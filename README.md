@@ -2,8 +2,8 @@
 Online research compendium into Willingness to Accept Compromises. This repository combines the pre-registration plan with a data &amp; analysis compendium.
 
 # Pre-Registration Plan
-* [Experiment 1](src/) The theoretical underpinnings and research design to test XXX (_hypotheses 1--X_).
-* [Experiment 2]() The theoretical underpinnings and research design to test XXX (_hypotheses X--X_).
+* [Experiment 1](src/pre-analysis-plan/experiment1.md) The theoretical underpinnings and research design to test XXX (_hypotheses 1--X_).
+* [Experiment 2](src/pre-analysis-plan/experiment2.md) The theoretical underpinnings and research design to test XXX (_hypotheses X--X_).
 
 # Data
 The following data files might be of interest:
