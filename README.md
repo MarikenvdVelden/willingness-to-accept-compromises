@@ -1,4 +1,4 @@
-# Willinges to Accept Compromises
+# Willingnes to Accept Compromises
 Online research compendium into Willingness to Accept Compromises. This repository combines the pre-registration plan with a data &amp; analysis compendium.
 
 # Pre-Registration Plan

@@ -37,10 +37,11 @@ Ask people which one they prefer - would help to elicit the mechanisms
 
 Yu don’t want the treatment to differ on the utility, but only on the way to which a compromise is reached. 
 Capitulation: utility == 0
+Delegation: utility ==0 (everyone loses, no one wins)
 Meet-in-the-Middle: utility == 50\% (both issues 50\% of proposals are accepted)
 Tit-for-that: utility == 50 (we get 25\% of proposals on co2 tax accepted and 75\% accepted of proposals on issue minimum wage).
 
-###Hypotheses on Credibility of Party
+###Hypotheses on welk compromis is beter
 
 *Capitulation Hypothesis* (H1):  _If a party strikes a capitulation compromise, trust/credibility/representation is lower compared to other types of compromises._
 *Meet in the Middle Hypothesis* (H2):  _If a party strikes a meet-in-the-middle compromise, trust/credibility/representation is higher compared to capitulation._
