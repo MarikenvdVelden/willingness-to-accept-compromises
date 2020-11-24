@@ -58,12 +58,12 @@ politicians are trustworthy* and 5 indicates that completely agrees with
 the statement.
 
 Because we pooled the data of various countries, the graph below
-demonstrate the country differences. This graph demonstrates that the
-hypothesized relationship is strongest in the Netherlands, and exactly
-average in Germany. In Italy and France, the data shows no (significant)
-relationship between trust in politicians and willingness to compromise.
-The relationship between political trust and willingness to accept
-compromise in Great Britain is positive.
+demonstrate the country differences. Austria is the reference category.
+This graph demonstrates that compared to Austria, the hypothesized
+relationship is strongest negatively in the Netherlands, and exactly
+around in Italy and Germany. The relationship between political trust
+and willingness to accept compromise in Great Britain and France is
+positive.
 
 ![](obervational_study_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 

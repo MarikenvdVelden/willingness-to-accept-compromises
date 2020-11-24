@@ -81,9 +81,9 @@ It indicates that when Willingness to Accept Compromise goes up by 1 -- i.e. ans
 Trust in politicians is a five-point scale, where 1 indicates completely disagreeing with the statement _Most politicians are trustworthy_ and 5 indicates that completely agrees with the statement.
 
 Because we pooled the data of various countries, the graph below demonstrate the country differences. 
-This graph demonstrates that the hypothesized relationship is strongest in the Netherlands, and exactly average in Germany.
-In Italy and France, the data shows no (significant) relationship between trust in politicians and willingness to compromise.
-The relationship between political trust and willingness to accept compromise in Great Britain is positive.
+Austria is the reference category.
+This graph demonstrates that compared to Austria, the hypothesized relationship is strongest negatively in the Netherlands, and exactly around in Italy and Germany.
+The relationship between political trust and willingness to accept compromise in Great Britain and France is positive.
 
 ```{r, echo = F, message=F, warning=F, fig.width=10, fig.height=7}
 ggcoefstats(
