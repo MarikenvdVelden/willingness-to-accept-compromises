@@ -1,8 +1,6 @@
 ---
 title: "Preprare Data"
 output: 
-  prettydoc::html_pretty:
-    theme: architect
   github_document:
   toc: yes
 editor_options: 
