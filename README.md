@@ -16,6 +16,9 @@ The following data files might be of interest:
 See the scripts in [src/data-processing](src/data-processing/README.md) for details on how these files were constructed.
 
 # Results
-* [Observational Study](src/analysis/obervational_study.md)
+* [Observational Study](src/analysis/observational_study.md)
 * [Experiment 1: XXX](src/analysis/experiment1.md)
 * [Experiment 2: XXX](src/analysis/experiment2.md)
+
+# Code of Conduct
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
