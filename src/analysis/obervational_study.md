@@ -49,11 +49,11 @@ The beta-coefficient of Willingness to Accept Compromise is negative and
 statistically significant, as hypothesized in [our Pre-Analysis
 Plan](https://osf.io/h29j3). The coefficient of -0.15 is however a small
 effect. It indicates that when Willingness to Accept Compromise goes up
-by 1 – i.e. answering `rather no` instead of `not at all` with the
-statement *What people call compromise in politics is really just
+by 1 – i.e. answering `rather yes` instead of `completely agree` with
+the statement *What people call compromise in politics is really just
 selling out on one’s principles.* – the the level of trust in
-politicians goes down by 0.15. Trust in politicians is a five-point
-scale, where 1 indicates completely disagreeing with the statement *Most
+politicians goes up by 0.15. Trust in politicians is a five-point scale,
+where 1 indicates completely disagreeing with the statement *Most
 politicians are trustworthy* and 5 indicates that completely agrees with
 the statement.
 
