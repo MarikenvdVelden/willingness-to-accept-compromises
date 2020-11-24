@@ -20,83 +20,61 @@ d <- readRDS("../../data/intermediate/observational_data.RDS")
 
 ### Pre-Registered
 
+The code below demonstrate the OLS regression predicting the level of
+political trust by willingness to accept compromises. Next to the
+control variables, it includes country dummies and dummies indicating
+whether more than ten percent of the values where missing.
+
 ``` r
 analysis <- d %>%
   dplyr::select(trust, wtac, political_interest, rile_selfplacement,
-         pid, gender, age, education, income, country,
+         gov_performance, pid, gender, age, education, income, country,
          missing_trust, missing_wtac, missing_rile_selfplacement,
-         missing_pid, missing_gender, missing_age, missing_education,
-         missing_income) 
+         missing_gov_performance, missing_pid, missing_gender, 
+         missing_age, missing_education, missing_income) 
 m <- stats::lm(formula = trust ~ wtac + factor(political_interest) +
-                  rile_selfplacement + factor(pid) + factor(gender) + age +
+                  rile_selfplacement + factor(gov_performance) + 
+                 factor(pid) + factor(gender) + age +
                   education + income + factor(country) + 
                   factor(missing_trust) + factor(missing_wtac) +
                   factor(missing_rile_selfplacement) + factor(missing_pid) +
                   factor(missing_gender) + factor(missing_age) + 
                   factor(missing_education) + factor(missing_income),
                 data = analysis)
-
-ggcoefstats(
-  x = tidy(m)[2:9,],
-  point.args = list(color = "seagreen", size = 3, shape = 15),
-  vline.args = list(size = 1, color = "violet", linetype = "dotdash"),
-  stats.label.color = "seagreen",
-  statistic = "t",
-  title = "Political Trust Predicted by Willingness to Compromise",
-  ggtheme = theme_minimal(),
-  ggstatsplot.layer = FALSE) + # note the order in which the labels are entered
-  scale_y_discrete(labels = c("Willingness to Accept Compromise", 
-                              "Not Politically Interested", 
-                              "Left-Right Self-Placement",
-                              "Partisan ID",
-                              "Male",
-                              "Age",
-                              "Education", "Income")) +
-  labs(x = "Regression Coefficients", y = NULL) 
 ```
 
-![](obervational_study_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+![](obervational_study_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
-``` r
-ggcoefstats(
-  x = tidy(m)[10:14,],
-  point.args = list(color = "seagreen", size = 3, shape = 15),
-  vline.args = list(size = 1, color = "violet", linetype = "dotdash"),
-  stats.label.color = "seagreen",
-  statistic = "t",
-  title = "Political Trust Predicted by Willingness to Compromise",
-  subtitle = "Country Differences",
-  ggtheme = theme_minimal(),
-  ggstatsplot.layer = FALSE) + # note the order in which the labels are entered
-  scale_y_discrete(labels = c("France", 
-                              "Germany", 
-                              "Great Britain",
-                              "Italy",
-                              "The Netherlands")) +
-  labs(x = "Regression Coefficients", y = NULL)
-```
+The beta-coefficient of Willingness to Accept Compromise is negative and
+statistically significant, as hypothesized in [our Pre-Analysis
+Plan](https://osf.io/h29j3). The coefficient of -0.15 is however a small
+effect. It indicates that when Willingness to Accept Compromise goes up
+by 1 – i.e. answering `rather no` instead of `not at all` with the
+statement *What people call compromise in politics is really just
+selling out on one’s principles.* – the the level of trust in
+politicians goes down by 0.15. Trust in politicians is a five-point
+scale, where 1 indicates completely disagreeing with the statement *Most
+politicians are trustworthy* and 5 indicates that completely agrees with
+the statement.
 
-![](obervational_study_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
+Because we pooled the data of various countries, the graph below
+demonstrate the country differences. This graph demonstrates that the
+hypothesized relationship is strongest in the Netherlands, and exactly
+average in Germany. In Italy and France, the data shows no (significant)
+relationship between trust in politicians and willingness to compromise.
+The relationship between political trust and willingness to accept
+compromise in Great Britain is positive.
 
-``` r
-ggcoefstats(
-  x = tidy(m)[15:22,],
-  point.args = list(color = "seagreen", size = 3, shape = 15),
-  vline.args = list(size = 1, color = "violet", linetype = "dotdash"),
-  stats.label.color = "seagreen",
-  statistic = "t",
-  title = "Political Trust Predicted by Willingness to Compromise",
-  subtitle = "Missing Values",
-  ggtheme = theme_minimal(),
-  ggstatsplot.layer = FALSE) + # note the order in which the labels are entered
-  scale_y_discrete(labels = c("Trust", 
-                              "Willingness to Accept Compromise", 
-                              "Left-Right Self-Placement",
-                              "Party ID", "Gender", "Age",
-                              "Education", "Income")) +
-  labs(x = "Regression Coefficients", y = NULL)
-```
+![](obervational_study_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
-![](obervational_study_files/figure-gfm/unnamed-chunk-2-3.png)<!-- -->
+Moreover, we have imputed the missing values using the *Green & Gerber
+formula* (Green & Gerber 2008). To demonstrate whether the dichotomous
+variables indicating whether the respondents’ value was missing are
+different from the respondents’ who have completed the question, the
+graph below demonstrates the coefficients of the `missing dummies`. The
+graph shows that only for the variables `age` and `trust` the imputed
+values elicit a different effect from the non-imputed ones.
+
+![](obervational_study_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 ### Exploratory

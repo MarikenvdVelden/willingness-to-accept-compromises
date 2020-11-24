@@ -49,7 +49,7 @@ is saved as `.RDS` file to save space.
 d <- readRDS("../../data/raw-private/cses.rds") %>%
   filter(E1003 == 04002017 | E1003 == 25002017 |
          E1003 == 27602017 | E1003 == 38002018) %>%
-  select(country = E1003,
+  dplyr::select(country = E1003,
          trust = E3004_3,
          wtac = E3004_1,
          age = E2001_Y,
@@ -59,6 +59,7 @@ d <- readRDS("../../data/raw-private/cses.rds") %>%
          pid = E3024_1,
          political_interest = E3001,
          rile_selfplacement = E3020,
+         gov_performance = E3009,
          satisfaction_democracy = E3023,
          elites_dont_care_people = E3004_2,
          elites_are_main_problem = E3004_4,
@@ -91,7 +92,15 @@ d <- readRDS("../../data/raw-private/cses.rds") %>%
                                      `2` = "Interested",
                                      `3` = "Not Interested",
                                      `4` = "Not Interested"),
-         rile_selfplacement = replace(rile_selfplacement, which(rile_selfplacement>10), NA),
+         gov_performance = replace(gov_performance, 
+                                   which(gov_performance>5),NA),
+         gov_performance = recode(gov_performance,
+                                  `1` = "Satisfied",
+                                  `2` = "Satisfied",
+                                  `3` = "Dissatisfied",
+                                  `4` = "Dissatisfied"),
+         rile_selfplacement = replace(rile_selfplacement, 
+                                      which(rile_selfplacement>10), NA),
          satisfaction_democracy = replace(satisfaction_democracy,
                                           which(satisfaction_democracy>5), NA),
          satisfaction_democracy = recode(satisfaction_democracy,
@@ -100,7 +109,17 @@ d <- readRDS("../../data/raw-private/cses.rds") %>%
                                      `3` = "Not Satisfied",
                                      `4` = "Not Satisfied"),
          trust = replace(trust, which(trust>5), NA),
+         trust = recode(trust,
+                        `1` = 5,
+                        `2` = 4,
+                        `4` = 2,
+                        `5` = 1),
          wtac = replace(wtac, which(wtac>5), NA),
+         wtac = recode(wtac,
+                        `1` = 5,
+                        `2` = 4,
+                        `4` = 2,
+                        `5` = 1),
          elites_dont_care_people = replace(elites_dont_care_people, 
                                            which(elites_dont_care_people>5), NA),
          elites_are_main_problem = replace(elites_are_main_problem,
@@ -108,7 +127,7 @@ d <- readRDS("../../data/raw-private/cses.rds") %>%
          strong_leaders_bend_rules = replace(strong_leaders_bend_rules,
                                              which(strong_leaders_bend_rules>5), NA),
          people_make_policy_decisions = replace(people_make_policy_decisions, 
-                                                which(people_make_policy_decisions>5), NA),
+                                              which(people_make_policy_decisions>5), NA),
          elites_care_rich_powerful = replace(elites_care_rich_powerful,
                                              which(elites_care_rich_powerful>5), NA),
          will_of_people = NA,
@@ -127,7 +146,7 @@ and is saved as `.RDS` file to save space.
 
 ``` r
 nl <- readRDS("../../data/raw-private/dpes.RDS") %>%
-  select(trust = V322,
+  dplyr::select(trust = V322,
          wtac = V320,
          age = V011,
          gender = V010,
@@ -137,6 +156,7 @@ nl <- readRDS("../../data/raw-private/dpes.RDS") %>%
          pid = S110,
          political_interest = V024,
          rile_selfplacement = V133,
+         gov_performance = S171,
          satisfaction_democracy = V240,
          elites_dont_care_people = V321,
          elites_are_main_problem = V323,
@@ -153,9 +173,19 @@ nl <- readRDS("../../data/raw-private/dpes.RDS") %>%
          trust = as.factor(trust),
          trust = as.numeric(trust),
          trust = replace(trust, which(trust>993), NA),
+         trust = recode(trust,
+                        `1` = 5,
+                        `2` = 4,
+                        `4` = 2,
+                        `5` = 1),
          wtac = as.factor(wtac),
          wtac = as.numeric(wtac),
          wtac = replace(wtac, which(wtac>993), NA),
+         wtac = recode(wtac,
+                        `1` = 5,
+                        `2` = 4,
+                        `4` = 2,
+                        `5` = 1),
          age = as.factor(age),
          age = as.numeric(age),
          age = 2020 - age,
@@ -199,6 +229,14 @@ nl <- readRDS("../../data/raw-private/dpes.RDS") %>%
                                      `3` = "Not Interested"),
          rile_selfplacement = as.factor(rile_selfplacement),
          rile_selfplacement = as.numeric(rile_selfplacement),
+         gov_performance = as.factor(gov_performance),
+         gov_performance = as.numeric(gov_performance),
+         gov_performance = recode(gov_performance,
+                                  `1` = "Satisfied",
+                                  `2` = "Satisfied",
+                                  `3` = "Satisfied",
+                                  `4` = "Dissatisfied",
+                                  `5` = "Dissatisfied"),
          satisfaction_democracy = as.factor(satisfaction_democracy),
          satisfaction_democracy = as.numeric(satisfaction_democracy),
          satisfaction_democracy = replace(satisfaction_democracy,
@@ -233,11 +271,14 @@ nl <- readRDS("../../data/raw-private/dpes.RDS") %>%
 
 nl$income[which(is.na(nl$income))] <- nl$income2[which(is.na(nl$income))]
 nl <- nl %>%
-  select(country, trust, wtac, age, gender, education, income, pid, political_interest,
-         rile_selfplacement, satisfaction_democracy, elites_dont_care_people, 
-         elites_are_main_problem, strong_leaders_bend_rules, people_make_policy_decisions, 
-         elites_care_rich_powerful, will_of_people, differences_elites_people, 
-         represented_ordinary_people, no_action_all_talk, dont_care_my_region, vote_choice)
+  dplyr::select(country, trust, wtac, age, gender, education, income, pid,
+         political_interest,rile_selfplacement, gov_performance,
+         satisfaction_democracy, elites_dont_care_people, 
+         elites_are_main_problem, strong_leaders_bend_rules,
+         people_make_policy_decisions, elites_care_rich_powerful, 
+         will_of_people, differences_elites_people, 
+         represented_ordinary_people, no_action_all_talk, 
+         dont_care_my_region, vote_choice)
 ```
 
 ### BES Data
@@ -248,7 +289,7 @@ saved as `.RDS` file to save space.
 
 ``` r
 uk <- readRDS("../../data/raw-private/bes.RDS") %>%
-  select(trust = q2_cses_4,
+  dplyr::select(trust = q2_cses_4,
          wtac = q2_cses_2,
          age = q25_cses,
          gender = q24_cses,
@@ -257,6 +298,7 @@ uk <- readRDS("../../data/raw-private/bes.RDS") %>%
          pid = d02,
          political_interest = a03,
          rile_selfplacement = e01,
+         gov_performance = q6_cses,
          satisfaction_democracy = m01,
          elites_dont_care_people = q2_cses_3,
          elites_are_main_problem = q2_cses_5,
@@ -348,6 +390,14 @@ uk <- readRDS("../../data/raw-private/bes.RDS") %>%
          rile_selfplacement = replace(rile_selfplacement, 
                                       which(rile_selfplacement<4), NA),
          rile_selfplacement = rile_selfplacement - 4,
+         gov_performance = as.numeric(gov_performance),
+         gov_performance = replace(gov_performance,
+                                   which(gov_performance<3), NA),
+         gov_performance = recode(gov_performance,
+                                  `3` = "Satisfied",
+                                  `4` = "Satisfied",
+                                  `5` = "Dissatisfied",
+                                  `6` = "Dissatisfied"),
          satisfaction_democracy = as.numeric(satisfaction_democracy),
          satisfaction_democracy = replace(satisfaction_democracy,
                                           which(satisfaction_democracy<3), NA),
@@ -387,11 +437,14 @@ uk <- readRDS("../../data/raw-private/bes.RDS") %>%
          no_action_all_talk = NA,
          dont_care_my_region = NA,
          vote_choice = as.character(vote_choice)) %>%
-  select(country, trust, wtac, age, gender, education, income, pid, political_interest,
-         rile_selfplacement, satisfaction_democracy, elites_dont_care_people, 
-         elites_are_main_problem, strong_leaders_bend_rules, people_make_policy_decisions, 
-         elites_care_rich_powerful, will_of_people, differences_elites_people, 
-         represented_ordinary_people, no_action_all_talk, dont_care_my_region, vote_choice)
+  dplyr::select(country, trust, wtac, age, gender, education, income, pid, 
+                political_interest, gov_performance,rile_selfplacement,
+                satisfaction_democracy, elites_dont_care_people, 
+                elites_are_main_problem, strong_leaders_bend_rules,
+                people_make_policy_decisions,  elites_care_rich_powerful,
+                will_of_people, differences_elites_people, 
+                represented_ordinary_people, no_action_all_talk,
+                dont_care_my_region, vote_choice)
 ```
 
 ## Missing Values
@@ -412,7 +465,7 @@ we employ the following criteria:
 ``` r
 covar <- c("Trust", "Willingness to Accept Compromise","Party ID",
            "Political Interest", "Left-Right Self-Placement",
-           "Gender", "Age","Education", "Income")
+           "Government Performance","Gender", "Age","Education", "Income")
 aut <- d %>%
   filter(country=="Austria")
 tibble(Covariate = covar,
@@ -421,6 +474,7 @@ tibble(Covariate = covar,
                      round(sum(is.na(aut$pid))/prod(dim(aut)[1]),2),
                      round(sum(is.na(aut$political_interest))/prod(dim(aut)[1]),2),
                      round(sum(is.na(aut$rile_selfplacement))/prod(dim(aut)[1]),2),
+                     round(sum(is.na(aut$gov_performance))/prod(dim(aut)[1]),2),
                      round(sum(is.na(aut$gender))/prod(dim(aut)[1]),2),
                      round(sum(is.na(aut$age))/prod(dim(aut)[1]),2),
                      round(sum(is.na(aut$education))/prod(dim(aut)[1]),2),
@@ -434,6 +488,7 @@ tibble(Covariate = covar,
 | Party ID                         |       0.01 |
 | Political Interest               |       0.00 |
 | Left-Right Self-Placement        |       0.00 |
+| Government Performance           |       0.07 |
 | Gender                           |       0.00 |
 | Age                              |       0.00 |
 | Education                        |       0.00 |
@@ -441,13 +496,16 @@ tibble(Covariate = covar,
 
 We recode the missing values of `trust` and `willingness to accept
 compromise` variables to the mean value of the respective variables. For
-the categorical variable `party id`, we use the median value.
+the categorical variables `party id` and `government performance` we use
+the median value.
 
 ``` r
 aut <- aut %>%
  mutate(trust = replace_na(trust, mean(trust, na.rm=T)),
         wtac = replace_na(wtac, mean(wtac, na.rm=T)),
         pid = replace_na(pid, "No Partisan ID"),
+        gov_performance = replace_na(gov_performance, "Dissatisfied"),
+        missing_gov_performance = 0,
         missing_trust = 0,
         missing_wtac = 0,
         missing_pid = 0,
@@ -469,6 +527,7 @@ tibble(Covariate = covar,
                      round(sum(is.na(fr$pid))/prod(dim(fr)[1]),2),
                      round(sum(is.na(fr$political_interest))/prod(dim(fr)[1]),2),
                      round(sum(is.na(fr$rile_selfplacement))/prod(dim(fr)[1]),2),
+                     round(sum(is.na(fr$gov_performance))/prod(dim(fr)[1]),2),
                      round(sum(is.na(fr$gender))/prod(dim(fr)[1]),2),
                      round(sum(is.na(fr$age))/prod(dim(fr)[1]),2),
                      round(sum(is.na(fr$education))/prod(dim(fr)[1]),2),
@@ -482,6 +541,7 @@ tibble(Covariate = covar,
 | Party ID                         |       0.01 |
 | Political Interest               |       0.00 |
 | Left-Right Self-Placement        |       0.09 |
+| Government Performance           |       0.02 |
 | Gender                           |       0.00 |
 | Age                              |       0.00 |
 | Education                        |       0.01 |
@@ -489,8 +549,9 @@ tibble(Covariate = covar,
 
 We recode the missing values of `trust`, `willingness to accept
 compromise`, `left-right self-placement`, and `education` variables to
-the mean value of the respective variables. For the categorical variable
-`party id`, we use the median value.
+the mean value of the respective variables. For the categorical
+variables `party id` and `government performance`, we use the median
+value.
 
 ``` r
 fr <- fr %>%
@@ -500,6 +561,8 @@ fr <- fr %>%
         education = replace_na(education, round(mean(education, na.rm=T),0)),
         rile_selfplacement = replace_na(rile_selfplacement, 
                                         mean(rile_selfplacement, na.rm = T)),
+        gov_performance = replace_na(gov_performance, "Dissatisfied"),
+        missing_gov_performance = 0,
         missing_rile_selfplacement =  0,
         political_interest = replace_na(political_interest, "Not Interested"),
         missing_trust = 0,
@@ -522,6 +585,7 @@ tibble(Covariate = covar,
                      round(sum(is.na(de$pid))/prod(dim(de)[1]),2),
                      round(sum(is.na(de$political_interest))/prod(dim(de)[1]),2),
                      round(sum(is.na(de$rile_selfplacement))/prod(dim(de)[1]),2),
+                     round(sum(is.na(de$gov_performance))/prod(dim(de)[1]),2),
                      round(sum(is.na(de$gender))/prod(dim(de)[1]),2),
                      round(sum(is.na(de$age))/prod(dim(de)[1]),2),
                      round(sum(is.na(de$education))/prod(dim(de)[1]),2),
@@ -535,6 +599,7 @@ tibble(Covariate = covar,
 | Party ID                         |       0.01 |
 | Political Interest               |       0.00 |
 | Left-Right Self-Placement        |       0.07 |
+| Government Performance           |       0.03 |
 | Gender                           |       0.00 |
 | Age                              |       0.00 |
 | Education                        |       0.04 |
@@ -543,7 +608,7 @@ tibble(Covariate = covar,
 We recode the missing values of `trust`, `willingness to accept
 compromise`, `left-right self-placement`, and `education` variables to
 the mean value of the respective variables. For the categorical variable
-`party id`, we use the median value.
+`party id` and `government performance`, we use the median value.
 
 ``` r
 de <- de %>%
@@ -554,6 +619,8 @@ de <- de %>%
         rile_selfplacement = replace_na(rile_selfplacement, 
                                         mean(rile_selfplacement, na.rm = T)),
         political_interest = replace_na(political_interest, "Not Interested"),
+        gov_performance = replace_na(gov_performance, "Satisfied"),
+        missing_gov_performance = 0,
         missing_trust = 0,
         missing_wtac = 0,
         missing_pid = 0,
@@ -575,6 +642,7 @@ tibble(Covariate = covar,
                      round(sum(is.na(it$pid))/prod(dim(it)[1]),2),
                      round(sum(is.na(it$political_interest))/prod(dim(it)[1]),2),
                      round(sum(is.na(it$rile_selfplacement))/prod(dim(it)[1]),2),
+                     round(sum(is.na(it$gov_performance))/prod(dim(it)[1]),2),
                      round(sum(is.na(it$gender))/prod(dim(it)[1]),2),
                      round(sum(is.na(it$age))/prod(dim(it)[1]),2),
                      round(sum(is.na(it$education))/prod(dim(it)[1]),2),
@@ -588,6 +656,7 @@ tibble(Covariate = covar,
 | Party ID                         |       0.03 |
 | Political Interest               |       0.00 |
 | Left-Right Self-Placement        |       0.15 |
+| Government Performance           |       0.05 |
 | Gender                           |       0.00 |
 | Age                              |       0.00 |
 | Education                        |       0.00 |
@@ -595,15 +664,16 @@ tibble(Covariate = covar,
 
 We recode the missing values of `trust` and `willingness to accept
 compromise` variables to the mean value of the respective variables. For
-the categorical variables `party id` and `political interest`, we use
-the median value.
+the categorical variables `party id`, `government performance`, and
+`political interest`, we use the median value.
 
 ``` r
 it <- it %>%
  mutate(trust = replace_na(trust, mean(trust, na.rm=T)),
         wtac = replace_na(wtac, mean(wtac, na.rm=T)),
         pid = replace_na(pid, "No Partisan ID"),
-        political_interest = replace_na(political_interest, "Not Interested"))
+        political_interest = replace_na(political_interest, "Not Interested"),
+        gov_performance = replace_na(gov_performance, "Dissatisfied"))
 ```
 
 We recode the missing values of the variable `left-right self-placement`
@@ -622,7 +692,8 @@ it <- it %>%
         missing_education = 0,
         missing_income = 0,
         missing_age = 0,
-        missing_gender = 0)
+        missing_gender = 0,
+        missing_gov_performance = 0)
 ```
 
 ### Netherlands
@@ -634,6 +705,7 @@ tibble(Covariate = covar,
                      round(sum(is.na(nl$pid))/prod(dim(nl)[1]),2),
                      round(sum(is.na(nl$political_interest))/prod(dim(nl)[1]),2),
                      round(sum(is.na(nl$rile_selfplacement))/prod(dim(nl)[1]),2),
+                     round(sum(is.na(nl$gov_performance))/prod(dim(nl)[1]),2),
                      round(sum(is.na(nl$gender))/prod(dim(nl)[1]),2),
                      round(sum(is.na(nl$age))/prod(dim(nl)[1]),2),
                      round(sum(is.na(nl$education))/prod(dim(nl)[1]),2),
@@ -647,6 +719,7 @@ tibble(Covariate = covar,
 | Party ID                         |       0.45 |
 | Political Interest               |       0.01 |
 | Left-Right Self-Placement        |       0.11 |
+| Government Performance           |       0.45 |
 | Gender                           |       0.00 |
 | Age                              |       0.00 |
 | Education                        |       0.15 |
@@ -664,19 +737,23 @@ nl <- nl %>%
 ```
 
 We recode the missing values of the variables `Trust` and `Willingness
-to Accept Comprimise`, to `3` and include the variables `missing_trust`
+to Accept Compromise`, to `3` and include the variables `missing_trust`
 and `missing_wtac` to the data, indicating whether the response on the
 covariate was missing (value of 1) or not (value of 0). We recode the
 missing values of the variable `Party ID`, to `No Party ID` and include
 the variable `missing_pid` to the data, indicating whether the response
 on the covariate was missing (value of 1) or not (value of 0). We recode
-the missing values of the variable `Education`, to `4` and include the
-variable `missing_education` to the data, indicating whether the
-response on the covariate was missing (value of 1) or not (value of 0).
-We recode the missing values of the variable `Left-Right Self-Placement`
-to `5` and include the variable `missing_rile_selfplacement` to the
+the missing values of the variable `Government Performance`, to
+`Satisfied` and include the variable `missing_gov_performance` to the
 data, indicating whether the response on the covariate was missing
-(value of 1) or not (value of 0).
+(value of 1) or not (value of 0). We recode the missing values of the
+variable `Education`, to `4` and include the variable
+`missing_education` to the data, indicating whether the response on the
+covariate was missing (value of 1) or not (value of 0). We recode the
+missing values of the variable `Left-Right Self-Placement` to `5` and
+include the variable `missing_rile_selfplacement` to the data,
+indicating whether the response on the covariate was missing (value of
+1) or not (value of 0).
 
 ``` r
 nl <- nl %>%
@@ -690,6 +767,8 @@ nl <- nl %>%
         education = replace_na(education, 4),
         missing_rile_selfplacement = ifelse(is.na(rile_selfplacement), 1, 0),
         rile_selfplacement = replace_na(rile_selfplacement, 5),
+        missing_gov_performance = ifelse(is.na(gov_performance), 1, 0),
+        gov_performance = replace_na(gov_performance, "Satisfied"),
         missing_income = 0,
         missing_age = 0,
         missing_gender = 0)
@@ -704,6 +783,7 @@ tibble(Covariate = covar,
                      round(sum(is.na(uk$pid))/prod(dim(uk)[1]),2),
                      round(sum(is.na(uk$political_interest))/prod(dim(uk)[1]),2),
                      round(sum(is.na(uk$rile_selfplacement))/prod(dim(uk)[1]),2),
+                     round(sum(is.na(uk$gov_performance))/prod(dim(uk)[1]),2),
                      round(sum(is.na(uk$gender))/prod(dim(uk)[1]),2),
                      round(sum(is.na(uk$age))/prod(dim(uk)[1]),2),
                      round(sum(is.na(uk$education))/prod(dim(uk)[1]),2),
@@ -717,6 +797,7 @@ tibble(Covariate = covar,
 | Party ID                         |       0.82 |
 | Political Interest               |       0.00 |
 | Left-Right Self-Placement        |       0.11 |
+| Government Performance           |       0.60 |
 | Gender                           |       0.56 |
 | Age                              |       0.55 |
 | Education                        |       0.00 |
@@ -730,16 +811,20 @@ one) or not (value of 0). We recode the missing values of the variable
 `Left-Right Self-Placement` to `5` and include the variable
 `missing_rile_selfplacement` to the data, indicating whether the
 response on the covariate was missing (value of 1) or not (value of 0).
-We recode the missing values of the variable `Party ID` and `Gender` to
-respecively `No Party ID` and `Female` and include the variables
-`missing_pid` and `missing_gender` to the data, indicating whether the
-response on the covariate was missing (value of 1) or not (value of 0).
-We recode the missing values of the variable `Income`, to `4` and
-include the variable `missing_education` to the data, indicating whether
-the response on the covariate was missing (value of 1) or not (value of
-0). We recode the missing values of the variable `Age` to the mean and
-include the variable `missing_age` to the data, indicating whether the
-response on the covariate was missing (value of 1) or not (value of 0).
+e recode the missing values of the variable `Government Performance`, to
+`Dissatisfied` and include the variable `missing_gov_performance` to the
+data, indicating whether the response on the covariate was missing
+(value of 1) or not (value of 0). We recode the missing values of the
+variable `Party ID` and `Gender` to respecively `No Party ID` and
+`Female` and include the variables `missing_pid` and `missing_gender` to
+the data, indicating whether the response on the covariate was missing
+(value of 1) or not (value of 0). We recode the missing values of the
+variable `Income`, to `4` and include the variable `missing_education`
+to the data, indicating whether the response on the covariate was
+missing (value of 1) or not (value of 0). We recode the missing values
+of the variable `Age` to the mean and include the variable `missing_age`
+to the data, indicating whether the response on the covariate was
+missing (value of 1) or not (value of 0).
 
 ``` r
 uk <- uk %>%
@@ -759,7 +844,9 @@ uk <- uk %>%
         education = replace_na(education, round(mean(education, na.rm=T),0)),
         political_interest = replace_na(political_interest, "Not Interested"),
         missing_rile_selfplacement = ifelse(is.na(rile_selfplacement),1, 0),
-        rile_selfplacement = replace_na(rile_selfplacement, 5))
+        rile_selfplacement = replace_na(rile_selfplacement, 5),
+        missing_gov_performance = ifelse(is.na(gov_performance), 1, 0),
+        gov_performance = replace_na(gov_performance, "Dissatisfied"))
 ```
 
 ## Save Data for Analysis
