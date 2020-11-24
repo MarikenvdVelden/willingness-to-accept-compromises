@@ -1,11 +1,6 @@
 Preprare Data
 ================
 
-<style>
-body {
-text-align: justify}
-</style>
-
 # Scripts
 
   - [Required Packages &

@@ -1,15 +1,13 @@
 ---
 title: "Preprare Data"
-output:
+output: 
+  prettydoc::html_pretty:
+    theme: architect
   github_document:
   toc: yes
 editor_options: 
   chunk_output_type: console
 ---
-<style>
-body {
-text-align: justify}
-</style>
 
 ```{r setup, include=FALSE}
 ## include this at top of your RMarkdown file for pretty output
@@ -39,7 +37,7 @@ library(rmarkdown)
   - [Correlations Matrix](#correlations-matrix)
 
 ## Required Packages &amp; Reproducibility
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=F}
 rm(list=ls())
 
 renv::snapshot()
