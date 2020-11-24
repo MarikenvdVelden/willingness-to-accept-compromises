@@ -41,8 +41,12 @@ source("../lib/functions.R")
 
 ### CSES Data
 
+Data can be downloaded
+[here](https://cses.org/data-download/download-data-documentation/), and
+is saved as `.RDS` file to save space.
+
 ``` r
-d <- read_csv("../../data/raw-encrypted/cses5.csv") %>%
+d <- readRDS("../../data/raw-private/cses.rds") %>%
   filter(E1003 == 04002017 | E1003 == 25002017 |
          E1003 == 27602017 | E1003 == 38002018) %>%
   select(country = E1003,
@@ -117,9 +121,12 @@ d <- read_csv("../../data/raw-encrypted/cses5.csv") %>%
 
 ### DPES Data
 
+Data can be downloaded
+[here](https://easy.dans.knaw.nl/ui/datasets/id/easy-dataset:101156),
+and is saved as `.RDS` file to save space.
+
 ``` r
-nl <- read_sav("../../data/raw-encrypted/DPES 2017 v1.31.sav",
-                      user_na = FALSE) %>%
+nl <- readRDS("../../data/raw-private/dpes.RDS") %>%
   select(trust = V322,
          wtac = V320,
          age = V011,
@@ -235,8 +242,12 @@ nl <- nl %>%
 
 ### BES Data
 
+Data can be downloaded
+[here](https://www.britishelectionstudy.com/data/#.X7yS5tso-F0), and is
+saved as `.RDS` file to save space.
+
 ``` r
-uk <- read.dta("../../data/raw-encrypted/bes_f2f_2017_v1.5.dta") %>%
+uk <- readRDS("../../data/raw-private/bes.RDS") %>%
   select(trust = q2_cses_4,
          wtac = q2_cses_2,
          age = q25_cses,
@@ -486,10 +497,11 @@ fr <- fr %>%
  mutate(trust = replace_na(trust, mean(trust, na.rm=T)),
         wtac = replace_na(wtac, mean(wtac, na.rm=T)),
         pid = replace_na(pid, "Partisan ID"),
-        education = replace_na(education, mean(education, na.rm=T)),
+        education = replace_na(education, round(mean(education, na.rm=T),0)),
         rile_selfplacement = replace_na(rile_selfplacement, 
                                         mean(rile_selfplacement, na.rm = T)),
         missing_rile_selfplacement =  0,
+        political_interest = replace_na(political_interest, "Not Interested"),
         missing_trust = 0,
         missing_wtac = 0,
         missing_pid = 0,
@@ -539,7 +551,9 @@ de <- de %>%
         wtac = replace_na(wtac, mean(wtac, na.rm=T)),
         education = replace_na(education, round(mean(education, na.rm=T),0)),
         pid = replace_na(pid, "No Partisan ID"),
-        rile_selfplacement = replace_na(rile_selfplacement, mean(rile_selfplacement, na.rm = T)),
+        rile_selfplacement = replace_na(rile_selfplacement, 
+                                        mean(rile_selfplacement, na.rm = T)),
+        political_interest = replace_na(political_interest, "Not Interested"),
         missing_trust = 0,
         missing_wtac = 0,
         missing_pid = 0,
@@ -581,13 +595,15 @@ tibble(Covariate = covar,
 
 We recode the missing values of `trust` and `willingness to accept
 compromise` variables to the mean value of the respective variables. For
-the categorical variable `party id`, we use the median value.
+the categorical variables `party id` and `political interest`, we use
+the median value.
 
 ``` r
 it <- it %>%
  mutate(trust = replace_na(trust, mean(trust, na.rm=T)),
         wtac = replace_na(wtac, mean(wtac, na.rm=T)),
-        pid = replace_na(pid, "No Partisan ID"))
+        pid = replace_na(pid, "No Partisan ID"),
+        political_interest = replace_na(political_interest, "Not Interested"))
 ```
 
 We recode the missing values of the variable `left-right self-placement`
@@ -599,6 +615,7 @@ data, indicating whether the response on the covariate was missing
 it <- it %>%
  mutate(missing_rile_selfplacement = ifelse(is.na(rile_selfplacement), 1, 0),
         rile_selfplacement = replace_na(rile_selfplacement, 5),
+        education = replace_na(education, round(mean(education, na.rm=T),0)),
         missing_trust = 0,
         missing_wtac = 0,
         missing_pid = 0,
@@ -642,7 +659,8 @@ value.
 ``` r
 nl <- nl %>%
  mutate(income = replace_na(income, round(mean(income, na.rm=T),0)),
-        political_interest = replace_na(political_interest, "Not Interested"))
+        political_interest = replace_na(political_interest, "Not Interested"),
+        gender = replace_na(gender, "Male"))
 ```
 
 We recode the missing values of the variables `Trust` and `Willingness
@@ -738,6 +756,8 @@ uk <- uk %>%
         missing_income = ifelse(is.na(income), 1, 0),
         income = replace_na(income, 3),
         missing_education = 0,
+        education = replace_na(education, round(mean(education, na.rm=T),0)),
+        political_interest = replace_na(political_interest, "Not Interested"),
         missing_rile_selfplacement = ifelse(is.na(rile_selfplacement),1, 0),
         rile_selfplacement = replace_na(rile_selfplacement, 5))
 ```
