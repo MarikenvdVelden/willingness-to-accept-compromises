@@ -6,7 +6,11 @@ output:
 editor_options: 
   chunk_output_type: console
 ---
-  
+<style>
+body {
+text-align: justify}
+</style>
+
 ```{r setup, include=FALSE}
 ## include this at top of your RMarkdown file for pretty output
 ## make sure to have the printr package installed: install.packages('printr')

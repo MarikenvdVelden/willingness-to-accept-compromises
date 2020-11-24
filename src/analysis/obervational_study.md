@@ -1,6 +1,11 @@
 Preprare Data
 ================
 
+<style>
+body {
+text-align: justify}
+</style>
+
 # Analysis
 
   - [Set Up](#set-up)
