@@ -62,13 +62,19 @@ politicians are trustworthy* and 5 indicates that completely agrees with
 the statement.
 
 Because we pooled the data of various countries, the graph below
-demonstrate the country differences. Austria is the reference category.
-This graph demonstrates that compared to the Netherlands, the
-hypothesized negative relationship between political trust and
-willingness to accept compromise is much stronger in France, Germany,
-Great Britain, and Italy, while it is similar in Austria.
+demonstrate the country differences. The Netherlads is the reference
+category. This graph demonstrates that all countries, but particularly
+France, Germany, Great Britain, and Italy, are statistically different
+from the Netherlands.
 
 ![](obervational_study_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+
+To make sure the effect is not driven by any particular country, the
+graphs below show that for all countries, the coefficient is positive.
+Moreover, except for Italy, the coefficient is statistically significant
+too. This indicates that the effects found in the pooled analysis are
+not driven by any specific country.
+![](obervational_study_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 Moreover, we have imputed the missing values using the *Green & Gerber
 formula* (Green & Gerber 2008). To demonstrate whether the dichotomous
@@ -78,7 +84,7 @@ graph below demonstrates the coefficients of the `missing dummies`. The
 graph shows that only for the variables `age` and `trust` the imputed
 values elicit a different effect from the non-imputed ones.
 
-![](obervational_study_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](obervational_study_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
 The result show that particularly the imputed missing values for `trust`
 and `age` seem to elicit an effect in the regression results. To check
@@ -87,6 +93,6 @@ excluding the observations where `trust` and `age` have been imputed. As
 the visualization below demonstrates, this does not change the
 coefficient of `willingness to accept compromise`.
 
-![](obervational_study_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+![](obervational_study_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
 ### Exploratory

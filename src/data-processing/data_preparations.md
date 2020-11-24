@@ -804,12 +804,12 @@ variable `Party ID` and `Gender` to respecively `No Party ID` and
 `Female` and include the variables `missing_pid` and `missing_gender` to
 the data, indicating whether the response on the covariate was missing
 (value of 1) or not (value of 0). We recode the missing values of the
-variable `Income`, to `4` and include the variable `missing_education`
-to the data, indicating whether the response on the covariate was
-missing (value of 1) or not (value of 0). We recode the missing values
-of the variable `Age` to the mean and include the variable `missing_age`
-to the data, indicating whether the response on the covariate was
-missing (value of 1) or not (value of 0).
+variable `Education`, to `4` and include the variable
+`missing_education` to the data, indicating whether the response on the
+covariate was missing (value of 1) or not (value of 0). We recode the
+missing values of the variable `Age` to the mean and include the
+variable `missing_age` to the data, indicating whether the response on
+the covariate was missing (value of 1) or not (value of 0).
 
 ``` r
 uk <- uk %>%
