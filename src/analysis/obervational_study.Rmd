@@ -39,7 +39,9 @@ analysis <- d %>%
          gov_performance, pid, gender, age, education, income, country,
          missing_trust, missing_wtac, missing_rile_selfplacement,
          missing_gov_performance, missing_pid, missing_gender, 
-         missing_age, missing_education, missing_income) 
+         missing_age, missing_education, missing_income) %>%
+  mutate(country = factor(country))
+analysis <- within(analysis, country <- relevel(country, ref = "The Netherlands"))
 m <- stats::lm(formula = trust ~ wtac + factor(political_interest) +
                   rile_selfplacement + factor(gov_performance) + 
                  factor(pid) + factor(gender) + age +
@@ -75,15 +77,15 @@ ggcoefstats(
   labs(x = "Regression Coefficients", y = NULL) 
 ```
 
-The beta-coefficient of Willingness to Accept Compromise is negative and statistically significant, as hypothesized in [our Pre-Analysis Plan](https://osf.io/h29j3).
-The coefficient of -0.15 is however a small effect. 
-It indicates that when Willingness to Accept Compromise goes up by 1 -- i.e. answering `rather yes` instead of `completely agree` with the statement _What people call compromise in politics is really just selling out on one's principles._ -- the the level of trust in politicians goes up by 0.15.
+The beta-coefficient of Willingness to Accept Compromise is positive and statistically significant, as hypothesized in [our Pre-Analysis Plan](https://osf.io/h29j3).
+The coefficient of 0.15 is however a small effect. 
+It indicates that the higher one's willingness to accept compromise, the higher one's trust in politicians.
+More precisely, it means that when Willingness to Accept Compromise goes up by 1 -- i.e. answering `rather yes` instead of `completely agree` with the statement _What people call compromise in politics is really just selling out on one's principles._ -- the the level of trust in politicians goes up by 0.15.
 Trust in politicians is a five-point scale, where 1 indicates completely disagreeing with the statement _Most politicians are trustworthy_ and 5 indicates that completely agrees with the statement.
 
 Because we pooled the data of various countries, the graph below demonstrate the country differences. 
 Austria is the reference category.
-This graph demonstrates that compared to Austria, the hypothesized relationship is strongest negatively in the Netherlands, and exactly around in Italy and Germany.
-The relationship between political trust and willingness to accept compromise in Great Britain and France is positive.
+This graph demonstrates that compared to the Netherlands, the hypothesized negative relationship between political trust and willingness to accept compromise is much stronger in France, Germany, Great Britain, and Italy, while it is similar in Austria.
 
 ```{r, echo = F, message=F, warning=F, fig.width=10, fig.height=7}
 ggcoefstats(
@@ -94,14 +96,14 @@ ggcoefstats(
   only.significant = TRUE,
   stats.label.color = "seagreen",
   title = "Political Trust Predicted by Willingness to Compromise",
-  subtitle = "Country Differences",
+  subtitle = "Country Differences: The Netherlands is Reference Category",
   ggtheme = theme_minimal(),
   ggstatsplot.layer = FALSE) + # note the order in which the labels are entered
-  scale_y_discrete(labels = c("France", 
+  scale_y_discrete(labels = c("Austria",
+                              "France", 
                               "Germany", 
                               "Great Britain",
-                              "Italy",
-                              "The Netherlands")) +
+                              "Italy")) +
   labs(x = "Regression Coefficients", y = NULL)
 ```
 
@@ -129,5 +131,53 @@ ggcoefstats(
   labs(x = "Regression Coefficients", y = NULL)
 
 ```
+
+The result show that particularly the imputed missing values for `trust` and `age` seem to elicit an effect in the regression results.
+To check the robustness of the analysis, we therefore have also ran the analysis excluding the observations where `trust` and `age` have been imputed.
+As the visualization below demonstrates, this does not change the coefficient of `willingness to accept compromise`.
+
+```{r, echo = F, message=F, warning=F, fig.width=10, fig.height=7}
+analysis <- d %>%
+  dplyr::select(trust, wtac, political_interest, rile_selfplacement,
+         gov_performance, pid, gender, age, education, income, country,
+         missing_trust, missing_wtac, missing_rile_selfplacement,
+         missing_gov_performance, missing_pid, missing_gender, 
+         missing_age, missing_education, missing_income) %>%
+  mutate(country = factor(country)) %>%
+  filter(missing_trust == 0,
+         missing_age == 0)
+analysis <- within(analysis, country <- relevel(country, ref = "The Netherlands"))
+m <- stats::lm(formula = trust ~ wtac + factor(political_interest) +
+                  rile_selfplacement + factor(gov_performance) + 
+                 factor(pid) + factor(gender) + age +
+                  education + income + factor(country)+ factor(missing_wtac) +
+                  factor(missing_rile_selfplacement) + factor(missing_pid) +
+                  factor(missing_gender) + 
+                  factor(missing_education) + factor(missing_income),
+                data = analysis)
+ggcoefstats(
+  x = tidy(m)[2:10,],
+  point.args = list(color = "seagreen", size = 3, shape = 15, alpha = .75),
+  vline.args = list(size = 1, color = "darkgrey", linetype = "dotdash"),
+  statistic = "t",
+  stats.label.color = "seagreen",
+  only.significant = TRUE,
+  package = "palettesForR",
+  palette = "Inkscape",
+  title = "Political Trust Predicted by Willingness to Compromise",
+  subtitle = "List-Wise Deletion for Missing Values on Trust and Age",
+  ggtheme = theme_minimal(),
+  ggstatsplot.layer = F) + # note the order in which the labels are entered
+  scale_y_discrete(labels = c("Willingness to Accept Compromise", 
+                              "Not Politically Interested", 
+                              "Left-Right Self-Placement",
+                              "Satisfied with Government Performance",
+                              "Partisan ID",
+                              "Male",
+                              "Age",
+                              "Education", "Income")) +
+  labs(x = "Regression Coefficients", y = NULL) 
+```
+
 
 ### Exploratory

@@ -81,7 +81,8 @@ d <- readRDS("../../data/raw-private/cses.rds") %>%
                          `2` = "Female"),
          education = recode(education, 
                             `96` = 0),
-         education = replace(education, which(education>96), NA),
+         education = replace(education, 
+                             which(education>96), NA),
          income = replace(income, which(income>96), NA),
          pid = replace(pid, which(pid>5), NA),
          pid = recode(pid,
@@ -108,8 +109,8 @@ d <- readRDS("../../data/raw-private/cses.rds") %>%
          satisfaction_democracy = recode(satisfaction_democracy,
                                      `1` = "Satisfied",
                                      `2` = "Satisfied",
-                                     `3` = "Not Satisfied",
-                                     `4` = "Not Satisfied"),
+                                     `4` = "Dissatisfied",
+                                     `5` = "Dissatisfied"),
          trust = replace(trust, which(trust>5), NA),
          trust = recode(trust,
                         `1` = 5,
@@ -234,8 +235,8 @@ nl <- readRDS("../../data/raw-private/dpes.RDS") %>%
          satisfaction_democracy = recode(satisfaction_democracy,
                                      `1` = "Satisfied",
                                      `2` = "Satisfied",
-                                     `3` = "Not Satisfied",
-                                     `4` = "Not Satisfied"),
+                                     `3` = "Dissatisfied",
+                                     `4` = "Dissatisfied"),
          elites_dont_care_people = as.factor(elites_dont_care_people),
          elites_dont_care_people = as.numeric(elites_dont_care_people),
          elites_are_main_problem = as.factor(elites_are_main_problem),
@@ -386,8 +387,8 @@ uk <- readRDS("../../data/raw-private/bes.RDS") %>%
          satisfaction_democracy = recode(satisfaction_democracy,
                                      `3` = "Satisfied",
                                      `4` = "Satisfied",
-                                     `5` = "Not Satisfied",
-                                     `6` = "Not Satisfied"),
+                                     `5` = "Dissatisfied",
+                                     `6` = "Dissatisfied"),
          elites_dont_care_people = as.numeric(elites_dont_care_people),
          elites_dont_care_people = replace(elites_dont_care_people,
                                            which(elites_dont_care_people<3), NA),
@@ -705,7 +706,6 @@ d <- aut %>%
   add_row(it) %>%
   add_row(nl) %>%
   add_row(uk)
-saveRDS(d, "../../data/intermediate/observational_data.RDS")
 rm(aut, de, fr, it, nl, uk, covar)
 ```
 

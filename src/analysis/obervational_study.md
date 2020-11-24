@@ -31,7 +31,9 @@ analysis <- d %>%
          gov_performance, pid, gender, age, education, income, country,
          missing_trust, missing_wtac, missing_rile_selfplacement,
          missing_gov_performance, missing_pid, missing_gender, 
-         missing_age, missing_education, missing_income) 
+         missing_age, missing_education, missing_income) %>%
+  mutate(country = factor(country))
+analysis <- within(analysis, country <- relevel(country, ref = "The Netherlands"))
 m <- stats::lm(formula = trust ~ wtac + factor(political_interest) +
                   rile_selfplacement + factor(gov_performance) + 
                  factor(pid) + factor(gender) + age +
@@ -45,12 +47,14 @@ m <- stats::lm(formula = trust ~ wtac + factor(political_interest) +
 
 ![](obervational_study_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
-The beta-coefficient of Willingness to Accept Compromise is negative and
+The beta-coefficient of Willingness to Accept Compromise is positive and
 statistically significant, as hypothesized in [our Pre-Analysis
-Plan](https://osf.io/h29j3). The coefficient of -0.15 is however a small
-effect. It indicates that when Willingness to Accept Compromise goes up
-by 1 – i.e. answering `rather yes` instead of `completely agree` with
-the statement *What people call compromise in politics is really just
+Plan](https://osf.io/h29j3). The coefficient of 0.15 is however a small
+effect. It indicates that the higher one’s willingness to accept
+compromise, the higher one’s trust in politicians. More precisely, it
+means that when Willingness to Accept Compromise goes up by 1 –
+i.e. answering `rather yes` instead of `completely agree` with the
+statement *What people call compromise in politics is really just
 selling out on one’s principles.* – the the level of trust in
 politicians goes up by 0.15. Trust in politicians is a five-point scale,
 where 1 indicates completely disagreeing with the statement *Most
@@ -59,11 +63,10 @@ the statement.
 
 Because we pooled the data of various countries, the graph below
 demonstrate the country differences. Austria is the reference category.
-This graph demonstrates that compared to Austria, the hypothesized
-relationship is strongest negatively in the Netherlands, and exactly
-around in Italy and Germany. The relationship between political trust
-and willingness to accept compromise in Great Britain and France is
-positive.
+This graph demonstrates that compared to the Netherlands, the
+hypothesized negative relationship between political trust and
+willingness to accept compromise is much stronger in France, Germany,
+Great Britain, and Italy, while it is similar in Austria.
 
 ![](obervational_study_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
@@ -76,5 +79,14 @@ graph shows that only for the variables `age` and `trust` the imputed
 values elicit a different effect from the non-imputed ones.
 
 ![](obervational_study_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+
+The result show that particularly the imputed missing values for `trust`
+and `age` seem to elicit an effect in the regression results. To check
+the robustness of the analysis, we therefore have also ran the analysis
+excluding the observations where `trust` and `age` have been imputed. As
+the visualization below demonstrates, this does not change the
+coefficient of `willingness to accept compromise`.
+
+![](obervational_study_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
 ### Exploratory
