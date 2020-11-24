@@ -18,6 +18,8 @@ d <- readRDS("../../data/intermediate/observational_data.RDS")
 
 ## Analyses
 
+### Pre-Registered
+
 ``` r
 analysis <- d %>%
   dplyr::select(trust, wtac, political_interest, rile_selfplacement,
@@ -96,7 +98,5 @@ ggcoefstats(
 ```
 
 ![](obervational_study_files/figure-gfm/unnamed-chunk-2-3.png)<!-- -->
-
-### Pre-Registered
 
 ### Exploratory

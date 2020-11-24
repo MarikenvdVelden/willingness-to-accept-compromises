@@ -28,6 +28,8 @@ d <- readRDS("../../data/intermediate/observational_data.RDS")
 ```
 
 ## Analyses
+
+### Pre-Registered
 ```{r, message=F, warning=F, fig.width=10, fig.height=10}
 analysis <- d %>%
   dplyr::select(trust, wtac, political_interest, rile_selfplacement,
@@ -98,6 +100,6 @@ ggcoefstats(
 
 ```
 
-### Pre-Registered
+
 
 ### Exploratory
