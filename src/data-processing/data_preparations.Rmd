@@ -83,7 +83,7 @@ d <- readRDS("../../data/raw-private/cses.rds") %>%
                             `96` = 0),
          education = replace(education, 
                              which(education>96), NA),
-         income = replace(income, which(income>96), NA),
+         income = replace(income, which(income>5), NA),
          pid = replace(pid, which(pid>5), NA),
          pid = recode(pid,
                       `0` = "No Partisan ID",
@@ -178,8 +178,9 @@ nl <- readRDS("../../data/raw-private/dpes.RDS") %>%
          wtac = as.numeric(wtac),
          wtac = replace(wtac, which(wtac>993), NA),
          age = as.factor(age),
+         age = as.character(age),
          age = as.numeric(age),
-         age = 2020 - age,
+         age = (2020 - age),
          gender = as.factor(gender),
          gender = recode(gender, 
                          `1` = "Male",
@@ -714,37 +715,22 @@ rm(aut, de, fr, it, nl, uk, covar)
 ### Dependent Variable
 ```{r, echo=F, message=FALSE, warning=FALSE}
 d %>%
-  dplyr::select(country, trust) %>%
-  group_by(country) %>%
-  summarise(avg = mean(trust),
-            std = sd(trust)) %>%
-  ggplot(mapping = aes(x = country, y = avg, 
-                       ymin = avg - (1.96 * std), 
-                       ymax = avg + (1.96 * std))) +
-  geom_col(alpha = .2, fill = "seagreen") +
-  geom_errorbar(position = position_dodge(width=0.9), width = 0.2, colour = "darkgrey") +
-  labs(x = "", y = "Strongly disagree (1) - Strongly agree (5)", title = "Most politicians are trustworthy") +
+  ggplot(mapping = aes(y = country, x = trust)) +
+  geom_boxplot(fill = "seagreen", alpha = .2) +
+  labs(y = "", x = "Strongly disagree (1) - Strongly agree (5)", title = "Most politicians are trustworthy") +
   theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5)) 
 ```
 
 ### Independent Variable
 ```{r, echo=F, message=FALSE, warning=FALSE}
 d %>%
-  dplyr::select(country, wtac) %>%
-  group_by(country) %>%
-  summarise(avg = mean(wtac),
-            std = sd(wtac)) %>%
-  ggplot(mapping = aes(x = country, y = avg, 
-                       ymin = avg - (1.96 * std), 
-                       ymax = avg + (1.96 * std))) +
-  geom_col(alpha = .2, fill = "seagreen") +
-  geom_errorbar(position = position_dodge(width=0.9), width = 0.2, colour = "darkgrey") +
-  labs(x = "", y = "Strongly Agree (1) - Strongly Disagree (5)", title = "Compromise is selling out principles") +
+  ggplot(mapping = aes(y = country, x = wtac)) +
+  geom_boxplot(alpha = .2, fill = "seagreen") +
+  labs(y = "", x = "Strongly Agree (1) - Strongly Disagree (5)", title = "Compromise is selling out principles") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5))
 ```
-
 
 ### Control Variables
 ```{r, echo=F, message=FALSE, warning=FALSE, fig.width=10, fig.height=7}
@@ -777,16 +763,10 @@ d %>%
          Education = education, 
          `Left-Right Self-Placement` = rile_selfplacement) %>%
   pivot_longer(cols = Age:`Left-Right Self-Placement`) %>%
-  group_by(country, name) %>%
-  summarise(avg = mean(value),
-            std = sd(value)) %>%
-  ggplot(mapping = aes(x = country, y = avg,
-                        ymin = avg - (1.96 * std), 
-                       ymax = avg + (1.96 * std))) +
-  geom_col(alpha = .2, fill = "seagreen") +
+  ggplot(mapping = aes(y = country, x = value)) +
+  geom_boxplot(alpha = .2, fill = "seagreen") +
   facet_wrap(.~ name, scales = "free") +
-  geom_errorbar(position = position_dodge(width=0.9), width = 0.2, colour = "darkgrey") +
-  labs(x = "", y = "Mean Values", title = "Continuous Control Variables") +
+  labs(y = "", x = "Mean Values", title = "Continuous Control Variables") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5),
         axis.text.x=element_text(color = "black", size=11, 

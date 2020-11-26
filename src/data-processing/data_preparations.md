@@ -81,7 +81,7 @@ d <- readRDS("../../data/raw-private/cses.rds") %>%
                             `96` = 0),
          education = replace(education, 
                              which(education>96), NA),
-         income = replace(income, which(income>96), NA),
+         income = replace(income, which(income>5), NA),
          pid = replace(pid, which(pid>5), NA),
          pid = recode(pid,
                       `0` = "No Partisan ID",
@@ -178,8 +178,9 @@ nl <- readRDS("../../data/raw-private/dpes.RDS") %>%
          wtac = as.numeric(wtac),
          wtac = replace(wtac, which(wtac>993), NA),
          age = as.factor(age),
+         age = as.character(age),
          age = as.numeric(age),
-         age = 2020 - age,
+         age = (2020 - age),
          gender = as.factor(gender),
          gender = recode(gender, 
                          `1` = "Male",
@@ -477,7 +478,7 @@ tibble(Covariate = covar,
 | Gender                           |       0.00 |
 | Age                              |       0.00 |
 | Education                        |       0.00 |
-| Income                           |       0.00 |
+| Income                           |       0.19 |
 
 We recode the missing values of `trust` and `willingness to accept
 compromise` variables to the mean value of the respective variables. For
@@ -530,7 +531,7 @@ tibble(Covariate = covar,
 | Gender                           |       0.00 |
 | Age                              |       0.00 |
 | Education                        |       0.01 |
-| Income                           |       0.00 |
+| Income                           |       0.10 |
 
 We recode the missing values of `trust`, `willingness to accept
 compromise`, `left-right self-placement`, and `education` variables to
@@ -588,7 +589,7 @@ tibble(Covariate = covar,
 | Gender                           |       0.00 |
 | Age                              |       0.00 |
 | Education                        |       0.04 |
-| Income                           |       0.00 |
+| Income                           |       0.14 |
 
 We recode the missing values of `trust`, `willingness to accept
 compromise`, `left-right self-placement`, and `education` variables to
@@ -645,7 +646,7 @@ tibble(Covariate = covar,
 | Gender                           |       0.00 |
 | Age                              |       0.00 |
 | Education                        |       0.00 |
-| Income                           |       0.00 |
+| Income                           |       0.21 |
 
 We recode the missing values of `trust` and `willingness to accept
 compromise` variables to the mean value of the respective variables. For
