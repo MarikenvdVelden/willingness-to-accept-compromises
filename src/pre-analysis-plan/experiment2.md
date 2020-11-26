@@ -4,13 +4,13 @@
 Given the pervasiveness of compromises in politics, voters cannot expect parties to avoid them.
 Indeed, studies demonstrate that citizens recognise the necessity of compromise in democratic governance ([Hibbing &amp; Theiss-Morse 2001](https://www.jstor.org/stable/3117634), [Gutmann &amp; Thompson 2014](https://press.princeton.edu/books/paperback/9780691160856/the-spirit-of-compromise); [Hardbridge, Malhotra &amp; Harrison 2014](https://doi.org/10.1111/lsq.12048); [Wolak 2020](https://global.oup.com/academic/product/compromise-in-an-age-of-party-polarization-9780197510490?cc=nl\&lang=en\&). 
 At the same time, voters can be disappointed if their party settles too often for less than they aspired to when making election pledges. 
-Compromises, therefore, is coined a ``_boo-hurray_'' concept; the positive notion of cooperation in coupled with the negative notion signalling that one is selling out on one's principles ([Margalit 2010](https://press.princeton.edu/books/paperback/9780691158129/on-compromise-and-rotten-compromises).
-We define compromise as “_an agreement in which all sides sacrifices something in order to improve on the status quo from their perspective, and in which the sacrifices are at least partially determined by the other sides’ will_” ([Gutmann &amp; Thompson 2014; p.10](https://press.princeton.edu/books/paperback/9780691160856/the-spirit-of-compromise)).  
+Compromises, therefore, is coined a "_boo-hurray_" concept; the positive notion of cooperation in coupled with the negative notion signalling that one is selling out on one's principles ([Margalit 2010](https://press.princeton.edu/books/paperback/9780691158129/on-compromise-and-rotten-compromises).
+We define compromise as "_an agreement in which all sides sacrifices something in order to improve on the status quo from their perspective, and in which the sacrifices are at least partially determined by the other sides’ will_”"([Gutmann &amp; Thompson 2014; p.10](https://press.princeton.edu/books/paperback/9780691160856/the-spirit-of-compromise)).  
 There are plenty ways of how a party can reach a compromise. 
 We argue that in the European context, four are of particular interest.
 First,  a party could give in to most of the demands of another party in order to avoid gridlock; i.e. thereby improving the status quo.
 This is termed a **capitulation** compromise.
-Second, the parties could ``meet each other in the middle''. 
+Second, the parties could "meet each other in the middle''. 
 Hence, both (or all) parties move their initial position to reach a compromise, called a **meet-in-he-middle** compromise.
 Third, parties could opt for a **tit-for-tat** compromise, where a party capitulates on one issue but wins on another issue.
 Finally, a party could take contested issues off the partisan agenda and delegating them to outside experts who are presumably more expert and/or objective, termed a **delegation** compromise.
