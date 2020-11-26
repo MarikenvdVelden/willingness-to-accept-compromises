@@ -1,28 +1,39 @@
 # Experiment 2: Mechanisms of Willingness to Accept Compromise
 
-## Experimental Design
+## Theoretical Background
+Given the pervasiveness of compromises in politics, voters cannot expect parties to avoid them.
+Indeed, studies demonstrate that citizens recognise the necessity of compromise in democratic governance ([Hibbing &amp; Theiss-Morse 2001](https://www.jstor.org/stable/3117634), [Gutmann &amp; Thompson 2014](https://press.princeton.edu/books/paperback/9780691160856/the-spirit-of-compromise); [Hardbridge, Malhotra &amp; Harrison 2014](https://doi.org/10.1111/lsq.12048); [Wolak 2020](https://global.oup.com/academic/product/compromise-in-an-age-of-party-polarization-9780197510490?cc=nl\&lang=en\&). 
+At the same time, voters can be disappointed if their party settles too often for less than they aspired to when making election pledges. 
+Compromises, therefore, is coined a ``_boo-hurray_'' concept; the positive notion of cooperation in coupled with the negative notion signalling that one is selling out on one's principles ([Margalit 2010](https://press.princeton.edu/books/paperback/9780691158129/on-compromise-and-rotten-compromises).
+We define compromise as “_an agreement in which all sides sacrifices something in order to improve on the status quo from their perspective, and in which the sacrifices are at least partially determined by the other sides’ will_” ([Gutmann &amp; Thompson 2014; p.10](https://press.princeton.edu/books/paperback/9780691160856/the-spirit-of-compromise)).  
+There are plenty ways of how a party can reach a compromise. 
+We argue that in the European context, four are of particular interest.
+First,  a party could give in to most of the demands of another party in order to avoid gridlock; i.e. thereby improving the status quo.
+This is termed a **capitulation** compromise.
+Second, the parties could ``meet each other in the middle''. 
+Hence, both (or all) parties move their initial position to reach a compromise, called a **meet-in-he-middle** compromise.
+Third, parties could opt for a **tit-for-tat** compromise, where a party capitulates on one issue but wins on another issue.
+Finally, a party could take contested issues off the partisan agenda and delegating them to outside experts who are presumably more expert and/or objective, termed a **delegation** compromise.
 
-Citizens recognise the necessity of compromise in democratic governance (Hibbing &amp; Theiss-Morse 2001, Gutmann & Thompson 2014; Hardbridge, Malhotra &amp; Harrison 2014; Wolak 2020). 
-Given the pervasiveness of compromises, voters cannot expect that their party avoids them. 
-Simultaneously, voters can be disappointed if they perceive their party as making too many compromises. 
-To compromise is to settle for less than we aspired to — meaning that by compromising a political party settles on a second-best choice.
-Compromise is coined a “boo-hurray” concept — a positive noting signaling cooperation coupled with the negative notion signaling selling out principles (Margalit 2010). 
-We define compromise as “_an agreement in which all sides sacrifices something in order to improve on the status quo from their perspective, and in which the sacrifices are at least partially determined by the other sides’ will_” (Gutmann &amp; Thompson 2014; p.10).  
-There are plenty ways of how a party can reach a compromise: (a) Capitulation: a party could give in to most of the demands on another one in order to avoid gridlock (i.e. thereby improving the status quo); (b) Meet-in-the-Middle: the parties could “meet each other in the middle”, thereby both moving their initial position; (c) Tit-for-Tat: parties could opt for a tit-for-tat strategy where they capitulate on one issue but win on another.
-
-Which compromise do voters accept?  
-In this experiment, we examine how voters’ credibility of the party is depended on striking a compromise or the outcome of the compromise.
-Gutmann and Thompson (2014) theorise that an _uncompromising mindset_ is dependent on (a) a principled tenacity; and (b) mutual mistrust. 
+Which compromises do voters accept? And what are the mechanisms driving that decision?
+Gutmann and Thompson ([2014](https://press.princeton.edu/books/paperback/9780691160856/the-spirit-of-compromise)) theorise that whether or not people are willing to accept compromises is dependent on so-called _principled tenacity_ and _mutual mistrust_. 
 Principled tenacity refers to an attitude in which people do not forsake their principles even when it yields interests.
 Mutual mistrust refers to mistrust in the opponents in the negotiations: The idea that the opponents are only motivated by a desire to defeat them.
-A capitulation strategy likely fosters both an attitude that politicians should never forsake their principles for interests as well as the idea that the opponents are only motivated by a desire to defeat them.
-Hence a capitulation strategy negatively affects the party’s credibility.
+A **capitulation compromise** likely fosters both an attitude that politicians should never forsake their principles for interests as well as the idea that the opponents are only motivated by a desire to defeat them.
+Hence a _capitulation compromise is least likely to be accepted by voters_.
 If both parties are however willing to move, the mutual distrust is likely to be alleviated.
-A meet-in-the-middle strategy would likely not appease voters attitude that politicians should never forsake their principles for interests. 
-Hence a meet-in-the-middle strategy negatively affects the party’s credibility, but less so than a capitulation once.
+A **meet-in-the-middle compromise** would more likely be accepted by people for which the mutual trust is there, but would not appease voters attitude that politicians should never forsake their principles for interests. 
 [NOTE: (1) this could depend on the direction of the middle (i.e. more/less extreme) and the issue; (2) the H2 could also be framed in fewer people than capitulation lose trust]
-Some compromises might become acceptable, even for the most principled, if they gain something (important), principles might way less.
+Some compromises might become acceptable, even for people with high levels of principled tenacity, if they gain something (important), principles might way less.
 Hence a tit-for-tat strategy positively affects the party’s credibility compared to the other types of compromise.
+
+
+In this experiment, we examine how voters’ credibility of the party is depended on striking a compromise or the outcome of the compromise.
+
+
+## Experimental Design
+
+
  
 				| Capitulation	|	Meet-in-the-Middle	|	Tit-for-Tat
 -------------------------------------------------|-----------------------------------|---------------------
