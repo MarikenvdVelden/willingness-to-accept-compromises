@@ -1,0 +1,517 @@
+---
+title: "Pre-Analysis Plan: Give a Little, Take a Little. Political Parties’ Reputational Cost of Compromise"
+date: "`r format(Sys.time(), '%d %B, %Y - %X (%Z)')`"
+output: 
+  pdf_document:
+    toc: yes
+    number_sections: true
+editor_options: 
+  chunk_output_type: console
+bibliography: references.bib
+urlcolor: blue
+linkcolor: blue
+header-includes:
+   - \usepackage{floatrow}
+   - \floatsetup[figure]{capposition=top}
+   - \floatsetup[table]{capposition=top}
+   - \usepackage{booktabs}
+   - \usepackage{longtable}
+   - \usepackage{array}
+   - \usepackage{multirow}
+   - \usepackage{wrapfig}
+   - \usepackage{float}
+   - \usepackage{colortbl}
+   - \usepackage{pdflscape}
+   - \usepackage{tabu}
+   - \usepackage{threeparttable}
+   - \usepackage{threeparttablex}
+   - \usepackage[normalem]{ulem}
+   - \usepackage{makecell}
+   - \usepackage{xcolor}
+---
+```{r setup, include=FALSE}
+## include this at top of your RMarkdown file for pretty output
+## make sure to have the printr package installed: install.packages('printr')
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, echo = FALSE)
+#library(printr)
+library(tidyverse)
+library(kableExtra)
+options(kableExtra.latex.load_packages = FALSE)
+```
+
+\newpage
+
+# Expectations
+
+**Gender hypothesis** (_H1a_):  Women politicians are evaluated lower when striking a political compromise compared to men politicians.
+
+**Gender hypothesis** (_H1b_):  Women politicians are evaluated lower when not striking a political compromise compared to men politicians.
+
+**Migration hypothesis** (_H2_): Politicians with a migration background are evaluated lower when striking a political compromise compared to politicians without a migration background.
+
+**Intersection hypothesis** (_H3a_): Women politician with a migration background are evaluated lower when striking a political compromise compared to men politicians without a migration background.
+
+**Intersection hypothesis** (_H3b_): Women politician with a migration background are evaluated lower when not striking a political compromise compared to men politicians without a migration background.
+
+# Research Desing and Protocol
+
+## Sample
+I will conduct this survey experiment in the Netherlands in April 2021.
+The sample, recruited through [KiesKompas](https://www.kieskompas.nl/en/), will consist of 2,000 participants (based on the power analysis presented in Figure \ref{fig:power1}) of 18 years and older.
+Kieskompas works with non-random opt-in respondents.
+Therefore, I measure many demographic background variables (see [Section 3.2](#control-variables)).
+Balance checks will be conducted to demonstrate whether certain categories are over represented in a certain experimental group.
+The study has been approved by the [Research Ethics Review Committee](https://fsw.vu.nl/nl/onderzoek/research-ethics-review/index.aspx) of the _Vrije Universiteit Amsterdam_ (see the approval [here](https://github.com/MarikenvdVelden/compromise-punish/blob/main/docs/EthicalApproval.pdf)).
+To ensure good quality of our data, two attention checks (discussed in more detail in [Section 3.3](#attention-checks)) are included.
+Each respondent failing the attention check will be excluded and replaced with another 'good' response.
+
+## Experimental Protocol
+The study is conducted online and in Dutch.
+Participants are told that they are taking part in a survey to get an overview of how Dutch people form their views on politics.
+After reading an informed consent message participants are forwarded to the main questionnaire (or the survey will be terminated if they do not agree to the consent form).
+
+First, participants complete a set of background variables on their stances on the political issues used in the experiment (i.e. corona-measures, defense, education, immigration) and on their attitude towards women in politics -- the full codeboek can be viewed [here](#).
+The pre-treatment block ends with one of the two attention checks included in this survey.
+When participants fail this attention check, a warning appears asking them to read the question again
+carefully  and  to  answer  again.
+Only when they have answered it correctly, they enter the first round of the experiment.
+After each round of the experiment, some filler questions are asked about the respondents demographics.
+The stimuli in the experiment are news messages in the same style as the Dutch news website [nu.nl](https://www.nu.nl/).
+In these news messages, we manipulate: a) the _gender_ of the politician (male vs. female); b) the _migration background_ of the politician (based on a Arabic sounding name (Rachid(a) Amezian) or a native Dutch sounding name (Karel/Karin van der Kleijn)); and c) whether the politician _striked a compromise or not_.
+This creates a full `2*2*2` factorial experiment with four rounds.
+Every round, the news message covers a new issue.
+The issues are: "defense" (increase cooperation of the defense units), "immigration" (immigration stop in western countries), "education" (expansion creative elementary school activities), "COVID-19" (emergency legislation to combat COVID-19).
+For every round, the politicians name, and thereby gender and immigration background, are manipulated in the text and in the picture as well as the decision to strike a compromise.
+For an illustration of the stimulus material, see Figure \ref{fig:treatment_example}.
+All manipulated elements are within the blue boxes.
+
+```{r treatment-example, fig.align = 'center', out.width = "85%", fig.cap = "\\label{fig:treatment_example}Annotated Example of Stimulus Material", echo = FALSE, fig.topcaption=TRUE}
+knitr::include_graphics(here::here("docs/pap/FMPdefensie_annotated.png"))
+```
+
+The text of the treatment is a Dutch translation of the stimulus material developed by @bauer2017punished.
+The authors have pre-tested the text of the stimuli material several times [see the [Web Appendix](https://static-content.springer.com/esm/art%3A10.1007%2Fs11109-016-9356-6/MediaObjects/11109_2016_9356_MOESM1_ESM.docx) of @bauer2017punished].
+The photo's of their stimuli material can unfortunately not be used, because a) @bauer2017punished only investigate the difference between men and women politicians, using solely photo''s of caucasians; and b) the American flag was present in their material.
+Instead, I have used photo's from local politicians of the city of The Hague that are not know to the general public. 
+The men politicians are in real life representatives of the [liberal-progressive party D66](https://www.denhaag.nl/nl/bestuur-en-organisatie/gemeenteraad/raadsleden-en-fractievertegenwoordigers/boutkabout-a.-abid-fractievertegenwoordiger-d66.htm) (man with immigrant background) and of the [christian democratic party CDA](https://www.denhaag.nl/nl/bestuur-en-organisatie/gemeenteraad/raadsleden-en-fractievertegenwoordigers/groot-de-d.p.-daniel-fractievertegenwoordiger-cda.htm) (man without immigrant background).
+The women politicians are in real life representatives of a [right-wing populist party _Hart voor Den Haag/ Groep de Mos_](https://www.denhaag.nl/nl/bestuur-en-organisatie/gemeenteraad/raadsleden-en-fractievertegenwoordigers/davituliani-n.-nino-raadslid-hart-voor-den-haaggroep-de-mos.htm) (woman with migration background) and of the [social democratic party PvdA](https://www.denhaag.nl/nl/bestuur-en-organisatie/gemeenteraad/raadsleden-en-fractievertegenwoordigers/holman-j.-janneke-raadslid-pvda.htm) (woman without immigrant background).
+Thereby we have a spread over the ideological different parties present in Dutch politics.
+The names for the politicians without immigration background are _Karel_ (man) and _Karin_ (woman) _van der Kleijn_, which are typical native Dutch names.
+For the politicians with an immigration background, we picked _Rachid_ (man) and _Rachida_ (woman) _Amezian_.
+
+## Power Analysis
+As detailed in [Section 4](#analysis), I conduct an OLS regression within a multiverse approach [@simonsohn2019specification;@steegen2016increasing] using the four post-treatment questions on the politician's a) leadership evaluaton (scale); b) general favorability; c) representative quality; and d) career perspective as dependent variable and the three manipulations (gender, migration background and whether or not the politician is willing to strike a compromise ) as independent variables.
+Each hypothesis is tested separately for all four issues.
+To calculate power for the hypotheses, the R package `DeclareDesign` is used [@blair2019declaring].
+Based on the study of @bauer2017punished, the effect sizes are between `b = 0.2` and `b = 0.1` -- i.e. a small effect visualized by the purple and blue lines in Figure \ref{fig:power1}.
+The hypothesis are directional, Figure \ref{fig:power1} therefore displays one-tailed tests with $\alpha$ `= 0.05`.
+The power analysis shows that testing hypotheses 1 and 2 requires a sample size of `1,800` participants (x-axis) to reach `95%` power (black dashed line, in the left-panel of Figure \ref{fig:power1}). 
+Note that if the effect size is bigger then `0.2` (i.e. `0.3`, `0.4`, `0.5`, or `0.6`) smaller sample sizes
+are sufficient to reach `95\%` power.
+To test H3, the combination of gender and migration background, we can detect a small effect `b = 0.2` (blue line) with a power of `80%` (gray dashed line) and a one-tailed test of signficance at $\alpha$ `=0.05` with a sample of `1,800` participants (Right-Panel of Figure \ref{fig:power1}). 
+At `2,000` participants, with a small effect and one-tailed test of significance at $\alpha$ `=0.05`, I reach power of `88%`.
+A sample of `2,000` participants therefore gives me suficient power to test Hypotheses 1 and 2, but a probability of `12%` for a Type II error remains when testing Hypotheses 3. 
+I will therefore test all hypotheses first by issue and second, by pooling our data across issues.
+As Figure \ref{fig:power2} demonstrates, this will give sufficient power even if we do two-tailed testing.
+
+```{r power-example, eval = FALSE, echo = TRUE}
+source(here::here("docs/pap/poweranalysis.R"))
+```
+
+```{r power, fig.align = 'center', out.width = "100%", fig.cap = "\\label{fig:power1}Power Analysis", fig.topcaption=TRUE}
+knitr::include_graphics(here::here("docs/pap/power_analysis.png"))
+```
+
+```{r power-pooled, fig.align = 'center', out.width = "100%", fig.cap = "\\label{fig:power2}Power Analysis - Pooled", fig.topcaption=TRUE}
+knitr::include_graphics(here::here("docs/pap/power_analysis-pooled.png"))
+```
+
+# Measures
+
+## Dependent Variables
+I rely on four measures reflecting different aspects of how people judge politicians.
+The evaluation of politicians' character traits are statements deriving from @aaldering2016political.
+The other three neasures to evaluate the politician of the treatment are translated from @bauer2017punished -- i.e. favorability, representation, and career perspectives.
+General favorability is shown to be related to vote choice [@elis2010dynamics], perceptions of represenation are related to legislative compromise and cooperation [@doherty2013whom], and career perspective is included because critiques of women are typically manifested in their leadership skills [@eagly2007female].
+Since the questionaire is in Dutch, Table \ref{tab:dv} describes the measures both in English and in Dutch.
+
+1. _Evaluation of politicians' character traits_ This measure exists of six statements -- see Table \ref{tab:dv} `PT-1_1` till `PT-1_6`.
+Each statement is measured on a 5-point Likert-scale: From `very much disagree` to `very much agree`.
+If `Cronbach's` $\alpha$ `=>0.8`, I will construct an additive scale for this measure.
+When `Cronbach's` $\alpha$ `<0.8`, I will add the statement as seperate dependent variables in the multiverse analysis. 
+
+2. _Favorability_ In this measure respondents are asked to rank the politician from very unfavorable (value of `0`) to very favorable (value of `10`) for the decision to (not) strike a compromise on the issue at stake.
+See Table \ref{tab:dv} `PT-2` for the exact phrasing of the question.
+
+3. _Representation_ In this measure, respondents are surveyed on how well the statement "[NAME] is a good representative of [HIS/HER] constituency" describes the politician.
+The politician can be evaluated on an 11-point scale from `very poorly` (value of `0`) till `very well` (value of 10).
+See Table \ref{tab:dv} `PT-3` for the exact phrasing of the question.
+
+4. _Career perspective_ This measure evaluates the politician more broadly by asking whether the politician is likely to move up in leadership position. 
+Respondents answer this question on an 11 point scale, ranging from `very unlikely` (value of `0`) till `very likely` (value of `10`).
+See Table \ref{tab:dv} `PT-4` for the exact phrasing of the question.
+
+
+```{r dv, topcaption=TRUE}
+d <- tibble(Variable = c("leadership_eval (PT-1)", "leadership_eval (PT-1_1)",
+                         "leadership_eval (PT-1_2)", "leadership_eval (PT-1_3)",
+                         "leadership_eval (PT-1_4)", "leadership_eval (PT-1_5)",
+                         "leadership_eval (PT-1_6)", "favorable (PT-2)", 
+                         "representation (PT-3)", "career (PT-4)"), 
+            `Wording ENG` = c("To what extent does the following statement apply to [NAME]? [NAME] ...", 
+                              "... has integrity", "... is competent", 
+                              "... is decisive", "... is empathetic", 
+                              "... is sympathetic",
+                              "... knows what goes on in society",
+                              "How disapproving or approving are you of the decision by [NAME] to [NOT] strike a compromise on the [ISSUE]?",
+                              "How well does the following statement describe the politician in question: [NAME] is a good representative of [HIS/HER] constituency.",
+                              "Do you think [NAME] is likely to move up the ladder, for example as a minister in government or a leadership position in parliament?"),
+            `Wording NL` = c("In hoeverre is onderstaande stelling van toepassing op [NAAM]? [NAAM]...", 
+                             "... is integer", "... is competent", "... is daadkrachtig",
+                             "... is empathisch","... is sympatiek",
+                             "... weet goed wat er leeft in de samenleving",
+                             "Hoe afkeurend of goedkeurend staat u tegenover de beslissing van [NAAM] om [(G)EEN] compromis te sluiten op [ISSUE]?",
+                             "Hoe goed beschrijft de volgende stelling de desbetreffende politicus: [NAAM] is een goede vertegenwoordiger van [ZIJN/HAAR] achterban.",
+                             "Denkt u dat [NAAM] waarschijnljk hogerop zal komen, bijvoorbeeld als minister in de regering of een leidinggevende positie in het parlement?"))
+
+kbl(d, booktabs =T, caption = "\\label{tab:dv}Survey Questions - DV") %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center") %>%
+  column_spec(1, width = "3cm") %>%
+  column_spec(2, width = "7cm") %>%
+  column_spec(3, width = "7cm")
+
+```
+
+&nbsp;
+
+## Control Variables
+
+As control variables, the following _demographics_ are measured: gender, age, education, geographical region, level of urbanness, migration background, vote choice in the 2021 parliamentary elections, employment, and income.
+For the analysis, only variables that are unbalanced over the experimental conditions will be included.
+Table \ref{tab:demographics} gives an overview of the questions asked in the survey as well as their English translations.
+
+- _Gender_ is measured as `sex` based on the advice of Kieskompas. The answer categories are `Male` (value of `1`), `Female` (value of `0`), and `Other` (value of `999`).
+
+- _Age_ is measured as a respondents birth year. 
+
+- _Education_ is measured as the highest successfully completed level of education, recoded into three categories: High (Dutch levels _HBO_ and _WO_), Middle (Dutch levels _MBO_, _HAVO_, and _VWO_), and Low (Dutch levels _LBO_, _MAVO_, _elementary school_, or _none_).
+I create dummy variables for each level of education with the lowest category as base category.
+
+- _Geographical region_ is measured using the _Nielsen districs_, dividing the Netherlands into 1) the 3 major cities plus suburbs, Amsterdam (plus Diemen, Ouder-Amstel, Landsmeer, Amstelveen), Rotterdam (plus Schiedam, Capelle aan den IJssel, Krimpen aan den IJssel, Nederlek, Ridderkerk, Barendrecht, Albrandswaard) and The Hague (plus Leidschendam, Voorburg, Rijswijk, Wassenaar, Wateringen); 2) West (Noord-Holland, Zuid-Holland and Utrecht (excluding the major cities and their suburbs; 3) North (Groningen, Friesland and Drenthe), 4) East (Overijssel, Gelderland and Flevoland); and South (Zeeland, Noord-Brabant and Limburg).
+
+- _Urbanness_ Respondents are asked for their postal codes. 
+Using the [Dutch Bureau of Statistics's classification](https://www.cbs.nl/nl-nl/cijfers/detail/84721NED?q=stedelijkheid) we calculate the level of urbanism, ranging from `not at all urban` to `very urban`.
+
+- _Migration background_ I use the [Dutch Bureau of Statistics's classification](https://www.cbs.nl/nl-nl/over-ons/innovatie/project/cbs-experimenteert-met-dotmaps/migratieachtergrond) for the type of migration background.
+The Bureau of Statistics distinguishes between `No migration background`, `1st generation Western`, `2nd generation Western`, `1st generation Non-Western`, and `2nd generation Non-Western`.  
+I create dummy variables for each category with the `2nd generation Non-Western` as base category.
+
+- _Vote recall_ Respondents were asked which party they voted for in the 2021 parliamentary elections. The options were 1) all parties that were elected into parliament --`CDA`, `ChristenUnie`, `D66`, `Denk`, `Forum for Democracy`, `GroenLinks`, `PvdA`, `Animal Rights Party`, `PVV`, `SGP`, `SP`, `VVD`, `50Plus Party` -- 2) another party; 3) blanco vote; and 4) a `Don't know` option.
+
+- _Employment_ Respondents were asked which category of employment -- `Full-time employed`, `Part-time employed`, `Entrepreneur`, `Unemployed and searching for a job`, `Unemployed and not searching for a job or incapacitated`, `Housewife/Househusband or else`, `Retired`, `Student or full-time education` -- applied most to them. 
+
+- _Income_ Respondents were questioned on their monthly income in bins of €500 -- `€500 or less`, `€501-€1000`, `€1001-€1500`, `€1501-€2000`, `€2001-€2500`, `€2501-€3000`, `€3001-€3500`, `€3501-€4000`, `€4501-€7500`, `€7501 or more` -- as well as giving them the options of `won't  say` and `don't know`.
+
+```{r demographics, topcaption=TRUE}
+d <- tibble(Variable = c("gender (F1)", "age (F2)", "education (F9)",
+                         "region (F3)", "postal_code (F4)", "migration_backgr (F5)",
+                         "vote_recall (F6)", "job (F7)", "income (F8)"), 
+            `Wording ENG` = c("What is your gender?", "What is your year of birth?",
+                              "What is your highest level of education?", 
+                             "In which region do you live?",
+                             "We ask your postal code to be able to make a classification on urbanity (very urban, strongly urban, moderately urban, little urban, not urban). By entering your postal code, you explicitly agree that your region of residence will be used for analysis purposes.",
+                             "Where is your country of birth, Where is your father's country of birth?, and Where is your monther's country of birth?",
+                              "Which party did you vote for during the last parliamentary elections of March 2021?",
+                             "What applies most to you? Are you...",
+                              "Can you indicate which income groups your net monthly household income falls into?"),
+            `Wording NL` = c("Wat is uw geslacht?", "Wat is uw geboortejaar?", 
+                             "Wat is uw hoogst GENOTEN opleiding","In welke regio woont u?",
+                             "Wij vragen uw postcode om een indeling op stedelijkheid (zeer sterk stedelijk, sterk stedelijk, matig stedelijk, weinig stedelijk, niet stedelijk) te kunnen maken. Door het invoeren van uw postcode gaat u er expliciet mee akkoord dat uw woonregio voor analyse doeleinden wordt gebruikt.",
+                             "Wat is uw geboorteland, Wat is het geboorteland van uw vader, en Wat is het geboorteland van uw moeder?",
+                             "Op welke politieke partij heeft u bij de vorige Tweede Kamerverkiezingen van maart 2021 gestemd?",
+                             "Wat is het meest op u van toepassing? Bent u...",
+                             "Kunt u aangeven in welke inkomensgroepen uw netto maandelijks huishoudinkomen valt?"))
+
+kbl(d, booktabs =T, caption = "\\label{tab:demographics}Survey Questions - Demographics") %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center") %>%
+  column_spec(1, width = "3cm") %>%
+  column_spec(2, width = "7cm") %>%
+  column_spec(3, width = "7cm")
+
+```
+
+In addition, pre-treatment, respondents' ideological position, position on the issues migration, defense, educaton, and COVID-19 policies, attitudes towards women in politics, and political efficacy are measured in a random order (see Tables \ref{tab:pret1} and \ref{tab:pret2}).
+Those variables will only be included in the analyses if balance checks indicate they are necessary.
+Moreover, the variables will be used to explore heterogeneous relationships. 
+
+- _Ideological position_ is measured using an 11-point scale ranging from left (`0`) to right (`10`).
+
+- _Position on immigration_ is measured using two items. In the first item, participants are asked to estimate the percentage of immigrants living in the Netherlands, which gives an indication of how prejudiced people are towards people with an immigrant background. In the second item, participants are asked to position themselves on whether people with an immigrant background should fully adapt to the Dutch culture on an 11-point scale, ranging from `fully maintain their own values` (value of `0`) to `fully adapt` (value of `10`). Hence, higher values indicate a stronger anti-migration position.
+
+```{r pret, topcaption=TRUE}
+d <- tibble(Variable = c("immigration-percentage (PreT1)", "immigration-assimilation (PreT2)",
+                         "defense (PreT3)", "education (PreT4)", "sexism-scale (PreT5)", 
+                         "sexism-scale (PreT5-1)","sexism-scale (PreT5-2)", "sexism-scale (PreT5-3)",
+                         "sexism-scale (PreT5-4)", "sexism-scale (PreT5-5)","rile-self (PreT6)",
+                         "poleff (PreT7)", "poleff (PreT7-1)", "poleff (PreT7-2)", "poleff (PreT7-3)", 
+                         "poleff (PreT7-4)", "poleff (PreT7-5)","poleff (PreT7-6)", "poleff (PreT7-7)",
+                         "corona-policy (PreT8)"), 
+            `Wording ENG` = c("What do you think is the share of immigrants of the Dutch population? By immigrants we mean people born in another country (first generation) and their children (second generation). Enter a percentage between 0 and 100 below, where 0 means that there are no immigrants in the Netherlands at all, 100 means that all residents of the Netherlands are immigrants, and 50 percent means that half of the Dutch population is immigrants.",
+                              "In the Netherlands, some think that Dutch people with a migration background should be able to live here while maintaining their own culture. Others think they should adapt completely to the Dutch culture. Where would you place yourself on a line from 0 to 10, where 0 means preservation of own culture for immigrants and 10 that they should adapt completely?",
+                              "The Netherlands must increase defense spending to meet NATO requirements.",
+                              "The Netherlands must increase spending on education to ensure its quality.",
+                              "To what extent do you agree with the following statements:",
+                              "I hope that in the next ten years the Netherlands will have a female prime minister",
+                             "Men are better at making political decisions than women.", 
+                             "It is easier in the Netherlands for a man to become a minister than for a woman.",
+                             "Political parties must do more to ensure that the number of women in the House of Representatives increases.", 
+                             "Women have fewer opportunities in politics in the Netherlands than men.",
+                             "In politics there is often talk about left and right. Where would you put yourself on this scale?",
+                             "You will now get to see a number of theses about Dutch politics. To what extent do you agree or disagree with these statements?",
+                             "The political parties are only interested in my vote and not in my opinion.", 
+                             "Against their better judgment, politicians promise more than they can deliver.", 
+                             "Most politicians are skilled people who know what they are doing.", 
+                             "Politicians are able to solve the most important problems.", 
+                             "I feel well represented by Dutch politicians.", 
+                             "What in politics is called `making compromises' is actually just betraying your principles.", 
+                             "A strong head of government is good for the Netherlands, even if he stretches the rules a bit to get things done.",
+                             "We would like to ask you for your opinion on the measures the government chooses to counter the coronavirus. All in all, are you in favor of:"),
+            `Wording NL` = c("Wat denkt u dat het aandeel is van immigranten van de Nederlandse bevolking? Onder immigranten verstaan we mensen die zijn geboren in een ander land (eerste generatie) en hun kinderen (tweede generatie). Vul hieronder een percentage in tussen 0 en 100, waarbij 0 betekent dat er helemaal geen immigranten in Nederland zijn, 100 betekent dat alle inwoners van Nederland immigrant zijn, en 50 procent betekent dat de helft van de Nederlandse bevolking immigrant is.",
+                             "In Nederland vinden sommigen dat Nederlanders met een migratieachtergrond hier moeten kunnen leven met behoud van de eigen cultuur. Anderen vinden dat zij zich geheel moeten aanpassen aan de Nederlandse cultuur. Waar zou u uzelf plaatsen op een lijn van 0 tot en met 10, waarbij de 0 behoud van eigen cultuur voor allochtonen betekent en de 10 dat zij zich geheel moeten aanpassen?",
+                             "Nederland moet de uitgaven aan defensie verhogen om zo te voldoen aan de eisen van de NAVO.",
+                             "Nederland moet de uitgaven aan het onderwijs verhogen om zo de kwaliteit ervan te kunnen waarborgen.",
+                             "In hoeverre bent u het eens met de volgende uitspraken:",
+                             "Ik hoop dat Nederland in de komende tien jaar een vrouwelijke minister-president krijgt", 
+                             "Mannen zijn beter in staat om politieke beslissingen te nemen dan vrouwen.", 
+                             "Het is in Nederland voor een man makkelijker om minister te worden dan voor een vrouw.", 
+                             "Politieke partijen moeten meer doen om te zorgen dat het aantal vrouwen in de Tweede Kamer toeneemt.", 
+                             "Vrouwen krijgen in Nederland minder kansen in de politiek dan mannen.",
+                             "In de politiek wordt vaak gesproken over links en rechts. Waar zou u uzelf op deze schaal plaatsen?",
+                             "In welke mate bent u het eens of oneens met deze stellingen?",
+                                "De politieke partijen zijn alleen maar geïnteresseerd in mijn stem en niet in mijn mening.",
+                             "Tegen beter weten in beloven politici meer dan ze kunnen waarmaken.", 
+                             "De meeste politici zijn bekwame mensen die weten wat ze doen.", 
+                             "Politici zijn in staat om de belangrijkste problemen op te lossen.", 
+                             "Ik voel mij goed vertegenwoordigd door Nederlandse politici.", 
+                             "Wat men in de politiek `het sluiten van compromissen' noemt, is eigenlijk gewoon het verraden van je principes.", 
+                             "Een sterke regeringsleider is goed voor Nederland, ook als deze de regels wat oprekt om dingen voor elkaar te krijgen.",
+                             "Hoe denkt u over de maatregelen die de regering kiest om het coronavirus tegen te gaan? Bent u al met al een voorstander van:"))
+
+kbl(d[1:11,], booktabs =T, caption = "\\label{tab:pret1}Survey Questions - PreTreatment Questions (1)") %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center") %>%
+  column_spec(1, width = "3cm") %>%
+  column_spec(2, width = "7cm") %>%
+  column_spec(3, width = "7cm")
+
+
+kbl(d[12:dim(d)[1],], booktabs =T, caption = "\\label{tab:pret2}Survey Questions - PreTreatment Questions (2)") %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center") %>%
+  column_spec(1, width = "3cm") %>%
+  column_spec(2, width = "7cm") %>%
+  column_spec(3, width = "7cm")
+```
+
+- _Position on defense_ is measured by asking people whether or not more money should be spend on defense to keep up with the NATO requirements using a 5-point Likert-scale (`fully disagree`, `disagree`, `neutral`, `agree`, `fully agree`).
+
+- _Position on education_ is measured by asking people whether or not more money should be spend on education to maintain the quality thereof using a 5-point Likert-scale (`fully disagree`, `disagree`, `neutral`, `agree`, `fully agree`).
+
+- _Position on COVID-19 policies_ is measured by asking people for your opinion on the measures the government chooses to counter the coronavirus, where people can choose for the options: `Much stricter measures to combat the virus (i.e. area ban).`, `Slightly stricter measures to prevent viruses.`, `The measures chosen by the government.`, `Slightly more flexible measures so that only the most vulnerable elderly are protected.`, `Much smoother measures to get the economy and nightlife going immediately.`
+
+- _Attitude towards women in politics_ is measured by using the sexism scale developed by Aaldering and Van der Pas. Using five statements (see Table \ref{tab:pret1}) people are asked on a 5-point Likert-scale whehter they `fully disagree`, `disagree`, `neutral`, `agree`, or `fully agree`. The items will be constructed into an additive scale.
+
+- _Political efficacy_ is measured using seven statements (see Table \ref{tab:pret2}) a 5-point Likert-scale (`fully disagree`, `disagree`, `neutral`, `agree`, `fully agree`).
+
+## Attention Checks
+I include two attention checks in the survey.
+The first one is after the pre-treatment covariates, the second one is asked just before respondents enter the third round of the experimental treatments.
+The attention checks are taken from @berinsky2014separating and adapted to the Dutch context (see also PAPER IR).
+If a respondents fails the first attention check, a warning appears and the respondent can only continue with the survey once the respondent has correctly answered the question correctly.
+The second attention check also has a warning -- meaning that respondents have to select two options -- but if they fail to correctly pass the check, they are excluded.
+Each excluded respondent due to failing an attention check is replaced with another ``good respondent".
+
+**Attention Check 1**  When a big news story breaks people often go online to get up-to-the-minute details on what is going on.
+We want to know which websites people trust to get this information.
+We also want to know if people are paying attention to the question.
+To show that you have read this much, please ignore the question and select Volkskrant and Metro as your two answers.
+When there is a big news story, which is the one news website you would visit first? (Please
+only choose one).
+Eight (Dutch) news outlets are provided to choose from.
+Respondents pass the attention check if they select _de Volkskrant_ and _Metro_.
+
+**Attention Check 2**:
+We would like to get a sense of your general preferences.
+Most  modern  theories  of  decision  making  recognize  that  decisions  do  not take  place  in  a  vacuum.
+Individual  preferences  and  knowledge,  along  with  situational variables can greatly impact the decision process.
+To demonstrate that you've read this much,  just  go  ahead  and  select  both  red  and  green  among  the  alternatives  below,  no matter what your favourite color is.  Yes, ignore the question below and select both of
+those options.
+What is your favourite color?
+Six colors are provided to choose from, respondents pass the attention check if they select red and green.
+
+## Exclusion Criteria
+Participants are required to respond to each question.
+Participants who fail the second attention check will be excluded but replaced by another participant.
+
+# Analysis
+I test the hypotheses formulated in [Section 1](#expectations) by fitting linear multivariate regressions separately for the four issues.
+In each model, will estimate the coefficient for gender of the politician (H1), migration background of the politician (H2), and the interaction of gendere and migration background (H3).
+I will apply a multiverse approach [@steegen2016increasing;@simonsohn2019specification].
+Instead of running various models using the different dependent variables, I will estimate whether the treatment explains the different operationalizations of the dependent variable ([see Section 3.1](#dependent-variables)) in one go and present the estimates and confidence intervals for the several combinations.
+I will only add control variables in the analyses that are unbalanced, as explained in [Section 4.1](#balance-checks).
+
+## Balance Checks
+I will conduct a balance test based on demographics (age, gender, education, geographical region, level of urbanness, migration background,  employment, and income), vote choice in the 2021 parliamentary elections, ideological self-placement, political efficacy, attitudes towards women in politics, and positions on the four issues, using the `cobalt` R package [@greifer2021]. 
+If the groups are unbalanced on one of these variables -- i.e. standardized mean differences `<0.05` -- I will add the covariates to the analyses.
+I will use the code below to conduct the balance tests (see [here](https://github.com/MarikenvdVelden/compromise-punish/tree/main/src/analysis/balance-test.R) for the R script).
+
+```{r balance, eval=FALSE, echo = TRUE}
+covs <- d %>%
+  mutate(treatment = paste(name, compromis, sep = "-")) %>%
+  select(treatment, PreT1:PreT8, F1:F9) 
+
+balanced <-bal.tab(Treatment ~ PreT1 + PreT2 + PreT3 + PreT4 +
+                     PreT5 + PreT6 + PreT7 + PreT8 +
+                     factor(F1) + F2 + factor(F9) + factor(F3) +
+                     factor(F4) + factor(F5) + factor(F6) + F7 + F8,
+                     Age + Education + factor(Sex_str), data = covs,
+          thresholds = c(m = 0.05))[[1]] 
+```
+
+## Hypothesis 1
+I test the _gender hypothesis_ using Equation \ref{eq:h1} and the code chunk below.
+The coefficient of $\beta_{1}$ denotes the difference in the evaluation of female and male politicians.
+The coefficient of $\beta_{2}$ denotes the difference in the evaluation of politicians who do and do not strike a comprmise.
+The coefficient of $\beta_{3}$ is the interaction of the  $\beta_{1}$ and  $\beta_{2}$.
+If the Average Marginal Effect of $\beta_{1}$ is negative and statistically siginificant when $\beta_{2} = 1$ (i.e. politician stroke a compromise), the _gender hypothesis_ will be confirmed.
+
+\begin{equation}\label{eq:h1}
+  \hat{Y} = \beta_{0} + \beta_{1}Female  + \beta_{2}Compromise + \beta_{3}Compromise * Female + \varepsilon
+\end{equation}
+
+```{r fake-data, eval = FALSE}
+
+df <- tibble(gender = sample(c(0,1),100, replace = T),
+             compromise = sample(c(0,1),100, replace = T),
+             PT1 = sample(c(0,10),100, replace = T),
+             PT2 = sample(c(0,10),100, replace = T),
+             PT3 = sample(c(0,10),100, replace = T),
+             PT4 = sample(c(0,10),100, replace = T))
+```
+
+```{r h1, eval = FALSE, echo = TRUE}
+source(here::here("src/lib/functions.R"))
+
+df <- d %>% select(PT1:PT4, gender, compromise)
+h1 <- regression(data = df, a = gender, b = compromise)
+```
+
+## Hypothesis 2
+
+I test the _migration hypothesis_ using Equation \ref{eq:h2} and the code chunk below.
+The coefficient of $\beta_{1}$ denotes the difference in the evaluation of politicians with and without a migration background.
+If $\beta_{1}$ is negative and statistically siginificant, the _migration hypothesis_ will be confirmed.
+The coefficient of $\beta_{2}$ denotes the difference in the evaluation of politicians who do and do not strike a comprmise.
+The coefficient of $\beta_{3}$ is the interaction of the  $\beta_{1}$ and  $\beta_{2}$.
+If the Average Marginal Effect of $\beta_{1}$ is negative and statistically siginificant when $\beta_{2} = 1$ (i.e. politician stroke a compromise), the _migration hypothesis_ will be confirmed.
+
+
+\begin{equation}\label{eq:h2}
+  \hat{Y} = \beta_{0} + \beta_{1}Migration Background + \beta_{2}Compromise + \beta_{3}Compromise * Migration Background + \varepsilon
+\end{equation}
+
+```{r h2, eval = FALSE, echo = TRUE}
+df <- d %>%
+  mutate(migration = recode(name, 
+                         `Rachid Amezian` = 1,
+                         `Rachida Amezian` = 1,
+                         .default = 0)) %>%
+  select(PT1:PT4, migration, compromise)
+
+h2 <- regression(data = df, a = migration, b = compromise)
+```
+
+
+## Hypothesis 3
+
+I test the _intersection hypothesis_ using Equation \ref{eq:h3} and the code chunk below.
+The coefficient of $\beta_{1}$ denotes the difference in the evaluation of female politicians with a migration background and the other politicians.
+If $\beta_{1}$ is negative and statistically siginificant, the _gender hypothesis_ will be confirmed.
+The coefficient of $\beta_{2}$ denotes the difference in the evaluation of politicians who do and do not strike a comprmise.
+The coefficient of $\beta_{3}$ is the interaction of the  $\beta_{1}$ and  $\beta_{2}$.
+If the Average Marginal Effect of $\beta_{1}$ is negative and statistically siginificant when $\beta_{2} = 1$ (i.e. politician stroke a compromise), the _intersection hypothesis_ will be confirmed.
+
+\begin{equation}\label{eq:h3}
+  \hat{Y} =\beta_{0} + \beta_{1}Intersection + \beta_{2}Compromise + \beta_{3}Compromise * Intersection + \varepsilon
+\end{equation}
+
+```{r h3, eval = FALSE, echo = TRUE}
+df <- d %>%
+  mutate(intersection = recode(name, 
+                         `Rachida Amezian` = 1,
+                         .default = 0)) %>%
+  select(PT1:PT4, intersection, compromise)
+
+h3 <- regression(data = df, a = intersection, b = compromise)
+```
+
+## Pooled Data
+Using the pooled data we will estimate a within groups fixed effects model. 
+$Y\hat{Y}_{r, i, t}$ in Equation \ref{eq:pooled} denotes  the  evaluation  of  a politician of respondent $r$, during issue $i$ and at experimental round $t$ -- ranging from round 1 to round 4.
+$\alpha_{i}$ is the issue specific intercept, and $\gamma_{t}$ is the experimental round specific intercept.  
+The standard errors are clustered at the individual level.  
+If the Average Marginal Effect of $\beta_{1}$ is negative and statistically siginificant when $\beta_{2} = 1$ (i.e. politician stroke a compromise), the _intersection hypothesis_ will be confirmed.
+
+\begin{equation}\label{eq:pooled}
+    \hat{Y}_{r, i, t} =\beta_{0} + \beta_{1}Intersection_{r, i, t} + \beta_{2}Compromise + \beta_{3}Compromise * Intersection + \alpha_{i} + \gamma_{t} + \varepsilon_{r, i, t}
+\end{equation}
+
+```{r pooled, echo = TRUE, eval = FALSE}
+h3_p <- pooled_regression(data = df, a = intersection, b = compromise, c = issues)
+```
+
+## Statistical Significance
+All the hypotheses are directional, and therefore all of the tests will be one-tailed.
+I will use an $\alpha$-value of `0.05` as the value for statistical significance in all models above.
+
+# Stimulus Material
+
+```{r stimulus, topcaption=TRUE}
+d <- tibble(` ` = c(1:8),
+            `Name Politician` = c(rep("Rachid Amezian", 2), rep("Karel van der Kleijn", 2),
+                                  rep("Rachida Amezian", 2), rep("Karin van der Kleijn", 2)),
+            Gender = c(rep("Men",4), rep("Women", 4)),
+            `Migration Background` = c(rep("Yes", 2), rep("No", 2),
+                                  rep("Yes", 2), rep("No", 2)),
+            Compromise = c("Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No"))
+
+kbl(d, booktabs =T, caption = "\\label{tab:treat}Experimental Conditions",
+    align = c("l", "l", "c", "c", "c")) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center") %>%
+  column_spec(1, width = ".5cm") %>%
+  column_spec(2, width = "3.2cm") %>%
+  column_spec(3, width = "2.5cm")%>%
+  column_spec(4, width = "3.5cm")%>%
+  column_spec(5, width = "2.5cm")
+
+```
+
+Table \ref{tab:treat} show the manipulations of the `2*2*2` experimental design, leading to 8 experimental groups. All stimulus material is developed by the [Network Institute of the _Vrije Universiteit Amsterdam_](https://networkinstitute.org/) and can be accessed [here](https://github.com/MarikenvdVelden/compromise-punish/tree/main/docs/pap/treatments). The treatment's texts are in Dutch. The English translation is displayed in Table \ref{tab:txt}.
+
+```{r text, topcaption=TRUE}
+d <- tibble(`  ` = c("Title", "First Paragraph", "Second Paragraph"),
+            ` ` = c("Politician makes [**no/ **] compromise on [**expansion creative elementary school activities/ intensifying defense cooperation/ migration freeze in Western countries/ Corona emergency legislation**]", "In this term, parliament faces a crucial crossroads regarding an [**expansion of creative elementary school activities/ intensification of defense cooperation/ migration freeze in Western countries/ extension of Corona emergency legislation**]. With the deadline for a vote fast approaching, parliament must determine the future of the policy on [**expanding creative elementary school activities/ intensifying defense cooperation/ migration freeze in Western countries/ Corona emergency legislation**] in the Netherlands. A number of non-partisan organizations have urged parliament to reach a compromise on this issue. Time is running out.", "For this important bill to pass, politicians from different political parties will have to put aside their differences and reach a compromise. While many in parliament are still debating their positions, some members of both left and right parties have already shown a willingness to compromise. One of those who [**won't/ will**] compromise is the politician [**Rachid Amezian/ Rachida Amezian/ Karin van der Kleijn/ Karel van der Kleijn**]. [**Rachid Amezian/ Rachida Amezian/ Karin van der Kleijn/ Karel van der Kleijn**] has already publicly stated that [**he / she**] wants to make [**no/ a**] compromises and will vote [**against/ for**] this bill. Although the vote is still a week away, [**Rachid Amezian/ Rachida Amezian/ Karin van der Kleijn/ Karel van der Kleijn**] has told numerous media sources that [**he/ she**] will not change [**his/ her**] vote. [**`This is just not an issue on which I want to compromise'/ `This is an issue on which I am willing to compromise'**] , said [**Rachid Amezian/ Rachida Amezian/ Karin van der Kleijn/ Karel van der Kleijn**]. `My voters knew this when they elected me.'"))
+
+kbl(d, booktabs =T, caption = "\\label{tab:txt}Text of Experimental Treatment") %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center") %>%
+  column_spec(1, width = "1cm") %>%
+  column_spec(2, width = "14cm")
+```
+
+
+\newpage
+# References
