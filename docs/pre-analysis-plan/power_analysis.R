@@ -84,7 +84,7 @@ reveal_Y <- declare_reveal()
 estimator <- declare_estimator(Y ~ Z, estimand = estimand, term="Z", model=lm)
 two_arm_design <- population + potential_outcomes + estimand + 
   assignment + reveal_Y + estimator
-designs <- redesign(design=two_arm_design, N=seq(8000,16000,2000), treatment_effect=seq(0.1,0.2,0.1))
+designs <- redesign(design=two_arm_design, N=seq(6000,10000,2000), treatment_effect=seq(0.1,0.2,0.1))
 
 alpha <- .05
 my_diagnosands <- declare_diagnosands(power.onetailed=mean(p.value<alpha), keep_defaults=TRUE)
@@ -107,7 +107,7 @@ reveal_Y <- declare_reveal()
 estimator <- declare_estimator(Y ~ Z, estimand = estimand, term="Z", model=lm)
 two_arm_design <- population + potential_outcomes + estimand + 
   assignment + reveal_Y + estimator
-designs <- redesign(design=two_arm_design, N=seq(8000,16000,2000), treatment_effect=seq(0.1,0.2,0.1))
+designs <- redesign(design=two_arm_design, N=seq(6000,10000,2000), treatment_effect=seq(0.1,0.2,0.1))
 
 alpha <- .05
 my_diagnosands <- declare_diagnosands(power.onetailed=mean(p.value<alpha), keep_defaults=TRUE)
@@ -122,7 +122,7 @@ p2 <- diagnosis1 %>% add_case(diagnosis2) %>%
   geom_line() +
   geom_hline(yintercept=0.95, linetype="dashed") +
   geom_hline(yintercept=0.8, linetype="dashed", color = "grey") +
-  geom_vline(xintercept = 12000,linetype="dotdash", color = "darkgrey") +
+  geom_vline(xintercept = 8000,linetype="dotdash", color = "darkgrey") +
   ylim(c(0,1)) +
   labs(x = "Number of Respondents", y = "Power: One-Tailed",
        title = "Issue-Pooled Analysis",
@@ -138,4 +138,4 @@ p2 <- diagnosis1 %>% add_case(diagnosis2) %>%
   guides(color=guide_legend(nrow=1,byrow=TRUE))
 
 p1 + p2
-ggsave("docs/power_analysis-pooled.eps", width=8, height=5, dpi=900)
+ggsave("docs/pre-analysis-plan/power_analysis-pooled.png", width=8, height=5, dpi=900)
