@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.3.20)  15 OCT 2021 10:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.3.20)  16 OCT 2021 11:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -697,37 +697,46 @@ LaTeX Warning: Label `tab:demographics' multiply defined.
 
 LaTeX Warning: Label `tab:pret' multiply defined.
 
+
+LaTeX Warning: Label `eq:h1' multiply defined.
+
+
+LaTeX Warning: Label `tab:post' multiply defined.
+
+
+LaTeX Warning: Label `tab:post' multiply defined.
+
 )
 \openout1 = `pap.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 148.
-LaTeX Font Info:    ... okay on input line 148.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 148.
-LaTeX Font Info:    ... okay on input line 148.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 148.
-LaTeX Font Info:    ... okay on input line 148.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 148.
-LaTeX Font Info:    ... okay on input line 148.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 148.
-LaTeX Font Info:    ... okay on input line 148.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 148.
-LaTeX Font Info:    ... okay on input line 148.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 148.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 148.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 149.
+LaTeX Font Info:    ... okay on input line 149.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 149.
+LaTeX Font Info:    ... okay on input line 149.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 149.
+LaTeX Font Info:    ... okay on input line 149.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 149.
+LaTeX Font Info:    ... okay on input line 149.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 149.
+LaTeX Font Info:    ... okay on input line 149.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 149.
+LaTeX Font Info:    ... okay on input line 149.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 149.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 149.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 148.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 148.
-LaTeX Font Info:    ... okay on input line 148.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 148.
-LaTeX Font Info:    ... okay on input line 148.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 148.
+LaTeX Font Info:    ... okay on input line 149.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 149.
+LaTeX Font Info:    ... okay on input line 149.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 149.
+LaTeX Font Info:    ... okay on input line 149.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 149.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Info: Redefining \microtypecontext on input line 148.
+LaTeX Info: Redefining \microtypecontext on input line 149.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
@@ -769,7 +778,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box50
-Package hyperref Info: Link coloring ON on input line 148.
+Package hyperref Info: Link coloring ON on input line 149.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
@@ -777,9 +786,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count152
 )
-LaTeX Info: Redefining \ref on input line 148.
-LaTeX Info: Redefining \pageref on input line 148.
-LaTeX Info: Redefining \nameref on input line 148.
+LaTeX Info: Redefining \ref on input line 149.
+LaTeX Info: Redefining \pageref on input line 149.
+LaTeX Info: Redefining \nameref on input line 149.
 (./pap.out) (./pap.out)
 \@outlinefile=\write4
 \openout4 = `pap.out'.
@@ -827,39 +836,39 @@ Package: fr-longtable 2007/11/28 v0.1b (beta) floatrow: additions for longtable
 \flrow@LT@prelastfoot=\box52
 \c@FBLTpage=\count153
 )
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 150.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 151.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 150.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 151.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 150
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 151
 .
 (/usr/local/texlive/2019/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 150
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 151
 .
 (/usr/local/texlive/2019/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 150.
+(Font)              <12> on input line 151.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 150.
+(Font)              <8> on input line 151.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 150.
-LaTeX Font Info:    Try loading font information for U+msa on input line 150.
+(Font)              <6> on input line 151.
+LaTeX Font Info:    Try loading font information for U+msa on input line 151.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/local/texlive/2019/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 150.
+LaTeX Font Info:    Try loading font information for U+msb on input line 151.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/usr/local/texlive/2019/texmf-dist/tex/latex/microtype/mt-msb.cfg
@@ -879,17 +888,17 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 
 {/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 
-Package hyperref Warning: Suppressing link with empty target on input line 245.
+Package hyperref Warning: Suppressing link with empty target on input line 246.
 
 
 [2]
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 270.
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 271.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 </Users/marikenvandervelden/Dropbox/Papers/veni_project_mm/willingness-to-accep
-t-compromises/docs/pre-analysis-plan/example_treatment.jpg, id=141, 2823.54875p
+t-compromises/docs/pre-analysis-plan/example_treatment.jpg, id=156, 2823.54875p
 t x 1799.72375pt>
 File: /Users/marikenvandervelden/Dropbox/Papers/veni_project_mm/willingness-to-
 accept-compromises/docs/pre-analysis-plan/example_treatment.jpg Graphic file (t
@@ -898,14 +907,14 @@ ype jpg)
 ccept-compromises/docs/pre-analysis-plan/example_treatment.jpg>
 Package pdftex.def Info: /Users/marikenvandervelden/Dropbox/Papers/veni_project
 _mm/willingness-to-accept-compromises/docs/pre-analysis-plan/example_treatment.
-jpg  used on input line 278.
+jpg  used on input line 279.
 (pdftex.def)             Requested size: 399.25784pt x 254.48607pt.
 [3 </Users/marikenvandervelden/Dropbox/Papers/veni_project_mm/willingness-to-ac
 cept-compromises/docs/pre-analysis-plan/example_treatment.jpg>]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 320.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 321.
 </Users/marikenvandervelden/Dropbox/Papers/veni_project_mm/willingness-to-accep
-t-compromises/docs/pre-analysis-plan/power_analysis-pooled.png, id=159, 7227.0p
+t-compromises/docs/pre-analysis-plan/power_analysis-pooled.png, id=174, 7227.0p
 t x 4516.875pt>
 File: /Users/marikenvandervelden/Dropbox/Papers/veni_project_mm/willingness-to-
 accept-compromises/docs/pre-analysis-plan/power_analysis-pooled.png Graphic fil
@@ -914,10 +923,10 @@ e (type png)
 ccept-compromises/docs/pre-analysis-plan/power_analysis-pooled.png>
 Package pdftex.def Info: /Users/marikenvandervelden/Dropbox/Papers/veni_project
 _mm/willingness-to-accept-compromises/docs/pre-analysis-plan/power_analysis-poo
-led.png  used on input line 326.
+led.png  used on input line 327.
 (pdftex.def)             Requested size: 469.66122pt x 293.53825pt.
 
-Overfull \hbox (49.9418pt too wide) in paragraph at lines 368--377
+Overfull \hbox (49.9418pt too wide) in paragraph at lines 369--378
  [][] 
  []
 
@@ -926,31 +935,31 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [4 </Users/marikenvandervelden/Dropbox/Papers/veni_project_mm/willingness-to-ac
 cept-compromises/docs/pre-analysis-plan/power_analysis-pooled.png>]
-LaTeX Font Info:    Try loading font information for TS1+lmr on input line 394.
+LaTeX Font Info:    Try loading font information for TS1+lmr on input line 395.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 413
+LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 414
 .
 (/usr/local/texlive/2019/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-Underfull \hbox (badness 1924) in paragraph at lines 423--431
+Underfull \hbox (badness 1924) in paragraph at lines 424--432
 \T1/lmtt/m/n/10 Part-time employed\T1/lmr/m/n/10 (+20) , \T1/lmtt/m/n/10 Entrep
 reneur\T1/lmr/m/n/10 (+20) , \T1/lmtt/m/n/10 Unemployed and searching for a job
 \T1/lmr/m/n/10 (+20) , \T1/lmtt/m/n/10 Unemployed and
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 423--431
+Underfull \hbox (badness 10000) in paragraph at lines 424--432
 \T1/lmtt/m/n/10 not searching for a job or incapacitated\T1/lmr/m/n/10 (+20) , 
 \T1/lmtt/m/n/10 Housewife/Househusband or else\T1/lmr/m/n/10 (+20) , \T1/lmtt/m
 /n/10 Retired\T1/lmr/m/n/10 (+20) ,
  []
 
 
-Overfull \hbox (49.9418pt too wide) in paragraph at lines 454--470
+Overfull \hbox (49.9418pt too wide) in paragraph at lines 455--471
  [][] 
  []
 
@@ -958,7 +967,7 @@ Overfull \hbox (49.9418pt too wide) in paragraph at lines 454--470
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Overfull \hbox (49.9418pt too wide) in paragraph at lines 499--518
+Overfull \hbox (49.9418pt too wide) in paragraph at lines 500--519
  [][] 
  []
 
@@ -967,44 +976,128 @@ Overfull \hbox (49.9418pt too wide) in paragraph at lines 499--518
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Overfull \hbox (49.9418pt too wide) in paragraph at lines 524--534
+Overfull \hbox (49.9418pt too wide) in paragraph at lines 525--535
  [][] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[6] [7] [8] [9]
-Overfull \hbox (1.49164pt too wide) in paragraph at lines 823--823
-[]|\T1/lmr/m/n/10 (-20) Second 
+[6] [7]
+Overfull \hbox (49.9418pt too wide) in paragraph at lines 660--679
+ [][] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+
+Overfull \hbox (49.9418pt too wide) in paragraph at lines 685--705
+ [][] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Overfull \hbox (49.9418pt too wide) in paragraph at lines 711--731
+ [][] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[8] [9]
+Overfull \hbox (43.57094pt too wide) detected at line 805
+[][] \OT1/lmr/m/n/10 = \OML/lmm/m/it/10 ^^L[] \OT1/lmr/m/n/10 + \OML/lmm/m/it/1
+0 ^^L[]Steadfast \OT1/lmr/m/n/10 + \OML/lmm/m/it/10 ^^L[]Outcome \OT1/lmr/m/n/1
+0 + \OML/lmm/m/it/10 ^^L[]Party ID \OT1/lmr/m/n/10 + \OML/lmm/m/it/10 ^^L[]Part
+y ID Strength \OT1/lmr/m/n/10 + \OML/lmm/m/it/10 ^^L[]Unbalanced Covariates \OT
+1/lmr/m/n/10 + \OML/lmm/m/it/10 "
+ []
+
+
+LaTeX Warning: Reference `eq:h2' on page 10 undefined on input line 830.
+
+
+Overfull \hbox (57.94113pt too wide) detected at line 842
+[][] \OT1/lmr/m/n/10 = \OML/lmm/m/it/10 ^^L[] \OT1/lmr/m/n/10 + \OML/lmm/m/it/1
+0 ^^L[]Compromise \OT1/lmr/m/n/10 + \OML/lmm/m/it/10 ^^L[]Outcome \OT1/lmr/m/n/
+10 + \OML/lmm/m/it/10 ^^L[]Party ID \OT1/lmr/m/n/10 + \OML/lmm/m/it/10 ^^L[]Par
+ty ID Strength \OT1/lmr/m/n/10 + \OML/lmm/m/it/10 ^^L[]Unbalanced Covariates \O
+T1/lmr/m/n/10 + \OML/lmm/m/it/10 "
+ []
+
 [10]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 872.
+Overfull \hbox (178.44054pt too wide) detected at line 885
+[][] \OT1/lmr/m/n/10 = \OML/lmm/m/it/10 ^^L[] \OT1/lmr/m/n/10 + \OML/lmm/m/it/1
+0 ^^L[]Compromise \OT1/lmr/m/n/10 + \OML/lmm/m/it/10 ^^L[]Outcome \OT1/lmr/m/n/
+10 + \OML/lmm/m/it/10 ^^L[]Compromise \OMS/lmsy/m/n/10 ^^C \OML/lmm/m/it/10 Out
+come \OT1/lmr/m/n/10 + \OML/lmm/m/it/10 ^^L[]Party ID \OT1/lmr/m/n/10 + \OML/lm
+m/m/it/10 ^^L[]Party ID Strength \OT1/lmr/m/n/10 + \OML/lmm/m/it/10 ^^L[]Unbala
+nced Covariates \OT1/lmr/m/n/10 + \OML/lmm/m/it/10 "
+ []
+
 [11]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 872.
+Overfull \hbox (240.14166pt too wide) detected at line 928
+[][] \OT1/lmr/m/n/10 = \OML/lmm/m/it/10 ^^L[] \OT1/lmr/m/n/10 + \OML/lmm/m/it/1
+0 ^^L[]Compromise \OT1/lmr/m/n/10 + \OML/lmm/m/it/10 ^^L[]Outcome \OT1/lmr/m/n/
+10 + \OML/lmm/m/it/10 ^^L[]Principled \OT1/lmr/m/n/10 + \OML/lmm/m/it/10 ^^L[]O
+utcoume \OMS/lmsy/m/n/10 ^^C \OML/lmm/m/it/10 Principled \OT1/lmr/m/n/10 + \OML
+/lmm/m/it/10 ^^L[]Party ID \OT1/lmr/m/n/10 + \OML/lmm/m/it/10 ^^L[]Party ID Str
+ength \OT1/lmr/m/n/10 + \OML/lmm/m/it/10 ^^L[]Unbalanced Covariates \OT1/lmr/m/
+n/10 + \OML/lmm/m/it/10 "
+ []
+
+
+Overfull \hbox (269.53024pt too wide) detected at line 991
+[][] \OT1/lmr/m/n/10 = \OML/lmm/m/it/10 ^^L[] \OT1/lmr/m/n/10 + \OML/lmm/m/it/1
+0 ^^L[]Compromise \OT1/lmr/m/n/10 + \OML/lmm/m/it/10 ^^L[]Outcome \OT1/lmr/m/n/
+10 + \OML/lmm/m/it/10 ^^L[]Mutual Trust \OT1/lmr/m/n/10 + \OML/lmm/m/it/10 ^^L[
+]Outcoume \OMS/lmsy/m/n/10 ^^C \OML/lmm/m/it/10 Mutual Trust \OT1/lmr/m/n/10 + 
+\OML/lmm/m/it/10 ^^L[]Party ID \OT1/lmr/m/n/10 + \OML/lmm/m/it/10 ^^L[]Party ID
+ Strength \OT1/lmr/m/n/10 + \OML/lmm/m/it/10 ^^L[]Unbalanced Covariates \OT1/lm
+r/m/n/10 + \OML/lmm/m/it/10 "
+ []
+
+[12]
+
+LaTeX Warning: Float too large for page by 219.52739pt on input line 1140.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 1148
+.
+
+[13]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1199.
+[14] [15] [16] [17]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1199.
 (./pap.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 872.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 872.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1199.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1199.
+
 Package rerunfilecheck Info: File `pap.out' has not changed.
-(rerunfilecheck)             Checksum: 917EDC91F1D2BFBA39EBD6A1092884DE;2453.
+(rerunfilecheck)             Checksum: F22CE18089CE6F4A3D9C11A2146CA968;2876.
+
+LaTeX Warning: There were undefined references.
+
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 16124 strings out of 492616
- 237537 string characters out of 6129481
- 393423 words of memory out of 5000000
- 19585 multiletter control sequences out of 15000+600000
- 60679 words of font info for 116 fonts, out of 8000000 for 9000
+ 16162 strings out of 492616
+ 237977 string characters out of 6129481
+ 444775 words of memory out of 5000000
+ 19594 multiletter control sequences out of 15000+600000
+ 61412 words of font info for 122 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,11n,38p,1207b,406s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/lo
-cal/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texliv
+ 37i,11n,38p,809b,406s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/lo
+cal/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texliv
 e/2019/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2019/texmf-d
 ist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/local/texlive/2019/texmf-dist/fonts/enc
 /dvips/lm/lm-ec.enc}</usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/l
@@ -1018,10 +1111,10 @@ ype1/public/lm/lmr17.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public
 fb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/l
 ocal/texlive/2019/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/local/texli
 ve/2019/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on pap.pdf (11 pages, 3400969 bytes).
+Output written on pap.pdf (17 pages, 3425090 bytes).
 PDF statistics:
- 327 PDF objects out of 1000 (max. 8388607)
- 296 compressed objects within 3 object streams
- 73 named destinations out of 1000 (max. 500000)
- 12451 words of extra memory for PDF output out of 14400 (max. 10000000)
+ 378 PDF objects out of 1000 (max. 8388607)
+ 340 compressed objects within 4 object streams
+ 90 named destinations out of 1000 (max. 500000)
+ 12475 words of extra memory for PDF output out of 14400 (max. 10000000)
 

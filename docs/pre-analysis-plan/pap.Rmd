@@ -28,6 +28,7 @@ header-includes:
    - \usepackage[normalem]{ulem}
    - \usepackage{makecell}
    - \usepackage{xcolor}
+   - \usepackage[utf8]{inputenc}
 ---
 ```{r setup, include=FALSE}
 ## include this at top of your RMarkdown file for pretty output
@@ -181,7 +182,7 @@ I create dummy variables for each level of education with the lowest category as
 Westphalia, Rhineland-Palatinate, Saarland, Saxony, Saxony-Anholt, Schleswig-Holstein, and Thuringia.
 
 ```{r demographics, topcaption=TRUE}
-d <- tibble(Variable = c("gender (RESPONDI)", "age (RESPONDI)", "education (RESPONDI)",
+d <- tibble(Variable = c("gender (D1)", "age (D2)", "education (D3)",
                          "geographical-region (D4)", "vote-recall2 (D6)", "employment (D7)",
                          "income (D8)", "living-place (D9)", "birth-place (D10)"), 
             `Wording ENG` = c("Which gender do you feel you belong to?", "To which of the following age groups do you belong?",
@@ -307,9 +308,126 @@ What is your favourite color?
 Six colors are provided to choose from, respondents pass the attention check if they select red and green.
 
 ## Post-Treatment Variables
-Post-treatment, the heterogeneous treatments (H4 and H5), manipulation checks and populist attitudes are surveyed. 
+Post-treatment, the heterogeneous treatments (H4 and H5), manipulation checks, cultural position, and populist attitudes are surveyed. 
 
-- _Principledness_ This is measured in two different ways. First, following @arceneaux2019roots, , we measure principledness with using the Ethical Positions Questionnaire using a 7-point Likert scale (`Strongly Disagree`, `Disagree`, `Somewhat Disagree`, `Neither Agree nor Disagree`, `Somewhat Agree`, `Agree`, `Strongly Agre`). We reduce the initial 20 statements to 12 based on this [analysis](#), where statements 1–6 measure idealism and statements 7– 12 measure relativism; absolutism is the combination of idealism with the rejection of relativism. Secondly, we use @ryan2017no's measure of Willingness to Accept (WtA) Benefits, where participants imagine to receive money but donate the same amount of money to an organization that is against their preferred policy position. 
+- _Principledness_ This is measured in two different ways. First, following @arceneaux2019roots, , we measure principledness with using the Ethical Positions Questionnaire using a 7-point Likert scale (`Strongly Disagree`, `Disagree`, `Somewhat Disagree`, `Neither Agree nor Disagree`, `Somewhat Agree`, `Agree`, `Strongly Agre`). We reduce the initial 20 statements to 12 based on this [analysis](https://github.com/MarikenvdVelden/willingness-to-accept-compromises/blob/main/docs/pre-analysis-plan/absolutism_irt.pdf), where statements 1–6 measure idealism and statements 7– 12 measure relativism; absolutism is the combination of idealism with the rejection of relativism. If `Cronbach's` $\alpha$ `=>0.8`, we will construct an additive scale for this measure.When `Cronbach's` $\alpha$ `<0.8`, we will add the statement as seperate dependent variables in the multiverse analysis. Secondly, we use @ryan2017no's measure of Willingness to Accept (WtA) Benefits, where participants imagine to receive money (\texteuro `0`, \texteuro `1`, \texteuro `2`, \texteuro `3`, \texteuro `4`) but donate the same amount of money to an organization that is against their preferred policy position. 
+
+- _Mutual trust_ is measured using three items from the European Social Survey using an 11-point scale, where `0` is the most negative answer, and `10` the most positive one. Respondents are asked whether they think most people can be trusted, most people try to take advantage of you, and most people are willing to help others. If `Cronbach's` $\alpha$ `=>0.8`, we will construct an additive scale for this measure.
+When `Cronbach's` $\alpha$ `<0.8`, we will add the statement as seperate dependent variables in the multiverse analysis. 
+
+- _Cultural position_ is measured by asking if people find it important if people are born in Germany, have German ancestors, are able to speak German, and conform to the German norms and values using a 5-point Likert-scale (`Very importnat`, `Important`, `Neutral`, `Unimportant`, `Very unimportant`).
+
+- _Populism attitudes_ We measure populist attitudes with the scale developed by @akkerman2014populist with a 5-point Likert-scale ranging (`Very much disagree`, `Disagree`, `Neutral`, `Agree`, `Very much agree`). For the statements, see Table XX.
+
+```{r post, topcaption=TRUE}
+d <- tibble(Variable = c("princpledness2 (HT1a)",
+                         "princpledness2 (HT1a-1)",
+                         "princpledness2 (HT1a-2)",
+                         "princpledness2 (HT1a-3)",
+                         "princpledness2 (HT1a-4)",
+                         "princpledness2 (HT1a-5)",
+                         "princpledness2 (HT1a-6)",
+                         "princpledness2b (HT1b)",
+                         "princpledness2 (HT1b-1)",
+                         "princpledness2 (HT1b-2)",
+                         "princpledness2 (HT1b-3)",
+                         "princpledness2 (HT1b-4)",
+                         "princpledness2 (HT1b-5)",
+                         "princpledness2 (HT1b-6)",
+                         "princpledness1 (HT2)",
+                         "mutual-trust1 (HT3a)",
+                         "mutual-trust2 (HT3b)",
+                         "mutual-trust3 (HT3c)",
+                         "cultural-position (HT4)",
+                         "cultural-position (HT4-1)",
+                         "cultural-position (HT4-2)",
+                         "cultural-position (HT4-3)",
+                         "cultural-position (HT4-4)",
+                         "populist-attitudes (POST1)",
+                         "populist-attitudes (POST1-1)",
+                         "populist-attitudes (POST1-2)",
+                         "populist-attitudes (POST1-3)",
+                         "populist-attitudes (POST1-4)",
+                         "populist-attitudes (POST1-5)",
+                         "populist-attitudes (POST1-6)",
+                         "populist-attitudes (POST1-7)",
+                         "populist-attitudes (POST1-8)",
+                         "manipulation-check1 (MC1)",
+                         "manipulation-check2 (MC2)",
+                         "reality-check (MC3)"),
+            `Wording ENG` = c("Below you will find a selection of general statements. We are interested in the extent to which you agree or disagree with the individual statements.", 
+                              "A person should be careful that their actions never intentionally cause harm to another person, even in a small way.", 
+                              "Putting others at risk should never be tolerated, no matter how small the risks.", 
+                              "The occurrence of potential harm to others is always wrong, regardless of the benefits.", 
+                              "One should never hurt another person psychologically or physically.", 
+                              "One should not take any action that could in any way threaten the dignity and well-being of another person.", 
+                              "If an act could harm an innocent third party, it should not be done.", 
+                              "Im Folgenden finden Sie eine Auswahl an allgemeinen Aussagen. Uns interessiert, inwieweit Sie den einzelnen Aussagen zustimmen oder nicht zustimmen.",
+                              "There are no ethical principles that are so important that everyone must follow them.", 
+                              "What is ethical varies from situation to situation and from society to society.", 
+                              "You cannot say that a certain kind of morality is more correct than another.", 
+                              "The question of what is ethical for all can never be settled, for what is moral or immoral should be left to the individual.",
+                              "Moral values are simply personal rules that indicate how a person should behave and should not be used to judge others.", 
+                              "Whether something is considered moral or immoral depends on the circumstances.", 
+                              "Imagine being able to choose an amount from the list below, and the amount you choose will be credited to your account. The catch is that the amount you choose will also be donated to an association that vehemently for/against the introduction of a top tax/ speed limit. What amount would you choose?",
+                              "Do you think that most people can be trusted, or that you can't be careful enough when dealing with other people? Please tell us using this scale from 0 to 10. 0 means that you can't be careful enough, and 10 means that you can trust most people.", 
+                              "Do you think most people try to take advantage of you when they have the opportunity, or do most people try to be fair?",
+                              "And do you think that people are mostly trying to be helpful, or that people are mostly looking out for their own advantage?",
+                              "Some people think that the following points are important to be truly German. Others do not think they are important. How important do you think the following points are to being German?",
+                              "To be born in Germany", 
+                              "to have German ancestors", 
+                              "to be able to speak German", 
+                              "to adhere to German traditions and customs",
+                              "Now we would like to know your opinion on some general statements about politics. For each of the following statements, please indicate the extent to which you agree or disagree with it.",
+                              "What is called compromise in politics is really just a betrayal of principles.",
+                              "Citizens, not politicians, should make the most important policy decisions.",
+                              "The members of the German Bundestag must follow the will of the citizens.", 
+                              "The political differences between elites and citizens are greater than the differences between citizens.", "Elected officials talk too much and take too little action", "A citizen would better represent my interests than a professional politician.", "In a democracy, it is important to compromise between different points of view.", "It is important to listen to the opinions of other groups.", "Can you please tell us if [PARTY] would compromise(s) according to the Instagram message?", "Can you please tell us if the two parties have agreed to start coalition talks according to the Instagram message?", "The Instagram message you just saw represented a fictional scenario of coalition talks. Do you know which parties are currently holding exploratory talks in reality? Please select all applicable parties."),
+            `Wording DE` = c("Im Folgenden finden Sie eine Auswahl an allgemeinen Aussagen. Uns interessiert, inwieweit Sie den einzelnen Aussagen zustimmen oder nicht zustimmen.",
+            "Eine Person sollte darauf achten, dass ihre Handlungen niemals absichtlich einen anderen Menschen Schaden zufügen, auch nicht in geringem Maße.", 
+            "Die Gefährdung anderer sollte niemals toleriert werden, unabhängig davon, wie gering die Risiken auch sein mögen.", 
+            "Das Eintreten eines potenziellen Schadens für andere ist immer falsch, unabhängig von den Vorteilen, die sich daraus ergeben.", 
+            "Man sollte eine andere Person niemals psychisch oder physisch verletzen.", 
+            "Man sollte keine Handlung vornehmen, die in irgendeiner Weise die Würde und das Wohlbefinden eines anderen Menschen bedrohen könnte.", 
+            "Wenn eine Handlung einem unschuldigen Dritten schaden könnte, sollte sie nicht vorgenommen werden.", 
+            "Im Folgenden finden Sie eine Auswahl an allgemeinen Aussagen. Uns interessiert, inwieweit Sie den einzelnen Aussagen zustimmen oder nicht zustimmen.",
+            "Es gibt keine ethischen Grundsätze, die so wichtig sind, dass jeder sie befolgen muss.",
+            "Was ethisch ist, variiert von Situation zu Situation und von Gesellschaft zu Gesellschaft.",
+            "Man kann nicht sagen, dass eine bestimmte Art von Moral richtiger ist als eine andere.", 
+            "Die Frage, was für alle ethisch ist, kann nie geklärt werden, denn was moralisch oder unmoralisch ist, sollte dem Einzelnen überlassen werden.",
+            "Moralische Werte sind einfach persönliche Regeln, die angeben, wie sich eine Person verhalten sollte, und sollten nicht dazu dienen, über andere zu urteilen.",
+            "Ob etwas als moralisch oder unmoralisch eingestuft wird, hängt von den Umständen ab.",
+            "Stellen Sie sich vor, Sie können einen Betrag aus der unten stehenden Liste auswählen, und der von Ihnen gewählte Betrag wird Ihrem Konto gutgeschrieben. Der Haken an der Sache ist, dass der von Ihnen gewählte Betrag auch an einen Verband gespendet wird, der sich vehement gegen/für die Einführung eines Spitzensteuersatzes/Generellen Tempolimits einsetzt. Welchen Betrag würden Sie auswählen?", 
+            "Glauben Sie, dass man den meisten Menschen vertrauen kann, oder dass man im Umgang mit anderen Menschen nicht vorsichtig genug sein kann? Bitte sagen Sie es uns anhand dieser Skala von 0 bis 10. 0 bedeutet, dass man nicht vorsichtig genug sein kann, und 10 bedeutet, dass man den meisten Menschen vertrauen kann.",
+            "Glauben Sie, dass die meisten Menschen versuchen, Sie auszunutzen, wenn sie die Gelegenheit dazu haben, oder versuchen die meisten Menschen, sich fair zu verhalten?",
+            "Und glauben Sie, dass die Menschen meistens versuchen, hilfsbereit zu sein, oder dass die Menschen meistens auf den eigenen Vorteil bedacht sind?",
+            "Manche Leute meinen, dass die folgenden Punkte wichtig sind, um wirklich deutsch zu sein. Andere halten diese nicht für wichtig. Für wie wichtig halten Sie die folgenden Punkte, um deutsch zu sein?", "in Deutschland geboren sein","deutsche Vorfahren haben", "deutsch sprechen können", "sich an deutsche Traditionen und Gepflogenheiten halten", "Jetzt möchten wir gerne Ihre Meinung zu einigen allgemeinen Aussagen zur Politik wissen. Bitte geben Sie zu jeder der folgenden Aussagen an, inwieweit Sie dieser zustimmen oder diese ablehnen.",
+"Was in der Politik Kompromiss genannt wird, ist in Wirklichkeit nur ein Verrat von Prinzipien.","Die Bürger, und nicht die Politiker, sollten die wichtigsten politischen Entscheidungen treffen.","Die Abgeordneten des Deutschen Bundestags müssen dem Willen der Bürger Folge leisten.","Die politischen Unterschiede zwischen den Eliten und den Bürgern sind größer als die Unterschiede zwischen Bürgern.", "Die Politiker reden zu viel und machen zu wenig.","Ein Bürger würde besser meine Interessen vertreten als ein Berufspolitiker.","In einer Demokratie ist es wichtig, Kompromisse zwischen unterschiedlichen Standpunkten zu schließen.","Es ist wichtig, die Meinung anderer Gruppen anzuhören.", "Können Sie uns bitte sagen, ob [PARTY] der Instagram-Nachricht zufolge einen Kompromiss eingehen würde(n)?", "Können Sie uns bitte sagen, ob die beide Parteien der Instagram-Nachricht zufolge sich geinigt haben, Koalitionsverhandlungen aufzunehmen?", "Die Instagram-Nachricht, die Sie gerade gesehen haben, stellte ein fiktives Szenario der Koalitionsverhandlungen dar. Wissen Sie, welche Parteien derzeit in der Wirklichkeit Sondierungsgespräche führen? Bitte wählen Sie alle zutreffenden Parteien aus."))
+
+kbl(d[1:11,], booktabs =T, caption = "\\label{tab:post1}Survey Questions - PostTreatment Questions (1)") %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center") %>%
+  column_spec(1, width = "3cm") %>%
+  column_spec(2, width = "7cm") %>%
+  column_spec(3, width = "7cm")
+
+
+kbl(d[12:23,], booktabs =T, caption = "\\label{tab:post2}Survey Questions - PostTreatment Questions (2)") %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center") %>%
+  column_spec(1, width = "3cm") %>%
+  column_spec(2, width = "7cm") %>%
+  column_spec(3, width = "7cm")
+
+kbl(d[24:dim(d)[1],], booktabs =T, caption = "\\label{tab:post3}Survey Questions - PostTreatment Questions (3)") %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center") %>%
+  column_spec(1, width = "3cm") %>%
+  column_spec(2, width = "7cm") %>%
+  column_spec(3, width = "7cm")
+```
+
+- _Manipulation checks_ 
 
 ## Exclusion Criteria
 Participants are required to respond to each question.
@@ -321,129 +439,312 @@ In each model, we will estimate the coefficient for whether the party compromise
 We will only add control variables in the analyses that are unbalanced, as explained in [Section 4.1](#balance-checks).
 
 ## Balance Checks
-We will conduct a balance test based on demographics (age, gender, education, geographical region, level of urbanness, migration background,  employment, and income), vote choice in the 2021 parliamentary elections, ideological self-placement, political efficacy, attitudes towards women in politics, and positions on the four issues, using the `cobalt` R package [@greifer2021]. 
+We will conduct a balance test based on demographics (age, gender, education, geographical region, level of urbanness,employment, and income), vote choice in the 2021 parliamentary elections, ideological self-placement, political knowledge, political interest, party identity strength, and positions on and salience of the three issues, using the `cobalt` R package [@greifer2021]. 
 If the groups are unbalanced on one of these variables -- i.e. standardized mean differences `<0.05` -- I will add the covariates to the analyses.
 I will use the code below to conduct the balance tests (see [here](https://github.com/MarikenvdVelden/compromise-punish/tree/main/src/analysis/balance-test.R) for the R script).
 
 ```{r balance, eval=FALSE, echo = TRUE}
 covs <- d %>%
-  mutate(treatment = paste(name, compromis, sep = "-")) %>%
-  select(treatment, PreT1:PreT8, F1:F9) 
+  mutate(treatment = paste(compromise, outcome, sep = "-")) %>%
+  select(treatment, D1:D10, PT1:PT8, S2) 
 
-balanced <-bal.tab(Treatment ~ PreT1 + PreT2 + PreT3 + PreT4 +
-                     PreT5 + PreT6 + PreT7 + PreT8 +
-                     factor(F1) + F2 + factor(F9) + factor(F3) +
-                     factor(F4) + factor(F5) + factor(F6) + F7 + F8,
-                     Age + Education + factor(Sex_str), data = covs,
+balanced <-bal.tab(treatment ~ factor(D1) + D2 +
+                     factor(D3) + D4 + D5 + 
+                     factor(D6) + D7 + D8 + D9 +
+                     D10 + PT1_1 + PT1_2 + PT1_3 +
+                     PT3_1 + PT3_2 + PT3_3 + PT4 + 
+                     PT5 + PT6 + PT7 + PT8 + S2
+                     factor(F1) + F2 + factor(F9),
+                     data = covs,
           thresholds = c(m = 0.05))[[1]] 
 ```
 
 ## Hypothesis 1
-I test the _gender hypothesis_ using Equation \ref{eq:h1} and the code chunk below.
-The coefficient of $\beta_{1}$ denotes the difference in the evaluation of female and male politicians.
-The coefficient of $\beta_{2}$ denotes the difference in the evaluation of politicians who do and do not strike a comprmise.
-The coefficient of $\beta_{3}$ is the interaction of the  $\beta_{1}$ and  $\beta_{2}$.
-If the Average Marginal Effect of $\beta_{1}$ is negative and statistically siginificant when $\beta_{2} = 1$ (i.e. politician stroke a compromise), the _gender hypothesis_ will be confirmed.
+We test the _steadfast hypothesis_ using Equation \ref{eq:h1} and the code chunk below.
+The coefficient of $\beta_{1}$ denotes the difference in the evaluation of steadfast and compromising parties
+If the effect of $\beta_{1}$ is positive and statistically significant, the \textit{steadfast hypothesis} will be confirmed.
 
 \begin{equation}\label{eq:h1}
-  \hat{Y} = \beta_{0} + \beta_{1}Female  + \beta_{2}Compromise + \beta_{3}Compromise * Female + \varepsilon
+  \hat{Y}_{Party \ Evaluation} = \beta_{0} + \beta_{1}Steadfast  +
+  \beta_{2}Outcome + \beta_{4}Party\ ID + 
+  \beta_{5}Party \ ID \ Strength + 
+  \beta_{5}Unbalanced \ Covariates + \varepsilon
 \end{equation}
-
-```{r fake-data, eval = FALSE}
-
-df <- tibble(gender = sample(c(0,1),100, replace = T),
-             compromise = sample(c(0,1),100, replace = T),
-             PT1 = sample(c(0,10),100, replace = T),
-             PT2 = sample(c(0,10),100, replace = T),
-             PT3 = sample(c(0,10),100, replace = T),
-             PT4 = sample(c(0,10),100, replace = T))
-```
 
 ```{r h1, eval = FALSE, echo = TRUE}
 source(here::here("src/lib/functions.R"))
 
-df <- d %>% select(PT1:PT4, gender, compromise)
-h1 <- regression(data = df, a = gender, b = compromise)
+df <- d %>% 
+  mutate(steadfast == if_else(compromise=="yes", 0, 1)) %>%
+  filter(issue == "SpeedLimit") %>%
+  select(DV1, outcome, steadfast, S1, S2) %>%
+h1_1 <- lm(DV1 ~  steadfast + outcome + factor(S1) + S2,
+                   data = df)
+
+df <- d %>% 
+  mutate(steadfast == if_else(compromise=="yes", 0, 1)) %>%
+  filter(issue == "TopTax") %>%
+  select(DV1, outcome, steadfast, S1, S2) %>%
+h1_2 <- lm(DV1 ~  steadfast + outcome + factor(S1) + S2, 
+                   data = df)
 ```
 
 ## Hypothesis 2
 
-I test the _migration hypothesis_ using Equation \ref{eq:h2} and the code chunk below.
-The coefficient of $\beta_{1}$ denotes the difference in the evaluation of politicians with and without a migration background.
-If $\beta_{1}$ is negative and statistically siginificant, the _migration hypothesis_ will be confirmed.
-The coefficient of $\beta_{2}$ denotes the difference in the evaluation of politicians who do and do not strike a comprmise.
-The coefficient of $\beta_{3}$ is the interaction of the  $\beta_{1}$ and  $\beta_{2}$.
-If the Average Marginal Effect of $\beta_{1}$ is negative and statistically siginificant when $\beta_{2} = 1$ (i.e. politician stroke a compromise), the _migration hypothesis_ will be confirmed.
+We test the _responsibility hypothesis_ using Equation \ref{eq:h2} and the code chunk below.
+The coefficient of $\beta_{2}$ denotes the difference in the evaluation of parties negotiating for coalition government and those who stop talking to potential coalition partners.
+If the effect of $\beta_{2}$ is positive and statistically significant, the _responsibility hypothesis_ will be confirmed.
 
 
-\begin{equation}\label{eq:h2}
-  \hat{Y} = \beta_{0} + \beta_{1}Migration Background + \beta_{2}Compromise + \beta_{3}Compromise * Migration Background + \varepsilon
+\begin{equation}\label{eq:h1}
+  \hat{Y}_{Party \ Evaluation} = \beta_{0} + \beta_{1}Compromise  +
+  \beta_{2}Outcome + \beta_{3}Party \ ID + 
+  \beta_{4}Party \ ID \ Strength + 
+  \beta_{5}Unbalanced \ Covariates + \varepsilon
 \end{equation}
 
 ```{r h2, eval = FALSE, echo = TRUE}
-df <- d %>%
-  mutate(migration = recode(name, 
-                         `Rachid Amezian` = 1,
-                         `Rachida Amezian` = 1,
-                         .default = 0)) %>%
-  select(PT1:PT4, migration, compromise)
+source(here::here("src/lib/functions.R"))
 
-h2 <- regression(data = df, a = migration, b = compromise)
+df <- d %>% 
+  mutate(steadfast == if_else(compromise=="yes", 1, 0),
+         negotiation = if_else(outcome=="negotiation", 1, 0)) %>%
+  filter(issue == "SpeedLimit") %>%
+  select(DV1, negotiation, compromise, S1, S2) %>%
+h2_1 <- lm(DV1 ~  compromise + negotiation + factor(S1) + S2,
+                   data = df)
+
+df <- d %>% 
+  mutate(steadfast == if_else(compromise=="yes", 1, 0),
+         negotiation = if_else(outcome=="negotiation", 1, 0)) %>%
+  filter(issue == "TopTax") %>%
+  select(DV1, negotiation, compromise, S1, S2) %>%
+h2_2 <- lm(DV1 ~  compromise + negotiation + factor(S1) + S2,
+                   data = df)
 ```
 
 
 ## Hypothesis 3
 
-I test the _intersection hypothesis_ using Equation \ref{eq:h3} and the code chunk below.
-The coefficient of $\beta_{1}$ denotes the difference in the evaluation of female politicians with a migration background and the other politicians.
-If $\beta_{1}$ is negative and statistically siginificant, the _gender hypothesis_ will be confirmed.
-The coefficient of $\beta_{2}$ denotes the difference in the evaluation of politicians who do and do not strike a comprmise.
+We test the _compromise hypothesis_ using Equation \ref{eq:h3} and the code chunk below.
+The coefficient of $\beta_{1}$ denotes the difference in the evaluation of steadfast and compromising parties.
+The coefficient of $\beta_{2}$ denotes the difference in the evaluation of parties negotiating for coalition government and those who stop talking to potential coalition partners.
 The coefficient of $\beta_{3}$ is the interaction of the  $\beta_{1}$ and  $\beta_{2}$.
-If the Average Marginal Effect of $\beta_{1}$ is negative and statistically siginificant when $\beta_{2} = 1$ (i.e. politician stroke a compromise), the _intersection hypothesis_ will be confirmed.
+If the Average Marginal Effect of $\beta_{1}$ is positive and statistically significant when $\beta_{2} = 1$ (i.e. congruence), then H3 will be confirmed.
 
 \begin{equation}\label{eq:h3}
-  \hat{Y} =\beta_{0} + \beta_{1}Intersection + \beta_{2}Compromise + \beta_{3}Compromise * Intersection + \varepsilon
+    \hat{Y}_{Party \ Evaluation} = \beta_{0} + \beta_{1}Compromise  +
+    \beta_{2}Outcome + \beta_{3}Compromise * Outcome +
+    \beta_{4}Party\ ID + \beta_{5}Party \ ID \ Strength +
+    \beta_{6}Unbalanced \ Covariates + \varepsilon
 \end{equation}
 
 ```{r h3, eval = FALSE, echo = TRUE}
-df <- d %>%
-  mutate(intersection = recode(name, 
-                         `Rachida Amezian` = 1,
-                         .default = 0)) %>%
-  select(PT1:PT4, intersection, compromise)
+source(here::here("src/lib/functions.R"))
 
-h3 <- regression(data = df, a = intersection, b = compromise)
+df <- d %>% 
+  mutate(steadfast == if_else(compromise=="yes", 1, 0),
+         negotiation = if_else(outcome=="negotiation", 1, 0)) %>%
+  filter(issue == "SpeedLimit") %>%
+  select(DV1, negotiation, compromise, S1, S2) %>%
+h3_1 <- lm(DV1 ~  compromise*negotiation + factor(S1) + S2,
+                   data = df)
+
+df <- d %>% 
+  mutate(steadfast == if_else(compromise=="yes", 1, 0),
+         negotiation = if_else(outcome=="negotiation", 1, 0)) %>%
+  filter(issue == "TopTax") %>%
+  select(DV1, negotiation, compromise, S1, S2) %>%
+h3_2 <- lm(DV1 ~  compromise*negotiation + factor(S1) + S2,
+                   data = df)
+```
+
+
+## Hypothesis 4
+
+We test the _principled hypothesis_ using Equation \ref{eq:h4} and the code chunk below.
+The coefficient of $\beta_{1}$ denotes the difference in the evaluation of steadfast and compromising parties.
+The coefficient of $\beta_{3}$ denotes the difference in the evaluation of parties for people with different levels of principledness.
+The coefficient of $\beta_{4}$ is the interaction of the  $\beta_{1}$ and  $\beta_{3}$.
+When the Average Marginal Effect of $\beta_{1}$ is negative and statistically significant for higher values of $\beta_{3} = >$ (i.e. principledness), H4 will be confirmed.
+
+\begin{equation}\label{eq:h4}
+    \hat{Y}_{Party \ Evaluation} = \beta_{0} + \beta_{1}Compromise  +
+    \beta_{2}Outcome + \beta_{3}Principled  +
+    \beta_{4}Outcoume * Principled + 
+    \beta_{5}Party\ ID + \beta_{6}Party \ ID \ Strength +
+    \beta_{5}Unbalanced \ Covariates + \varepsilon
+\end{equation}
+
+```{r h4, eval = FALSE, echo = TRUE}
+source(here::here("src/lib/functions.R"))
+
+df <- d %>% 
+  mutate(steadfast == if_else(compromise=="yes", 1, 0),
+         negotiation = if_else(outcome=="negotiation", 1, 0)) %>%
+  filter(issue == "SpeedLimit") %>%
+  select(DV1, negotiation, compromise, HT1, S1, S2) %>%
+h4_1a <- lm(DV1 ~  compromise + negotiation*HT1 +
+                      factor(S1) + S2,
+                    data = df)
+
+df <- d %>% 
+  mutate(steadfast == if_else(compromise=="yes", 1, 0),
+         negotiation = if_else(outcome=="negotiation", 1, 0)) %>%
+  filter(issue == "SpeedLimit") %>%
+  select(DV1, negotiation, compromise, HT2, S1, S2) %>%
+h4_1b <- lm(DV1 ~  compromise + negotiation*HT2 +
+                      factor(S1) + S2,
+                    data = df)
+
+df <- d %>% 
+  mutate(steadfast == if_else(compromise=="yes", 1, 0),
+         negotiation = if_else(outcome=="negotiation", 1, 0)) %>%
+  filter(issue == "topTax") %>%
+  select(DV1, negotiation, compromise, HT1, S1, S2) %>%
+h4_2a <- lm(DV1 ~  compromise + negotiation*HT1 +
+                      factor(S1) + S2,
+                    data = df)
+
+df <- d %>% 
+  mutate(steadfast == if_else(compromise=="yes", 1, 0),
+         negotiation = if_else(outcome=="negotiation", 1, 0)) %>%
+  filter(issue == "topTax") %>%
+  select(DV1, negotiation, compromise, HT2, S1, S2) %>%
+h4_2b <- lm(DV1 ~  compromise + negotiation*HT2 +
+                      factor(S1) + S2,
+                    data = df)
+```
+
+## Hypothesis 5
+
+ We test the _distrust hypothesis_ using Equation \ref{eq:h5} and the code chunk below.
+The coefficient of $\beta_{1}$ denotes the difference in the evaluation of steadfast and compromising parties.
+The coefficient of $\beta_{3}$ denotes the difference in the evaluation of parties for people with different levels of distrust.
+The coefficient of $\beta_{4}$ is the interaction of the  $\beta_{1}$ and  $\beta_{3}$.
+When the Average Marginal Effect of $\beta_{1}$ is negative and statistically significant for higher values of $\beta_{3} = >$ (i.e. distrust), H5 will be confirmed.
+
+\begin{equation}\label{eq:h5}
+    \hat{Y}_{Party \ Evaluation} = \beta_{0} + \beta_{1}Compromise  +
+    \beta_{2}Outcome + \beta_{3}Mutual \ Trust  +
+    \beta_{4}Outcoume * Mutual \ Trust + 
+    \beta_{5}Party\ ID + \beta_{6}Party \ ID \ Strength +
+    \beta_{5}Unbalanced \ Covariates + \varepsilon
+\end{equation}
+
+```{r h5, eval = FALSE, echo = TRUE}
+source(here::here("src/lib/functions.R"))
+
+df <- d %>% 
+  mutate(steadfast == if_else(compromise=="yes", 1, 0),
+         negotiation = if_else(outcome=="negotiation", 1, 0)) %>%
+  filter(issue == "SpeedLimit") %>%
+  select(DV1, negotiation, compromise, HT3, S1, S2) %>%
+h5_1 <- lm(DV1 ~  compromise + negotiation*HT3 +
+                      factor(S1) + S2,
+                    data = df)
+
+df <- d %>% 
+  mutate(steadfast == if_else(compromise=="yes", 1, 0),
+         negotiation = if_else(outcome=="negotiation", 1, 0)) %>%
+  filter(issue == "topTax") %>%
+  select(DV1, negotiation, compromise, HT3, S1, S2) %>%
+h5_2 <- lm(DV1 ~  compromise + negotiation*HT3 +
+                      factor(S1) + S2,
+                    data = df)
 ```
 
 ## Pooled Data
-Using the pooled data we will estimate a within groups fixed effects model. 
-$Y\hat{Y}_{r, i, t}$ in Equation \ref{eq:pooled} denotes  the  evaluation  of  a politician of respondent $r$, during issue $i$ and at experimental round $t$ -- ranging from round 1 to round 4.
-$\alpha_{i}$ is the issue specific intercept, and $\gamma_{t}$ is the experimental round specific intercept.  
+Using the pooled data, we will estimate a within groups fixed effects model. 
+$\hat{Y}_{r, i}$ in Equation \ref{eq:pooled} denotes  the  evaluation  of  a party of respondent $r$, during issue $i$.
+$\alpha_{i}$ is the issue specific intercept.  
 The standard errors are clustered at the individual level.  
-If the Average Marginal Effect of $\beta_{1}$ is negative and statistically siginificant when $\beta_{2} = 1$ (i.e. politician stroke a compromise), the _intersection hypothesis_ will be confirmed.
+If the Average Marginal Effect of $\beta_{2}$ is negative and statistically significant when $\beta_{3} = 1$ (i.e. parties continue to negotiate), the _compromise hypothesis_ will be confirmed.
 
 \begin{equation}\label{eq:pooled}
-    \hat{Y}_{r, i, t} =\beta_{0} + \beta_{1}Intersection_{r, i, t} + \beta_{2}Compromise + \beta_{3}Compromise * Intersection + \alpha_{i} + \gamma_{t} + \varepsilon_{r, i, t}
+    \hat{Y}_{r, i} =\beta_{0} + \beta_{1}Intersection_{r, i} + \beta_{2}Compromise + \beta_{3}Compromise * Intersection + \alpha_{i} + \varepsilon_{r, i}
 \end{equation}
 
+
 ```{r pooled, echo = TRUE, eval = FALSE}
-h3_p <- pooled_regression(data = df, a = intersection, b = compromise, c = issues)
+df <- d %>% 
+  mutate(steadfast == if_else(compromise=="yes", 1, 0),
+         negotiation = if_else(outcome=="negotiation", 1, 0)) %>%
+  select(DV1, negotiation, compromise, issue, S1, S2) %>%
+h3_p <- lmer(DV1 ~  compromise*negotiation + factor(S1) + S2 +
+               (1 | issue), data = df)
 ```
 
 ## Statistical Significance
 All the hypotheses are directional, and therefore all of the tests will be one-tailed.
-I will use an $\alpha$-value of `0.05` as the value for statistical significance in all models above.
+We will use an $\alpha$-value of `0.05` as the value for statistical significance in all models above.
 
 # Stimulus Material
 
 ```{r stimulus, topcaption=TRUE}
-d <- tibble(` ` = c(1:8),
-            `Name Politician` = c(rep("Rachid Amezian", 2), rep("Karel van der Kleijn", 2),
-                                  rep("Rachida Amezian", 2), rep("Karin van der Kleijn", 2)),
-            Gender = c(rep("Men",4), rep("Women", 4)),
-            `Migration Background` = c(rep("Yes", 2), rep("No", 2),
-                                  rep("Yes", 2), rep("No", 2)),
-            Compromise = c("Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No"))
+d <- tibble(` ` = c(1:64),
+            `In-Party` = c(rep("CDU", 16), rep("die Grünen", 16),
+                           rep("FDP", 16), rep("SPD", 16)),
+            Partner = c(rep("SPD",8), rep("die Grünen",8),
+                        rep("SPD",8), rep("die Grünen",8),
+                        rep("CDU",8), rep("FDP",8),
+                        rep("CDU",8), rep("FDP",8)),
+            Compromise = c(rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2)),
+            Outcome = c("Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation"),
+            Issue = c(rep("TopTax", 4), rep("SpeedLimit", 4),
+                      rep("TopTax", 4), rep("SpeedLimit", 4),
+                      rep("TopTax", 4), rep("SpeedLimit", 4),
+                      rep("TopTax", 4), rep("SpeedLimit", 4),
+                      rep("TopTax", 4), rep("SpeedLimit", 4),
+                      rep("TopTax", 4), rep("SpeedLimit", 4),
+                      rep("TopTax", 4), rep("SpeedLimit", 4),
+                      rep("TopTax", 4), rep("SpeedLimit", 4)))
 
 kbl(d, booktabs =T, caption = "\\label{tab:treat}Experimental Conditions",
     align = c("l", "l", "c", "c", "c")) %>%
@@ -457,19 +758,9 @@ kbl(d, booktabs =T, caption = "\\label{tab:treat}Experimental Conditions",
 
 ```
 
-Table \ref{tab:treat} show the manipulations of the `2*2*2` experimental design, leading to 8 experimental groups. All stimulus material is developed by the [Network Institute of the _Vrije Universiteit Amsterdam_](https://networkinstitute.org/) and can be accessed [here](https://github.com/MarikenvdVelden/compromise-punish/tree/main/docs/pap/treatments). The treatment's texts are in Dutch. The English translation is displayed in Table \ref{tab:txt}.
-
-```{r text, topcaption=TRUE}
-d <- tibble(`  ` = c("Title", "First Paragraph", "Second Paragraph"),
-            ` ` = c("Politician makes [**no/ **] compromise on [**expansion creative elementary school activities/ intensifying defense cooperation/ migration freeze in Western countries/ Corona emergency legislation**]", "In this term, parliament faces a crucial crossroads regarding an [**expansion of creative elementary school activities/ intensification of defense cooperation/ migration freeze in Western countries/ extension of Corona emergency legislation**]. With the deadline for a vote fast approaching, parliament must determine the future of the policy on [**expanding creative elementary school activities/ intensifying defense cooperation/ migration freeze in Western countries/ Corona emergency legislation**] in the Netherlands. A number of non-partisan organizations have urged parliament to reach a compromise on this issue. Time is running out.", "For this important bill to pass, politicians from different political parties will have to put aside their differences and reach a compromise. While many in parliament are still debating their positions, some members of both left and right parties have already shown a willingness to compromise. One of those who [**won't/ will**] compromise is the politician [**Rachid Amezian/ Rachida Amezian/ Karin van der Kleijn/ Karel van der Kleijn**]. [**Rachid Amezian/ Rachida Amezian/ Karin van der Kleijn/ Karel van der Kleijn**] has already publicly stated that [**he / she**] wants to make [**no/ a**] compromises and will vote [**against/ for**] this bill. Although the vote is still a week away, [**Rachid Amezian/ Rachida Amezian/ Karin van der Kleijn/ Karel van der Kleijn**] has told numerous media sources that [**he/ she**] will not change [**his/ her**] vote. [**`This is just not an issue on which I want to compromise'/ `This is an issue on which I am willing to compromise'**] , said [**Rachid Amezian/ Rachida Amezian/ Karin van der Kleijn/ Karel van der Kleijn**]. `My voters knew this when they elected me.'"))
-
-kbl(d, booktabs =T, caption = "\\label{tab:txt}Text of Experimental Treatment") %>%
-  kable_styling(latex_options = c("striped", "hold_position"),
-                full_width = F, fixed_thead = T, position = "center") %>%
-  column_spec(1, width = "1cm") %>%
-  column_spec(2, width = "14cm")
-```
-
+Table \ref{tab:treat} show the manipulations of the `2*2` experimental design, for two issues for four different in-partiies and two different potential coalition partners leading to 64 experimental treatments. 
+All stimulus material is developed by the [Network Institute of the _Vrije Universiteit Amsterdam_](https://networkinstitute.org/) and can be accessed [here](#). 
+The treatment's texts are in German.
 
 \newpage
 # References
