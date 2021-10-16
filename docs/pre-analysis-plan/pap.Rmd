@@ -15,6 +15,8 @@ header-includes:
    - \floatsetup[figure]{capposition=top}
    - \floatsetup[table]{capposition=top}
    - \usepackage{booktabs}
+   - \usepackage{graphicx}
+   - \usepackage{amsmath}
    - \usepackage{longtable}
    - \usepackage{array}
    - \usepackage{multirow}
@@ -106,7 +108,7 @@ knitr::include_graphics(here::here("docs/pre-analysis-plan/example_treatment.jpg
 As detailed in [Section 4](#analysis), we conduct an OLS regression for each of the dependent variables: a) trust in the party; b) sincerity of the party; and c) representation of the party, and the three manipulations (potential coalition partner, being steadfast, and the outcome) as independent variables.
 Each hypothesis is tested separately for the two issues.
 To calculate power for the hypotheses, the R package `DeclareDesign` is used [@blair2019declaring].
-Based on the study of @bauer2017punished, the effect sizes are between `b = 0.2` and `b = 0.1` -- i.e. a small effect visualized by the purple and blue lines in Figure \ref{fig:power1}.
+Based on the study of @fortunato2021cycle, the effect sizes are between `b = 0.2` and `b = 0.1` -- i.e. a small effect visualized by the purple and blue lines in Figure \ref{fig:power1}.
 The hypothesis are directional, Figure \ref{fig:power1} therefore displays one-tailed tests with $\alpha$ `= 0.05`.
 The power analysis shows that testing hypotheses 1 and 2 requires a sample size of `4,000` participants (x-axis) to reach `95`\% power (black dashed line, in the left-panel of Figure \ref{fig:power}). 
 Note that if the effect size is bigger then \texttt{0.2}, smaller sample sizes are sufficient to reach `95\%` power.
@@ -404,7 +406,7 @@ d <- tibble(Variable = c("princpledness2 (HT1a)",
             "Manche Leute meinen, dass die folgenden Punkte wichtig sind, um wirklich deutsch zu sein. Andere halten diese nicht für wichtig. Für wie wichtig halten Sie die folgenden Punkte, um deutsch zu sein?", "in Deutschland geboren sein","deutsche Vorfahren haben", "deutsch sprechen können", "sich an deutsche Traditionen und Gepflogenheiten halten", "Jetzt möchten wir gerne Ihre Meinung zu einigen allgemeinen Aussagen zur Politik wissen. Bitte geben Sie zu jeder der folgenden Aussagen an, inwieweit Sie dieser zustimmen oder diese ablehnen.",
 "Was in der Politik Kompromiss genannt wird, ist in Wirklichkeit nur ein Verrat von Prinzipien.","Die Bürger, und nicht die Politiker, sollten die wichtigsten politischen Entscheidungen treffen.","Die Abgeordneten des Deutschen Bundestags müssen dem Willen der Bürger Folge leisten.","Die politischen Unterschiede zwischen den Eliten und den Bürgern sind größer als die Unterschiede zwischen Bürgern.", "Die Politiker reden zu viel und machen zu wenig.","Ein Bürger würde besser meine Interessen vertreten als ein Berufspolitiker.","In einer Demokratie ist es wichtig, Kompromisse zwischen unterschiedlichen Standpunkten zu schließen.","Es ist wichtig, die Meinung anderer Gruppen anzuhören.", "Können Sie uns bitte sagen, ob [PARTY] der Instagram-Nachricht zufolge einen Kompromiss eingehen würde(n)?", "Können Sie uns bitte sagen, ob die beide Parteien der Instagram-Nachricht zufolge sich geinigt haben, Koalitionsverhandlungen aufzunehmen?", "Die Instagram-Nachricht, die Sie gerade gesehen haben, stellte ein fiktives Szenario der Koalitionsverhandlungen dar. Wissen Sie, welche Parteien derzeit in der Wirklichkeit Sondierungsgespräche führen? Bitte wählen Sie alle zutreffenden Parteien aus."))
 
-kbl(d[1:11,], booktabs =T, caption = "\\label{tab:post1}Survey Questions - PostTreatment Questions (1)") %>%
+kbl(d[1:10,], booktabs =T, caption = "\\label{tab:post1}Survey Questions - PostTreatment Questions (1)") %>%
   kable_styling(latex_options = c("striped", "hold_position"),
                 full_width = F, fixed_thead = T, position = "center") %>%
   column_spec(1, width = "3cm") %>%
@@ -412,14 +414,21 @@ kbl(d[1:11,], booktabs =T, caption = "\\label{tab:post1}Survey Questions - PostT
   column_spec(3, width = "7cm")
 
 
-kbl(d[12:23,], booktabs =T, caption = "\\label{tab:post2}Survey Questions - PostTreatment Questions (2)") %>%
+kbl(d[11:20,], booktabs =T, caption = "\\label{tab:post2}Survey Questions - PostTreatment Questions (2)") %>%
   kable_styling(latex_options = c("striped", "hold_position"),
                 full_width = F, fixed_thead = T, position = "center") %>%
   column_spec(1, width = "3cm") %>%
   column_spec(2, width = "7cm") %>%
   column_spec(3, width = "7cm")
 
-kbl(d[24:dim(d)[1],], booktabs =T, caption = "\\label{tab:post3}Survey Questions - PostTreatment Questions (3)") %>%
+kbl(d[21:30,], booktabs =T, caption = "\\label{tab:post3}Survey Questions - PostTreatment Questions (3)") %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center") %>%
+  column_spec(1, width = "3cm") %>%
+  column_spec(2, width = "7cm") %>%
+  column_spec(3, width = "7cm")
+
+kbl(d[31:dim(d)[1],], booktabs =T, caption = "\\label{tab:post4}Survey Questions - PostTreatment Questions (4)") %>%
   kable_styling(latex_options = c("striped", "hold_position"),
                 full_width = F, fixed_thead = T, position = "center") %>%
   column_spec(1, width = "3cm") %>%
@@ -465,10 +474,12 @@ The coefficient of $\beta_{1}$ denotes the difference in the evaluation of stead
 If the effect of $\beta_{1}$ is positive and statistically significant, the \textit{steadfast hypothesis} will be confirmed.
 
 \begin{equation}\label{eq:h1}
-  \hat{Y}_{Party \ Evaluation} = \beta_{0} + \beta_{1}Steadfast  +
-  \beta_{2}Outcome + \beta_{4}Party\ ID + 
-  \beta_{5}Party \ ID \ Strength + 
-  \beta_{5}Unbalanced \ Covariates + \varepsilon
+  \begin{aligned}
+    \hat{Y}_{Party \ Evaluation} = \beta_{0} + \beta_{1}Steadfast  +
+    \beta_{2}Outcome + \beta_{4}Party\ ID + 
+    \beta_{5}Party \ ID \ Strength + \nonumber \\
+    \beta_{5}Unbalanced \ Covariates + \varepsilon
+  \end{aligned}
 \end{equation}
 
 ```{r h1, eval = FALSE, echo = TRUE}
@@ -496,11 +507,13 @@ The coefficient of $\beta_{2}$ denotes the difference in the evaluation of parti
 If the effect of $\beta_{2}$ is positive and statistically significant, the _responsibility hypothesis_ will be confirmed.
 
 
-\begin{equation}\label{eq:h1}
-  \hat{Y}_{Party \ Evaluation} = \beta_{0} + \beta_{1}Compromise  +
-  \beta_{2}Outcome + \beta_{3}Party \ ID + 
-  \beta_{4}Party \ ID \ Strength + 
-  \beta_{5}Unbalanced \ Covariates + \varepsilon
+\begin{equation}\label{eq:h2}
+  \begin{aligned}
+    \hat{Y}_{Party \ Evaluation} = \beta_{0} + \beta_{1}Compromise  +
+    \beta_{2}Outcome + \beta_{3}Party \ ID + \nonumber \\
+    \beta_{4}Party \ ID \ Strength +
+    \beta_{5}Unbalanced \ Covariates + \varepsilon
+  \end{aligned}
 \end{equation}
 
 ```{r h2, eval = FALSE, echo = TRUE}
@@ -533,10 +546,12 @@ The coefficient of $\beta_{3}$ is the interaction of the  $\beta_{1}$ and  $\bet
 If the Average Marginal Effect of $\beta_{1}$ is positive and statistically significant when $\beta_{2} = 1$ (i.e. congruence), then H3 will be confirmed.
 
 \begin{equation}\label{eq:h3}
-    \hat{Y}_{Party \ Evaluation} = \beta_{0} + \beta_{1}Compromise  +
-    \beta_{2}Outcome + \beta_{3}Compromise * Outcome +
-    \beta_{4}Party\ ID + \beta_{5}Party \ ID \ Strength +
+  \begin{aligned}
+    \hat{Y}_{Party \ Evaluation} = \beta_{0} + \beta_{1}Compromise  + 
+    \beta_{2}Outcome + \beta_{3}Compromise * Outcome + \nonumber \\
+    \beta_{4}Party\ ID + \beta_{5}Party \ ID \ Strength + 
     \beta_{6}Unbalanced \ Covariates + \varepsilon
+  \end{aligned}
 \end{equation}
 
 ```{r h3, eval = FALSE, echo = TRUE}
@@ -569,11 +584,13 @@ The coefficient of $\beta_{4}$ is the interaction of the  $\beta_{1}$ and  $\bet
 When the Average Marginal Effect of $\beta_{1}$ is negative and statistically significant for higher values of $\beta_{3} = >$ (i.e. principledness), H4 will be confirmed.
 
 \begin{equation}\label{eq:h4}
-    \hat{Y}_{Party \ Evaluation} = \beta_{0} + \beta_{1}Compromise  +
-    \beta_{2}Outcome + \beta_{3}Principled  +
-    \beta_{4}Outcoume * Principled + 
-    \beta_{5}Party\ ID + \beta_{6}Party \ ID \ Strength +
-    \beta_{5}Unbalanced \ Covariates + \varepsilon
+  \begin{aligned}
+      \hat{Y}_{Party \ Evaluation} = \beta_{0} + \beta_{1}Compromise  +
+      \beta_{2}Outcome + \beta_{3}Principled  +\nonumber \\
+      \beta_{4}Outcoume * Principled + 
+      \beta_{5}Party\ ID + \beta_{6}Party \ ID \ Strength +\nonumber \\
+      \beta_{5}Unbalanced \ Covariates + \varepsilon
+    \end{aligned}
 \end{equation}
 
 ```{r h4, eval = FALSE, echo = TRUE}
@@ -625,11 +642,13 @@ The coefficient of $\beta_{4}$ is the interaction of the  $\beta_{1}$ and  $\bet
 When the Average Marginal Effect of $\beta_{1}$ is negative and statistically significant for higher values of $\beta_{3} = >$ (i.e. distrust), H5 will be confirmed.
 
 \begin{equation}\label{eq:h5}
-    \hat{Y}_{Party \ Evaluation} = \beta_{0} + \beta_{1}Compromise  +
-    \beta_{2}Outcome + \beta_{3}Mutual \ Trust  +
-    \beta_{4}Outcoume * Mutual \ Trust + 
-    \beta_{5}Party\ ID + \beta_{6}Party \ ID \ Strength +
-    \beta_{5}Unbalanced \ Covariates + \varepsilon
+  \begin{aligned}
+  \hat{Y}_{Party \ Evaluation} = \beta_{0} + \beta_{1}Compromise  +
+      \beta_{2}Outcome + \beta_{3}Mutual \ Trust  +\nonumber \\
+      \beta_{4}Outcoume * Mutual \ Trust + 
+      \beta_{5}Party\ ID + \beta_{6}Party \ ID \ Strength +\nonumber \\
+      \beta_{5}Unbalanced \ Covariates + \varepsilon
+    \end{aligned}
 \end{equation}
 
 ```{r h5, eval = FALSE, echo = TRUE}
@@ -662,8 +681,12 @@ The standard errors are clustered at the individual level.
 If the Average Marginal Effect of $\beta_{2}$ is negative and statistically significant when $\beta_{3} = 1$ (i.e. parties continue to negotiate), the _compromise hypothesis_ will be confirmed.
 
 \begin{equation}\label{eq:pooled}
-    \hat{Y}_{r, i} =\beta_{0} + \beta_{1}Intersection_{r, i} + \beta_{2}Compromise + \beta_{3}Compromise * Intersection + \alpha_{i} + \varepsilon_{r, i}
-\end{equation}
+    \begin{aligned}
+    \hat{Y}_{r, i} =\beta_{0} + \beta_{1}Compromise{r, i} + \beta_{2}Outcome + 
+    \beta_{3}Compromise * Outcome + \nonumber \\
+    \beta_{4}Party\ ID + \beta_{5}Party \ ID \ Strength +
+      \beta_{6}Unbalanced \ Covariates + \varepsilon\alpha_{i} + \varepsilon_{r, i}
+    \end{aligned}
 
 
 ```{r pooled, echo = TRUE, eval = FALSE}
@@ -674,12 +697,6 @@ df <- d %>%
 h3_p <- lmer(DV1 ~  compromise*negotiation + factor(S1) + S2 +
                (1 | issue), data = df)
 ```
-
-## Statistical Significance
-All the hypotheses are directional, and therefore all of the tests will be one-tailed.
-We will use an $\alpha$-value of `0.05` as the value for statistical significance in all models above.
-
-# Stimulus Material
 
 ```{r stimulus, topcaption=TRUE}
 d <- tibble(` ` = c(1:64),
@@ -746,20 +763,32 @@ d <- tibble(` ` = c(1:64),
                       rep("TopTax", 4), rep("SpeedLimit", 4),
                       rep("TopTax", 4), rep("SpeedLimit", 4)))
 
-kbl(d, booktabs =T, caption = "\\label{tab:treat}Experimental Conditions",
+kbl(d[1:32,], booktabs =T, caption = "\\label{tab:treat}Experimental Conditions (1)",
     align = c("l", "l", "c", "c", "c")) %>%
   kable_styling(latex_options = c("striped", "hold_position"),
                 full_width = F, fixed_thead = T, position = "center") %>%
-  column_spec(1, width = ".5cm") %>%
-  column_spec(2, width = "3.2cm") %>%
-  column_spec(3, width = "2.5cm")%>%
-  column_spec(4, width = "3.5cm")%>%
-  column_spec(5, width = "2.5cm")
+  column_spec(1, width = "3cm") %>%
+  column_spec(2, width = "7cm") %>%
+  column_spec(3, width = "7cm")
 
+
+kbl(d[33:dim(d)[1],], booktabs =T, caption = "\\label{tab:treat}Experimental Conditions (2)",
+    align = c("l", "l", "c", "c", "c")) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center") %>%
+  column_spec(1, width = "3cm") %>%
+  column_spec(2, width = "7cm") %>%
+  column_spec(3, width = "7cm")
 ```
 
+## Statistical Significance
+All the hypotheses are directional, and therefore all of the tests will be one-tailed.
+We will use an $\alpha$-value of `0.05` as the value for statistical significance in all models above.
+
+# Stimulus Material
+
 Table \ref{tab:treat} show the manipulations of the `2*2` experimental design, for two issues for four different in-partiies and two different potential coalition partners leading to 64 experimental treatments. 
-All stimulus material is developed by the [Network Institute of the _Vrije Universiteit Amsterdam_](https://networkinstitute.org/) and can be accessed [here](#). 
+All stimulus material is developed by the [Network Institute of the _Vrije Universiteit Amsterdam_](https://networkinstitute.org/) and can be accessed [here](https://github.com/MarikenvdVelden/willingness-to-accept-compromises/tree/main/docs/pre-analysis-plan/treatments). 
 The treatment's texts are in German.
 
 \newpage
