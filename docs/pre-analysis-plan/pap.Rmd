@@ -15,7 +15,6 @@ header-includes:
    - \floatsetup[figure]{capposition=top}
    - \floatsetup[table]{capposition=top}
    - \usepackage{booktabs}
-   - \usepackage{graphicx}
    - \usepackage{amsmath}
    - \usepackage{longtable}
    - \usepackage{array}
@@ -469,18 +468,16 @@ balanced <-bal.tab(treatment ~ factor(D1) + D2 +
 ```
 
 ## Hypothesis 1
-We test the _steadfast hypothesis_ using Equation \ref{eq:h1} and the code chunk below.
+We test the _steadfast hypothesis_ using the equation and the code chunk below.
 The coefficient of $\beta_{1}$ denotes the difference in the evaluation of steadfast and compromising parties
 If the effect of $\beta_{1}$ is positive and statistically significant, the \textit{steadfast hypothesis} will be confirmed.
 
-\begin{equation}\label{eq:h1}
-  \begin{aligned}
+$$\begin{aligned}
     \hat{Y}_{Party \ Evaluation} = \beta_{0} + \beta_{1}Steadfast  +
     \beta_{2}Outcome + \beta_{4}Party\ ID + 
     \beta_{5}Party \ ID \ Strength + \nonumber \\
     \beta_{5}Unbalanced \ Covariates + \varepsilon
-  \end{aligned}
-\end{equation}
+  \end{aligned}$$
 
 ```{r h1, eval = FALSE, echo = TRUE}
 source(here::here("src/lib/functions.R"))
@@ -502,19 +499,17 @@ h1_2 <- lm(DV1 ~  steadfast + outcome + factor(S1) + S2,
 
 ## Hypothesis 2
 
-We test the _responsibility hypothesis_ using Equation \ref{eq:h2} and the code chunk below.
+We test the _responsibility hypothesis_ using the equation and the code chunk below.
 The coefficient of $\beta_{2}$ denotes the difference in the evaluation of parties negotiating for coalition government and those who stop talking to potential coalition partners.
 If the effect of $\beta_{2}$ is positive and statistically significant, the _responsibility hypothesis_ will be confirmed.
 
 
-\begin{equation}\label{eq:h2}
-  \begin{aligned}
+$$\begin{aligned}
     \hat{Y}_{Party \ Evaluation} = \beta_{0} + \beta_{1}Compromise  +
     \beta_{2}Outcome + \beta_{3}Party \ ID + \nonumber \\
     \beta_{4}Party \ ID \ Strength +
     \beta_{5}Unbalanced \ Covariates + \varepsilon
-  \end{aligned}
-\end{equation}
+  \end{aligned}$$
 
 ```{r h2, eval = FALSE, echo = TRUE}
 source(here::here("src/lib/functions.R"))
@@ -539,20 +534,18 @@ h2_2 <- lm(DV1 ~  compromise + negotiation + factor(S1) + S2,
 
 ## Hypothesis 3
 
-We test the _compromise hypothesis_ using Equation \ref{eq:h3} and the code chunk below.
+We test the _compromise hypothesis_ using the equation and the code chunk below.
 The coefficient of $\beta_{1}$ denotes the difference in the evaluation of steadfast and compromising parties.
 The coefficient of $\beta_{2}$ denotes the difference in the evaluation of parties negotiating for coalition government and those who stop talking to potential coalition partners.
 The coefficient of $\beta_{3}$ is the interaction of the  $\beta_{1}$ and  $\beta_{2}$.
 If the Average Marginal Effect of $\beta_{1}$ is positive and statistically significant when $\beta_{2} = 1$ (i.e. congruence), then H3 will be confirmed.
 
-\begin{equation}\label{eq:h3}
-  \begin{aligned}
+$$\begin{aligned}
     \hat{Y}_{Party \ Evaluation} = \beta_{0} + \beta_{1}Compromise  + 
     \beta_{2}Outcome + \beta_{3}Compromise * Outcome + \nonumber \\
     \beta_{4}Party\ ID + \beta_{5}Party \ ID \ Strength + 
     \beta_{6}Unbalanced \ Covariates + \varepsilon
-  \end{aligned}
-\end{equation}
+  \end{aligned}$$
 
 ```{r h3, eval = FALSE, echo = TRUE}
 source(here::here("src/lib/functions.R"))
@@ -577,21 +570,19 @@ h3_2 <- lm(DV1 ~  compromise*negotiation + factor(S1) + S2,
 
 ## Hypothesis 4
 
-We test the _principled hypothesis_ using Equation \ref{eq:h4} and the code chunk below.
+We test the _principled hypothesis_ using the equation and the code chunk below.
 The coefficient of $\beta_{1}$ denotes the difference in the evaluation of steadfast and compromising parties.
 The coefficient of $\beta_{3}$ denotes the difference in the evaluation of parties for people with different levels of principledness.
 The coefficient of $\beta_{4}$ is the interaction of the  $\beta_{1}$ and  $\beta_{3}$.
 When the Average Marginal Effect of $\beta_{1}$ is negative and statistically significant for higher values of $\beta_{3} = >$ (i.e. principledness), H4 will be confirmed.
 
-\begin{equation}\label{eq:h4}
-  \begin{aligned}
+$$\begin{aligned}
       \hat{Y}_{Party \ Evaluation} = \beta_{0} + \beta_{1}Compromise  +
       \beta_{2}Outcome + \beta_{3}Principled  +\nonumber \\
       \beta_{4}Outcoume * Principled + 
       \beta_{5}Party\ ID + \beta_{6}Party \ ID \ Strength +\nonumber \\
       \beta_{5}Unbalanced \ Covariates + \varepsilon
-    \end{aligned}
-\end{equation}
+    \end{aligned}$$
 
 ```{r h4, eval = FALSE, echo = TRUE}
 source(here::here("src/lib/functions.R"))
@@ -635,21 +626,19 @@ h4_2b <- lm(DV1 ~  compromise + negotiation*HT2 +
 
 ## Hypothesis 5
 
- We test the _distrust hypothesis_ using Equation \ref{eq:h5} and the code chunk below.
+ We test the _distrust hypothesis_ using the equation and the code chunk below.
 The coefficient of $\beta_{1}$ denotes the difference in the evaluation of steadfast and compromising parties.
 The coefficient of $\beta_{3}$ denotes the difference in the evaluation of parties for people with different levels of distrust.
 The coefficient of $\beta_{4}$ is the interaction of the  $\beta_{1}$ and  $\beta_{3}$.
 When the Average Marginal Effect of $\beta_{1}$ is negative and statistically significant for higher values of $\beta_{3} = >$ (i.e. distrust), H5 will be confirmed.
 
-\begin{equation}\label{eq:h5}
-  \begin{aligned}
+$$\begin{aligned}
   \hat{Y}_{Party \ Evaluation} = \beta_{0} + \beta_{1}Compromise  +
       \beta_{2}Outcome + \beta_{3}Mutual \ Trust  +\nonumber \\
       \beta_{4}Outcoume * Mutual \ Trust + 
       \beta_{5}Party\ ID + \beta_{6}Party \ ID \ Strength +\nonumber \\
       \beta_{5}Unbalanced \ Covariates + \varepsilon
-    \end{aligned}
-\end{equation}
+    \end{aligned}$$
 
 ```{r h5, eval = FALSE, echo = TRUE}
 source(here::here("src/lib/functions.R"))
@@ -675,18 +664,17 @@ h5_2 <- lm(DV1 ~  compromise + negotiation*HT3 +
 
 ## Pooled Data
 Using the pooled data, we will estimate a within groups fixed effects model. 
-$\hat{Y}_{r, i}$ in Equation \ref{eq:pooled} denotes  the  evaluation  of  a party of respondent $r$, during issue $i$.
+$\hat{Y}_{r, i}$ in the equation below denotes  the  evaluation  of  a party of respondent $r$, during issue $i$.
 $\alpha_{i}$ is the issue specific intercept.  
 The standard errors are clustered at the individual level.  
 If the Average Marginal Effect of $\beta_{2}$ is negative and statistically significant when $\beta_{3} = 1$ (i.e. parties continue to negotiate), the _compromise hypothesis_ will be confirmed.
 
-\begin{equation}\label{eq:pooled}
-    \begin{aligned}
-    \hat{Y}_{r, i} =\beta_{0} + \beta_{1}Compromise{r, i} + \beta_{2}Outcome + 
-    \beta_{3}Compromise * Outcome + \nonumber \\
-    \beta_{4}Party\ ID + \beta_{5}Party \ ID \ Strength +
+$$\begin{aligned}
+      \hat{Y}_{r, i} =\beta_{0} + \beta_{1}Compromise{r, i} + \beta_{2}Outcome + 
+      \beta_{3}Compromise * Outcome + \nonumber \\
+      \beta_{4}Party\ ID + \beta_{5}Party \ ID \ Strength +
       \beta_{6}Unbalanced \ Covariates + \varepsilon\alpha_{i} + \varepsilon_{r, i}
-    \end{aligned}
+    \end{aligned}$$
 
 
 ```{r pooled, echo = TRUE, eval = FALSE}
@@ -700,8 +688,8 @@ h3_p <- lmer(DV1 ~  compromise*negotiation + factor(S1) + S2 +
 
 ```{r stimulus, topcaption=TRUE}
 d <- tibble(` ` = c(1:64),
-            `In-Party` = c(rep("CDU", 16), rep("die Grünen", 16),
-                           rep("FDP", 16), rep("SPD", 16)),
+            `In-Party` = c(rep("CDU", 16), rep("FDP", 16), 
+                           rep("SPD", 16), rep("die Grünen", 16)),
             Partner = c(rep("SPD",8), rep("die Grünen",8),
                         rep("SPD",8), rep("die Grünen",8),
                         rep("CDU",8), rep("FDP",8),
@@ -767,18 +755,14 @@ kbl(d[1:32,], booktabs =T, caption = "\\label{tab:treat}Experimental Conditions 
     align = c("l", "l", "c", "c", "c")) %>%
   kable_styling(latex_options = c("striped", "hold_position"),
                 full_width = F, fixed_thead = T, position = "center") %>%
-  column_spec(1, width = "3cm") %>%
-  column_spec(2, width = "7cm") %>%
-  column_spec(3, width = "7cm")
+  column_spec(1, width = ".5cm") 
 
 
 kbl(d[33:dim(d)[1],], booktabs =T, caption = "\\label{tab:treat}Experimental Conditions (2)",
     align = c("l", "l", "c", "c", "c")) %>%
   kable_styling(latex_options = c("striped", "hold_position"),
                 full_width = F, fixed_thead = T, position = "center") %>%
-  column_spec(1, width = "3cm") %>%
-  column_spec(2, width = "7cm") %>%
-  column_spec(3, width = "7cm")
+ column_spec(1, width = ".5cm") 
 ```
 
 ## Statistical Significance
