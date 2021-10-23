@@ -12,8 +12,8 @@ Results Observational Study
 
 ``` r
 rm(list=ls())
-source("../lib/functions.R")
-d <- readRDS("../../data/intermediate/observational_data.RDS")
+source(here::here("src/lib/functions.R"))
+d <- readRDS(here("data/intermediate/observational_data.RDS"))
 ```
 
 ## Analyses
@@ -26,26 +26,11 @@ control variables, it includes country dummies and dummies indicating
 whether more than ten percent of the values where missing.
 
 ``` r
-analysis <- d %>%
-  dplyr::select(trust, wtac, political_interest, rile_selfplacement,
-         gov_performance, pid, gender, age, education, income, country,
-         missing_trust, missing_wtac, missing_rile_selfplacement,
-         missing_gov_performance, missing_pid, missing_gender, 
-         missing_age, missing_education, missing_income) %>%
-  mutate(country = factor(country))
-analysis <- within(analysis, country <- relevel(country, ref = "The Netherlands"))
-m <- stats::lm(formula = trust ~ wtac + factor(political_interest) +
-                  rile_selfplacement + factor(gov_performance) + 
-                 factor(pid) + factor(gender) + age +
-                  education + income + factor(country) + 
-                  factor(missing_trust) + factor(missing_wtac) +
-                  factor(missing_rile_selfplacement) + factor(missing_pid) +
-                  factor(missing_gender) + factor(missing_age) + 
-                  factor(missing_education) + factor(missing_income),
-                data = analysis)
+source(here("src/analysis/h1_obs.R"))
+h1
 ```
 
-![](obervational_study_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![](obervational_study_files/figure-gfm/h1-1.png)<!-- -->
 
 The beta-coefficient of Willingness to Accept Compromise is positive and
 statistically significant, as hypothesized in [our Pre-Analysis
@@ -67,14 +52,14 @@ category. This graph demonstrates that all countries, but particularly
 France, Germany, Great Britain, and Italy, are statistically different
 from the Netherlands.
 
-![](obervational_study_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](obervational_study_files/figure-gfm/robust1-1.png)<!-- -->
 
 To make sure the effect is not driven by any particular country, the
 graphs below show that for all countries, the coefficient is positive.
 Moreover, except for Italy, the coefficient is statistically significant
 too. This indicates that the effects found in the pooled analysis are
 not driven by any specific country.
-![](obervational_study_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](obervational_study_files/figure-gfm/robust2-1.png)<!-- -->
 
 Moreover, we have imputed the missing values using the *Green & Gerber
 formula* (Green & Gerber 2008). To demonstrate whether the dichotomous
@@ -84,7 +69,7 @@ graph below demonstrates the coefficients of the `missing dummies`. The
 graph shows that only for the variables `age` and `trust` the imputed
 values elicit a different effect from the non-imputed ones.
 
-![](obervational_study_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+![](obervational_study_files/figure-gfm/robust4-1.png)<!-- -->
 
 The result show that particularly the imputed missing values for `trust`
 and `age` seem to elicit an effect in the regression results. To check
@@ -93,6 +78,6 @@ excluding the observations where `trust` and `age` have been imputed. As
 the visualization below demonstrates, this does not change the
 coefficient of `willingness to accept compromise`.
 
-![](obervational_study_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+![](obervational_study_files/figure-gfm/robust5-1.png)<!-- -->
 
 ### Exploratory

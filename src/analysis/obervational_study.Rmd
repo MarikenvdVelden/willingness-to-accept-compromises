@@ -21,10 +21,10 @@ library(rmarkdown)
   - [Exploratory](#exploratory)
 
 ## Set-up
-```{r, message=FALSE, warning=F}
+```{r "set-up", message=FALSE, warning=F}
 rm(list=ls())
-source("../lib/functions.R")
-d <- readRDS("../../data/intermediate/observational_data.RDS")
+source(here::here("src/lib/functions.R"))
+d <- readRDS(here("data/intermediate/observational_data.RDS"))
 ```
 
 ## Analyses
@@ -33,48 +33,9 @@ d <- readRDS("../../data/intermediate/observational_data.RDS")
 The code below demonstrate the OLS regression predicting the level of political trust by willingness to accept compromises.
 Next to the control variables, it includes country dummies and dummies indicating whether more than ten percent of the values where missing.
 
-```{r, message=F, warning=F, fig.width=10, fig.height=7}
-analysis <- d %>%
-  dplyr::select(trust, wtac, political_interest, rile_selfplacement,
-         gov_performance, pid, gender, age, education, income, country,
-         missing_trust, missing_wtac, missing_rile_selfplacement,
-         missing_gov_performance, missing_pid, missing_gender, 
-         missing_age, missing_education, missing_income) %>%
-  mutate(country = factor(country))
-analysis <- within(analysis, country <- relevel(country, ref = "The Netherlands"))
-m <- stats::lm(formula = trust ~ wtac + factor(political_interest) +
-                  rile_selfplacement + factor(gov_performance) + 
-                 factor(pid) + factor(gender) + age +
-                  education + income + factor(country) + 
-                  factor(missing_trust) + factor(missing_wtac) +
-                  factor(missing_rile_selfplacement) + factor(missing_pid) +
-                  factor(missing_gender) + factor(missing_age) + 
-                  factor(missing_education) + factor(missing_income),
-                data = analysis)
-```
-
-```{r, echo = F, message=F, warning=F, fig.width=10, fig.height=7}
-ggcoefstats(
-  x = tidy(m)[2:10,],
-  point.args = list(color = "seagreen", size = 3, shape = 15, alpha = .75),
-  vline.args = list(size = 1, color = "darkgrey", linetype = "dotdash"),
-  statistic = "t",
-  stats.label.color = "seagreen",
-  only.significant = TRUE,
-  package = "palettesForR",
-  palette = "Inkscape",
-  title = "Political Trust Predicted by Willingness to Compromise",
-  ggtheme = theme_minimal(),
-  ggstatsplot.layer = F) + # note the order in which the labels are entered
-  scale_y_discrete(labels = c("Willingness to Accept Compromise", 
-                              "Not Politically Interested", 
-                              "Left-Right Self-Placement",
-                              "Satisfied with Government Performance",
-                              "Partisan ID",
-                              "Male",
-                              "Age",
-                              "Education", "Income")) +
-  labs(x = "Regression Coefficients", y = NULL) 
+```{r "h1", message=F, warning=F, fig.width=10, fig.height=7}
+source(here("src/analysis/h1_obs.R"))
+h1
 ```
 
 The beta-coefficient of Willingness to Accept Compromise is positive and statistically significant, as hypothesized in [our Pre-Analysis Plan](https://osf.io/h29j3).
@@ -87,239 +48,15 @@ Because we pooled the data of various countries, the graph below demonstrate the
 The Netherlads is the reference category.
 This graph demonstrates that all countries, but particularly France, Germany, Great Britain, and Italy, are statistically different from the Netherlands.
 
-```{r, echo = F, message=F, warning=F, fig.width=10, fig.height=7}
-ggcoefstats(
-  x = tidy(m)[10:14,],
-  point.args = list(color = "seagreen", size = 3, shape = 15, alpha = .75),
-  vline.args = list(size = 1, color = "darkgrey", linetype = "dotdash"),
-  statistic = "t",
-  only.significant = TRUE,
-  stats.label.color = "seagreen",
-  title = "Political Trust Predicted by Willingness to Compromise",
-  subtitle = "Country Differences: The Netherlands is Reference Category",
-  ggtheme = theme_minimal(),
-  ggstatsplot.layer = FALSE) + # note the order in which the labels are entered
-  scale_y_discrete(labels = c("Austria",
-                              "France", 
-                              "Germany", 
-                              "Great Britain",
-                              "Italy")) +
-  labs(x = "Regression Coefficients", y = NULL)
+```{r "robust1", echo = F, message=F, warning=F, fig.width=10, fig.height=7}
+r1
 ```
 
 To make sure the effect is not driven by any particular country, the graphs below show that for all countries, the coefficient is positive.
 Moreover, except for Italy, the coefficient is statistically significant too.
 This indicates that the effects found in the pooled analysis are not driven by any specific country.
-```{r, echo = F, message=F, warning=F, fig.width=12, fig.height=20}
-tmp <- d %>%
-    filter(country == "Austria") %>%
-  dplyr::select(trust, wtac, political_interest, rile_selfplacement,
-         gov_performance, pid, gender, age, education, income,
-         missing_trust, missing_wtac, missing_rile_selfplacement,
-         missing_gov_performance, missing_pid, missing_gender, 
-         missing_age, missing_education, missing_income)
-aut <- stats::lm(formula = trust ~ wtac + factor(political_interest) +
-                  rile_selfplacement + factor(gov_performance) + 
-                 factor(pid) + factor(gender) + age +
-                  education + income,
-                data = tmp)
-p1 <- ggcoefstats(
-  x = tidy(aut)[2:10,],
-  point.args = list(color = "seagreen", size = 3, shape = 15, alpha = .75),
-  vline.args = list(size = 1, color = "darkgrey", linetype = "dotdash"),
-  statistic = "t",
-  stats.label.color = "seagreen",
-  only.significant = TRUE,
-  package = "palettesForR",
-  palette = "Inkscape",
-  title =  "Austria",
-  ggtheme = theme_minimal(),
-  ggstatsplot.layer = F) + # note the order in which the labels are entered
-  scale_y_discrete(labels = c("Willingness to Accept Compromise", 
-                              "Not Politically Interested", 
-                              "Left-Right Self-Placement",
-                              "Satisfied with Government Performance",
-                              "Partisan ID",
-                              "Male",
-                              "Age",
-                              "Education", "Income")) +
-  labs(x = "Regression Coefficients", y = NULL)
-
-tmp <- d %>%
-    filter(country == "France") %>%
-  dplyr::select(trust, wtac, political_interest, rile_selfplacement,
-         gov_performance, pid, gender, age, education, income,
-         missing_trust, missing_wtac, missing_rile_selfplacement,
-         missing_gov_performance, missing_pid, missing_gender, 
-         missing_age, missing_education, missing_income)
-fr <- stats::lm(formula = trust ~ wtac + factor(political_interest) +
-                  rile_selfplacement + factor(gov_performance) + 
-                 factor(pid) + factor(gender) + age +
-                  education + income,
-                data = tmp)
-p2 <- ggcoefstats(
-  x = tidy(fr)[2:10,],
-  point.args = list(color = "seagreen", size = 3, shape = 15, alpha = .75),
-  vline.args = list(size = 1, color = "darkgrey", linetype = "dotdash"),
-  statistic = "t",
-  stats.label.color = "seagreen",
-  only.significant = TRUE,
-  package = "palettesForR",
-  palette = "Inkscape",
-  title =  "France",
-  ggtheme = theme_minimal(),
-  ggstatsplot.layer = F) + # note the order in which the labels are entered
-  scale_y_discrete(labels = c("Willingness to Accept Compromise", 
-                              "Not Politically Interested", 
-                              "Left-Right Self-Placement",
-                              "Satisfied with Government Performance",
-                              "Partisan ID",
-                              "Male",
-                              "Age",
-                              "Education", "Income")) +
-  labs(x = "Regression Coefficients", y = NULL)
-
-tmp <- d %>%
-    filter(country == "Germany") %>%
-  dplyr::select(trust, wtac, political_interest, rile_selfplacement,
-         gov_performance, pid, gender, age, education, income,
-         missing_trust, missing_wtac, missing_rile_selfplacement,
-         missing_gov_performance, missing_pid, missing_gender, 
-         missing_age, missing_education, missing_income)
-de  <- stats::lm(formula = trust ~ wtac + factor(political_interest) +
-                  rile_selfplacement + factor(gov_performance) + 
-                 factor(pid) + factor(gender) + age +
-                  education + income,
-                data = tmp)
-p3 <- ggcoefstats(
-  x = tidy(de)[2:10,],
-  point.args = list(color = "seagreen", size = 3, shape = 15, alpha = .75),
-  vline.args = list(size = 1, color = "darkgrey", linetype = "dotdash"),
-  statistic = "t",
-  stats.label.color = "seagreen",
-  only.significant = TRUE,
-  package = "palettesForR",
-  palette = "Inkscape",
-  title = "Germany",
-  ggtheme = theme_minimal(),
-  ggstatsplot.layer = F) + # note the order in which the labels are entered
-  scale_y_discrete(labels = c("Willingness to Accept Compromise", 
-                              "Not Politically Interested", 
-                              "Left-Right Self-Placement",
-                              "Satisfied with Government Performance",
-                              "Partisan ID",
-                              "Male",
-                              "Age",
-                              "Education", "Income")) +
-  labs(x = "Regression Coefficients", y = NULL)
-
-tmp <- d %>%
-    filter(country == "Italy") %>%
-  dplyr::select(trust, wtac, political_interest, rile_selfplacement,
-         gov_performance, pid, gender, age, education, income,
-         missing_trust, missing_wtac, missing_rile_selfplacement,
-         missing_gov_performance, missing_pid, missing_gender, 
-         missing_age, missing_education, missing_income)
-it  <- stats::lm(formula = trust ~ wtac + factor(political_interest) +
-                  rile_selfplacement + factor(gov_performance) + 
-                 factor(pid) + factor(gender) + age +
-                  education + income + missing_rile_selfplacement,
-                data = tmp)
-p4 <- ggcoefstats(
-  x = tidy(it)[2:10,],
-  point.args = list(color = "seagreen", size = 3, shape = 15, alpha = .75),
-  vline.args = list(size = 1, color = "darkgrey", linetype = "dotdash"),
-  statistic = "t",
-  stats.label.color = "seagreen",
-  only.significant = TRUE,
-  package = "palettesForR",
-  palette = "Inkscape",
-  title = "Italy",
-  ggtheme = theme_minimal(),
-  ggstatsplot.layer = F) + # note the order in which the labels are entered
-  scale_y_discrete(labels = c("Willingness to Accept Compromise", 
-                              "Not Politically Interested", 
-                              "Left-Right Self-Placement",
-                              "Satisfied with Government Performance",
-                              "Partisan ID",
-                              "Male",
-                              "Age",
-                              "Education", "Income")) +
-  labs(x = "Regression Coefficients", y = NULL)
-
-tmp <- d %>%
-    filter(country == "The Netherlands") %>%
-  dplyr::select(trust, wtac, political_interest, rile_selfplacement,
-         gov_performance, pid, gender, age, education, income,
-         missing_trust, missing_wtac, missing_rile_selfplacement,
-         missing_gov_performance, missing_pid, missing_gender, 
-         missing_age, missing_education, missing_income)
-nl  <- stats::lm(formula = trust ~ wtac + factor(political_interest) +
-                  rile_selfplacement + factor(gov_performance) + 
-                 factor(pid) + factor(gender) + age +
-                  education + income + missing_rile_selfplacement +
-                   missing_trust + missing_wtac + missing_education +
-                   missing_gov_performance + missing_pid,
-                data = tmp)
-p5 <- ggcoefstats(
-  x = tidy(nl)[2:10,],
-  point.args = list(color = "seagreen", size = 3, shape = 15, alpha = .75),
-  vline.args = list(size = 1, color = "darkgrey", linetype = "dotdash"),
-  statistic = "t",
-  stats.label.color = "seagreen",
-  only.significant = TRUE,
-  package = "palettesForR",
-  palette = "Inkscape",
-  title = "The Netherlands",
-  ggtheme = theme_minimal(),
-  ggstatsplot.layer = F) + # note the order in which the labels are entered
-  scale_y_discrete(labels = c("Willingness to Accept Compromise", 
-                              "Not Politically Interested", 
-                              "Left-Right Self-Placement",
-                              "Satisfied with Government Performance",
-                              "Partisan ID",
-                              "Male",
-                              "Age",
-                              "Education", "Income")) +
-  labs(x = "Regression Coefficients", y = NULL)
-
-tmp <- d %>%
-    filter(country == "Great Britain") %>%
-  dplyr::select(trust, wtac, political_interest, rile_selfplacement,
-         gov_performance, pid, gender, age, education, income,
-         missing_trust, missing_wtac, missing_rile_selfplacement,
-         missing_gov_performance, missing_pid, missing_gender, 
-         missing_age, missing_education, missing_income)
-gb  <- stats::lm(formula = trust ~ wtac + factor(political_interest) +
-                  rile_selfplacement + factor(gov_performance) + 
-                 factor(pid) + factor(gender) + age +
-                  education + income + missing_rile_selfplacement +
-                   missing_trust + missing_wtac + missing_education +
-                   missing_gov_performance + missing_pid +
-                   missing_income + missing_gender + missing_age,
-                data = tmp)
-p6 <- ggcoefstats(
-  x = tidy(gb)[2:10,],
-  point.args = list(color = "seagreen", size = 3, shape = 15, alpha = .75),
-  vline.args = list(size = 1, color = "darkgrey", linetype = "dotdash"),
-  statistic = "t",
-  stats.label.color = "seagreen",
-  only.significant = TRUE,
-  package = "palettesForR",
-  palette = "Inkscape",
-  title = "Great Britain",
-  ggtheme = theme_minimal(),
-  ggstatsplot.layer = F) + # note the order in which the labels are entered
-  scale_y_discrete(labels = c("Willingness to Accept Compromise", 
-                              "Not Politically Interested", 
-                              "Left-Right Self-Placement",
-                              "Satisfied with Government Performance",
-                              "Partisan ID",
-                              "Male",
-                              "Age",
-                              "Education", "Income")) +
-  labs(x = "Regression Coefficients", y = NULL)
-
+```{r "robust2", echo = F, message=F, warning=F, fig.width=12, fig.height=20}
+source(here("src/analysis/robust_obs.R"))
 easyGgplot2::ggplot2.multiplot(p1, p2, p3, p4, p5, p6, cols = 2)
 ```
 
@@ -327,72 +64,16 @@ Moreover, we have imputed the missing values using the _Green \& Gerber formula_
 To demonstrate whether the dichotomous variables indicating whether the respondents' value was missing are different from the respondents' who have completed the question, the graph below demonstrates the coefficients of the `missing dummies`.
 The graph shows that only for the variables `age` and `trust` the imputed values elicit a different effect from the non-imputed ones. 
 
-```{r, echo=F, message=F, warning=F, fig.width=10, fig.height=7}
-ggcoefstats(
-  x = tidy(m)[15:22,],
-  point.args = list(color = "seagreen", size = 3, shape = 15, alpha = .75),
-  vline.args = list(size = 1, color = "darkgrey", linetype = "dotdash"),
-  statistic = "t",
-  only.significant = TRUE,
-  stats.label.color = "seagreen",
-  title = "Political Trust Predicted by Willingness to Compromise",
-  subtitle = "Missing Values",
-  ggtheme = theme_minimal(),
-  ggstatsplot.layer = FALSE) + # note the order in which the labels are entered
-  scale_y_discrete(labels = c("Trust", 
-                              "Willingness to Accept Compromise", 
-                              "Left-Right Self-Placement",
-                              "Party ID", "Gender", "Age",
-                              "Education", "Income")) +
-  labs(x = "Regression Coefficients", y = NULL)
-
+```{r "robust4", echo=F, message=F, warning=F, fig.width=10, fig.height=7}
+r2
 ```
 
 The result show that particularly the imputed missing values for `trust` and `age` seem to elicit an effect in the regression results.
 To check the robustness of the analysis, we therefore have also ran the analysis excluding the observations where `trust` and `age` have been imputed.
 As the visualization below demonstrates, this does not change the coefficient of `willingness to accept compromise`.
 
-```{r, echo = F, message=F, warning=F, fig.width=10, fig.height=7}
-analysis <- d %>%
-  dplyr::select(trust, wtac, political_interest, rile_selfplacement,
-         gov_performance, pid, gender, age, education, income, country,
-         missing_trust, missing_wtac, missing_rile_selfplacement,
-         missing_gov_performance, missing_pid, missing_gender, 
-         missing_age, missing_education, missing_income) %>%
-  mutate(country = factor(country)) %>%
-  filter(missing_trust == 0,
-         missing_age == 0)
-analysis <- within(analysis, country <- relevel(country, ref = "The Netherlands"))
-m <- stats::lm(formula = trust ~ wtac + factor(political_interest) +
-                  rile_selfplacement + factor(gov_performance) + 
-                 factor(pid) + factor(gender) + age +
-                  education + income + factor(country)+ factor(missing_wtac) +
-                  factor(missing_rile_selfplacement) + factor(missing_pid) +
-                  factor(missing_gender) + 
-                  factor(missing_education) + factor(missing_income),
-                data = analysis)
-ggcoefstats(
-  x = tidy(m)[2:10,],
-  point.args = list(color = "seagreen", size = 3, shape = 15, alpha = .75),
-  vline.args = list(size = 1, color = "darkgrey", linetype = "dotdash"),
-  statistic = "t",
-  stats.label.color = "seagreen",
-  only.significant = TRUE,
-  package = "palettesForR",
-  palette = "Inkscape",
-  title = "Political Trust Predicted by Willingness to Compromise",
-  subtitle = "List-Wise Deletion for Missing Values on Trust and Age",
-  ggtheme = theme_minimal(),
-  ggstatsplot.layer = F) + # note the order in which the labels are entered
-  scale_y_discrete(labels = c("Willingness to Accept Compromise", 
-                              "Not Politically Interested", 
-                              "Left-Right Self-Placement",
-                              "Satisfied with Government Performance",
-                              "Partisan ID",
-                              "Male",
-                              "Age",
-                              "Education", "Income")) +
-  labs(x = "Regression Coefficients", y = NULL) 
+```{r "robust5", echo = F, message=F, warning=F, fig.width=10, fig.height=7}
+r3
 ```
 
 
