@@ -7,13 +7,14 @@ editor_options:
   chunk_output_type: console
 ---
 
-```{r setup, include=FALSE}
-## include this at top of your RMarkdown file for pretty output
-## make sure to have the printr package installed: install.packages('printr')
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-library(printr)
+```{r "setup", include=FALSE}
+library(knitr)
+opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
+                      fig.align = "center",
+                      fig.path=('../../report/figures/'))
 library(rmarkdown)
 ```
+
 # Analysis
 - [Set Up](#set-up)
 - [Analyses](#analysis)
@@ -75,6 +76,5 @@ As the visualization below demonstrates, this does not change the coefficient of
 ```{r "robust5", echo = F, message=F, warning=F, fig.width=10, fig.height=7}
 r3
 ```
-
 
 ### Exploratory
