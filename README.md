@@ -10,7 +10,7 @@ This repository combines the re-registration plans, data &amp; analysis compendi
 The following data files might be of interest:
 
 * [Observational Study](data/intermediate/observational_data.RDS) Cleaned data for analysis of the observational study of 6 Western European countries ([Comparative Study of Electoral Systems Module 5](https://cses.org/data-download/cses-module-5-2016-2021/)) for Austria, Germany, France, Italy complemented with election study data from the [2017 British Election Study](https://www.britishelectionstudy.com/news-category/2017-general-election/) and the [2017 Dutch Parliamentary Electoral Studies](https://easy.dans.knaw.nl/ui/datasets/id/easy-dataset:101156).).
-* [Experiment](data/intermediate/cleaned_experiment1.csv) Cleaned data with constructed scales for analysis of experiment fielded in Germany (October 2021).
+* [Experiment](data/intermediate/cleaned_experiment.RData) Cleaned data with constructed scales for analysis of experiment fielded in Germany (October 2021).
 
 See the scripts in `src/data-processing` for details on how these files were constructed  for the [observational](src/data-processing/clean_data_obs.md) and the [experimental data](src/data-processing/clean_data_exp.md).
 

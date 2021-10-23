@@ -1,0 +1,150 @@
+---
+title: 'Prepare Experimental Data'
+author: 
+output: 
+  github_document:
+    toc: yes
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r "setup", include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
+                      fig.align = "center",
+                      fig.path=('../../report/figures/'))
+library(printr)
+options(digits = 2)
+library(rmarkdown)
+```
+
+# Scripts
+- [Required Packages &amp; Reproducibility](#required-packages-&amp;-reproducibility)
+- [Tidy Data](#tidy-data)
+- [Save Data for Analysis](#save-data-for-analysis)
+- [Check Missing Values](#check-missing-values)
+- [Visualization of Data](#visualization-of-data)
+  - [Dependent Variable](#dependent-variable)
+  - [Treatment Conditions](#treatment-conditions)
+  - [Correlations Matrix](#correlations-matrix)
+
+## Required Packages &amp; Reproducibility
+```{r "env", message=FALSE, warning=F, results='hide'}
+rm(list=ls())
+source(here::here("src/lib/functions.R"))
+renv::snapshot()
+```
+
+## Tidy Data
+This code chuck downloads the data from Qualtrics using the API and cleans the raw data.
+
+```{r "get data from Qualtrics", results="hide"}
+## Match data with RESPONDI quota questions
+d <- fetch_survey(surveyID = "SV_7PoXOEVMUF1JZn8", 
+                    verbose = TRUE, force_request = T,
+                    label = FALSE, convert = FALSE)
+source(here("src/data-processing/clean_data.R"))
+```
+
+## Save Data for Analysis
+```{r "save data",eval=FALSE}
+save(d, file = here("data/intermediate/cleaned_experiment.RData"))
+```
+
+## Visualization of Data
+
+### Dependent Variable
+```{r "Dependent Variable", echo=F, fig.width=10, fig.height=8}
+d %>%
+  select(matches("DV\\d"), issue) %>%
+  pivot_longer(cols = DV1:DV3,
+               names_to = "dvs") %>%
+  mutate(dvs = recode(dvs,
+                      `DV1` = "Trust",
+                      `DV2` = "Sincere",
+                      `DV3` = "Representation")) %>%
+  group_by(dvs, issue) %>%
+  summarise(means = mean(value, na.rm=T),
+            stdev = sd(value, na.rm=T)) %>%
+  mutate(lower = means - (1.56 * stdev),
+         upper = means + (1.56 * stdev)) %>%
+  ggplot(aes(x = dvs, y = means, color = issue,
+             label = issue,
+             ymin = lower, ymax = upper)) +
+  geom_point(position = position_dodge(.5)) + 
+  geom_text(aes(y = upper +.35), position = position_dodge(.5), na.rm = TRUE) +
+  geom_errorbar(position = position_dodge(.5), width = 0) +
+  labs(y = "0 (Negative) - 1 (Positive)", 
+       x = "") +
+  theme_minimal() +
+  scale_color_manual(values = fig_cols) +
+  coord_flip() +
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.position="none",
+        legend.title = element_blank()) 
+```
+
+### Treatment Conditions
+```{r "Independent Variables", echo=F, message=FALSE, warning=FALSE,fig.width=10, fig.height=10}
+d %>%
+  select(outcome, compromise, issue) %>%
+  mutate(outcome = recode(outcome, 
+                           `stalled` = "Coalition talks stalled", 
+                           `negotiation` = "Parties go to negotiation phase"),
+         compromise = recode(compromise,
+                             `yes` = "Party compromised",
+                             `no` = "Party remained steadfast")) %>%
+  unite(treat, compromise, outcome, sep = " - ") %>%
+  group_by(treat, issue) %>%
+  drop_na() %>%
+  summarise(n = n()) %>%
+  mutate(perc = round(n/sum(n)/2,2),
+         perc2 = paste0(perc*100, "%")) %>%
+  ggplot(aes(x = perc, y = treat, label = perc2)) +
+  geom_col(width=0.75) + 
+  geom_text(position = position_fill(vjust=0.13), color = "white", fontface = "bold") +
+  labs(y = "", x = "", title = "Distribution of Treatments") +
+  scale_x_continuous(labels=scales::percent) +
+  theme_minimal() +
+  scale_fill_manual(values = fig_cols) +
+  facet_grid(.~issue) +
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.position="bottom",
+        legend.title = element_blank()) +
+  guides(fill=guide_legend(ncol=4,byrow=TRUE))
+```
+
+
+### Correlations Matrix
+```{r "Correlations Matrix", echo=F, message=T, warning=T, fig.width=15, fig.height=15}
+d %>%
+  mutate(HT1 = (HT1a_1 + HT1a_2  + HT1a_3  + HT1a_4  + 
+           HT1a_5  + HT1a_6 + HT1b_1 + HT1b_2 + HT1b_3 + 
+           HT1b_4 + HT1b_5 + HT1b_6)/12,
+         HT3 = (HT3a + HT3b + HT3c)/3,
+         POST = (POST_1 + POST_2 + POST_3 + POST_4 + POST_5 + 
+           POST_6)/6) %>%
+  select(#`Gender` = D1,
+         #`Age` = D2,
+         #`Education` = D3,
+         `Region`  = D9,
+         `Birth-place` = D10,
+         `Urbanness`  = D4,
+         `Job`  = D7,
+         `Income`  = D8,
+         `Political Knowledge (1)`  = PT4,
+         `Political Knowledge (2)`  = PT5,
+         `Political Knowledge (3)`  = PT6,
+         `Political Interest`  = PT7,
+         `Ideology`  = PT8,
+         `Partisan Strength` = S2,
+         `Principledness (1)` = HT2,
+         `Principledness (2)` = HT1,
+         `Muttual Trust` = HT3,
+         `Populist Attitude` = POST) %>%
+  ggcorrmat(
+  type = "robust", # correlation method
+  cor.vars = c(everything()), # a range of variables can be selected
+  colors = c(fig_cols[1], fig_cols[4], fig_cols[8]),
+  title = "Correlalogram for Variables under Study"
+)
+```
