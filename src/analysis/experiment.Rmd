@@ -29,6 +29,15 @@ source(here::here("src/lib/functions.R"))
 
 ```{r "data for analyses"}
 load(here("data/intermediate/cleaned_experiment.RData"))
+
+source(here("src/analysis/scaling.R"))
+kbl(scale, booktabs =T, caption = "\\label{tab:scale}Reliable Scales") %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center") %>%
+  column_spec(1, width = "5cm") %>%
+  column_spec(2, width = "4cm")
+rm(scale)
+
 source(here("src/analysis/data-for-analyses.R"))
 ```
 
@@ -53,21 +62,27 @@ rm(descr, methodnames, table, fn, table2)
 ## Descriptive Results
 ```{r "descriptive-results", echo=FALSE, fig.height=15, fig.width=10}
 d %>%
-  select(POST_2, POST_3, POST_4, ethnic) %>%
-  pivot_longer(cols = POST_2:POST_4,
+  select(DV1:DV3, compromise, outcome) %>%
+  pivot_longer(cols = DV1:DV3,
                names_to = "dvs") %>%
   mutate(dvs = recode(dvs,
-                      `POST_2` = "DV: Item 2",
-                      `POST_3` = "DV: Item 3",
-                      `POST_4` = "DV: Item 4"),
-         ethnic = if_else(ethnic==0, "Civic Conception", "Ethnic Conception")) %>%
-  group_by(ethnic, dvs) %>%
+                      `DV1` = "DV: Trust",
+                      `DV2` = "DV: Credibility",
+                      `DV3` = "DV: Representation"),
+         outcome = recode(outcome, 
+                           `stalled` = "Coalition talks stalled", 
+                           `negotiation` = "Parties go to negotiation phase"),
+         compromise = recode(compromise,
+                             `yes` = "Party compromised",
+                             `no` = "Party remained steadfast")) %>%
+  unite(treat, compromise, outcome, sep = " - ") %>%
+  group_by(treat, dvs) %>%
   summarise(means = round(mean(value, na.rm=T),1),
             stdev = sd(value, na.rm=T)) %>%
   mutate(lower = means - (1.56 * stdev),
          upper = means + (1.56 * stdev),
          type = if_else(means <= 5, "below", "above")) %>%
-  ggplot(aes(x = ethnic, 
+  ggplot(aes(x = treat, 
              y =means, label = means,
              ymin = lower, ymax = upper)) +
   geom_point(stat='identity', size=6)  +
@@ -76,8 +91,8 @@ d %>%
   geom_errorbar(width = 0) +
   geom_text(color="white", size=2) +
   facet_grid(dvs~.) +
-  labs(y = "0 (negative) - 5 (positive)", 
-       x = "", title = "The People as 'Volk' or 'Bürger'?") +
+  labs(y = "0 (negative) - 10 (positive)", 
+       x = "", title = "Reputational Cost of Compromise") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5),
@@ -98,30 +113,28 @@ source(here("src/analysis/balance-test.R"))
 df
 ```
 
-## Ethnic Conception Hypothesis 
+## Steadfast Hypothesis & Outcome Hypothesis
 ```{r "h1", fig.align="center", fig.height=8, fig.width=8}
-source(here("src/analysis/h1.R"))
+source(here("src/analysis/h1_exp.R"))
 p1
 ```
 
-## National Identity Hypothesis
-```{r "h2a", fig.align="center", fig.height=8, fig.width=8}
-source(here("src/analysis/h2a.R"))
-p2a
+## Compromise Hypothesis
+```{r "h3", fig.align="center", fig.height=8, fig.width=8}
+source(here("src/analysis/h3_exp.R"))
+p2
 ```
 
-## Far Right Party ID Hypothesis
-```{r "h2b", fig.align="center", fig.height=8, fig.width=8}
-source(here("src/analysis/h2b.R"))
-p2b
+## Principled Hypothesis
+```{r "h4", fig.align="center", fig.height=8, fig.width=8}
+source(here("src/analysis/h4_exp.R"))
+p3
 ```
 
+## Mutual Trust Hypothesis
+```{r "h5", fig.align="center", fig.height=8, fig.width=8}
+source(here("src/analysis/h5_exp.R"))
+p4
+```
 
 # Exploration
-
-## Scaling fit
-
-```{r "scale", fig.align="center", fig.height=8, fig.width=8}
-source(here("src/analysis/explorative_cfa.R"))
-
-```
