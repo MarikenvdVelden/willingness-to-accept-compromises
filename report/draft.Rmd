@@ -1,0 +1,267 @@
+---
+title: "Responsive or Responsible? The Reputational Cost of Political Compromises"
+date: "`r format(Sys.time(), '%d %B, %Y - %X (%Z)')`"
+author:
+  - Maurits Meijers, Radboud University Nijmegen
+  - Mariken A.C.G. van der Velden, Vrije Universiteit Amsterdam
+output: 
+  pdf_document:
+   number_sections: false
+   includes:
+      in_header: header.tex
+editor_options: 
+  chunk_output_type: console
+bibliography: references.bib
+urlcolor: blue
+linkcolor: blue
+abstract: "_With electoral fragmentation on the rise political compromises are more than ever daily necessities. Yet, while the abstract democratic principle of political compromise finds broad support, voters have been shown to reject compromise when confronted with specific compromises between political parties. Compromises obscure a party's policy reputation, which can negatively affect electoral support. During coalition negotiations political parties therefore face a trade-off between responsiveness to their voters and responsibility in government formation. This begs the question: Do compromises confront parties with reputational costs? Using a pre-registered observational study of 6 Western European countries as a proof of concept, we show that being less willing to accept compromise coincides with lower levels of trust in political parties. To examine more closely whether responsive or responsible party behaviour in coalition negotiations is decisive for voters’ party trust, we further conduct a pre-registered survey experiment in Germany fielded just after the 2021 parliamentary elections (`N=8,000`). This allows us to 1) isolate the effect of parties’ negotiation position from  success or failure in the negotiations; and 2) delve into the mechanisms that drive voters’ party trust after (not) accepting compromises. Our study sheds light on the reputational costs associated with accepting compromises in coalition negotiations. Thereby, our study has important implications for the study of political representation._"
+header-includes:
+   - \usepackage{floatrow}
+   - \floatsetup[figure]{capposition=top}
+   - \floatsetup[table]{capposition=top}
+   - \usepackage{booktabs}
+   - \usepackage{longtable}
+   - \usepackage{array}
+   - \usepackage{multirow}
+   - \usepackage{wrapfig}
+   - \usepackage{float}
+   - \usepackage{colortbl}
+   - \usepackage{pdflscape}
+   - \usepackage{tabu}
+   - \usepackage{threeparttable}
+   - \usepackage{threeparttablex}
+   - \usepackage[normalem]{ulem}
+   - \usepackage{makecell}
+   - \usepackage{xcolor}
+---
+
+```{r setup, include=FALSE}
+## include this at top of your RMarkdown file for pretty output
+## make sure to have the printr package installed: install.packages('printr')
+library(knitr)
+opts_chunk$set(message = FALSE, warning = FALSE, echo = FALSE)
+options(kableExtra.latex.load_packages = FALSE)
+here::i_am("report/draft.Rmd")
+source(here::here("src/lib/functions.R"))
+```
+
+# Introduction
+
+### What is the problem, puzzle, tension, etc. motivating the paper?
+
+
+### Why is providing an answer to that problem important
+
+
+### What is the answer to the question, puzzle, etc. you posed above that you are going to test in this paper? Why is this the answer?
+
+### Sketch of how you are going to test your answer
+
+# Acceptance of Political Compromises
+
+### Unpacking the problem, puzzle, tension
+
+### Unpacking why the answer to that problem is important
+
+### Unpacking your articulation of the theory that provides an answer to your problem 
+
+
+
+
+# Data, Measurement & Method
+
+## Observational Study
+
+### Data
+
+### Measurement
+
+### Method
+
+
+## Experimental Study
+
+### Data
+The survey experiment is conducted in Germany between the 13th of October 2021 and the 11th of November 2021.
+The sample, recruited through [Respondi](https://www.respondi.com/EN/), consists of 8,000 participants (based on the power analysis presented in Figure \ref{fig:power}) of 18 years and older.
+Respondi works with opt-in respondents, so we have implemented quota on age, gender, and education.
+Moreover, we measure some more demographic background variables (see [Section 3.2](\#control-variables)).
+Balance checks are conducted to demonstrate whether certain categories are over represented in a certain experimental group (see [Section 3.2.3](###method), Figure \ref{fig:balance}).
+The study has been approved by the [Research Ethics Review Committee](https://fsw.vu.nl/nl/onderzoek/research-ethics-review/index.aspx) of the \textit{Vrije Universiteit Amsterdam} (see the approval [here](LINK)).
+To ensure good quality of our data, two attention checks are included.
+Each respondent failing the attention check will be excluded and replaced with another 'good' response.
+
+### Measurement
+
+**_Dependent Variables_**
+
+
+**_Experimental Conditions_**
+
+
+```{r stimulus, topcaption=TRUE}
+d <- tibble(` ` = c(1:64),
+            `In-Party` = c(rep("CDU", 16), rep("FDP", 16), 
+                           rep("SPD", 16), rep("die Grünen", 16)),
+            Partner = c(rep("SPD",8), rep("die Grünen",8),
+                        rep("SPD",8), rep("die Grünen",8),
+                        rep("CDU",8), rep("FDP",8),
+                        rep("CDU",8), rep("FDP",8)),
+            Compromise = c(rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2)),
+            Outcome = c("Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation"),
+            Issue = c(rep("TopTax", 4), rep("SpeedLimit", 4),
+                      rep("TopTax", 4), rep("SpeedLimit", 4),
+                      rep("TopTax", 4), rep("SpeedLimit", 4),
+                      rep("TopTax", 4), rep("SpeedLimit", 4),
+                      rep("TopTax", 4), rep("SpeedLimit", 4),
+                      rep("TopTax", 4), rep("SpeedLimit", 4),
+                      rep("TopTax", 4), rep("SpeedLimit", 4),
+                      rep("TopTax", 4), rep("SpeedLimit", 4)))
+
+kbl(d[1:32,], booktabs =T, caption = "\\label{tab:treat}Experimental Conditions (1)",
+    align = c("l", "l", "c", "c", "c")) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center") %>%
+  column_spec(1, width = ".5cm") 
+
+
+kbl(d[33:dim(d)[1],], booktabs =T, caption = "\\label{tab:treat}Experimental Conditions (2)",
+    align = c("l", "l", "c", "c", "c")) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center") %>%
+ column_spec(1, width = ".5cm") 
+```
+
+
+
+**_Covariates_**
+
+```{r descriptive-table, echo = FALSE, eval = FALSE}
+source(here::here("src/lib/functions.R"))
+load(here("data/intermediate/cleaned_data.RData"))
+source(here("src/analysis/data-for-analyses.R"))
+means <- d %>%
+  summarise(F4 = round(mean(F4, na.rm = T),0),
+            F5 = round(mean(F5, na.rm = T), 0),
+            F6 = max(names(table(F6))),
+            F7 = round(mean(F7, na.rm = T),0),
+            F8 = round(mean(F8, na.rm = T),0),
+            F9 = round(mean(F9, na.rm = T),0))
+
+d <- d %>%
+  mutate(F4 = replace_na(F4, means$F4),
+         F5 = replace_na(F5, means$F5),
+         F6 = replace_na(F6, means$F6),
+         F7 = replace_na(F7, means$F7),
+         missing_F8 = if_else(is.na(F8), 1, 0),
+         F8 = replace_na(F8, means$F8),
+         F9 = replace_na(F9, means$F9))
+source(here("src/analysis/descriptive-information-overview.R"))
+kbl(descr, booktabs =T, caption = "\\label{tab:descr}Descriptive Information",
+    digits = 2) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center")  %>%
+   column_spec(1, width = "5.5cm") %>%
+   column_spec(2, width = "2cm") %>%
+   column_spec(3, width = "1.5cm") %>%
+   column_spec(4, width = "2cm") %>%
+   column_spec(5, width = "2cm")
+rm(descr, means)  
+```
+
+### Method
+
+```{r balance, fig.align = 'center', out.width = "95%", fig.cap = "\\label{fig:balance}Balance Checks"}
+include_graphics(here("report/figures", "balance-checks-1.png"))
+```
+
+
+# Costs of Compromises for Responsive and Responsible Parties
+
+## Pre-Registered Hypotheses
+
+### Observational
+
+### Experiments
+
+```{r results-h1h2, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:results-h1h2}Results: H1 and H2"}
+include_graphics(here("report/figures", "h1-1.png"))
+```
+
+```{r results-h3, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:results-h3}Results: H3"}
+include_graphics(here("report/figures", "h3-1.png"))
+```
+
+```{r results-h3p, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:results-h3p}Results: H3 pooled"}
+include_graphics(here("report/figures", "h3-2.png"))
+```
+
+```{r results-h4, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:results-h4}Results: H4"}
+include_graphics(here("report/figures", "h4-1.png"))
+```
+
+```{r results-h4p, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:results-h4p}Results: H4 pooled"}
+include_graphics(here("report/figures", "h4-2.png"))
+```
+
+```{r results-h5, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:results-h5}Results: H5"}
+include_graphics(here("report/figures", "h5-1.png"))
+```
+
+```{r results-h5p, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:results-h5p}Results: H5 pooled"}
+include_graphics(here("report/figures", "h5-2.png"))
+```
+
+## Explorations
+
+# Discussion
+
+
+\newpage
+# References

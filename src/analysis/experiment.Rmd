@@ -121,20 +121,26 @@ p1
 
 ## Compromise Hypothesis
 ```{r "h3", fig.align="center", fig.height=8, fig.width=8}
-source(here("src/analysis/h3_exp.R"))
+source(here("src/analysis/h3_exp.R")) #pooled?
 p2
+
+p2p
 ```
 
 ## Principled Hypothesis
 ```{r "h4", fig.align="center", fig.height=8, fig.width=8}
-source(here("src/analysis/h4_exp.R"))
-p3
+source(here("src/analysis/h4_exp.R")) #pooled?
+p3b / p3a
+
+p3bp / p3ap
 ```
 
 ## Mutual Trust Hypothesis
 ```{r "h5", fig.align="center", fig.height=8, fig.width=8}
-source(here("src/analysis/h5_exp.R"))
+source(here("src/analysis/h5_exp.R")) #pooled?
 p4
+
+p4p
 ```
 
 # Exploration

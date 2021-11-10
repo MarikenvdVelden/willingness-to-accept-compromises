@@ -112,7 +112,7 @@ Populist Attitudes
 
 <td style="text-align:right;width: 4cm; ">
 
-0.81
+0.82
 
 </td>
 
@@ -179,28 +179,46 @@ p1
 ## Compromise Hypothesis
 
 ``` r
-source(here("src/analysis/h3_exp.R"))
+source(here("src/analysis/h3_exp.R")) #pooled?
 p2
 ```
 
 <img src="../../report/figures/h3-1.png" style="display: block; margin: auto;" />
 
+``` r
+p2p
+```
+
+<img src="../../report/figures/h3-2.png" style="display: block; margin: auto;" />
+
 ## Principled Hypothesis
 
 ``` r
-source(here("src/analysis/h4_exp.R"))
-p3
+source(here("src/analysis/h4_exp.R")) #pooled?
+p3b / p3a
 ```
 
 <img src="../../report/figures/h4-1.png" style="display: block; margin: auto;" />
 
+``` r
+p3bp / p3ap
+```
+
+<img src="../../report/figures/h4-2.png" style="display: block; margin: auto;" />
+
 ## Mutual Trust Hypothesis
 
 ``` r
-source(here("src/analysis/h5_exp.R"))
+source(here("src/analysis/h5_exp.R")) #pooled?
 p4
 ```
 
 <img src="../../report/figures/h5-1.png" style="display: block; margin: auto;" />
+
+``` r
+p4p
+```
+
+<img src="../../report/figures/h5-2.png" style="display: block; margin: auto;" />
 
 # Exploration

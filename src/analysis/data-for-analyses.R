@@ -4,16 +4,20 @@ d <- d %>%
                      `2` = "Suburb",
                      `3` = "Middlesized City",
                      `4` = "Rural Village",
-                     `5` = "Countryside", .default = "NA"),
+                     `5` = "Countryside",
+                     .default = "NA"), #6 participants DK
          D6 = recode(D6,
                      `1` = "CDU/CSU",
                      `2` = "SPD",
                      `3` = "AfD",
-                     `4` = "Left",
-                     `5` = "Greens",
-                     `6` = "Other party", .default = "NA"),
-         D7 = na_if(D7, 12),
-         D8 = na_if(D8, 14),
+                     `4` = "FDP",
+                     `5` = "Left",
+                     `6` = "Greens",
+                     `7` = "Other party", 
+                     `8` = "Didn't vote/Not eligible",
+                     .default = "NA"), #375 participants DK
+         D7 = recode(D7, `12` = 0),  #DK = reference category
+         D8 = recode(D8, `14` = 0), #DK = reference category
          D9 = recode(D9,
                      `1` = "Baden-Würtemberg",
                      `17` = "Bavaria",
@@ -30,7 +34,8 @@ d <- d %>%
                      `28` = "Saxony",
                      `29` = "Saxony-Anholt",
                      `30` = "Schleswig-Holstein",
-                     `31` = "Thuringia"),
+                     `31` = "Thuringia",
+                     .default = "NA"), #2 particpants DK
          D10 = recode(D10,
                       `1` = "Baden-Würtemberg",
                       `17` = "Bavaria",
@@ -48,20 +53,20 @@ d <- d %>%
                       `29` = "Saxony-Anholt",
                       `30` = "Schleswig-Holstein",
                       `31` = "Thuringia",
-                      `32` = "Not born in Germany", .default = "NA"),
+                      `32` = "Not born in Germany", .default = "NA"), #5 participants DK
          PT1_1 = if_else(PT1_1 == 2, 0, 1),
          PT1_2 = if_else(PT1_2 == 2, 0, 1),
          PT1_3 = if_else(PT1_3 == 2, 0, 1),
-         PT3_1 = if_else(PT3_1 <13, PT3_1 - 1, 13),
-         PT3_1 = na_if(PT3_1, 13),
-         PT3_2 = if_else(PT3_2 <13, PT3_2 - 1, 13),
-         PT3_2 = na_if(PT3_2, 13),
-         PT3_3 = if_else(PT3_3 <13, PT3_3 - 1, 13),
-         PT3_3 = na_if(PT3_3, 13),
+         PT3_1 = if_else(PT3_1 <13, PT3_1 - 1, 0), # otherwise 1154 participants DK
+         #PT3_1 = na_if(PT3_1, 13),
+         PT3_2 = if_else(PT3_2 <13, PT3_2 - 1, 0), # otherwise 1263 participants DK
+         #PT3_2 = na_if(PT3_2, 13),
+         PT3_3 = if_else(PT3_3 <13, PT3_3 - 1, 0), # otherwise 983 participants DK
+         #PT3_3 = na_if(PT3_3, 13),
          PT4 = if_else(PT4 == 3, 1, 0),
          PT5 = if_else(PT5 == 5, 1, 0),
          PT6 = if_else(PT6==1, 1, 0),
-         PT7 =  na_if(PT7, 7),
+         PT7 =  na_if(PT7, 6), #48 participants
          S1 = recode(S1, 
                      `1` = "CDU",
                      `2` = "Greens",
@@ -83,7 +88,7 @@ d <- d %>%
          HT1b_6 = 8 - HT1b_6,
          HT1b = round((HT1b_1 + HT1b_2 + HT1b_3 + HT1b_4 + HT1b_5 + HT1b_6)/6,0),
          HT1 = HT1a + HT1b,
-         HT2 = HT2 - 1,
+         HT2 = 5 - HT2,
          HT3 = round((HT3a + HT3b + HT3c)/3,0),
          POST = round((POST_1 + POST_2 + POST_3 + POST_4 + POST_5 + POST_6)/6),0) %>%
   select(id, D4:D10, PT1_1: PT3_3, pol_know, PT7:PT8, S1:S2, compromise, outcome,
