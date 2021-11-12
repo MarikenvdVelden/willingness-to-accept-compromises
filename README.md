@@ -2,6 +2,9 @@
 Online research compendium of the paper entitled _Responsive or Responsible?  The Reputational Cost of Political Compromise_ . 
 This repository combines the re-registration plans, data &amp; analysis compendium.
 
+## Draft
+View the [draft of the paper here](report/draft.pdf).
+
 # Pre-Registration Plan
 * [Observational Study](https://osf.io/h29j3) Pre-registered hypothesis and analyses for testing the relationship between political trust and willingness to accept compromises in politics (_hypothesis 1_).
 * [Experiment](docs/pre-analysis-plan/pap.pdf) Pre-registered hypotheses and  analyses for testing the effect of parties’ negotiation position from  success or failure in the negotiations (_hypotheses 1--3_).; and delve into the mechanisms that drive voters’ party trust after (not) accepting compromises (_hypotheses 4--5_)..
