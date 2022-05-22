@@ -20,7 +20,9 @@ d <- cses5 %>%
          rile_selfplacement = E3020,
          gov_performance = E3009) %>% 
   mutate(trust = ifelse(trust>5, NA, trust),
+         trust = 6 - trust,
          swd = ifelse(swd>5, NA, swd),
+         swd = 5 - swd,
          wtac = ifelse(wtac>5, NA, wtac),
          age = ifelse(age<20, NA, age),
          gender = ifelse(gender>2, NA, gender), #1 = Male
