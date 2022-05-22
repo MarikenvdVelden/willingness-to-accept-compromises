@@ -22,7 +22,11 @@ d <- cses5 %>%
   mutate(trust = ifelse(trust>5, NA, trust),
          trust = 6 - trust,
          swd = ifelse(swd>5, NA, swd),
-         swd = 5 - swd,
+         swd = recode(swd,
+                                         `1` = 1,
+                                         `2` = 1,
+                                         `4` = 0,
+                                         `5` = 0),
          wtac = ifelse(wtac>5, NA, wtac),
          age = ifelse(age<20, NA, age),
          gender = ifelse(gender>2, NA, gender), #1 = Male
