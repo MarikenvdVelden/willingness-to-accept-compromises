@@ -1,5 +1,19 @@
 d <- d %>%
-  mutate(D4 = recode(D4, 
+  mutate(D1 = recode(D1, 
+                     `1` = "Female",
+                     `2` = "Male", .default = "NA"),
+         D2 = recode(D2, 
+                     `1` = "17 or younger",
+                     `2` = "18-29",
+                     `3` = "30-39",
+                     `4` = "40-49",
+                     `5` = "50-59",
+                     `6` = "60-74", .default = "NA"),
+         D3 = recode(D3, 
+                     `1` = "Low Levels of Education",
+                     `2` = "Medium Levels of Education",  
+                     `3` =  "High Levels of Education",.default = "NA"),
+         D4 = recode(D4, 
                      `1` = "Big City",
                      `2` = "Suburb",
                      `3` = "Middlesized City",
@@ -72,6 +86,12 @@ d <- d %>%
                      `2` = "Greens",
                      `3` = "FDP",
                      `4` = "SPD"),
+         S2 = recode(S2,
+                     `5` = 1, #from weak to strong
+                     `4` = 2,
+                     `3` = 3,
+                     `2` = 4,
+                     `1` = 5),  
          MC1 = if_else(compromise == "yes" & MC1 == 1, 1,
                if_else(compromise == "no" & MC1 == 2, 1, 0)),
          MC2 = if_else(outcome == "negotiation" & MC2 == 1, 1,
@@ -91,6 +111,6 @@ d <- d %>%
          HT2 = 5 - HT2,
          HT3 = round((HT3a + HT3b + HT3c)/3,0),
          POST = round((POST_1 + POST_2 + POST_3 + POST_4 + POST_5 + POST_6)/6),0) %>%
-  select(id, D4:D10, PT1_1: PT3_3, pol_know, PT7:PT8, S1:S2, compromise, outcome,
+  select(id, D1:D10, PT1_1: PT3_3, pol_know, PT7:PT8, S1:S2, compromise, outcome,
          partner, issue, DV1:DV3, MC, HT1, HT2, HT3, POST) %>%
   drop_na()

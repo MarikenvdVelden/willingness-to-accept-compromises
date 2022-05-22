@@ -80,3 +80,15 @@ d <- left_join(d, dv, by = "id")
 d <- left_join(d, ht, by = "id")
 d <- left_join(d, post, by = "id") 
 rm(dem, pret, treat, post, ht, dv)
+
+dem <- read_delim(here("data/raw-private/14651 data matched final.csv"), 
+                  delim = ";") %>%
+  select(id = tic, D2 = age, D1 = gender, D3 = education)
+
+d <- left_join(d, dem, by = "id") %>%
+  mutate(D1 = if_else(is.na(D1), round(mean(D1, na.rm = T),0), D1),
+         D2 = if_else(is.na(D2), round(mean(D2, na.rm = T),0), D2),
+         D3 = if_else(is.na(D3), round(mean(D3, na.rm = T),0), D3)) %>% 
+  select(id, D1, D2, D3, D4:POST_6)
+
+rm(dem)

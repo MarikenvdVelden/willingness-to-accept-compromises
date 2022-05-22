@@ -1,4 +1,4 @@
-uk <- readRDS("../../data/raw-private/bes.RDS") %>%
+uk <- read_sav(here("data/raw-private/bes_2017.sav")) %>% 
   dplyr::select(trust = q2_cses_4,
                 wtac = q2_cses_2,
                 age = q25_cses,
@@ -16,6 +16,7 @@ uk <- readRDS("../../data/raw-private/bes.RDS") %>%
                 people_make_policy_decisions = q2_cses_7,
                 elites_care_rich_powerful = q2_cses_8,
                 vote_choice = b02) %>%
+  zap_labels() %>% 
   mutate(country = "Great Britain",
          trust = as.numeric(trust),
          trust = replace(trust, which(trust<3), NA),
@@ -28,11 +29,9 @@ uk <- readRDS("../../data/raw-private/bes.RDS") %>%
          wtac = as.numeric(wtac),
          wtac = replace(wtac, which(wtac<3), NA),
          age = replace(age, which(age==-999), NA),
-         gender = as.numeric(gender),
-         gender = replace(gender, which(gender==1), NA),
          gender = recode(gender, 
-                         `2` = "Male",
-                         `3` = "Female"),
+                         `1` = "Male",
+                         `2` = "Female"),
          education = as.numeric(education),
          education = recode(education,
                             `2` = 96,
@@ -78,10 +77,10 @@ uk <- readRDS("../../data/raw-private/bes.RDS") %>%
                          `18` = 5),
          income = replace(income, which(income>5), NA),
          pid = as.numeric(pid),
-         pid = replace(pid, which(pid<4), NA),
+         pid = replace(pid, which(pid<0), NA),
          pid = recode(pid,
-                      `5` = "No Partisan ID",
-                      `4` = "Partisan ID"),
+                      `1` = "No Partisan ID",
+                      `2` = "Partisan ID"),
          political_interest = as.numeric(political_interest),
          political_interest = replace(political_interest, 
                                       which(political_interest<3), NA),

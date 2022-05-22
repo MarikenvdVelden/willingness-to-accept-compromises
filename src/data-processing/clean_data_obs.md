@@ -1,63 +1,62 @@
 Prepare Observational Data
 ================
 
-# Scripts
-
-  - [Required Packages &
-    Reproducibility](#required-packages-&-reproducibility)
-  - [Tidy Data](#tidy-data)
-      - [CSES Data](#cses-data)
-      - [DPES Data](#dpes-data)
-      - [BES Data](#bes-data)
-  - [Missing Values](#missing-values)
-      - [Austria](#austria)
-      - [France](#france)
-      - [Germany](#germany)
-      - [Italy](#italy)
-      - [The Netherlands](#the-netherlands)
-      - [Great Britain](#great-britain)
-  - [Save Data for Analysis](#save-data-for-analysis)
-  - [Visualization of Data](#visualization-of-data)
-      - [Dependent Variable](#dependent-variable)
-      - [Independent Variable](#independent-variable)
-      - [Control Variables](#control-variables)
-      - [Correlations Matrix](#correlations-matrix)
+-   [Required Packages &
+    Reproducibility](#required-packages--reproducibility)
+-   [Tidy Data](#tidy-data)
+    -   [CSES Data Round 5](#cses-data-round-5)
+    -   [DPES Data 2017](#dpes-data-2017)
+    -   [BES Data 2017](#bes-data-2017)
+-   [Missing Values](#missing-values)
+    -   [Austria](#austria)
+    -   [France](#france)
+    -   [Germany](#germany)
+    -   [Italy](#italy)
+    -   [Netherlands](#netherlands)
+    -   [Great Britain](#great-britain)
+-   [Save Data for Analysis](#save-data-for-analysis)
+-   [Visualization of Data](#visualization-of-data)
+    -   [Dependent Variable](#dependent-variable)
+    -   [Independent Variable](#independent-variable)
+    -   [Control Variables](#control-variables)
+    -   [Correlations Matrix](#correlations-matrix)
+-   [Full CSESS Round 5 Data for
+    Replication](#full-csess-round-5-data-for-replication)
+    -   [Dependent Variable](#dependent-variable-1)
+    -   [Independent Variable](#independent-variable-1)
 
 ## Required Packages & Reproducibility
 
 ``` r
 rm(list=ls())
 source(here::here("src/lib/functions.R"))
-renv::snapshot()
+#renv::snapshot()
 ```
 
 ## Tidy Data
 
-### CSES Data
+### CSES Data Round 5
 
 Data can be downloaded
-[here](https://cses.org/data-download/download-data-documentation/), and
-is saved as `.RDS` file to save space.
+[here](https://cses.org/data-download/download-data-documentation/).
 
 ``` r
 source(here("src/data-processing/tidy_cses.R"))
 ```
 
-### DPES Data
+### DPES Data 2017
 
 Data can be downloaded
-[here](https://easy.dans.knaw.nl/ui/datasets/id/easy-dataset:101156),
-and is saved as `.RDS` file to save space.
+[here](https://easy.dans.knaw.nl/ui/datasets/id/easy-dataset:101156).
 
 ``` r
 source(here("src/data-processing/tidy_dpes.R"))
 ```
 
-### BES Data
+### BES Data 2017
 
 Data can be downloaded
-[here](https://www.britishelectionstudy.com/data/#.X7yS5tso-F0), and is
-saved as `.RDS` file to save space.
+[here](https://www.britishelectionstudy.com/data/#.X7yS5tso-F0).
 
 ``` r
 source(here("src/data-processing/tidy_bes.R"))
@@ -69,9 +68,9 @@ As pre-registered
 [here](https://osf.io/nt6ra/?view_only=b84cde8bd47f4e94ac529b088542b8d0),
 we employ the following criteria:
 
-  - If 10% or less of the values on the dimension are missing, then we
+-   If 10% or less of the values on the dimension are missing, then we
     re-code the missing values to the overall mean.
-  - If 11% or more of the values on the dimension are missing, then we
+-   If 11% or more of the values on the dimension are missing, then we
     re-code the missing values to a constant (for instance 0) and
     include a dummy variable indicating whether the response on the
     covariate was missing or not.
@@ -97,23 +96,105 @@ tibble(Covariate = covar,
                      round(sum(is.na(aut$income))/prod(dim(aut)[1]),2)))
 ```
 
-| Covariate                        | Percentage |
-| :------------------------------- | ---------: |
-| Trust                            |       0.01 |
-| Willingness to Accept Compromise |       0.06 |
-| Party ID                         |       0.01 |
-| Political Interest               |       0.00 |
-| Left-Right Self-Placement        |       0.00 |
-| Government Performance           |       0.07 |
-| Gender                           |       0.00 |
-| Age                              |       0.00 |
-| Education                        |       0.00 |
-| Income                           |       0.19 |
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Covariate
+</th>
+<th style="text-align:right;">
+Percentage
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Trust
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Willingness to Accept Compromise
+</td>
+<td style="text-align:right;">
+0.06
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Party ID
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Political Interest
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Left-Right Self-Placement
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Government Performance
+</td>
+<td style="text-align:right;">
+0.07
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gender
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Age
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Education
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Income
+</td>
+<td style="text-align:right;">
+0.19
+</td>
+</tr>
+</tbody>
+</table>
 
-We recode the missing values of `trust` and `willingness to accept
-compromise` variables to the mean value of the respective variables. For
-the categorical variables `party id` and `government performance` we use
-the median value.
+We recode the missing values of `trust` and
+`willingness to accept compromise` variables to the mean value of the
+respective variables. For the categorical variables `party id` and
+`government performance` we use the median value.
 
 ``` r
 aut <- aut %>%
@@ -150,24 +231,106 @@ tibble(Covariate = covar,
                      round(sum(is.na(fr$income))/prod(dim(fr)[1]),2)))
 ```
 
-| Covariate                        | Percentage |
-| :------------------------------- | ---------: |
-| Trust                            |       0.02 |
-| Willingness to Accept Compromise |       0.04 |
-| Party ID                         |       0.01 |
-| Political Interest               |       0.00 |
-| Left-Right Self-Placement        |       0.09 |
-| Government Performance           |       0.02 |
-| Gender                           |       0.00 |
-| Age                              |       0.00 |
-| Education                        |       0.01 |
-| Income                           |       0.10 |
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Covariate
+</th>
+<th style="text-align:right;">
+Percentage
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Trust
+</td>
+<td style="text-align:right;">
+0.02
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Willingness to Accept Compromise
+</td>
+<td style="text-align:right;">
+0.04
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Party ID
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Political Interest
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Left-Right Self-Placement
+</td>
+<td style="text-align:right;">
+0.09
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Government Performance
+</td>
+<td style="text-align:right;">
+0.02
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gender
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Age
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Education
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Income
+</td>
+<td style="text-align:right;">
+0.10
+</td>
+</tr>
+</tbody>
+</table>
 
-We recode the missing values of `trust`, `willingness to accept
-compromise`, `left-right self-placement`, and `education` variables to
-the mean value of the respective variables. For the categorical
-variables `party id` and `government performance`, we use the median
-value.
+We recode the missing values of `trust`,
+`willingness to accept compromise`, `left-right self-placement`, and
+`education` variables to the mean value of the respective variables. For
+the categorical variables `party id` and `government performance`, we
+use the median value.
 
 ``` r
 fr <- fr %>%
@@ -208,23 +371,106 @@ tibble(Covariate = covar,
                      round(sum(is.na(de$income))/prod(dim(de)[1]),2)))
 ```
 
-| Covariate                        | Percentage |
-| :------------------------------- | ---------: |
-| Trust                            |       0.02 |
-| Willingness to Accept Compromise |       0.06 |
-| Party ID                         |       0.01 |
-| Political Interest               |       0.00 |
-| Left-Right Self-Placement        |       0.07 |
-| Government Performance           |       0.03 |
-| Gender                           |       0.00 |
-| Age                              |       0.00 |
-| Education                        |       0.04 |
-| Income                           |       0.14 |
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Covariate
+</th>
+<th style="text-align:right;">
+Percentage
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Trust
+</td>
+<td style="text-align:right;">
+0.02
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Willingness to Accept Compromise
+</td>
+<td style="text-align:right;">
+0.06
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Party ID
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Political Interest
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Left-Right Self-Placement
+</td>
+<td style="text-align:right;">
+0.07
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Government Performance
+</td>
+<td style="text-align:right;">
+0.03
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gender
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Age
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Education
+</td>
+<td style="text-align:right;">
+0.04
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Income
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+</tr>
+</tbody>
+</table>
 
-We recode the missing values of `trust`, `willingness to accept
-compromise`, `left-right self-placement`, and `education` variables to
-the mean value of the respective variables. For the categorical variable
-`party id` and `government performance`, we use the median value.
+We recode the missing values of `trust`,
+`willingness to accept compromise`, `left-right self-placement`, and
+`education` variables to the mean value of the respective variables. For
+the categorical variable `party id` and `government performance`, we use
+the median value.
 
 ``` r
 de <- de %>%
@@ -265,23 +511,106 @@ tibble(Covariate = covar,
                      round(sum(is.na(it$income))/prod(dim(it)[1]),2)))
 ```
 
-| Covariate                        | Percentage |
-| :------------------------------- | ---------: |
-| Trust                            |       0.02 |
-| Willingness to Accept Compromise |       0.02 |
-| Party ID                         |       0.03 |
-| Political Interest               |       0.00 |
-| Left-Right Self-Placement        |       0.15 |
-| Government Performance           |       0.05 |
-| Gender                           |       0.00 |
-| Age                              |       0.00 |
-| Education                        |       0.00 |
-| Income                           |       0.21 |
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Covariate
+</th>
+<th style="text-align:right;">
+Percentage
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Trust
+</td>
+<td style="text-align:right;">
+0.02
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Willingness to Accept Compromise
+</td>
+<td style="text-align:right;">
+0.02
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Party ID
+</td>
+<td style="text-align:right;">
+0.03
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Political Interest
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Left-Right Self-Placement
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Government Performance
+</td>
+<td style="text-align:right;">
+0.05
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gender
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Age
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Education
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Income
+</td>
+<td style="text-align:right;">
+0.21
+</td>
+</tr>
+</tbody>
+</table>
 
-We recode the missing values of `trust` and `willingness to accept
-compromise` variables to the mean value of the respective variables. For
-the categorical variables `party id`, `government performance`, and
-`political interest`, we use the median value.
+We recode the missing values of `trust` and
+`willingness to accept compromise` variables to the mean value of the
+respective variables. For the categorical variables `party id`,
+`government performance`, and `political interest`, we use the median
+value.
 
 ``` r
 it <- it %>%
@@ -328,18 +657,100 @@ tibble(Covariate = covar,
                      round(sum(is.na(nl$income))/prod(dim(nl)[1]),2)))
 ```
 
-| Covariate                        | Percentage |
-| :------------------------------- | ---------: |
-| Trust                            |       0.14 |
-| Willingness to Accept Compromise |       0.16 |
-| Party ID                         |       0.45 |
-| Political Interest               |       0.01 |
-| Left-Right Self-Placement        |       0.11 |
-| Government Performance           |       0.45 |
-| Gender                           |       0.00 |
-| Age                              |       0.00 |
-| Education                        |       0.15 |
-| Income                           |       0.54 |
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Covariate
+</th>
+<th style="text-align:right;">
+Percentage
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Trust
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Willingness to Accept Compromise
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Party ID
+</td>
+<td style="text-align:right;">
+0.45
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Political Interest
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Left-Right Self-Placement
+</td>
+<td style="text-align:right;">
+0.11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Government Performance
+</td>
+<td style="text-align:right;">
+0.45
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gender
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Age
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Education
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Income
+</td>
+<td style="text-align:right;">
+0.54
+</td>
+</tr>
+</tbody>
+</table>
 
 We recode the missing values of the `income` variable to its mean value.
 For the categorical variable `political interest`, we use the median
@@ -352,24 +763,24 @@ nl <- nl %>%
         gender = replace_na(gender, "Male"))
 ```
 
-We recode the missing values of the variables `Trust` and `Willingness
-to Accept Compromise`, to `3` and include the variables `missing_trust`
-and `missing_wtac` to the data, indicating whether the response on the
-covariate was missing (value of 1) or not (value of 0). We recode the
-missing values of the variable `Party ID`, to `No Party ID` and include
-the variable `missing_pid` to the data, indicating whether the response
+We recode the missing values of the variables `Trust` and
+`Willingness to Accept Compromise`, to `3` and include the variables
+`missing_trust` and `missing_wtac` to the data, indicating whether the
+response on the covariate was missing (value of 1) or not (value of 0).
+We recode the missing values of the variable `Party ID`, to
+`No Party ID` and include the variable `missing_pid` to the data,
+indicating whether the response on the covariate was missing (value
+of 1) or not (value of 0). We recode the missing values of the variable
+`Government Performance`, to `Satisfied` and include the variable
+`missing_gov_performance` to the data, indicating whether the response
 on the covariate was missing (value of 1) or not (value of 0). We recode
-the missing values of the variable `Government Performance`, to
-`Satisfied` and include the variable `missing_gov_performance` to the
+the missing values of the variable `Education`, to `4` and include the
+variable `missing_education` to the data, indicating whether the
+response on the covariate was missing (value of 1) or not (value of 0).
+We recode the missing values of the variable `Left-Right Self-Placement`
+to `5` and include the variable `missing_rile_selfplacement` to the
 data, indicating whether the response on the covariate was missing
-(value of 1) or not (value of 0). We recode the missing values of the
-variable `Education`, to `4` and include the variable
-`missing_education` to the data, indicating whether the response on the
-covariate was missing (value of 1) or not (value of 0). We recode the
-missing values of the variable `Left-Right Self-Placement` to `5` and
-include the variable `missing_rile_selfplacement` to the data,
-indicating whether the response on the covariate was missing (value of
-1) or not (value of 0).
+(value of 1) or not (value of 0).
 
 ``` r
 nl <- nl %>%
@@ -406,22 +817,104 @@ tibble(Covariate = covar,
                      round(sum(is.na(uk$income))/prod(dim(uk)[1]),2)))
 ```
 
-| Covariate                        | Percentage |
-| :------------------------------- | ---------: |
-| Trust                            |       0.57 |
-| Willingness to Accept Compromise |       0.59 |
-| Party ID                         |       0.82 |
-| Political Interest               |       0.00 |
-| Left-Right Self-Placement        |       0.11 |
-| Government Performance           |       0.60 |
-| Gender                           |       0.56 |
-| Age                              |       0.55 |
-| Education                        |       0.00 |
-| Income                           |       0.20 |
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Covariate
+</th>
+<th style="text-align:right;">
+Percentage
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Trust
+</td>
+<td style="text-align:right;">
+0.69
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Willingness to Accept Compromise
+</td>
+<td style="text-align:right;">
+0.76
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Party ID
+</td>
+<td style="text-align:right;">
+0.82
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Political Interest
+</td>
+<td style="text-align:right;">
+0.65
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Left-Right Self-Placement
+</td>
+<td style="text-align:right;">
+0.33
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Government Performance
+</td>
+<td style="text-align:right;">
+0.76
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gender
+</td>
+<td style="text-align:right;">
+0.56
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Age
+</td>
+<td style="text-align:right;">
+0.55
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Education
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Income
+</td>
+<td style="text-align:right;">
+0.09
+</td>
+</tr>
+</tbody>
+</table>
 
-We recode the missing values of the variables `Trust`, `Willingness to
-Accept Compromise`, and `Income` to `3` and include the variables
-`missing_trust`, `missing_wtac`, `missing_income` to the data,
+We recode the missing values of the variables `Trust`,
+`Willingness to Accept Compromise`, and `Income` to `3` and include the
+variables `missing_trust`, `missing_wtac`, `missing_income` to the data,
 indicating whether the response on the covariate was missing (value of
 one) or not (value of 0). We recode the missing values of the variable
 `Left-Right Self-Placement` to `5` and include the variable
@@ -475,6 +968,7 @@ d <- aut %>%
   add_row(nl) %>%
   add_row(uk)
 rm(aut, de, fr, it, nl, uk, covar)
+save(d, file = here("data/intermediate/observational_data.Rdata"))
 ```
 
 ## Visualization of Data
@@ -496,3 +990,15 @@ rm(aut, de, fr, it, nl, uk, covar)
 ### Correlations Matrix
 
 <img src="../../report/figures/correlation-matrix-1.png" style="display: block; margin: auto;" />
+
+## Full CSESS Round 5 Data for Replication
+
+### Dependent Variable
+
+<img src="../../report/figures/dv1-cses5-1.png" style="display: block; margin: auto;" />
+
+<img src="../../report/figures/dv2-cses5-1.png" style="display: block; margin: auto;" />
+
+### Independent Variable
+
+<img src="../../report/figures/iv-cses5-1.png" style="display: block; margin: auto;" />

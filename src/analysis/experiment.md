@@ -24,102 +24,53 @@ kbl(scale, booktabs =T, caption = "\\label{tab:scale}Reliable Scales") %>%
 ```
 
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
-
 <caption>
-
-Reliable
-Scales
-
+Reliable Scales
 </caption>
-
 <thead>
-
 <tr>
-
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-
 Variable
-
 </th>
-
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
-
 Cronbach’s alpha
-
 </th>
-
 </tr>
-
 </thead>
-
 <tbody>
-
 <tr>
-
 <td style="text-align:left;width: 5cm; ">
-
 Idealism
-
 </td>
-
 <td style="text-align:right;width: 4cm; ">
-
-0.92
-
+0.91
 </td>
-
 </tr>
-
 <tr>
-
 <td style="text-align:left;width: 5cm; ">
-
 Relativism
-
 </td>
-
 <td style="text-align:right;width: 4cm; ">
-
-0.80
-
+0.79
 </td>
-
 </tr>
-
 <tr>
-
 <td style="text-align:left;width: 5cm; ">
-
 Mutual Trust
-
 </td>
-
 <td style="text-align:right;width: 4cm; ">
-
 0.82
-
 </td>
-
 </tr>
-
 <tr>
-
 <td style="text-align:left;width: 5cm; ">
-
 Populist Attitudes
-
 </td>
-
 <td style="text-align:right;width: 4cm; ">
-
-0.82
-
+0.81
 </td>
-
 </tr>
-
 </tbody>
-
 </table>
 
 ``` r
@@ -130,7 +81,7 @@ source(here("src/analysis/data-for-analyses.R"))
 
 Next, we automatically extract a `.md` file for the online appendix, as
 well as a latex table for the manuscript. We are using jinja2 template
-[src/analysis/table\_descriptives.tex.j2](table.tex.j2) which is called
+[src/analysis/table_descriptives.tex.j2](table.tex.j2) which is called
 with a json string containing the data. To replicate, make sure
 `env/bin/pip install -U j2cli` is installed via your command line.
 
@@ -155,8 +106,8 @@ rm(descr, methodnames, table, fn, table2)
 ## Balance Checks
 
 The figure below shows that the data is unbalanced for the variables:
-`Education`,`Income`, `Employment`, `Urbaness`, `Living Place`, `Birth
-Place`, `Age`, `Political Knowledge`, `Political Interest`, and
+`Education`,`Income`, `Employment`, `Urbaness`, `Living Place`,
+`Birth Place`, `Age`, `Political Knowledge`, `Political Interest`, and
 `Ideology`. As described in the Pre-Analysis Plan (p.10), I will add
 these covariates to the analyses as controls.
 
@@ -185,26 +136,14 @@ p2
 
 <img src="../../report/figures/h3-1.png" style="display: block; margin: auto;" />
 
-``` r
-p2p
-```
-
-<img src="../../report/figures/h3-2.png" style="display: block; margin: auto;" />
-
 ## Principled Hypothesis
 
 ``` r
 source(here("src/analysis/h4_exp.R")) #pooled?
-p3b / p3a
+p3b / p3a + plot_layout(guides = 'collect')  & theme(legend.position = 'bottom')
 ```
 
 <img src="../../report/figures/h4-1.png" style="display: block; margin: auto;" />
-
-``` r
-p3bp / p3ap
-```
-
-<img src="../../report/figures/h4-2.png" style="display: block; margin: auto;" />
 
 ## Mutual Trust Hypothesis
 
@@ -215,10 +154,25 @@ p4
 
 <img src="../../report/figures/h5-1.png" style="display: block; margin: auto;" />
 
+# Exploration
+
 ``` r
-p4p
+source(here("src/analysis/exploration_h3.R"))
+p2_explor
 ```
 
-<img src="../../report/figures/h5-2.png" style="display: block; margin: auto;" />
+<img src="../../report/figures/h2-3-explor-1.png" style="display: block; margin: auto;" />
 
-# Exploration
+``` r
+source(here("src/analysis/exploration_h45.R")) 
+p45d1 + p45d2 + p45d3 +
+  plot_layout(guides = 'collect')  & theme(legend.position = 'bottom')
+```
+
+<img src="../../report/figures/h45-direct-1.png" style="display: block; margin: auto;" />
+
+``` r
+p34e
+```
+
+<img src="../../report/figures/h45-direct-2.png" style="display: block; margin: auto;" />

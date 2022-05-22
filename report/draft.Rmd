@@ -1,6 +1,6 @@
 ---
 output: 
-  stevetemplates::article:
+  stevetemplates::article2:
     fig_caption: true
 bibliography: references.bib
 urlcolor: black
@@ -33,7 +33,6 @@ header-includes:
    - \usepackage{hhline}
    - \usepackage{calc}
    - \usepackage{tabularx}
-   - \usepackage{fontawesome}
    - \usepackage{amsthm}
    - \newtheorem{hypo}{Hypothesis}
 biblio-style: apsr
@@ -69,7 +68,22 @@ opts_chunk$set(echo = FALSE,
 options(kableExtra.latex.load_packages = FALSE)
 ```
 
+```{r}
+here::i_am("report/draft.Rmd")
+source(here::here("src/lib/functions.R"))
+load(here("data/intermediate/cleaned_experiment.RData"))
+source(here("src/analysis/data-for-analyses.R"))
+source(here("src/analysis/descriptive-information-overview.R"))
+```
+
 # Introduction
+
+- Urgency: Democratic commitment of citizens is crucial for the resilience of representative democracy
+- Fragmentation increases the need for political compromises
+- Yet, what are the reputational costs of political compromise (and what are the effects on )
+- Compromise / pol pluralism accepted in the abstract / in princple.
+
+We advance a behavioural theory of political pluralism in which we posit that while compromise (and other aspects of pol pluralism) are accepted in princple, citizens oppose compromises in practice. Hence, we theorize there are significant reputational costs involved when parties accept political compromise. This approach helps us to explain present day discontent with politics and the rise of anti-establishment parties (cf. democratic commitment).
 
 <!-- What is the problem, puzzle, tension, etc. motivating the paper?-->
 
@@ -83,12 +97,54 @@ options(kableExtra.latex.load_packages = FALSE)
 
 # Acceptance of Political Compromises
 
+ Responsive vs responsible parties
+  - Position change and reputations
+  - Coalitions and reputations
+  - Compromise attitudes (principledness, social trust, populist attitudes, views on representation)
+
 <!-- Unpacking the problem, puzzle, tension-->
 
 <!-- Unpacking why the answer to that problem is important-->
 
 <!-- Unpacking your articulation of the theory that provides an answer to your problem -->
 
+# Observational Study
+## Theory & Hypothesis
+>**Hypothesis**: _The lower one's willingness to accept compromises, the lower one's trust in politicians._
+
+## Data, Measurement & Method
+
+## Results
+OLS regression predicting the level of political trust by willingness to accept compromises.
+Next to the control variables, it includes country dummies and dummies indicating whether more than ten percent of the values where missing.
+The beta-coefficient of Willingness to Accept Compromise is positive and statistically significant, as hypothesized in [our Pre-Analysis Plan](https://osf.io/h29j3).
+The coefficient of 0.15 is however a small effect. 
+It indicates that the higher one's willingness to accept compromise, the higher one's trust in politicians.
+More precisely, it means that when Willingness to Accept Compromise goes up by 1 -- i.e. answering `rather yes` instead of `completely agree` with the statement _What people call compromise in politics is really just selling out on one's principles._ -- the the level of trust in politicians goes up by 0.15.
+Trust in politicians is a five-point scale, where 1 indicates completely disagreeing with the statement _Most politicians are trustworthy_ and 5 indicates that completely agrees with the statement.
+
+Because we pooled the data of various countries, Appendix A demonstrates the country differences. 
+The Netherlands is the reference category.
+This graph demonstrates that all countries, but particularly France, Germany, Great Britain, and Italy, are statistically different from the Netherlands.
+To make sure the effect is not driven by any particular country, the graphs below show that for all countries, the coefficient is positive.
+Moreover, except for Italy, the coefficient is statistically significant too.
+This indicates that the effects found in the pooled analysis are not driven by any specific country.
+
+```{r results-h1, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:results-h1-obs}Results: H1"}
+include_graphics(here("report/figures", "h1-obs-1.png"))
+```
+
+Moreover, we have imputed the missing values using the _Green \& Gerber formula_ (Green \& Gerber 2008). 
+To demonstrate whether the dichotomous variables indicating whether the respondents' value was missing are different from the respondents' who have completed the question, the graph below demonstrates the coefficients of the `missing dummies`.
+The graph shows that only for the variables `age` and `trust` the imputed values elicit a different effect from the non-imputed ones. 
+The result show that particularly the imputed missing values for `trust` and `age` seem to elicit an effect in the regression results.
+To check the robustness of the analysis, we therefore have also ran the analysis excluding the observations where `trust` and `age` have been imputed.
+As the visualization below demonstrates, this does not change the coefficient of `willingness to accept compromise`.
+
+# Experimental Study
+## Limitations to Observational Study
+
+## Theody & Hypothesis
 <!-- hypothesis 1 -->
 > **H1** (**Steadfast**):  _All else equal, in-partisans view their party more positively when a party remains steadfast in coalition talks, compared to accepting a compromise_.
 
@@ -104,18 +160,7 @@ options(kableExtra.latex.load_packages = FALSE)
 <!-- hypothesis 5 -->
 > **H5** (**Mutual Distrust**):  _All else equal, the more distrusting a respondent is, the higher the evaluation of a steadfast party_.
 
-# Data, Measurement & Method
-
-## Observational Study
-
-### Data
-
-### Measurement
-
-### Method
-
-
-## Experimental Study
+## Data, Measurement & Method
 
 ### Data
 The survey experiment is conducted in Germany between the 13th of October 2021 and the 11th of November 2021.
@@ -138,11 +183,6 @@ Each respondent failing the attention check will be excluded and replaced with a
 **_Covariates_**
 
 ```{r descriptive-table, echo = FALSE}
-here::i_am("report/draft.Rmd")
-source(here::here("src/lib/functions_draft.R"))
-load(here("data/intermediate/cleaned_experiment.RData"))
-source(here("src/analysis/data-for-analyses.R"))
-source(here("src/analysis/descriptive-information-overview.R"))
 kbl(descr, booktabs =T, caption = "\\label{tab:descr}Descriptive Information",
     digits = 2) %>%
   kable_styling(latex_options = c("striped", "hold_position"),
@@ -162,34 +202,25 @@ include_graphics(here("report/figures", "balance-checks-1.png"))
 ```
 
 
-# Costs of Compromises for Responsive and Responsible Parties
-
-## Pre-Registered Hypotheses
-
-### Observational
-
-### Experiments
+## Results
 
 ```{r results-h1h2, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:results-h1h2}Results: H1 and H2"}
 include_graphics(here("report/figures", "h1-1.png"))
 ```
 
 ```{r results-h3, out.width = "80%", fig.align = 'center', fig.cap = "\\label{fig:results-h3}Results: H3"}
-source(here("src/analysis/h3_exp.R")) #pooled?
-
-p2 + p2p
+include_graphics(here("report/figures", "h3-1.png"))
 ```
 
 ```{r results-h4p, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:results-h4p}Results: H4 pooled"}
-include_graphics(here("report/figures", "h4-2.png"))
+include_graphics(here("report/figures", "h4-1.png"))
 ```
 
 
 ```{r results-h5p, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:results-h5p}Results: H5 pooled"}
-include_graphics(here("report/figures", "h5-2.png"))
+include_graphics(here("report/figures", "h5-1.png"))
 ```
 
-## Explorations
 
 # Discussion
 
@@ -198,9 +229,24 @@ include_graphics(here("report/figures", "h5-2.png"))
 # References
 
 \newpage
-# Appendix A. Experimental Conditions
+# Appendix A. Robustness Analyses Observational Study
+```{r robust1, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:results-missing-values}Results"}
+include_graphics(here("report/figures", "robust1-1.png"))
+```
 
+```{r robust2, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:results-missing-values}Results"}
+include_graphics(here("report/figures", "robust2-1.png"))
+```
 
+```{r robust4, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:results-missing-values}Results"}
+include_graphics(here("report/figures", "robust4-1.png"))
+```
+
+```{r robust5, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:results-missing-values}Results"}
+include_graphics(here("report/figures", "robust5-1.png"))
+```
+
+# Appendix B. Experimental Conditions
 ```{r stimulus, topcaption=TRUE}
 d <- tibble(` ` = c(1:64),
             `In-Party` = c(rep("CDU", 16), rep("FDP", 16), 
@@ -281,12 +327,17 @@ kbl(d[33:dim(d)[1],], booktabs =T, caption = "\\label{tab:treat}Experimental Con
 ```
 
 \newpage
-# Appendix B. Issue Analyses H4 and H5
-```{r results-h4, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:results-h4}Results: H4"}
-include_graphics(here("report/figures", "h4-1.png"))
+# Appendix C. HTE for H2/3: are continued talks evaluated positively only when there is compromise
+```{r h3-explor, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:results-outcome-compromise-steadfast}Results: H4"}
+include_graphics(here("report/figures", "h2-3-explor-1.png"))
+```
+
+#Appendix C. Direct Effect of Principledness and Mutual Trust on Parties' Reputational Cost
+```{r h45-descr, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:distribution-pmt-issues}Results: Distribution of Principledness and Mutual Trust for Issues under Studies"}
+include_graphics(here("report/figures", "h45-direct-1.png"))
 ```
 
 
-```{r results-h5, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:results-h5}Results: H5"}
-include_graphics(here("report/figures", "h5-1.png"))
+```{r h45-explor, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:results-pmt-direct-effects}Results: Regression Effects of Principledness and Mutual Trust on Parties' Reputational Cost"}
+include_graphics(here("report/figures", "h45-direct-2.png"))
 ```

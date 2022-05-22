@@ -31,7 +31,6 @@ library(rmarkdown)
 ```{r "env", message=FALSE, warning=F, results='hide'}
 rm(list=ls())
 source(here::here("src/lib/functions.R"))
-renv::snapshot()
 ```
 
 ## Tidy Data
@@ -75,12 +74,12 @@ d %>%
   geom_errorbar(position = position_dodge(.5), width = 0) +
   labs(y = "0 (Negative) - 1 (Positive)", 
        x = "") +
-  theme_minimal() +
   scale_color_manual(values = fig_cols) +
   coord_flip() +
   theme(plot.title = element_text(hjust = 0.5),
         legend.position="none",
-        legend.title = element_blank()) 
+        legend.title = element_blank()) +
+  theme_ipsum()
 ```
 
 ### Treatment Conditions
@@ -104,13 +103,13 @@ d %>%
   geom_text(position = position_fill(vjust=0.13), color = "white", fontface = "bold") +
   labs(y = "", x = "", title = "Distribution of Treatments") +
   scale_x_continuous(labels=scales::percent) +
-  theme_minimal() +
   scale_fill_manual(values = fig_cols) +
   facet_grid(.~issue) +
   theme(plot.title = element_text(hjust = 0.5),
         legend.position="bottom",
         legend.title = element_blank()) +
-  guides(fill=guide_legend(ncol=4,byrow=TRUE))
+  guides(fill=guide_legend(ncol=4,byrow=TRUE)) +
+  theme_ipsum()
 ```
 
 

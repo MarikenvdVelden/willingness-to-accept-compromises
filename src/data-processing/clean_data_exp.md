@@ -1,24 +1,33 @@
 Prepare Experimental Data
 ================
 
+-   [Scripts](#scripts)
+    -   [Required Packages &
+        Reproducibility](#required-packages--reproducibility)
+    -   [Tidy Data](#tidy-data)
+    -   [Save Data for Analysis](#save-data-for-analysis)
+    -   [Visualization of Data](#visualization-of-data)
+        -   [Dependent Variable](#dependent-variable)
+        -   [Treatment Conditions](#treatment-conditions)
+        -   [Correlations Matrix](#correlations-matrix)
+
 # Scripts
 
-  - [Required Packages &
+-   [Required Packages &
     Reproducibility](#required-packages-&-reproducibility)
-  - [Tidy Data](#tidy-data)
-  - [Save Data for Analysis](#save-data-for-analysis)
-  - [Check Missing Values](#check-missing-values)
-  - [Visualization of Data](#visualization-of-data)
-      - [Dependent Variable](#dependent-variable)
-      - [Treatment Conditions](#treatment-conditions)
-      - [Correlations Matrix](#correlations-matrix)
+-   [Tidy Data](#tidy-data)
+-   [Save Data for Analysis](#save-data-for-analysis)
+-   [Check Missing Values](#check-missing-values)
+-   [Visualization of Data](#visualization-of-data)
+    -   [Dependent Variable](#dependent-variable)
+    -   [Treatment Conditions](#treatment-conditions)
+    -   [Correlations Matrix](#correlations-matrix)
 
 ## Required Packages & Reproducibility
 
 ``` r
 rm(list=ls())
 source(here::here("src/lib/functions.R"))
-renv::snapshot()
 ```
 
 ## Tidy Data

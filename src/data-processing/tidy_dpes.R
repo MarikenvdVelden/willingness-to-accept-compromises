@@ -1,4 +1,4 @@
-nl <- readRDS("../../data/raw-private/dpes.RDS") %>%
+nl <- read_sav(here("data/raw-private/DPES_2017.sav")) %>%
   dplyr::select(trust = V322,
                 wtac = V320,
                 age = V011,

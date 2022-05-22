@@ -17,52 +17,32 @@ options(digits = 2)
 library(rmarkdown)
 ```
 
-# Scripts
-- [Required Packages &amp; Reproducibility](#required-packages-&amp;-reproducibility)
-- [Tidy Data](#tidy-data)
-  - [CSES Data](#cses-data)
-  - [DPES Data](#dpes-data)
-  - [BES Data](#bes-data)
-- [Missing Values](#missing-values)
-  - [Austria](#austria)
-  - [France](#france)
-  - [Germany](#germany)
-  - [Italy](#italy)
-  - [The Netherlands](#the-netherlands)
-  - [Great Britain](#great-britain)
-- [Save Data for Analysis](#save-data-for-analysis)
-- [Visualization of Data](#visualization-of-data)
-  - [Dependent Variable](#dependent-variable)
-  - [Independent Variable](#independent-variable)
-  - [Control Variables](#control-variables)
-  - [Correlations Matrix](#correlations-matrix)
-
 ## Required Packages &amp; Reproducibility
 ```{r "env", message=FALSE, warning=F, results='hide'}
 rm(list=ls())
 source(here::here("src/lib/functions.R"))
-renv::snapshot()
+#renv::snapshot()
 ```
 
 ## Tidy Data
 
-### CSES Data
-Data can be downloaded [here](https://cses.org/data-download/download-data-documentation/), and is saved as `.RDS` file to save space.
+### CSES Data Round 5
+Data can be downloaded [here](https://cses.org/data-download/download-data-documentation/).
 ```{r "tidy cses", message=FALSE, warning=FALSE}
 source(here("src/data-processing/tidy_cses.R"))
 ```
 
-### DPES Data
+### DPES Data 2017
 
-Data can be downloaded [here](https://easy.dans.knaw.nl/ui/datasets/id/easy-dataset:101156), and is saved as `.RDS` file to save space.
+Data can be downloaded [here](https://easy.dans.knaw.nl/ui/datasets/id/easy-dataset:101156).
 
 ```{r "tidy dpes", message=FALSE, warning=FALSE}
 source(here("src/data-processing/tidy_dpes.R"))
 ```
 
-### BES Data
+### BES Data 2017
 
-Data can be downloaded [here](https://www.britishelectionstudy.com/data/#.X7yS5tso-F0), and is saved as `.RDS` file to save space.
+Data can be downloaded [here](https://www.britishelectionstudy.com/data/#.X7yS5tso-F0).
 
 ```{r "tidy bes", message=FALSE, warning=FALSE}
 source(here("src/data-processing/tidy_bes.R"))
@@ -345,6 +325,7 @@ d <- aut %>%
   add_row(nl) %>%
   add_row(uk)
 rm(aut, de, fr, it, nl, uk, covar)
+save(d, file = here("data/intermediate/observational_data.Rdata"))
 ```
 
 ## Visualization of Data
@@ -430,3 +411,42 @@ d %>%
   title = "Correlalogram for Variables under Study"
 )
 ```
+
+## Full CSESS Round 5 Data for Replication
+```{r "cses round 5", echo=F, message=FALSE, warning=FALSE, fig.width=10, fig.height=7}
+source(here("src/data-processing/tidy_cses_round5.R"))
+d <- d %>% 
+  drop_na(trust, wtac)
+save(d, file = here("data/intermediate/cses_round5.Rdata"))
+```
+
+### Dependent Variable
+```{r "dv1-cses5", echo=F, message=FALSE, warning=FALSE, fig.width=10, fig.height=17}
+d %>%
+  ggplot(mapping = aes(y = country, x = trust)) +
+  geom_boxplot(fill = "seagreen", alpha = .2) +
+  labs(y = "", x = "Strongly disagree (1) - Strongly agree (5)", title = "Most politicians are trustworthy") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5)) 
+```
+
+```{r "dv2-cses5", echo=F, message=FALSE, warning=FALSE, fig.width=10, fig.height=17}
+d %>%
+  ggplot(mapping = aes(y = country, x = swd)) +
+  geom_boxplot(fill = "seagreen", alpha = .2) +
+  labs(y = "", x = "Strongly disatisfied (1) - Strongly satisfied (5)", 
+       title = "Satisfaction with Democracy") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5)) 
+```
+
+### Independent Variable
+```{r "iv-cses5", echo=F, message=FALSE, warning=FALSE, fig.width=10, fig.height=17}
+d %>%
+  ggplot(mapping = aes(y = country, x = wtac)) +
+  geom_boxplot(alpha = .2, fill = "seagreen") +
+  labs(y = "", x = "Strongly Agree (1) - Strongly Disagree (5)", title = "Compromise is selling out principles") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+

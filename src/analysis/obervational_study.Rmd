@@ -25,7 +25,7 @@ library(rmarkdown)
 ```{r "set-up", message=FALSE, warning=F}
 rm(list=ls())
 source(here::here("src/lib/functions.R"))
-d <- readRDS(here("data/intermediate/observational_data.RDS"))
+load(here("data/intermediate/observational_data.Rdata"))
 ```
 
 ## Analyses
@@ -34,7 +34,7 @@ d <- readRDS(here("data/intermediate/observational_data.RDS"))
 The code below demonstrate the OLS regression predicting the level of political trust by willingness to accept compromises.
 Next to the control variables, it includes country dummies and dummies indicating whether more than ten percent of the values where missing.
 
-```{r "h1", message=F, warning=F, fig.width=10, fig.height=7}
+```{r "h1-obs", message=F, warning=F, fig.width=10, fig.height=7}
 source(here("src/analysis/h1_obs.R"))
 h1
 ```
@@ -58,7 +58,7 @@ Moreover, except for Italy, the coefficient is statistically significant too.
 This indicates that the effects found in the pooled analysis are not driven by any specific country.
 ```{r "robust2", echo = F, message=F, warning=F, fig.width=12, fig.height=20}
 source(here("src/analysis/robust_obs.R"))
-easyGgplot2::ggplot2.multiplot(p1, p2, p3, p4, p5, p6, cols = 2)
+(p1 + p2) /( p3 + p4)/ ( p5 + p6)
 ```
 
 Moreover, we have imputed the missing values using the _Green \& Gerber formula_ (Green \& Gerber 2008). 
@@ -77,4 +77,10 @@ As the visualization below demonstrates, this does not change the coefficient of
 r3
 ```
 
-### Exploratory
+### Replication Full CSES Round 5
+```{r "cses5", echo = F, message=F, warning=F, fig.width=10, fig.height=7}
+load(here("data/intermediate/cses_round5.Rdata"))
+source(here("src/analysis/replication.R"))
+rep
+```
+

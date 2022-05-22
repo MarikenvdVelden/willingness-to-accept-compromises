@@ -93,7 +93,7 @@ d %>%
   facet_grid(dvs~.) +
   labs(y = "0 (negative) - 10 (positive)", 
        x = "", title = "Reputational Cost of Compromise") +
-  theme_minimal() +
+  theme_ipsum() +
   theme(plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5),
         legend.position="none",
@@ -123,24 +123,30 @@ p1
 ```{r "h3", fig.align="center", fig.height=8, fig.width=8}
 source(here("src/analysis/h3_exp.R")) #pooled?
 p2
-
-p2p
 ```
 
 ## Principled Hypothesis
 ```{r "h4", fig.align="center", fig.height=8, fig.width=8}
 source(here("src/analysis/h4_exp.R")) #pooled?
-p3b / p3a
-
-p3bp / p3ap
+p3b / p3a + plot_layout(guides = 'collect')  & theme(legend.position = 'bottom')
 ```
 
 ## Mutual Trust Hypothesis
 ```{r "h5", fig.align="center", fig.height=8, fig.width=8}
 source(here("src/analysis/h5_exp.R")) #pooled?
 p4
-
-p4p
 ```
 
 # Exploration
+```{r "h2-3-explor", fig.align="center", fig.height=8, fig.width=8}
+source(here("src/analysis/exploration_h3.R"))
+p2_explor
+```
+
+```{r "h45-direct", fig.align="center", fig.height=8, fig.width=8}
+source(here("src/analysis/exploration_h45.R")) 
+p45d1 + p45d2 + p45d3 +
+  plot_layout(guides = 'collect')  & theme(legend.position = 'bottom')
+
+p34e
+```

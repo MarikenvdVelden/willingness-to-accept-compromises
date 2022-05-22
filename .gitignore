@@ -55,3 +55,4 @@ data/raw-private
 .DS_Store
 src/.DS_Store
 Data/.DS_Store
+docs/.DS_Store

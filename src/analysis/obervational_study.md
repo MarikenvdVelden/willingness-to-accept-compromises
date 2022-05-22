@@ -3,17 +3,17 @@ Results Observational Study
 
 # Analysis
 
-  - [Set Up](#set-up)
-  - [Analyses](#analysis)
-      - [Pre-Registered](#pre-registered)
-      - [Exploratory](#exploratory)
+-   [Set Up](#set-up)
+-   [Analyses](#analysis)
+    -   [Pre-Registered](#pre-registered)
+    -   [Exploratory](#exploratory)
 
 ## Set-up
 
 ``` r
 rm(list=ls())
 source(here::here("src/lib/functions.R"))
-d <- readRDS(here("data/intermediate/observational_data.RDS"))
+load(here("data/intermediate/observational_data.Rdata"))
 ```
 
 ## Analyses
@@ -30,7 +30,7 @@ source(here("src/analysis/h1_obs.R"))
 h1
 ```
 
-<img src="../../report/figures/h1-1.png" style="display: block; margin: auto;" />
+<img src="../../report/figures/h1-obs-1.png" style="display: block; margin: auto;" />
 
 The beta-coefficient of Willingness to Accept Compromise is positive and
 statistically significant, as hypothesized in [our Pre-Analysis
@@ -50,8 +50,7 @@ Because we pooled the data of various countries, the graph below
 demonstrate the country differences. The Netherlads is the reference
 category. This graph demonstrates that all countries, but particularly
 France, Germany, Great Britain, and Italy, are statistically different
-from the
-Netherlands.
+from the Netherlands.
 
 <img src="../../report/figures/robust1-1.png" style="display: block; margin: auto;" />
 
@@ -68,8 +67,7 @@ variables indicating whether the respondents’ value was missing are
 different from the respondents’ who have completed the question, the
 graph below demonstrates the coefficients of the `missing dummies`. The
 graph shows that only for the variables `age` and `trust` the imputed
-values elicit a different effect from the non-imputed
-ones.
+values elicit a different effect from the non-imputed ones.
 
 <img src="../../report/figures/robust4-1.png" style="display: block; margin: auto;" />
 
@@ -78,9 +76,10 @@ and `age` seem to elicit an effect in the regression results. To check
 the robustness of the analysis, we therefore have also ran the analysis
 excluding the observations where `trust` and `age` have been imputed. As
 the visualization below demonstrates, this does not change the
-coefficient of `willingness to accept
-compromise`.
+coefficient of `willingness to accept compromise`.
 
 <img src="../../report/figures/robust5-1.png" style="display: block; margin: auto;" />
 
-### Exploratory
+### Replication Full CSES Round 5
+
+<img src="../../report/figures/cses5-1.png" style="display: block; margin: auto;" />

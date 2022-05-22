@@ -1,4 +1,5 @@
 # H1 & H2
+
 issues <- unique(d$issue)
 for(i in 1:length(issues)){
   df <- d %>% 
@@ -43,7 +44,7 @@ p1 <- h1 %>%
          y = factor(y,
                     levels = c("DV: Trust","DV: Credibility",
                                "DV: Representation"))) %>%
-  filter(estimate != is.na(estimate)) %>%
+  filter(estimate != is.na(estimate), x != is.na(x)) %>%
   ggplot(aes(x = x, 
              y = estimate,
              color = issue,
@@ -52,7 +53,7 @@ p1 <- h1 %>%
              label = issue)) +
   geom_point(position = position_dodge(.5)) + 
   geom_errorbar(position = position_dodge(.5), width = 0) +
-  theme_minimal() +
+  theme_ipsum() +
   labs(x = "", y = "Predicted Reputational Cost") +
   facet_grid(.~y) +
   theme(plot.title = element_text(hjust = 0.5),

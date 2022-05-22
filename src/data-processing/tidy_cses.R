@@ -1,4 +1,6 @@
-d <- readRDS("../../data/raw-private/cses.rds") %>%
+load(here("data/raw-private/cses5.Rdata"))
+
+d <- cses5 %>% 
   filter(E1003 == 04002017 | E1003 == 25002017 |
            E1003 == 27602017 | E1003 == 38002018) %>%
   dplyr::select(country = E1003,
@@ -19,6 +21,7 @@ d <- readRDS("../../data/raw-private/cses.rds") %>%
                 people_make_policy_decisions = E3004_6,
                 elites_care_rich_powerful = E3004_7,
                 vote_choice = E3013_LH_PL) %>%
+  zap_labels() %>% 
   mutate(country = recode(country,
                           `04002017` = "Austria",
                           `25002017` = "France",
@@ -29,10 +32,7 @@ d <- readRDS("../../data/raw-private/cses.rds") %>%
          gender = recode(gender, 
                          `1` = "Male", 
                          `2` = "Female"),
-         education = recode(education, 
-                            `96` = 0),
-         education = replace(education, 
-                             which(education>96), NA),
+         education = ifelse(education >9, NA, education),
          income = replace(income, which(income>5), NA),
          pid = replace(pid, which(pid>5), NA),
          pid = recode(pid,
@@ -54,6 +54,7 @@ d <- readRDS("../../data/raw-private/cses.rds") %>%
                                   `4` = "Dissatisfied"),
          rile_selfplacement = replace(rile_selfplacement, 
                                       which(rile_selfplacement>10), NA),
+         rile_selfplacement = as.numeric(rile_selfplacement),
          satisfaction_democracy = replace(satisfaction_democracy,
                                           which(satisfaction_democracy>5), NA),
          satisfaction_democracy = recode(satisfaction_democracy,
@@ -61,13 +62,11 @@ d <- readRDS("../../data/raw-private/cses.rds") %>%
                                          `2` = "Satisfied",
                                          `4` = "Dissatisfied",
                                          `5` = "Dissatisfied"),
-         trust = replace(trust, which(trust>5), NA),
-         trust = recode(trust,
-                        `1` = 5,
-                        `2` = 4,
-                        `4` = 2,
-                        `5` = 1),
+         trust = replace(trust, 
+                         which(trust>5),NA),
+         trust = 6 - trust,
          wtac = replace(wtac, which(wtac>5), NA),
+         wtac = as.numeric(wtac),
          elites_dont_care_people = replace(elites_dont_care_people, 
                                            which(elites_dont_care_people>5), NA),
          elites_are_main_problem = replace(elites_are_main_problem,
@@ -84,3 +83,4 @@ d <- readRDS("../../data/raw-private/cses.rds") %>%
          no_action_all_talk = NA,
          dont_care_my_region = NA,
          vote_choice = as.character(vote_choice)) 
+rm(cses5)
