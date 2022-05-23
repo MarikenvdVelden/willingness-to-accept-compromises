@@ -19,7 +19,7 @@ m <- tidy(stats::lm(formula = trust ~ wtac + factor(political_interest) +
 h1 <- m %>%
   filter(term != "(Intercept)") %>%
   mutate(term = recode(term,
-                    `wtac` = "Willingness to Accept Compromise",
+                    `wtac` = "Anti-Compromise Attitude",
                     `factor(political_interest)Not Interested` = "Not Politically Interested",
                     `rile_selfplacement` = "Left-Right Self-Placement",
                     `factor(gov_performance)Satisfied` = "Satisfied with Government Performance",
@@ -34,7 +34,7 @@ h1 <- m %>%
                                "Satisfied with Government Performance",
                                "Left-Right Self-Placement",
                                "Not Politically Interested",
-                               "Willingness to Accept Compromise")),
+                               "Anti-Compromise Attitude")),
          lower = estimate - (1.56 * std.error),
          upper = estimate + (1.56 * std.error)) %>%
   select(term, estimate, upper, lower) %>%
@@ -48,7 +48,7 @@ h1 <- m %>%
   geom_errorbar(position = position_dodge(.5), width = 0, 
                 color = fig_cols[1]) +
   theme_ipsum() +
-  labs(x = "", y = "Political Trust Predicted by Willingness to Compromise") +
+  labs(x = "", y = "Predicted Political Trust") +
   theme(plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5),
         legend.position="bottom",
@@ -78,7 +78,7 @@ r1 <- m[11:15,] %>%
                 color = fig_cols[1]) +
   theme_ipsum() +
   labs(x = "",
-       y = "Political Trust Predicted by Willingness to Compromise\n Country Differences: The Netherlands is Reference Category") +
+       y = "Predicted Political Trust\n Country Differences: The Netherlands is Reference Category") +
   theme(plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5),
         legend.position="bottom",
@@ -90,7 +90,7 @@ r1 <- m[11:15,] %>%
 r2 <- m[16:23,] %>% 
   mutate(term = recode(term,
                        `factor(missing_trust)1` = "Trust",
-                       `factor(missing_wtac)1` = "Willingness to Accept Compromise",
+                       `factor(missing_wtac)1` = "Anti-Compromise Attitude",
                        `factor(missing_rile_selfplacement)1` = "Left-Right Self-Placement",
                        `factor(missing_pid)1` = "Partisan ID",
                        `factor(missing_gender)1` = "Gender",
@@ -100,7 +100,7 @@ r2 <- m[16:23,] %>%
          term = factor(term,
                        levels = c("Income", "Education", "Age", "Gender",
                                   "Partisan ID", "Left-Right Self-Placement",
-                                  "Willingness to Accept Compromise", "Trust")),
+                                  "Anti-Compromise Attitude", "Trust")),
          lower = estimate - (1.56 * std.error),
          upper = estimate + (1.56 * std.error)) %>%
   select(term, estimate, upper, lower) %>%
@@ -114,7 +114,7 @@ r2 <- m[16:23,] %>%
                 color = fig_cols[1]) +
   theme_ipsum() +
   labs(x = "",
-       y = "Political Trust Predicted by Willingness to Compromise\n Missing Values") +
+       y = "Predicted Political Trust\n Missing Values") +
   theme(plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5),
         legend.position="bottom",
@@ -144,7 +144,7 @@ m <- tidy(stats::lm(formula = trust ~ wtac + factor(political_interest) +
 r3 <- m %>% 
   filter(term != "(Intercept)") %>%
   mutate(term = recode(term,
-                       `wtac` = "Willingness to Accept Compromise",
+                       `wtac` = "Anti-Compromise Attitude",
                        `factor(political_interest)Not Interested` = "Not Politically Interested",
                        `rile_selfplacement` = "Left-Right Self-Placement",
                        `factor(gov_performance)Satisfied` = "Satisfied with Government Performance",
@@ -159,7 +159,7 @@ r3 <- m %>%
                                   "Satisfied with Government Performance",
                                   "Left-Right Self-Placement",
                                   "Not Politically Interested",
-                                  "Willingness to Accept Compromise")),
+                                  "Anti-Compromise Attitude")),
          lower = estimate - (1.56 * std.error),
          upper = estimate + (1.56 * std.error)) %>%
   select(term, estimate, upper, lower) %>%
@@ -173,7 +173,7 @@ r3 <- m %>%
   geom_errorbar(position = position_dodge(.5), width = 0, 
                 color = fig_cols[1]) +
   theme_ipsum() +
-  labs(x = "", y = "Political Trust Predicted by Willingness to Compromise") +
+  labs(x = "", y = "Predicted Political Trust") +
   theme(plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5),
         legend.position="bottom",

@@ -57,7 +57,7 @@ As pre-registered [here](https://osf.io/nt6ra/?view_only=b84cde8bd47f4e94ac529b0
 
 ### Austria
 ```{r "missing aut", message=FALSE, warning=FALSE}
-covar <- c("Trust", "Willingness to Accept Compromise","Party ID",
+covar <- c("Trust", "Anti-Compromise Attitude","Party ID",
            "Political Interest", "Left-Right Self-Placement",
            "Government Performance","Gender", "Age","Education", "Income")
 aut <- d %>%
@@ -74,7 +74,7 @@ tibble(Covariate = covar,
                      round(sum(is.na(aut$education))/prod(dim(aut)[1]),2),
                      round(sum(is.na(aut$income))/prod(dim(aut)[1]),2)))
 ```
-We recode the missing values of `trust` and `willingness to accept compromise` variables to the mean value of the respective variables. 
+We recode the missing values of `trust` and `Anti-Compromise Attitude` variables to the mean value of the respective variables. 
 For the categorical variables `party id` and `government performance` we use the median value. 
 
 ```{r "missing aut2", message=FALSE, warning=FALSE}
@@ -110,7 +110,7 @@ tibble(Covariate = covar,
                      round(sum(is.na(fr$education))/prod(dim(fr)[1]),2),
                      round(sum(is.na(fr$income))/prod(dim(fr)[1]),2)))
 ```
-We recode the missing values of `trust`, `willingness to accept compromise`, `left-right self-placement`, and `education` variables to the mean value of the respective variables. 
+We recode the missing values of `trust`, `Anti-Compromise Attitude`, `left-right self-placement`, and `education` variables to the mean value of the respective variables. 
 For the categorical variables `party id` and `government performance`, we use the median value. 
 
 ```{r "missing fr2", message=FALSE, warning=FALSE}
@@ -151,7 +151,7 @@ tibble(Covariate = covar,
                      round(sum(is.na(de$income))/prod(dim(de)[1]),2)))
 ```
 
-We recode the missing values of `trust`, `willingness to accept compromise`, `left-right self-placement`, and `education` variables to the mean value of the respective variables. 
+We recode the missing values of `trust`, `Anti-Compromise Attitude`, `left-right self-placement`, and `education` variables to the mean value of the respective variables. 
 For the categorical variable `party id` and `government performance`, we use the median value. 
 
 ```{r "missing de2", message=FALSE, warning=FALSE}
@@ -192,7 +192,7 @@ tibble(Covariate = covar,
                      round(sum(is.na(it$income))/prod(dim(it)[1]),2)))
 ```
 
-We recode the missing values of `trust` and `willingness to accept compromise` variables to the mean value of the respective variables. 
+We recode the missing values of `trust` and `Anti-Compromise Attitude` variables to the mean value of the respective variables. 
 For the categorical variables `party id`, `government performance`, and `political interest`, we use the median value. 
 
 ```{r "missing it2", message=FALSE, warning=FALSE}
@@ -246,7 +246,7 @@ nl <- nl %>%
         gender = replace_na(gender, "Male"))
 ```
 
-We recode the missing values of the variables `Trust` and `Willingness to Accept Compromise`, to `3` and include the variables `missing_trust` and `missing_wtac` to the data, indicating whether the response on the covariate was missing (value of 1) or not (value of 0).
+We recode the missing values of the variables `Trust` and `Anti-Compromise Attitude`, to `3` and include the variables `missing_trust` and `missing_wtac` to the data, indicating whether the response on the covariate was missing (value of 1) or not (value of 0).
 We recode the missing values of the variable `Party ID`, to `No Party ID` and include the variable `missing_pid` to the data, indicating whether the response on the covariate was missing (value of 1) or not (value of 0).
 We recode the missing values of the variable `Government Performance`, to `Satisfied` and include the variable `missing_gov_performance` to the data, indicating whether the response on the covariate was missing (value of 1) or not (value of 0).
 We recode the missing values of the variable `Education`, to `4` and include the variable `missing_education` to the data, indicating whether the response on the covariate was missing (value of 1) or not (value of 0).
@@ -286,7 +286,7 @@ tibble(Covariate = covar,
                      round(sum(is.na(uk$income))/prod(dim(uk)[1]),2)))
 ```
 
-We recode the missing values of the variables `Trust`, `Willingness to Accept Compromise`, and `Income` to `3` and include the variables `missing_trust`, `missing_wtac`, `missing_income` to the data, indicating whether the response on the covariate was missing (value of one) or not (value of 0).
+We recode the missing values of the variables `Trust`, `Anti-Compromise Attitude`, and `Income` to `3` and include the variables `missing_trust`, `missing_wtac`, `missing_income` to the data, indicating whether the response on the covariate was missing (value of one) or not (value of 0).
 We recode the missing values of the variable `Left-Right Self-Placement` to `5` and include the variable `missing_rile_selfplacement` to the data, indicating whether the response on the covariate was missing (value of 1) or not (value of 0).
 e recode the missing values of the variable `Government Performance`, to `Dissatisfied` and include the variable `missing_gov_performance` to the data, indicating whether the response on the covariate was missing (value of 1) or not (value of 0).
 We recode the missing values of the variable `Party ID` and `Gender` to respecively `No Party ID` and `Female` and include the variables `missing_pid` and `missing_gender` to the data, indicating whether the response on the covariate was missing (value of 1) or not (value of 0).
@@ -345,7 +345,7 @@ d %>%
 d %>%
   ggplot(mapping = aes(y = country, x = wtac)) +
   geom_boxplot(alpha = .2, fill = "seagreen") +
-  labs(y = "", x = "Strongly Agree (1) - Strongly Disagree (5)", title = "Compromise is selling out principles") +
+  labs(y = "", x = "Strongly disagree (1) - Strongly agree (5)", title = "Compromise is selling out principles") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5))
 ```
@@ -395,7 +395,7 @@ d %>%
 ```{r "correlation-matrix", echo=F, message=T, warning=T, fig.width=8, fig.height=8}
 d %>%
   dplyr::select(`Political Trust` = trust,
-         `Willingness to Accept Compromises` = wtac,
+         `Anti-Compromise Attitude` = wtac,
          Gender = gender, 
          `Party ID` = pid, 
          `Political Interest` = political_interest,
@@ -416,7 +416,7 @@ d %>%
 ```{r "cses round 5", echo=F, message=FALSE, warning=FALSE, fig.width=10, fig.height=7}
 source(here("src/data-processing/tidy_cses_round5.R"))
 d <- d %>% 
-  drop_na(trust, wtac)
+  drop_na(trust, swd, wtac)
 save(d, file = here("data/intermediate/cses_round5.Rdata"))
 ```
 
@@ -434,7 +434,7 @@ d %>%
 d %>%
   ggplot(mapping = aes(y = country, x = swd)) +
   geom_boxplot(fill = "seagreen", alpha = .2) +
-  labs(y = "", x = "Strongly disatisfied (1) - Strongly satisfied (5)", 
+  labs(y = "", x = "Disatisfied (0) - Satisfied (1)", 
        title = "Satisfaction with Democracy") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5)) 
@@ -445,7 +445,7 @@ d %>%
 d %>%
   ggplot(mapping = aes(y = country, x = wtac)) +
   geom_boxplot(alpha = .2, fill = "seagreen") +
-  labs(y = "", x = "Strongly Agree (1) - Strongly Disagree (5)", title = "Compromise is selling out principles") +
+  labs(y = "", x = "Strongly disagree (1) - Strongly agree (5)", title = "Compromise is selling out principles") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5))
 ```

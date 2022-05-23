@@ -78,7 +78,7 @@ we employ the following criteria:
 ### Austria
 
 ``` r
-covar <- c("Trust", "Willingness to Accept Compromise","Party ID",
+covar <- c("Trust", "Anti-Compromise Attitude","Party ID",
            "Political Interest", "Left-Right Self-Placement",
            "Government Performance","Gender", "Age","Education", "Income")
 aut <- d %>%
@@ -118,7 +118,7 @@ Trust
 </tr>
 <tr>
 <td style="text-align:left;">
-Willingness to Accept Compromise
+Anti-Compromise Attitude
 </td>
 <td style="text-align:right;">
 0.06
@@ -191,10 +191,10 @@ Income
 </tbody>
 </table>
 
-We recode the missing values of `trust` and
-`willingness to accept compromise` variables to the mean value of the
-respective variables. For the categorical variables `party id` and
-`government performance` we use the median value.
+We recode the missing values of `trust` and `Anti-Compromise Attitude`
+variables to the mean value of the respective variables. For the
+categorical variables `party id` and `government performance` we use the
+median value.
 
 ``` r
 aut <- aut %>%
@@ -253,7 +253,7 @@ Trust
 </tr>
 <tr>
 <td style="text-align:left;">
-Willingness to Accept Compromise
+Anti-Compromise Attitude
 </td>
 <td style="text-align:right;">
 0.04
@@ -326,11 +326,10 @@ Income
 </tbody>
 </table>
 
-We recode the missing values of `trust`,
-`willingness to accept compromise`, `left-right self-placement`, and
-`education` variables to the mean value of the respective variables. For
-the categorical variables `party id` and `government performance`, we
-use the median value.
+We recode the missing values of `trust`, `Anti-Compromise Attitude`,
+`left-right self-placement`, and `education` variables to the mean value
+of the respective variables. For the categorical variables `party id`
+and `government performance`, we use the median value.
 
 ``` r
 fr <- fr %>%
@@ -393,7 +392,7 @@ Trust
 </tr>
 <tr>
 <td style="text-align:left;">
-Willingness to Accept Compromise
+Anti-Compromise Attitude
 </td>
 <td style="text-align:right;">
 0.06
@@ -466,11 +465,10 @@ Income
 </tbody>
 </table>
 
-We recode the missing values of `trust`,
-`willingness to accept compromise`, `left-right self-placement`, and
-`education` variables to the mean value of the respective variables. For
-the categorical variable `party id` and `government performance`, we use
-the median value.
+We recode the missing values of `trust`, `Anti-Compromise Attitude`,
+`left-right self-placement`, and `education` variables to the mean value
+of the respective variables. For the categorical variable `party id` and
+`government performance`, we use the median value.
 
 ``` r
 de <- de %>%
@@ -533,7 +531,7 @@ Trust
 </tr>
 <tr>
 <td style="text-align:left;">
-Willingness to Accept Compromise
+Anti-Compromise Attitude
 </td>
 <td style="text-align:right;">
 0.02
@@ -606,11 +604,10 @@ Income
 </tbody>
 </table>
 
-We recode the missing values of `trust` and
-`willingness to accept compromise` variables to the mean value of the
-respective variables. For the categorical variables `party id`,
-`government performance`, and `political interest`, we use the median
-value.
+We recode the missing values of `trust` and `Anti-Compromise Attitude`
+variables to the mean value of the respective variables. For the
+categorical variables `party id`, `government performance`, and
+`political interest`, we use the median value.
 
 ``` r
 it <- it %>%
@@ -679,7 +676,7 @@ Trust
 </tr>
 <tr>
 <td style="text-align:left;">
-Willingness to Accept Compromise
+Anti-Compromise Attitude
 </td>
 <td style="text-align:right;">
 0.16
@@ -764,7 +761,7 @@ nl <- nl %>%
 ```
 
 We recode the missing values of the variables `Trust` and
-`Willingness to Accept Compromise`, to `3` and include the variables
+`Anti-Compromise Attitude`, to `3` and include the variables
 `missing_trust` and `missing_wtac` to the data, indicating whether the
 response on the covariate was missing (value of 1) or not (value of 0).
 We recode the missing values of the variable `Party ID`, to
@@ -834,15 +831,15 @@ Percentage
 Trust
 </td>
 <td style="text-align:right;">
-0.69
+0.57
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Willingness to Accept Compromise
+Anti-Compromise Attitude
 </td>
 <td style="text-align:right;">
-0.76
+0.59
 </td>
 </tr>
 <tr>
@@ -913,7 +910,7 @@ Income
 </table>
 
 We recode the missing values of the variables `Trust`,
-`Willingness to Accept Compromise`, and `Income` to `3` and include the
+`Anti-Compromise Attitude`, and `Income` to `3` and include the
 variables `missing_trust`, `missing_wtac`, `missing_income` to the data,
 indicating whether the response on the covariate was missing (value of
 one) or not (value of 0). We recode the missing values of the variable
