@@ -150,3 +150,28 @@ p45d1 + p45d2 + p45d3 +
 
 p34e
 ```
+
+```{r "effect-on-compromise-attitude", fig.align="center", fig.height=8, fig.width=8}
+source(here("src/analysis/exploration_compromise_attitude.R")) 
+p_ca
+```
+
+
+```{r "effects-per-party", fig.align="center", fig.height=8, fig.width=18}
+source(here("src/analysis/exploration_h1_party.R")) 
+p1_e
+
+source(here("src/analysis/exploration_h3_party.R")) 
+p2_e
+
+source(here("src/analysis/exploration_h4_party.R"))
+p4a_e1 + p4a_e2 + p4a_e3 +
+  plot_annotation(title = 'Principledness (2)')
+
+p4b_e1 + p4b_e2 + p4b_e3 +
+  plot_annotation(title = 'Principledness (1)')
+
+source(here("src/analysis/exploration_h5_party.R"))
+p5_e1 + p5_e2 + p5_e3 +
+  plot_annotation(title = 'Mutual Trust')
+```

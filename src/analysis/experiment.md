@@ -176,3 +176,47 @@ p34e
 ```
 
 <img src="../../report/figures/h45-direct-2.png" style="display: block; margin: auto;" />
+
+``` r
+source(here("src/analysis/exploration_compromise_attitude.R")) 
+p_ca
+```
+
+<img src="../../report/figures/effect-on-compromise-attitude-1.png" style="display: block; margin: auto;" />
+
+``` r
+source(here("src/analysis/exploration_h1_party.R")) 
+p1_e
+```
+
+<img src="../../report/figures/effects-per-party-1.png" style="display: block; margin: auto;" />
+
+``` r
+source(here("src/analysis/exploration_h3_party.R")) 
+p2_e
+```
+
+<img src="../../report/figures/effects-per-party-2.png" style="display: block; margin: auto;" />
+
+``` r
+source(here("src/analysis/exploration_h4_party.R"))
+p4a_e1 + p4a_e2 + p4a_e3 +
+  plot_annotation(title = 'Principledness (2)')
+```
+
+<img src="../../report/figures/effects-per-party-3.png" style="display: block; margin: auto;" />
+
+``` r
+p4b_e1 + p4b_e2 + p4b_e3 +
+  plot_annotation(title = 'Principledness (1)')
+```
+
+<img src="../../report/figures/effects-per-party-4.png" style="display: block; margin: auto;" />
+
+``` r
+source(here("src/analysis/exploration_h5_party.R"))
+p5_e1 + p5_e2 + p5_e3 +
+  plot_annotation(title = 'Mutual Trust')
+```
+
+<img src="../../report/figures/effects-per-party-5.png" style="display: block; margin: auto;" />

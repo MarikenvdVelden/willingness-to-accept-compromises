@@ -55,6 +55,43 @@ regression_direct <- function(df, a, b){
   return(m)
 }
 
+regression_direct_party <- function(df, a, b){
+  
+  depVarList <- df %>% select(matches("DV[123]"))
+  indepVarList <- df %>% select(a, b, S2, partner, PT8, 
+                                PT1_1, PT1_2, PT3_2, D4, D7,
+                                D9, D10) 
+  allModels <- apply(depVarList,2,function(xl)lm(xl ~ a + b +
+                                                   S2 + factor(partner) +
+                                                   PT8 + PT1_1 + PT1_2 + PT3_2 +
+                                                   factor(D4) + factor(D7) +
+                                                   factor(D9) + factor(D10),
+                                                 data= indepVarList))
+  depVarList <- df %>% select(matches("DV[123]")) %>% colnames()
+  
+  for(i in 1:length(depVarList)){
+    if(i==1){
+      m <- tidy(allModels[[i]]) %>%
+        mutate(x = term,
+               y = depVarList[i],
+               lower = estimate - (1.56 * std.error),
+               upper = estimate + (1.56 * std.error)) %>%
+        select(estimate, upper, lower, y, x)
+    }
+    else{
+      tmp <- tidy(allModels[[i]]) %>%
+        mutate(x = term,
+               y = depVarList[i],
+               lower = estimate - (1.56 * std.error),
+               upper = estimate + (1.56 * std.error)) %>%
+        select(estimate, upper, lower, y, x)
+      m <- m %>%
+        add_case(tmp)
+    }
+  }
+  return(m)
+}
+
 regression_direct_explor <- function(df, a, b){
   
   depVarList <- df %>% select(matches("DV[123]"))
@@ -102,6 +139,42 @@ regression <- function(df, a, b){
                                 D9, D10) 
   allModels <- apply(depVarList,2,function(xl)lm(xl ~ a * b +
                                                    factor(S1) + S2 + factor(partner) +
+                                                   PT8 + PT1_1 + PT1_2 + PT3_2 +
+                                                   factor(D4) + factor(D7) +
+                                                   factor(D9) + factor(D10),
+                                                 data= indepVarList))
+  depVarList <- df %>% select(matches("DV[123]")) %>% colnames()
+  
+  for(i in 1:length(depVarList)){
+    if(i==1){
+      m <- summary(margins(allModels[[i]], variables = "a", at = list(b = 0:1))) %>%
+        mutate(y = depVarList[i],
+               lower = AME - (1.56 * SE),
+               upper = AME + (1.56 * SE)) %>%
+        select(AME, upper, lower, y, b)
+    }
+    else{
+      tmp <- summary(margins(allModels[[i]], variables = "a", at = list(b = 0:1))) %>%
+        mutate(y = depVarList[i],
+               lower = AME - (1.56 * SE),
+               upper = AME + (1.56 * SE)) %>%
+        select(AME, upper, lower, y, b)
+      m <- m %>%
+        add_case(tmp)
+      
+    }
+  }
+  return(m)
+}
+
+regression_party <- function(df, a, b){
+  
+  depVarList <- df %>% select(matches("DV[123]"))
+  indepVarList <- df %>% select(a, b, S2, partner, PT8, 
+                                PT1_1, PT1_2, PT3_2, D4, D7,
+                                D9, D10) 
+  allModels <- apply(depVarList,2,function(xl)lm(xl ~ a * b +
+                                                   S2 + factor(partner) +
                                                    PT8 + PT1_1 + PT1_2 + PT3_2 +
                                                    factor(D4) + factor(D7) +
                                                    factor(D9) + factor(D10),
@@ -274,6 +347,114 @@ regression_ht3 <- function(df, compromise, outcome, b){
   return(m)
 }
 
+regression_ht1_party <- function(df, compromise, outcome, b){
+  
+  depVarList <- df %>% select(matches("DV[123]"))
+  indepVarList <- df %>% select(compromise, outcome, b, S2, partner, PT8, 
+                                PT1_1, PT1_2, PT3_2, D4, D7,
+                                D9, D10) 
+  allModels <- apply(depVarList,2,function(xl)lm(xl ~ outcome + compromise * b +
+                                                   S2 + factor(partner) +
+                                                   PT8 + PT1_1 + PT1_2 + PT3_2 +
+                                                   factor(D4) + factor(D7) +
+                                                   factor(D9) + factor(D10),
+                                                 data= indepVarList))
+  depVarList <- df %>% select(matches("DV[123]")) %>% colnames()
+  
+  for(i in 1:length(depVarList)){
+    if(i==1){
+      m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:14))) %>%
+        mutate(y = depVarList[i],
+               lower = AME - (1.56 * SE),
+               upper = AME + (1.56 * SE)) %>%
+        select(AME, upper, lower, y, b)
+    }
+    else{
+      tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:14))) %>%
+        mutate(y = depVarList[i],
+               lower = AME - (1.56 * SE),
+               upper = AME + (1.56 * SE)) %>%
+        select(AME, upper, lower, y, b)
+      m <- m %>%
+        add_case(tmp)
+      
+    }
+  }
+  return(m)
+}
+
+regression_ht2_party <- function(df, compromise, outcome, b){
+  
+  depVarList <- df %>% select(matches("DV[123]"))
+  indepVarList <- df %>% select(compromise, outcome, b, S2, partner, PT8, 
+                                PT1_1, PT1_2, PT3_2, D4, D7,
+                                D9, D10) 
+  allModels <- apply(depVarList,2,function(xl)lm(xl ~ outcome + compromise * b +
+                                                   S2 + factor(partner) +
+                                                   PT8 + PT1_1 + PT1_2 + PT3_2 +
+                                                   factor(D4) + factor(D7) +
+                                                   factor(D9) + factor(D10),
+                                                 data= indepVarList))
+  depVarList <- df %>% select(matches("DV[123]")) %>% colnames()
+  
+  for(i in 1:length(depVarList)){
+    if(i==1){
+      m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:4))) %>%
+        mutate(y = depVarList[i],
+               lower = AME - (1.56 * SE),
+               upper = AME + (1.56 * SE)) %>%
+        select(AME, upper, lower, y, b)
+    }
+    else{
+      tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:4))) %>%
+        mutate(y = depVarList[i],
+               lower = AME - (1.56 * SE),
+               upper = AME + (1.56 * SE)) %>%
+        select(AME, upper, lower, y, b)
+      m <- m %>%
+        add_case(tmp)
+      
+    }
+  }
+  return(m)
+}
+
+regression_ht3_party <- function(df, compromise, outcome, b){
+  
+  depVarList <- df %>% select(matches("DV[123]"))
+  indepVarList <- df %>% select(compromise, outcome, b, S2, partner, PT8, 
+                                PT1_1, PT1_2, PT3_2, D4, D7,
+                                D9, D10) 
+  allModels <- apply(depVarList,2,function(xl)lm(xl ~  outcome + compromise * b +
+                                                   S2 + factor(partner) +
+                                                   PT8 + PT1_1 + PT1_2 + PT3_2 +
+                                                   factor(D4) + factor(D7) +
+                                                   factor(D9) + factor(D10),
+                                                 data= indepVarList))
+  depVarList <- df %>% select(matches("DV[123]")) %>% colnames()
+  
+  for(i in 1:length(depVarList)){
+    if(i==1){
+      m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:10))) %>%
+        mutate(y = depVarList[i],
+               lower = AME - (1.56 * SE),
+               upper = AME + (1.56 * SE)) %>%
+        select(AME, upper, lower, y, b)
+    }
+    else{
+      tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:10))) %>%
+        mutate(y = depVarList[i],
+               lower = AME - (1.56 * SE),
+               upper = AME + (1.56 * SE)) %>%
+        select(AME, upper, lower, y, b)
+      m <- m %>%
+        add_case(tmp)
+      
+    }
+  }
+  return(m)
+}
+
 pooled_regression <- function(df, a, b, issue){
   
   depVarList <- df %>% select(matches("DV[123]"))
@@ -287,6 +468,43 @@ pooled_regression <- function(df, a, b, issue){
                                                    factor(D4) + factor(D7) +
                                                    factor(D9) + factor(D10),
                                                    data= indepVarList))
+  depVarList <- df %>% select(matches("DV[123]")) %>% colnames()
+  
+  for(i in 1:length(depVarList)){
+    if(i==1){
+      m <- summary(margins(allModels[[i]], variables = "a", at = list(b = 0:1))) %>%
+        mutate(y = depVarList[i],
+               lower = AME - (1.56 * SE),
+               upper = AME + (1.56 * SE)) %>%
+        select(AME, upper, lower, y, b)
+    }
+    else{
+      tmp <- summary(margins(allModels[[i]], variables = "a", at = list(b = 0:1))) %>%
+        mutate(y = depVarList[i],
+               lower = AME - (1.56 * SE),
+               upper = AME + (1.56 * SE)) %>%
+        select(AME, upper, lower, y, b)
+      m <- m %>%
+        add_case(tmp)
+      
+    }
+  }
+  return(m)
+}
+
+pooled_regression_party <- function(df, a, b, issue){
+  
+  depVarList <- df %>% select(matches("DV[123]"))
+  indepVarList <- df %>% select(a, b, S2, partner, issue, PT8, 
+                                PT1_1, PT1_2, PT3_2, D4, D7,
+                                D9, D10) 
+  allModels <- apply(depVarList,2,function(xl)lm(xl ~ a * b +
+                                                   factor(partner) +
+                                                   S2 + factor(issue) +
+                                                   PT8 + PT1_1 + PT1_2 + PT3_2 +
+                                                   factor(D4) + factor(D7) +
+                                                   factor(D9) + factor(D10),
+                                                 data= indepVarList))
   depVarList <- df %>% select(matches("DV[123]")) %>% colnames()
   
   for(i in 1:length(depVarList)){
@@ -347,7 +565,6 @@ pooled_regression_explor <- function(df, a, b, issue){
   }
   return(m)
 }
-
 
 pooled_regression_ht1 <- function(df, compromise, outcome, b, issue){
   
@@ -459,6 +676,119 @@ pooled_regression_ht3 <- function(df, compromise, outcome, b, issue){
   }
   return(m)
 }
+
+
+pooled_regression_ht1_party <- function(df, compromise, outcome, b, issue){
+  
+  depVarList <- df %>% select(matches("DV[123]"))
+  indepVarList <- df %>% select(compromise, outcome, b, S2, partner, issue, PT8, 
+                                PT1_1, PT1_2, PT3_2, D4, D7,
+                                D9, D10) 
+  allModels <- apply(depVarList,2,function(xl)lm(xl ~ outcome + compromise * b +
+                                                   S2 + factor(partner) +
+                                                   factor(issue) +
+                                                   PT8 + PT1_1 + PT1_2 + PT3_2 +
+                                                   factor(D4) + factor(D7) +
+                                                   factor(D9) + factor(D10),
+                                                 data= indepVarList))
+  depVarList <- df %>% select(matches("DV[123]")) %>% colnames()
+  
+  for(i in 1:length(depVarList)){
+    if(i==1){
+      m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:14))) %>%
+        mutate(y = depVarList[i],
+               lower = AME - (1.56 * SE),
+               upper = AME + (1.56 * SE)) %>%
+        select(AME, upper, lower, y, b)
+    }
+    else{
+      tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:14))) %>%
+        mutate(y = depVarList[i],
+               lower = AME - (1.56 * SE),
+               upper = AME + (1.56 * SE)) %>%
+        select(AME, upper, lower, y, b)
+      m <- m %>%
+        add_case(tmp)
+      
+    }
+  }
+  return(m)
+}
+
+pooled_regression_ht2_party <- function(df, compromise, outcome, b, issue){
+  
+  depVarList <- df %>% select(matches("DV[123]"))
+  indepVarList <- df %>% select(compromise, outcome, b, S2, partner, issue, PT8, 
+                                PT1_1, PT1_2, PT3_2, D4, D7,
+                                D9, D10) 
+  allModels <- apply(depVarList,2,function(xl)lm(xl ~ outcome + compromise * b +
+                                                   S2 + factor(partner)  +
+                                                   factor(issue) +
+                                                   PT8 + PT1_1 + PT1_2 + PT3_2 +
+                                                   factor(D4) + factor(D7) +
+                                                   factor(D9) + factor(D10),
+                                                 data= indepVarList))
+  depVarList <- df %>% select(matches("DV[123]")) %>% colnames()
+  
+  for(i in 1:length(depVarList)){
+    if(i==1){
+      m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:4))) %>%
+        mutate(y = depVarList[i],
+               lower = AME - (1.56 * SE),
+               upper = AME + (1.56 * SE)) %>%
+        select(AME, upper, lower, y, b)
+    }
+    else{
+      tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:4))) %>%
+        mutate(y = depVarList[i],
+               lower = AME - (1.56 * SE),
+               upper = AME + (1.56 * SE)) %>%
+        select(AME, upper, lower, y, b)
+      m <- m %>%
+        add_case(tmp)
+      
+    }
+  }
+  return(m)
+}
+
+pooled_regression_ht3_party <- function(df, compromise, outcome, b, issue){
+  
+  depVarList <- df %>% select(matches("DV[123]"))
+  indepVarList <- df %>% select(compromise, outcome, b, S2, partner, issue, PT8, 
+                                PT1_1, PT1_2, PT3_2, D4, D7,
+                                D9, D10) 
+  allModels <- apply(depVarList,2,function(xl)lm(xl ~ outcome + compromise * b +
+                                                   S2 + factor(partner)  +
+                                                   factor(issue) +
+                                                   PT8 + PT1_1 + PT1_2 + PT3_2 +
+                                                   factor(D4) + factor(D7) +
+                                                   factor(D9) + factor(D10),
+                                                 data= indepVarList))
+  depVarList <- df %>% select(matches("DV[123]")) %>% colnames()
+  
+  for(i in 1:length(depVarList)){
+    if(i==1){
+      m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:10))) %>%
+        mutate(y = depVarList[i],
+               lower = AME - (1.56 * SE),
+               upper = AME + (1.56 * SE)) %>%
+        select(AME, upper, lower, y, b)
+    }
+    else{
+      tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:10))) %>%
+        mutate(y = depVarList[i],
+               lower = AME - (1.56 * SE),
+               upper = AME + (1.56 * SE)) %>%
+        select(AME, upper, lower, y, b)
+      m <- m %>%
+        add_case(tmp)
+      
+    }
+  }
+  return(m)
+}
+
 
 theme_ipsum <- function(base_family="Arial Narrow", base_size = 11.5,
                         plot_title_family=base_family, plot_title_size = 18,

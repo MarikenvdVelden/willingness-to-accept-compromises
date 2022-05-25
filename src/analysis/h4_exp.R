@@ -36,7 +36,7 @@ h4 <- h4 %>%
 df <- d %>% 
   mutate(compromise = if_else(compromise=="yes", 0, 1),
          outcome = if_else(outcome == "negotiation", 0, 1),
-         b = HT2,
+         b = HT1,
          partner = recode(partner, 
                           "CDU" = 1,
                           "die Grünen"= 0,

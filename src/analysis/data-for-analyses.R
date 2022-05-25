@@ -112,5 +112,5 @@ d <- d %>%
          HT3 = round((HT3a + HT3b + HT3c)/3,0),
          POST = round((POST_1 + POST_2 + POST_3 + POST_4 + POST_5 + POST_6)/6),0) %>%
   select(id, D1:D10, PT1_1: PT3_3, pol_know, PT7:PT8, S1:S2, compromise, outcome,
-         partner, issue, DV1:DV3, MC, HT1, HT2, HT3, POST) %>%
+         partner, issue, DV1:DV3, MC, HT1, HT2, HT3, POST, POST_1) %>%
   drop_na()
