@@ -123,6 +123,17 @@ p1
 ```{r "h3", fig.align="center", fig.height=8, fig.width=8}
 source(here("src/analysis/h3_exp.R")) #pooled?
 p2
+
+kbl(t3, booktabs =T, caption = "\\label{tab:interaction_h3}Regression Results table") %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center") %>%
+  column_spec(1, width = "3cm") %>%
+  column_spec(2, width = "3cm") %>%
+  column_spec(3, width = "3cm") %>%
+  column_spec(4, width = "1cm") %>%
+  column_spec(5, width = "1cm") %>%
+  column_spec(6, width = "1cm")
+rm(t3)
 ```
 
 ## Principled Hypothesis
@@ -174,4 +185,10 @@ p4b_e1 + p4b_e2 + p4b_e3 +
 source(here("src/analysis/exploration_h5_party.R"))
 p5_e1 + p5_e2 + p5_e3 +
   plot_annotation(title = 'Mutual Trust')
+```
+
+```{r "explor-pol-mod", fig.align="center", fig.height=8, fig.width=18}
+source(here("src/analysis/exploration_pol_mod.R"))
+mod_a
+mod_b
 ```

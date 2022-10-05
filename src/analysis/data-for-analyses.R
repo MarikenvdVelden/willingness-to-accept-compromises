@@ -68,7 +68,7 @@ d <- d %>%
                       `30` = "Schleswig-Holstein",
                       `31` = "Thuringia",
                       `32` = "Not born in Germany", .default = "NA"), #5 participants DK
-         PT1_1 = if_else(PT1_1 == 2, 0, 1),
+         PT1_1 = if_else(PT1_1 == 2, 0, 1), #0=no, 1=yes
          PT1_2 = if_else(PT1_2 == 2, 0, 1),
          PT1_3 = if_else(PT1_3 == 2, 0, 1),
          PT3_1 = if_else(PT3_1 <13, PT3_1 - 1, 0), # otherwise 1154 participants DK
