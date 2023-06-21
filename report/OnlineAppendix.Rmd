@@ -1,0 +1,1096 @@
+---
+output: 
+  stevetemplates::article:
+    number_sections: TRUE
+    toc: yes
+    dev: cairo_pdf
+title: "ONLINE APPENDIX: Don't Budge! The Reputational Cost of Political Compromises"
+bibliography: references.bib
+biblio-style: apsr
+geometry: margin=1in
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+fontsize: 11pt
+endnotes: FALSE
+mainfont: cochineal
+sansitup: FALSE
+params:
+  anonymous: ""
+  doublespacing: ""
+  removetitleabstract: ""
+appendix: TRUE
+appendixletter: "OA"
+pandocparas: FALSE
+anonymous: "`r params$anonymous`"
+doublespacing: "`r params$doublespacing`"
+removetitleabstract: "`r params$removetitleabstract`"
+linkcolor: black
+#nocite: |
+#  @cartersmith2020fml, @andersetal2020bbgb
+header-includes: 
+   - \usepackage{array}
+   - \usepackage{floatrow}
+   - \floatsetup[figure]{capposition=top}
+   - \floatsetup[table]{capposition=top}
+   - \usepackage{booktabs}
+   - \usepackage{longtable}
+   - \usepackage{array}
+   - \usepackage{multirow}
+   - \usepackage{wrapfig}
+   - \usepackage{float}
+   - \usepackage{colortbl}
+   - \usepackage{pdflscape}
+   - \newcommand{\blandscape}{\begin{landscape}}
+   - \newcommand{\elandscape}{\end{landscape}}
+   - \usepackage{tabu}
+   - \usepackage[para,online,flushleft]{threeparttable}
+   - \usepackage{threeparttablex}
+   - \usepackage[normalem]{ulem}
+   - \usepackage{makecell}
+   - \usepackage{xcolor}
+   - \usepackage{caption}
+   - \usepackage{graphicx}
+   - \usepackage{epstopdf}
+   - \usepackage{siunitx}
+   - \usepackage{multirow}
+   - \usepackage{hhline}
+   - \usepackage{calc}
+   - \usepackage{tabularx}
+   - \usepackage{fontawesome}
+   - \usepackage{amsthm}
+   - \usepackage{csquotes}
+   - \LTcapwidth=.95\textwidth
+   - \linespread{1.05}
+   - \usepackage{hyperref}
+   - \usepackage{setspace}
+   - \renewcommand{\thepage}{OA-\arabic{page}}
+---
+
+```{r setup, include=FALSE}
+## include this at top of your RMarkdown file for pretty output
+## make sure to have the printr package installed: install.packages('printr')
+library(knitr)
+opts_chunk$set(echo = FALSE,
+                      message=FALSE, warning=FALSE,
+               fig.pos = "H", out.extra = "")
+options(kableExtra.latex.load_packages = FALSE)
+```
+
+```{r "data"}
+here::i_am("report/OnlineAppendix.Rmd")
+source(here::here("src/lib/functions.R"))
+load(here("data/intermediate/cleaned_experiment.RData"))
+source(here("src/analysis/experiment/data-for-analyses.R"))
+ds <- d
+source(here("src/analysis/experiment/descriptive-information-overview.R"))
+```
+
+\newpage
+# Appendix A. Power Analysis
+As detailed in our [pre-analysis plan (pp. 9--15)](https://github.com/MarikenvdVelden/willingness-to-accept-compromises/blob/main/docs/pre-analysis-plan/pap.pdf), we conducted an OLS regression for each of the dependent variables: a) trust in the party; b) sincerity of the party; and c) representation of the party, and the three manipulations (potential coalition partner, being steadfast, and the outcome) as independent variables.
+Each hypothesis is tested separately for the two issues.
+To calculate power for the hypotheses, the R package `DeclareDesign` is used [@blair2019declaring].
+Based on the study of @fortunato2021cycle, the effect sizes are between `b = 0.2` and `b = 0.1` -- i.e. a small effect visualized by the purple and blue lines in Figure \ref{fig:power1}.
+The hypothesis are directional, Figure \ref{fig:power1} therefore displays one-tailed tests with $\alpha$ `= 0.05`.
+The power analysis shows that testing hypotheses 1 and 2 requires a sample size of `4,000` participants (x-axis) to reach `95`\% power (black dashed line, in the left-panel of Figure \ref{fig:power}). 
+Note that if the effect size is bigger then \texttt{0.2}, smaller sample sizes are sufficient to reach `95\%` power.
+To test H3, the combination of steadfast and outcome, we can detect an effect $\beta = 0.1$ (purple line) with reasonable levels of power (`80`\%, as indicated by the gray dotted line) and a one-tailed test of significance at $\alpha =0.05$ with a sample of `4,000` participants (Middle Left-Panel of Figure \ref{fig:power}). 
+A probability of approximately `20`\% remains for a Type II error remains when testing Hypotheses 3. 
+We will therefore test all hypotheses first by issue and second, by pooling our data across issues.
+As the right-hand panel of Figure \ref{fig:power} demonstrates, this will give sufficient power -- yellow and purple lines are approximating `100`\% with 8,000 respondents.
+
+```{r power, fig.align = 'center', out.width = "100%", fig.cap = "\\label{fig:power1}Power Analysis", fig.topcaption=TRUE}
+knitr::include_graphics(here::here("docs/pre-analysis-plan/power_analysis-pooled.png"))
+```
+
+\newpage
+# Appendix B. Data Collection: Questionnaire & Stimulus Material
+
+## Questionnaire
+
+**__Dependent Variables__**.
+We rely on three measures reflecting different aspects of how people evaluate parties as trustworthy.
+Measure 1 is used to test the hypothesis, measure 2 and 3 are used exploratively. 
+
+1. _General trust_ This measure exists of a statement on whether or not you trust a party -- see Table \ref{tab:dv} `DV1`.
+The statement is measured on a 10-point scale: From `do not trust at all` to `trust completely`.
+
+2. _Sincerity_ In this measure respondents are asked to rank the party from very insincere (value of `0`) to very sincere (value of `10`) for the decision to (not) strike a compromise on the issue at stake.
+See Table \ref{tab:dv} `DV2` for the exact phrasing of the question.
+
+3. _Representation_ In this measure, respondents are surveyed on how well  the party is a good representative of  the voters.
+The party can be evaluated on an 11-point scale from `very poorly` (value of `0`) till `very well` (value of 10).
+See Table \ref{tab:dv} `DV3` for the exact phrasing of the question.
+
+```{r dv, topcaption=TRUE}
+df <- tibble(Variable = c("trust (DV1)",
+                         "sincere (DV2)",
+                         "representation (DV3)"), 
+            `Wording ENG` = c("Based on the Instagram post, to what extent do you trust [PARTY]","Based on the Instagram post, to what extent do you think [PARTY] is sincere?","Based on the Instagram post, to what extent do you think [PARTY] does a good job in representing its voters?"),
+            `Wording DE` = c("Der Instagram-Nachricht nach zu urteilen, wie sehr würden Sie [PARTY] vertrauen?",  "Und inwieweit denken Sie, dass [PARTY] der Instagram-Nachricht nach aufrichtig gehandelt hat?", "Und inwiefern denken Sie, dass [PARTY] ihre Wähler gut vertritt in Anbetracht der Instagram-Nachricht?"))
+
+kbl(df, booktabs =T, caption = "\\label{tab:dv}Survey Questions - DV", position = "h") %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center") %>%
+  column_spec(1, width = "3cm") %>%
+  column_spec(2, width = "7cm") %>%
+  column_spec(3, width = "7cm")
+
+```
+
+&nbsp;
+
+**__Control Variables--**.
+As control variables, the following _demographics_ are measured: gender, age, education, geographical region, level of urbanness, vote choice in the 2021 parliamentary elections, employment, and income.
+For the analysis, only variables that are unbalanced over the experimental conditions will be included.
+Table \ref{tab:demographics} gives an overview of the questions asked in the survey as well as their English translations.
+
+- _Gender_ is measured as `sex` based on the advice of Kieskompas. The answer categories are `Male` (value of `1`), `Female` (value of `0`), and `No answer` (value of `999`).
+
+- _Age_ is measured using 6 categories: `17 or younger`, `18--29`, `30--39`, `40--49`, `50--59`, `60--74`. 
+
+- _Education_ is measured as the highest successfully completed level of education, recoded into four categories: `low`, `middle`, `high`, and `none`.
+I create dummy variables for each level of education with the lowest category as base category.
+
+- _Urbanness_ Respondents are asked for what the type of location they live: `big city`, `suburb of a large city`, `middle-szed or small city`, `rural village`, `detached house in the countryside`, `don't know/won't say`.
+
+- _Vote Recall_ Respondents were asked which party they voted for in the last election with their second vote. Answering categories were: `CDU/CSU`, `SPD`, `AfD`, `FDP`, `DIE LINKE`, `BÜNDNIS 90/DIE GRÜNEN`, `Other party:`, `I didn't vote/wasn't eligble to vote`, `Don't know/won't say`.
+
+- _Employment_ Respondents were asked which category of employment -- `Full-time employed`, `Part-time employed`, `Entrepreneur`, `Unemployed and searching for a job`, `Unemployed and not searching for a job or incapacitated`, `Housewife/Househusband or else`, `Retired`, `Student or full-time education` -- applied most to them. 
+
+- _Income_ Respondents were questioned on their monthly income in bins of €500 -- `€500 or less`, `€501-€1000`, `€1001-€1500`, `€1501-€2000`, `€2001-€2500`, `€2501-€3000`, `€3001-€3500`, `€3501-€4000`, `€4501-€7500`, `€7501 or more` -- as well as giving them the options of `won't  say` and `don't know`.
+
+- _Geographical region_ is measured using the same questions as the [German Longitudinal Election Study](https://www.gesis.org/wahlen/gles), asking respondents where they are born and currently live, differentiating between the different German provinces (_Bundesl{\"a}nder_): Baden-W{\"u}rtemberg, Bavaria, Berlin, Brandenburg, Bremen, Hamburg, Hessen, Lower Saxony, Mecklenburg-Western Pomerania, North Rhine-
+Westphalia, Rhineland-Palatinate, Saarland, Saxony, Saxony-Anholt, Schleswig-Holstein, and Thuringia.
+
+```{r demographics, topcaption=TRUE}
+df <- tibble(Variable = c("gender (D1)", "age (D2)", "education (D3)",
+                         "geographical-region (D4)", "vote-recall2 (D6)", "employment (D7)",
+                         "income (D8)", "living-place (D9)", "birth-place (D10)"), 
+            `Wording ENG` = c("Which gender do you feel you belong to?", "To which of the following age groups do you belong?",
+                              "What is your highest educational qualification?", 
+                             "Which of the following categories best describes where you live?",
+                             "Which party did you vote for with your second vote in the last federal election in September 2021?",
+                             "Now we would like to ask you something about your employment. Which of this list applies to you?",
+                              "What is the total monthly net income of your household? This refers to the sum that remains after deducting taxes and social security contributions.",
+                             "In which federal state or on the territory of which present federal state do you currently live?",
+                              "And in which federal state or on the territory of which present federal state were you born?"),
+            `Wording DE` = c("Welchem Geschlecht fühlen Sie sich zugehörig?", 
+                             "Zu welcher der nachfolgenden Altersgruppen gehören Sie?",
+                             "Was ist Ihr höchster Bildungsabschluss?",
+                             "Welche der folgenden Kategorien beschreibt am besten, wo Sie wohnen?",
+                             "Welche Partei haben Sie bei der letzten Bundestagswahl im September 2021 mit Ihrer Zweitstimme gewählt?",
+                             "Nun möchten wir Sie gerne etwas zu Ihrer Erwerbstätigkeit fragen. Was von dieser Liste trifft auf Sie zu?",
+                             "Wie hoch ist das monatliche Netto-Einkommen Ihres Haushaltes insgesamt? Gemeint ist die Summe, die nach Abzug von Steuern und Sozialversicherungsbeiträgen übrig bleibt.",
+                             "Im welchen Bundesland bzw. auf dem Gebiet welches heutigen Bundeslandes wohnen Sie derzeit?",
+                             "Und in welchem Bundesland bzw. auf dem Gebiet welches heutigen Bundeslandes wurden Sie geboren?"))
+
+kbl(df, booktabs =T, caption = "\\label{tab:demographics}Survey Questions - Demographics", position = "h") %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center") %>%
+  column_spec(1, width = "3cm") %>%
+  column_spec(2, width = "7cm") %>%
+  column_spec(3, width = "7cm")
+
+```
+
+In addition, pre-treatment, respondents' ideological position, position on and salience of the issues speed limit, top tax, and Cannabis legalization, political knowledge and interest are measured (see Tables \ref{tab:pret1} and \ref{tab:pret2}).
+Those variables will only be included in the analyses if balance checks indicate they are necessary.
+Moreover, the variables will be used to explore heterogeneous relationships. 
+
+- _Ideological position_ is measured using an 11-point scale ranging from left (`0`) to right (`10`).
+
+- _Position on issues_ is measured by forcing participants to choose whether or not the government should implement a policy: `implement speed limit`, `increase of top tax`, `legalize cannabis`.
+
+- _Salience of issues_ is measured using an 11-point scale ranging from not at all important (`0`) to very important (`10`).
+
+
+```{r pret, topcaption=TRUE}
+df <- tibble(Variable = c("issue-pref-forced (PT1)",
+                         "general speed limit (PT1-1)","increase of top tax (PT1-2)","legalization of cannabis (PT1-3)","issue-importance (PT3)",  "general speed limit (PT3-1)","increase of top tax (PT3-2)","legalization of cannabis (PT3-3)",
+                         "political-knowledge1 (PT4)", "political-knowledge2 (PT5)", "political-knowledge3 (PT6)", "political-interest (PT7)","RILE (PT8)", "in-party (S1)", "in-party-strength (S2)"), 
+            `Wording ENG` = c("In your opinion, should the federal government implement the following policy proposals? Please select the response option that most closely matches your opinion.",
+                             "General speed limit.",
+                             "Increase the top tax rate",
+                             "Cannabis Legalization.",
+                             "How important are the following issues to you?", 
+                             "General speed limit",
+                             "Increasing the top tax rate",
+                             "Cannabis legalization",
+                             "In the federal election, you have two votes, a first vote and a second vote. How is that actually, which of the two votes is decisive for the distribution of seats in the Bundestag?",
+                             "Now we would like to know from you, from what percentage of the second votes a party can send deputies in any case in the Bundestag?",
+                             "And can you say approximately what the current unemployment rate is in Germany? Is it lower or higher than 10 percent?", 
+                             "Once speaking in general terms: How interested are you in politics - very strongly, strongly, moderately, less strongly, or not at all?",
+                            "In politics, people often talk about 'left' and 'right.' Where would you classify yourself?", 
+                            "If you had to choose, which of the following parties would you be most likely to vote for in the next federal election?",
+                            "How strongly or how weakly do you identify with this party: very strongly, fairly strongly, moderately, fairly weakly, or very weakly?"),
+            `Wording DE` = c("Sollte die Bundesregierung Ihrer Meinung nach die folgenden politischen Vorschläge umsetzen? Bitte wählen Sie die Antwortoption, die Ihrer Meinung am ehesten entspricht.",
+                             "Generelles Tempolimit",
+                             "Erhöhung des Spitzensteuersatzes",
+                             "Cannabis-Legalisierung",
+                             "Wie wichtig sind die folgenden Themen für Sie?", 
+                             "Generelles Tempolimit",
+                             "Erhöhung des Spitzensteuersatzes",
+                             "Cannabis-Legalisierung",
+                             "Bei der Bundestagswahl haben Sie ja zwei Stimmen, eine Erststimme und eine Zweitstimme. Wie ist das eigentlich, welche der beiden Stimmen ist ausschlaggebend für die Sitzverteilung im Bundestag?",
+                             "Jetzt möchten wir gerne von Ihnen wissen, ab wie viel Prozent der Zweitstimmen eine Partei auf jeden Fall Abgeordnete in den Bundestag entsenden kann? ",
+                             "Und können Sie ungefähr sagen, wie hoch die derzeitige Arbeitslosenquote in Deutschland ist? Ist sie niedriger oder höher als 10 Prozent?", "Einmal ganz allgemein gesprochen: Wie stark interessieren Sie sich für Politik – sehr stark, stark, mittelmäßig, weniger stark oder überhaupt nicht?",
+                            "In der Politik reden die Leute häufig von 'links' und 'rechts'. Wo würden Sie sich selbst einordnen?", 
+                            "Wenn Sie sich entscheiden müssten, welche der folgenden Parteien würden Sie bei der nächsten Bundestagswahl am ehesten wählen?",
+                            "Wie stark oder wie schwach indentifizieren Sie sich mit dieser Partei: sehr stark, ziemlich stark, mäßig, ziemlich schwach, oder sehr schwach?"))
+
+kbl(df, booktabs =T, caption = "\\label{tab:pret1}Survey Questions - PreTreatment Questions (1)", longtable = T, position = "h") %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center") %>%
+  column_spec(1, width = "3cm") %>%
+  column_spec(2, width = "7cm") %>%
+  column_spec(3, width = "7cm")
+```
+
+- _Political knowledge_ is measured with three items. First, respondents are asked which of the two votes is determinative for the seat distribution in parliament: `first vote`, `second vote`, `both`, `don't know`. Secondly, respondents are asked about the electoral threshold. Last, respondents are asked whether or not the unemployment rate is over ten procent.
+
+- _Political interest_ is measured by asking people how strongly they are interested in politics using a 5-point Likert-scale (`very strong`, `strong`, `medium`, `less strong`, `not at all`) and a `don't know/won't say` option.
+
+- _In-party_ is measured by forcing people to choose beween the four parties of the experiment (`CDU`, `die Grünen`, `FDP`, and `SPD`) to determine which treatment they will be shown.
+
+- _In-party strength_ is measured by asking people how strongly they identify with the party uing a 5-point Likert-scale: `very strong`, `strong`, `medium`, `less strong`, `not at all`
+
+**__Attention Checks__**.
+We include two attention checks in the survey.
+The first one is after the demographic covariates, the second one is asked just before respondents enter the round of the experimental treatments.
+The attention checks are taken from @berinsky2014separating and adapted to the German context by the authors.
+If a respondents fails the first attention check, a warning appears and the respondent can only continue with the survey once the respondent has correctly answered the question correctly.
+The second attention check also has a warning -- meaning that respondents have to select two options -- but if they fail to correctly pass the check, they are excluded.
+Each excluded respondent due to failing an attention check is replaced with another ``good respondent".
+
+
+## Stimulus Material
+
+```{r stimulus, topcaption=TRUE}
+df <- tibble(` ` = c(1:64),
+            `In-Party` = c(rep("CDU", 16), rep("FDP", 16), 
+                           rep("SPD", 16), rep("die Grünen", 16)),
+            Partner = c(rep("SPD",8), rep("die Grünen",8),
+                        rep("SPD",8), rep("die Grünen",8),
+                        rep("CDU",8), rep("FDP",8),
+                        rep("CDU",8), rep("FDP",8)),
+            Compromise = c(rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2),
+                           rep("Yes",2), rep("No", 2)),
+            Outcome = c("Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation", 
+                        "Stalled", "Negotation",
+                        "Stalled", "Negotation"),
+            Issue = c(rep("TopTax", 4), rep("SpeedLimit", 4),
+                      rep("TopTax", 4), rep("SpeedLimit", 4),
+                      rep("TopTax", 4), rep("SpeedLimit", 4),
+                      rep("TopTax", 4), rep("SpeedLimit", 4),
+                      rep("TopTax", 4), rep("SpeedLimit", 4),
+                      rep("TopTax", 4), rep("SpeedLimit", 4),
+                      rep("TopTax", 4), rep("SpeedLimit", 4),
+                      rep("TopTax", 4), rep("SpeedLimit", 4)))
+
+kbl(df, booktabs =T, caption = "\\label{tab:treat}Experimental Conditions (1)",
+    align = c("l", "l", "c", "c", "c"), longtable = T, position = "h") %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center") %>%
+  column_spec(1, width = ".5cm") 
+```
+
+\newpage
+# Appendix C. Additional Experiment: Testing Stimulus Material
+
+Figure \ref{fig:balance-exp2} below shows that the data is unbalanced for the variable `Digital Literacy`.
+As described in the Pre-Analysis Plan (p.10), we will add this co-variates to the analyses as controls. 
+
+```{r "data-experiment",fig.height=7, fig.width=5,fig.cap = "\\label{fig:balance-exp2}Balance Test", fig.topcaption=TRUE}
+load(here("treatment-experiment/data/intermediate/cleaned_experiment.RData"))
+source(here("treatment-experiment/src/analysis/balance-test.R"))
+df
+```
+
+\blandscape
+```{r "treat-diff",fig.height=7, fig.width=10, fig.cap = "\\label{fig:exp_main}Predicting Treatment Differences", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+source(here("treatment-experiment/src/analysis/hs.R"))
+h
+```
+\elandscape
+
+\blandscape
+```{r "treat-diff-exp",fig.height=10, fig.width=10, fig.cap = "\\label{fig:ht_exp}Heterogeneoous Treatment Effects",fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+source(here("treatment-experiment/src/analysis/exp.R"))
+he
+```
+\elandscape
+
+# Appendix D. IRT Analysis for Principled Items
+
+Our attitudinal measure of ‘principledness’ is based on the absolutism scale of Arceneaux (2019).
+The original  absolutism scale consists of 20 items: 10 items measuring ‘idealism’ and 10 items measuring ‘relativism’. 
+To reduce survey length, we examined using Item Response Theory analyses on the basis of Arceneaux’s data whether we can reduce the number of items without discarding relevant information. 
+The Item Information Function graphs (IIFs), see Figure \ref{fig:it1} for relativism and idealism show that a number of items of the original scales add little information. 
+
+```{r irt-1, fig.align = 'center', out.width = "100%", fig.cap = "\\label{fig:irt1}Item Information Function graphs", fig.topcaption=TRUE, fig.pos="H"}
+knitr::include_graphics(here::here("report/figures/idealism_relativism_iifs.png"))
+```
+
+Creating a subset of the scale with 12 items (6 each for relativism and idealism), we see in the Test Information Function analyses in Figures \ref{fig:irt2} and \ref{fig:irt3} that this new scale yields similar overall levels of information with with a similar theta-spread. 
+For idealism, the correlation between the mean responses to the 10- and 6-item is `0.95`. 
+The 6-items idealism measure has a Cronbach’s alpha of `0.88`.
+For relativism, the correlation between the mean responses to the 10- and 6-item is `0.96` and the Cronbach’s alpha is `0.81`. 
+The overall correlation between the 20 and the 12-item constructs is `0.95`. 
+
+```{r irt-2, fig.align = 'center', out.width = "100%", fig.cap = "\\label{fig:irt2}Test Information Function for Relativism", fig.topcaption=TRUE, fig.pos="H"}
+knitr::include_graphics(here::here("report/figures/relativism_tif.png"))
+```
+
+```{r irt-3, fig.align = 'center', out.width = "100%", fig.cap = "\\label{fig:irt2}Test Information Function for Idealism", fig.topcaption=TRUE, fig.pos="H"}
+knitr::include_graphics(here::here("report/figures/idealism_tifs.png"))
+```
+
+\newpage
+
+# Appendix E. Balance Checks
+We have conducted a balance test based on demographics (age, gender, education, geographical region, level of urbanness,employment, and income), vote choice in the 2021 parliamentary elections, ideological self-placement, political knowledge, political interest, party identity strength, and positions on and salience of the three issues, using the `cobalt` R package [@greifer2021]. 
+The figure below shows that the data is unbalanced for the variables: `Education`,`Income`, `Employment`, `Urbaness`, `Living Place`, `Birth Place`, `Age`, `Political Knowledge`, `Political Interest`, and `Ideology`.
+As described in the [Pre-Analysis Plan (p.10)](https://github.com/MarikenvdVelden/willingness-to-accept-compromises/blob/main/docs/pre-analysis-plan/pap.pdf), we have added these co-variates to the analyses as controls.
+
+```{r "balance-checks", fig.height=10, fig.width=10,out.height="70%",out.width="70%"}
+d <- ds
+source(here("src/analysis/experiment/balance-test.R"))
+df
+```
+
+\newpage
+
+# Appendix F. Manipulation Checks
+
+## Effectiveness of Manipulation
+
+Figure \ref{fig:mc} shows that both manipulations in the experiment are successful: The significant effects of both manipulations indicate that those in the experimental group reported to have seen the manipulated conditions.
+
+```{r "mc", out.width="80%", fig.align = "center", fig.cap = "\\label{fig:mc}Effect of Treatment on Manipulations Checks", fig.topcaption=TRUE, fig.pos="h"}
+include_graphics(here("report/figures/mc-1.png"))
+```
+
+
+## H1 and H2 for those passing the Manipulation Checks
+Looking at those respondents who have correctly filled in the manipulation checks, Figure \ref{fig:mh1} shows that the main effects shown in the manuscript (Figure 2) do not change.
+
+```{r "mc-h1",out.width="80%",fig.align = "center", fig.cap = "\\label{fig:mh1}Predicted Reputational Cost", fig.topcaption=TRUE, fig.pos="h"}
+knitr::include_graphics(here("report/figures/mc-2.png"))
+```
+
+## H3 for those passing the Manipulation Checks
+Looking at those respondents who have correctly filled in the manipulation checks, Figure \ref{fig:mh2} shows that the main effects shown in the manuscript (Figure 3) do not change.
+
+```{r "mc-h3",out.width="80%", fig.align = "center", fig.cap = "\\label{fig:mh3}Predicted Reputational Cost", fig.topcaption=TRUE, fig.pos="h"}
+knitr::include_graphics(here("report/figures/mc-3.png"))
+```
+
+## H4 for those passing the Manipulation Checks
+Looking at those respondents who have correctly filled in the manipulation checks, Figure \ref{fig:mh4} shows that the main effects shown in the manuscript (Figure 4) do not change.
+
+```{r "mc-h4",out.width="80%", fig.align = "center", fig.cap = "\\label{fig:mh4}Heterogeneous Treatment Effect: Principledness", fig.topcaption=TRUE, fig.pos="h"}
+knitr::include_graphics(here("report/figures/mc-4.png"))
+```
+
+## H5 for those passing the Manipulation Checks
+
+Looking at those respondents who have correctly filled in the manipulation checks, Figure \ref{fig:mh5} shows that the main effects shown in the manuscript (Figure 5) do not change.
+
+```{r "mc-h5", out.height="50%", out.width="80%", fig.align = "center", fig.cap = "\\label{fig:mh5}Heterogeneous Treatment Effect: Social Trust", fig.topcaption=TRUE, fig.pos="h"}
+knitr::include_graphics(here("report/figures/mc-5.png"))
+```
+\newpage
+
+# Appendix G. Regression Tables for Hypotheses 1-5
+
+## Hypothesis 1 & 2 (Figure 2)
+```{r "h1", topcaption=TRUE}
+source(here("src/analysis/oa/h1_exp_oa.R"))
+
+kbl(t1a, booktabs =T, caption = "\\label{tab:h1_1_oa}Predicted Reputational Cost for TopTax, DV = Trust -- Table Supporting Figure 2 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm")
+
+kbl(t1b, booktabs =T, caption = "\\label{tab:h1_2_oa}Predicted Reputational Cost for Speed Limit, DV = Trust -- Table Supporting Figure 2 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm") 
+
+kbl(t1c, booktabs =T, caption = "\\label{tab:h1_3_oa}Predicted Reputational Cost for TopTax, DV = Credibility -- Table Supporting Figure 2 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm")
+
+kbl(t1d, booktabs =T, caption = "\\label{tab:h1_4_oa}Predicted Reputational Cost for Speed Limit, DV = Credibility -- Table Supporting Figure 2 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm") 
+
+```
+
+## Hypothesis 3 (Figure 3)
+```{r "h3", topcaption=TRUE}
+source(here("src/analysis/oa/h3_exp_oa.R")) 
+
+kbl(t3a, booktabs =T, caption = "\\label{tab:h3_1_oa}Predicted Reputational Cost for TopTax, DV = Trust -- Table Supporting Figure 3 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm")
+
+kbl(t3b, booktabs =T, caption = "\\label{tab:h3_2_oa}Predicted Reputational Cost for Speed Limit, DV = Trust -- Table Supporting Figure 3 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm") 
+
+kbl(t3c, booktabs =T, caption = "\\label{tab:h3_3_oa}Predicted Reputational Cost for Issue Pooled Analysis, DV = Trust -- Table Supporting Figure 3 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm") 
+
+kbl(t3d, booktabs =T, caption = "\\label{tab:h3_4_oa}Predicted Reputational Cost for TopTax, DV = Credibility -- Table Supporting Figure 3 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm")
+
+kbl(t3e, booktabs =T, caption = "\\label{tab:h3_5_oa}Predicted Reputational Cost for Speed Limit, DV = Credibility -- Table Supporting Figure 3 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm") 
+
+kbl(t3f, booktabs =T, caption = "\\label{tab:h3_6_oa}Predicted Reputational Cost for Issue Pooled Analysis, DV = Credibility -- Table Supporting Figure 3 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm") 
+```
+
+## Hypothesis 4 (Figure 4)
+```{r "h4", topcaption=TRUE}
+source(here("src/analysis/oa/h4_exp_oa.R")) 
+
+kbl(t4g, booktabs =T, caption = "\\label{tab:h4_1_oa}Heterogeneous Treatment Effect: Principledness (1) for TopTax, DV = Trust -- Table Supporting Figure 4 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm")
+
+kbl(t4h, booktabs =T, caption = "\\label{tab:h4_2_oa}Heterogeneous Treatment Effect: Principledness (1) for Speed Limit, DV = Trust -- Table Supporting Figure 4 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm") 
+
+kbl(t4i, booktabs =T, caption = "\\label{tab:h4_3_oa}Heterogeneous Treatment Effect: Principledness (1) for Issue Pooled Analysis, DV = Trust -- Table Supporting Figure 4 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm") 
+
+kbl(t4j, booktabs =T, caption = "\\label{tab:h4_4_oa}Heterogeneous Treatment Effect: Principledness (1) for TopTax, DV = Credibility -- Table Supporting Figure 4 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm")
+
+kbl(t4k, booktabs =T, caption = "\\label{tab:h4_5_oa}Heterogeneous Treatment Effect: Principledness (1) for Speed Limit, DV = Credibility -- Table Supporting Figure 4 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm") 
+
+kbl(t4l, booktabs =T, caption = "\\label{tab:h4_6_oa}Heterogeneous Treatment Effect: Principledness (1) for Issue Pooled Analysis, DV = Credibility -- Table Supporting Figure 4 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm")
+
+kbl(t4a, booktabs =T, caption = "\\label{tab:h4_7_oa}Heterogeneous Treatment Effect: Principledness (2) for TopTax, DV = Trust -- Table Supporting Figure 4 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm")
+
+kbl(t4b, booktabs =T, caption = "\\label{tab:h4_8_oa}Heterogeneous Treatment Effect: Principledness (2) for Speed Limit, DV = Trust -- Table Supporting Figure 4 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm") 
+
+kbl(t4c, booktabs =T, caption = "\\label{tab:h4_9_oa}Heterogeneous Treatment Effect: Principledness (2) for Issue Pooled Analysis, DV = Trust -- Table Supporting Figure 4 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm") 
+
+kbl(t4d, booktabs =T, caption = "\\label{tab:h4_10_oa}Heterogeneous Treatment Effect: Principledness (2) for TopTax, DV = Credibility -- Table Supporting Figure 4 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm")
+
+kbl(t4e, booktabs =T, caption = "\\label{tab:h4_11_oa}Heterogeneous Treatment Effect: Principledness (2) for Speed Limit, DV = Credibility -- Table Supporting Figure 4 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm") 
+
+kbl(t4f, booktabs =T, caption = "\\label{tab:h4_12_oa}Heterogeneous Treatment Effect: Principledness (2) for Issue Pooled Analysis, DV = Credibility -- Table Supporting Figure 4 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm")
+```
+
+## Hypothesis 5 (Figure 5)
+```{r "h5", topcaption=TRUE}
+source(here("src/analysis/oa/h5_exp_oa.R")) #pooled?
+
+kbl(t5a, booktabs =T, caption = "\\label{tab:h5_1_oa}Heterogeneous Treatment Effect: Social Trust for TopTax, DV = Trust -- Table Supporting Figure 5 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm")
+
+kbl(t5b, booktabs =T, caption = "\\label{tab:h5_2_oa}Heterogeneous Treatment Effect: Social Trust for Speed Limit, DV = Trust -- Table Supporting Figure 5 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm") 
+
+kbl(t5c, booktabs =T, caption = "\\label{tab:h5_3_oa}Heterogeneous Treatment Effect: Social Trust for Issue Pooled Analysis, DV = Trust -- Table Supporting Figure 5 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm") 
+
+kbl(t5d, booktabs =T, caption = "\\label{tab:h5_4_oa}Heterogeneous Treatment Effect: Principledness (1) for TopTax, DV = Credibility -- Table Supporting Figure 5 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm")
+
+kbl(t5e, booktabs =T, caption = "\\label{tab:h5_5_oa}Heterogeneous Treatment Effect: Social Trust for Speed Limit, DV = Credibility -- Table Supporting Figure 5 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm") 
+
+kbl(t5f, booktabs =T, caption = "\\label{tab:h5_6_oa}Heterogeneous Treatment Effect: Social Trust for Issue Pooled Analysis, DV = Credibility -- Table Supporting Figure 5 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm")
+
+```
+
+\newpage
+# Appendix H. Explorative Analysis: DV Representation
+
+## Hypothesis 1 & 2
+```{r "h1-rep", topcaption=TRUE}
+source(here("src/analysis/oa/h1_exp_oa_dv_rep.R"))
+
+kbl(t1a, booktabs =T, caption = "\\label{tab:h1_1_oa_rep}Predicted Reputational Cost for TopTax, DV = Representation", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm")
+
+kbl(t1b, booktabs =T, caption = "\\label{tab:h1_2_oa_rep}Predicted Reputational Cost for Speed Limit, DV = Representation", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm") 
+```
+
+## Hypothesis 3
+```{r "h3-rep", topcaption=TRUE}
+source(here("src/analysis/oa/h3_exp_oa_dv_rep.R")) 
+
+kbl(t3a, booktabs =T, caption = "\\label{tab:h3_1_oa_rep}Predicted Reputational Cost for TopTax, DV = Representation", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm")
+
+kbl(t3b, booktabs =T, caption = "\\label{tab:h3_2_oa_rep}Predicted Reputational Cost for Speed Limit, DV = Representation", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm") 
+
+kbl(t3c, booktabs =T, caption = "\\label{tab:h3_3_oa}Predicted Reputational Cost for Issue Pooled Analysis, DV = Trust -- Table Supporting Figure 3 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm") 
+
+```
+
+## Hypothesis 4
+```{r "h4-rep", topcaption=TRUE}
+source(here("src/analysis/oa/h4_exp_oa_dv_rep.R")) 
+
+kbl(t4d, booktabs =T, caption = "\\label{tab:h4_1_oa_rep}Heterogeneous Treatment Effect: Principledness (1) for TopTax, DV = Representation", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm")
+
+kbl(t4e, booktabs =T, caption = "\\label{tab:h4_2_oa_rep}Heterogeneous Treatment Effect: Principledness (1) for Speed Limit, DV = Representation", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm") 
+
+kbl(t4f, booktabs =T, caption = "\\label{tab:h4_3_oa_rep}Heterogeneous Treatment Effect: Principledness (1) for Issue Pooled Analysis, DV = Representation", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm") 
+
+kbl(t4a, booktabs =T, caption = "\\label{tab:h4_4_oa_rep}Heterogeneous Treatment Effect: Principledness (2) for TopTax, DV = Representation", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm")
+
+kbl(t4b, booktabs =T, caption = "\\label{tab:h4_5_oa_rep}Heterogeneous Treatment Effect: Principledness (2) for Speed Limit, DV = Representation", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm") 
+
+kbl(t4c, booktabs =T, caption = "\\label{tab:h4_6_oa_rep}Heterogeneous Treatment Effect: Principledness (2) for Issue Pooled Analysis, DV = Representation", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm") 
+
+kbl(t4d, booktabs =T, caption = "\\label{tab:h4_10_oa}Heterogeneous Treatment Effect: Principledness (2) for TopTax, DV = Credibility -- Table Supporting Figure 4 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm")
+
+kbl(t4e, booktabs =T, caption = "\\label{tab:h4_11_oa}Heterogeneous Treatment Effect: Principledness (2) for Speed Limit, DV = Credibility -- Table Supporting Figure 4 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm") 
+
+kbl(t4f, booktabs =T, caption = "\\label{tab:h4_12_oa}Heterogeneous Treatment Effect: Principledness (2) for Issue Pooled Analysis, DV = Credibility -- Table Supporting Figure 4 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm")
+```
+
+## Hypothesis 5
+```{r "h5-rep", topcaption=TRUE}
+source(here("src/analysis/oa/h5_exp_oa_dv_rep.R")) #pooled?
+
+kbl(t5a, booktabs =T, caption = "\\label{tab:h5_1_oa_rep}Heterogeneous Treatment Effect: Social Trust for TopTax, DV = Representation", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm")
+
+kbl(t5b, booktabs =T, caption = "\\label{tab:h5_2_oa_re9}Heterogeneous Treatment Effect: Social Trust for Speed Limit, DV = Representation", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm") 
+
+kbl(t5c, booktabs =T, caption = "\\label{tab:h5_3_oa}Heterogeneous Treatment Effect: Social Trust for Issue Pooled Analysis, DV = Represenation", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm") 
+```
+
+\newpage
+# Appendix I. Explorative Analysis: Heterogeneous treatments
+
+## HT: Issue congruence
+
+Figure \ref{fig:ht_ic} visualizes the heteregeneous effect of issue congruence. 
+Looking at the issue of speed limits, we see that respondents who hold a congruent issue position with the party, they value staying steadfast less than those who hold an incongruent issue position.
+We however observe the complete opposite for the issue top tax, but the difference however is insignificant.
+This means that we cannot conclude a uniform moderating effect of issue congruence on the relationship between parties' reputation and striking a compromise.
+
+```{r ht-ic, fig.align = 'center', out.width = "100%", fig.cap = "\\label{fig:ht_ic}Heterogenous Treatment Issue Congruence", fig.topcaption=TRUE, fig.pos="H"}
+knitr::include_graphics(here("report/figures/explor-pol-mod-5.png"))
+```
+
+## HT: Ideological Position 
+
+Figure \ref{fig:hr_ip} demonstrates that the respondents with a left-leaning ideological orientation prefer parties to stay steadfast on the issue of top tax, while right-leaning voters prefer a political compromise.
+There is however no significant difference between the left and the right when it comes to the issue of speed limit.
+This indicates that for issues that align with the dimension, you like your party to stick to their ideological commitment.
+
+```{r ht-ip, fig.align = 'center', out.width = "100%", fig.cap = "\\label{fig:hr_ip}Heterogenous Treatment Ideological Position", fig.topcaption=TRUE, fig.pos="H"}
+knitr::include_graphics(here("report/figures/explor-pol-mod-4.png"))
+```
+
+## HT: Political Interest
+
+Figure \ref{ht_pol_int} demonstrates that the more political interest a respondent has, the less likely the respondent values the party stating steadfast. 
+This indicates that people with high levels of political interest, they prefer the party to seek a political compromise. 
+This could be an indication of understanding politics -- if a party gives in on something, it might be that they later get something in return.
+
+```{r ht-polint, fig.align = 'center', out.width = "100%", fig.cap = "\\label{fig:ht_pol_int}Heterogenous Treatment Political Interest", fig.topcaption=TRUE, fig.pos="H"}
+knitr::include_graphics(here("report/figures/explor-pol-mod-8.png"))
+```
+
+## HT: Political Knowledge
+
+Figure \ref{ht_pol_know} demonstrates, similar to Political Interest, that the more political knowledge a respondent has, the less likely the respondent values the party stating steadfast. 
+This indicates that people with high levels of political knowledge, they prefer the party to seek a political compromise. 
+
+```{r ht-polknow, fig.align = 'center', out.width = "100%", fig.cap = "\\label{fig:ht_pol_know}Heterogenous Treatment Political Knowledge", fig.topcaption=TRUE, fig.pos="H"}
+knitr::include_graphics(here("report/figures/explor-pol-mod-9.png"))
+```
+
+## HT:Party Choice
+
+The effect of this analysis is elaborated on in the main text.
+
+```{r ht-partychoice, fig.align = 'center', out.width = "100%", fig.cap = "\\label{fig:ht_pol_know}Heterogenous Treatment Party Choice", fig.topcaption=TRUE, fig.pos="H"}
+knitr::include_graphics(here("report/figures/explor-pol-mod-7.png"))
+```
+
+\newpage
+# Appendix J. Robustness Analyses Experimental Study -- Knowledge of Parties Negotiation
+
+## Hypothesis 1 & 2
+
+Looking at those respondents who know which parties are negotating for the 2021 coalition, Figure \ref{fig:h1_party} shows that the main effects shown in the manuscript (Figure 2) do not change.
+
+```{r "h1-know", fig.cap = "\\label{fig:h1_party}Predicted Reputational Cost ", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+knitr::include_graphics(here("report/figures/robust-1.png"))
+```
+
+## Hypothesis 3
+
+Looking at those respondents who know which parties are negotating for the 2021 coalition, Figure \ref{fig:h3_party} shows that the main effects shown in the manuscript (Figure 3) do not change.
+
+```{r "h3-know", fig.cap = "\\label{fig:h3_party}Predicted Reputational Cost ", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+knitr::include_graphics(here("report/figures/robust-2.png"))
+```
+
+## Hypothesis 4 & 5
+
+Looking at those respondents who know which parties are negotating for the 2021 coalition, Figures \ref{fig:h4_party} and \ref{fig:h5_party} show that the main effects shown in the manuscript (Figure 4 and 5) do not change.
+
+```{r "h4-know", fig.cap = "\\label{fig:h4_party}Heterogeneous Treatment Effect: Principledness", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+knitr::include_graphics(here("report/figures/robust-3.png"))
+```
+
+```{r "h5-know", fig.cap = "\\label{fig:h5_party}Heterogeneous Treatment Effect: Social Trust", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+knitr::include_graphics(here("report/figures/robust-4.png"))
+```
+\newpage
+
+# Appendix K. Robustness Analyses Experimental Study -- Analyses per Party
+\blandscape
+## Hypothesis 1 & 2
+```{r "h1-party", fig.cap = "\\label{fig:h1_party}Predicted Reputational Cost ", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+knitr::include_graphics(here("report/figures/effects-per-party-1.png"))
+```
+
+## Hypothesis 3
+```{r "h3-party", fig.cap = "\\label{fig:h3_party}Predicted Reputational Cost ", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+knitr::include_graphics(here("report/figures/effects-per-party-2.png"))
+```
+
+## Hypothesis 4 & 5
+```{r "h4-party", fig.cap = "\\label{fig:h1_party}Heterogeneous Treatment Effect: Principledness", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+knitr::include_graphics(here("report/figures/effects-per-party-3.png"))
+```
+
+```{r "h5-party", fig.cap = "\\label{fig:h5_party}Heterogeneous Treatment Effect: Social Trust", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+knitr::include_graphics(here("report/figures/effects-per-party-4.png"))
+```
+
+```{r "h45-direct", fig.cap = "\\label{fig:h5_party}Direct Effects of Principledness and Social Trust", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+knitr::include_graphics(here("report/figures/h45-direct-2.png"))
+```
+\elandscape
+
+\newpage
+# Appendix L. Operationalization Variables of Observational Data
+To measure the effects on political trust, we study two dependent variables: `trust in politicians` and `satisfaction with democracy`.[^]:N.B. Only the `trust in politicians` was pre-registered as the dependent variable. 
+`Trust in politicians` is measured with responses to the statement: ''Most politicians are trustworthy'' with a 5-point Likert scale from 1 (_strongly disagree_) to 5 (_strongly disagree_).
+
+`Satisfaction in democracy` is measured with the question: ''On the whole are you very satisfied, rather satisfied, not very satisfied or not at all satisfied with the way democracy is developing in [COUNTRY]?'', with 5-point Likert scale from 1 (_not at all satisfied_) to 5 (_very satisfied_) as answer categories.   
+
+Our main independent variable, `willingness to accept compromise`, is measured with an item from @hibbing2002stealth's stealth democracy index: ''What people call compromise in politics is really just selling out on one's principles.'' This item is also measured with a 5-point Likert variable ranging from 1 (_strongly disagree_) to 5 (_strongly disagree_).
+
+# Appendix M. Regression Tables for Observational Data
+
+## Figure 6
+```{r "obs", topcaption=TRUE}
+source(here("src/analysis/oa/obs_oa.R"))
+
+dv1 <- rep2 %>% 
+  filter(y == "Trust in Politicians") %>% 
+  select(Country = country, estimate, std.error, statistic)
+kbl(dv1, booktabs =T, caption = "\\label{tab:obs1_oa}Predicted Anti-Compromise Attitude, DV = Trust in Politicians -- Table Supporting Figure 6 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm")
+
+dv2 <- rep2 %>% 
+  filter(y == "Satisfaction with Democracy") %>% 
+  select(Country = country, estimate, std.error, statistic)
+kbl(dv2, booktabs =T, caption = "\\label{tab:obs2_oa}Predicted Anti-Compromise Attitude, DV = Satisfaction with Democracy -- Table Supporting Figure 6 in the Main Manuscript", position = "h",
+    align = c("l", "c", "c", "c"), longtable = T) %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center",
+                repeat_header_continued = T) %>%
+ column_spec(1, width = "7.5cm") %>%
+ column_spec(2, width = "2.5cm") %>%
+ column_spec(3, width = "2.5cm") %>%
+ column_spec(4, width = "2.5cm")
+```
+
+\newpage

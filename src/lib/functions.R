@@ -39,7 +39,7 @@ regression_direct <- function(df, a, b){
                y = depVarList[i],
                lower = estimate - (1.56 * std.error),
                upper = estimate + (1.56 * std.error)) %>%
-        select(estimate, upper, lower, y, x)
+        select(estimate, upper, lower, y, x, std.error, p.value)
     }
     else{
       tmp <- tidy(allModels[[i]]) %>%
@@ -47,7 +47,7 @@ regression_direct <- function(df, a, b){
                y = depVarList[i],
                lower = estimate - (1.56 * std.error),
                upper = estimate + (1.56 * std.error)) %>%
-        select(estimate, upper, lower, y, x)
+        select(estimate, upper, lower, y, x, std.error, p.value)
       m <- m %>%
         add_case(tmp)
     }
@@ -147,21 +147,22 @@ regression <- function(df, a, b){
   
   for(i in 1:length(depVarList)){
     if(i==1){
-      m <- summary(margins(allModels[[i]], variables = "a", at = list(b = 0:1))) %>%
-        mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
-        select(AME, upper, lower, y, b)
+      m <- tidy(allModels[[i]]) %>%
+        mutate(x = term,
+               y = depVarList[i],
+               lower = estimate - (1.56 * std.error),
+               upper = estimate + (1.56 * std.error)) %>%
+        select(estimate, upper, lower, y, x, std.error, p.value)
     }
     else{
-      tmp <- summary(margins(allModels[[i]], variables = "a", at = list(b = 0:1))) %>%
-        mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
-        select(AME, upper, lower, y, b)
+      tmp <- tidy(allModels[[i]]) %>%
+        mutate(x = term,
+               y = depVarList[i],
+               lower = estimate - (1.56 * std.error),
+               upper = estimate + (1.56 * std.error)) %>%
+        select(estimate, upper, lower, y, x, std.error, p.value)
       m <- m %>%
         add_case(tmp)
-      
     }
   }
   return(m)
@@ -183,21 +184,22 @@ regression_party <- function(df, a, b){
   
   for(i in 1:length(depVarList)){
     if(i==1){
-      m <- summary(margins(allModels[[i]], variables = "a", at = list(b = 0:1))) %>%
-        mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
-        select(AME, upper, lower, y, b)
+      m <- tidy(allModels[[i]]) %>%
+        mutate(x = term,
+               y = depVarList[i],
+               lower = estimate - (1.56 * std.error),
+               upper = estimate + (1.56 * std.error)) %>%
+        select(estimate, upper, lower, y, x)
     }
     else{
-      tmp <- summary(margins(allModels[[i]], variables = "a", at = list(b = 0:1))) %>%
-        mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
-        select(AME, upper, lower, y, b)
+      tmp <- tidy(allModels[[i]]) %>%
+        mutate(x = term,
+               y = depVarList[i],
+               lower = estimate - (1.56 * std.error),
+               upper = estimate + (1.56 * std.error)) %>%
+        select(estimate, upper, lower, y, x)
       m <- m %>%
         add_case(tmp)
-      
     }
   }
   return(m)
@@ -270,6 +272,39 @@ regression_ht1 <- function(df, compromise, outcome, b){
       m <- m %>%
         add_case(tmp)
       
+    }
+  }
+  return(m)
+}
+
+regression_ht_oa <- function(df, compromise, outcome, b){
+  
+  depVarList <- df %>% select(matches("DV[123]"))
+  indepVarList <- df %>% select(compromise, outcome, b, S1, S2, partner, PT8, 
+                                PT1_1, PT1_2, PT3_2, D4, D7,
+                                D9, D10) 
+  allModels <- apply(depVarList,2,function(xl)lm(xl ~ outcome + compromise * b +
+                                                   factor(S1) + S2 + factor(partner) +
+                                                   PT8 + PT1_1 + PT1_2 + PT3_2 +
+                                                   factor(D4) + factor(D7) +
+                                                   factor(D9) + factor(D10),
+                                                 data= indepVarList))
+  depVarList <- df %>% select(matches("DV[123]")) %>% colnames()
+  
+  for(i in 1:length(depVarList)){
+    if(i==1){
+      m <- tidy(allModels[[i]]) %>%
+        mutate(x = term,
+               y = depVarList[i]) %>%
+        select(estimate, y, x, std.error, p.value)
+    }
+    else{
+      tmp <- tidy(allModels[[i]]) %>%
+        mutate(x = term,
+               y = depVarList[i]) %>%
+        select(estimate, y, x, std.error, p.value)
+      m <- m %>%
+        add_case(tmp)
     }
   }
   return(m)
@@ -656,21 +691,22 @@ pooled_regression <- function(df, a, b, issue){
   
   for(i in 1:length(depVarList)){
     if(i==1){
-      m <- summary(margins(allModels[[i]], variables = "a", at = list(b = 0:1))) %>%
-        mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
-        select(AME, upper, lower, y, b)
+      m <- tidy(allModels[[i]]) %>%
+        mutate(x = term,
+               y = depVarList[i],
+               lower = estimate - (1.56 * std.error),
+               upper = estimate + (1.56 * std.error)) %>%
+        select(estimate, upper, lower, y, x, std.error, p.value)
     }
     else{
-      tmp <- summary(margins(allModels[[i]], variables = "a", at = list(b = 0:1))) %>%
-        mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
-        select(AME, upper, lower, y, b)
+      tmp <- tidy(allModels[[i]]) %>%
+        mutate(x = term,
+               y = depVarList[i],
+               lower = estimate - (1.56 * std.error),
+               upper = estimate + (1.56 * std.error)) %>%
+        select(estimate, upper, lower, y, x, std.error, p.value)
       m <- m %>%
         add_case(tmp)
-      
     }
   }
   return(m)
@@ -693,21 +729,22 @@ pooled_regression_party <- function(df, a, b, issue){
   
   for(i in 1:length(depVarList)){
     if(i==1){
-      m <- summary(margins(allModels[[i]], variables = "a", at = list(b = 0:1))) %>%
-        mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
-        select(AME, upper, lower, y, b)
+      m <- tidy(allModels[[i]]) %>%
+        mutate(x = term,
+               y = depVarList[i],
+               lower = estimate - (1.56 * std.error),
+               upper = estimate + (1.56 * std.error)) %>%
+        select(estimate, upper, lower, y, x)
     }
     else{
-      tmp <- summary(margins(allModels[[i]], variables = "a", at = list(b = 0:1))) %>%
-        mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
-        select(AME, upper, lower, y, b)
+      tmp <- tidy(allModels[[i]]) %>%
+        mutate(x = term,
+               y = depVarList[i],
+               lower = estimate - (1.56 * std.error),
+               upper = estimate + (1.56 * std.error)) %>%
+        select(estimate, upper, lower, y, x)
       m <- m %>%
         add_case(tmp)
-      
     }
   }
   return(m)
@@ -745,6 +782,40 @@ pooled_regression_explor <- function(df, a, b, issue){
       m <- m %>%
         add_case(tmp)
       
+    }
+  }
+  return(m)
+}
+
+pooled_regression_ht_oa <- function(df, compromise, outcome, b, issue){
+  
+  depVarList <- df %>% select(matches("DV[123]"))
+  indepVarList <- df %>% select(compromise, outcome, b, S1, S2, partner, issue, PT8, 
+                                PT1_1, PT1_2, PT3_2, D4, D7,
+                                D9, D10) 
+  allModels <- apply(depVarList,2,function(xl)lm(xl ~ outcome + compromise * b +
+                                                   factor(S1) + S2 + factor(partner) +
+                                                   factor(issue) +
+                                                   PT8 + PT1_1 + PT1_2 + PT3_2 +
+                                                   factor(D4) + factor(D7) +
+                                                   factor(D9) + factor(D10),
+                                                 data= indepVarList))
+  depVarList <- df %>% select(matches("DV[123]")) %>% colnames()
+  
+  for(i in 1:length(depVarList)){
+    if(i==1){
+      m <- tidy(allModels[[i]]) %>%
+        mutate(x = term,
+               y = depVarList[i]) %>%
+        select(estimate, y, x, std.error, p.value)
+    }
+    else{
+      tmp <- tidy(allModels[[i]]) %>%
+        mutate(x = term,
+               y = depVarList[i]) %>%
+        select(estimate, y, x, std.error, p.value)
+      m <- m %>%
+        add_case(tmp)
     }
   }
   return(m)

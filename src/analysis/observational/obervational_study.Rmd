@@ -1,0 +1,121 @@
+---
+title: "Results Observational Study"
+output:
+  github_document:
+  toc: yes
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r "setup", include=FALSE}
+library(knitr)
+opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
+                      fig.align = "center",
+                      fig.path=('../../../report/figures/'))
+library(rmarkdown)
+```
+
+# Analysis
+- [Set Up](#set-up)
+- [Analyses](#analysis)
+  - [Pre-Registered](#pre-registered)
+  - [Exploratory](#exploratory)
+
+## Set-up
+```{r "set-up", message=FALSE, warning=F}
+rm(list=ls())
+source(here::here("src/lib/functions.R"))
+load(here("data/intermediate/observational_data.Rdata"))
+```
+
+## Analyses
+
+### Pre-Registered
+The code below demonstrate the OLS regression predicting the level of political trust by willingness to accept compromises.
+Next to the control variables, it includes country dummies and dummies indicating whether more than ten percent of the values where missing.
+
+```{r "h1-obs", message=F, warning=F, fig.width=10, fig.height=7}
+source(here("src/analysis/h1_obs.R"))
+h1
+```
+
+The beta-coefficient of Willingness to Accept Compromise is positive and statistically significant, as hypothesized in [our Pre-Analysis Plan](https://osf.io/h29j3).
+The coefficient of 0.15 is however a small effect. 
+It indicates that the higher one's willingness to accept compromise, the higher one's trust in politicians.
+More precisely, it means that when Willingness to Accept Compromise goes up by 1 -- i.e. answering `rather yes` instead of `completely agree` with the statement _What people call compromise in politics is really just selling out on one's principles._ -- the the level of trust in politicians goes up by 0.15.
+Trust in politicians is a five-point scale, where 1 indicates completely disagreeing with the statement _Most politicians are trustworthy_ and 5 indicates that completely agrees with the statement.
+
+Because we pooled the data of various countries, the graph below demonstrate the country differences. 
+The Netherlads is the reference category.
+This graph demonstrates that all countries, but particularly France, Germany, Great Britain, and Italy, are statistically different from the Netherlands.
+
+```{r "robust1", echo = F, message=F, warning=F, fig.width=10, fig.height=7}
+r1
+```
+
+To make sure the effect is not driven by any particular country, the graphs below show that for all countries, the coefficient is positive.
+Moreover, except for Italy, the coefficient is statistically significant too.
+This indicates that the effects found in the pooled analysis are not driven by any specific country.
+```{r "robust2", echo = F, message=F, warning=F, fig.width=12, fig.height=20}
+source(here("src/analysis/robust_obs.R"))
+(p1 + p2) /( p3 + p4)/ ( p5 + p6)
+```
+
+Moreover, we have imputed the missing values using the _Green \& Gerber formula_ (Green \& Gerber 2008). 
+To demonstrate whether the dichotomous variables indicating whether the respondents' value was missing are different from the respondents' who have completed the question, the graph below demonstrates the coefficients of the `missing dummies`.
+The graph shows that only for the variables `age` and `trust` the imputed values elicit a different effect from the non-imputed ones. 
+
+```{r "robust4", echo=F, message=F, warning=F, fig.width=10, fig.height=7}
+r2
+```
+
+The result show that particularly the imputed missing values for `trust` and `age` seem to elicit an effect in the regression results.
+To check the robustness of the analysis, we therefore have also ran the analysis excluding the observations where `trust` and `age` have been imputed.
+As the visualization below demonstrates, this does not change the coefficient of `willingness to accept compromise`.
+
+```{r "robust5", echo = F, message=F, warning=F, fig.width=10, fig.height=7}
+r3
+```
+
+### Replication Full CSES Round 5
+```{r "cses5", echo = F, message=F, warning=F, fig.width=12, fig.height=7}
+df <- d %>% 
+  filter(country %in% c("The Netherlands", "Great Britain")) %>% 
+  select(country, 
+         trust,
+         swd = satisfaction_democracy,
+         wtac,
+         age, gender, education, income,
+         pid, political_interest,
+         rile_selfplacement, gov_performance,
+         m_trust = missing_trust,
+         m_wtac = missing_wtac,
+         m_pid = missing_pid,
+         m_education = missing_education,
+         m_income = missing_income,
+         m_age = missing_age,
+         m_gender = missing_gender,
+         m_rile_selfplacement = missing_rile_selfplacement
+         ) %>% 
+  mutate(swd = ifelse(swd == "Dissatisfied", 0,1))
+
+load(here("data/intermediate/cses_round5.Rdata"))
+
+d <- d %>% 
+  mutate(political_interest = recode(political_interest,
+                                     `1` = "Interested",
+                                     `2` = "Interested",
+                                     `3` = "Not Interested",
+                                     `4` = "Not Interested"),
+         gov_performance = recode(gov_performance,
+                                  `1` = "Satisfied",
+                                  `2` = "Satisfied",
+                                  `3` = "Dissatisfied",
+                                  `4` = "Dissatisfied"))
+source(here("src/analysis/replication.R"))
+
+rep
+
+rep2
+```
+

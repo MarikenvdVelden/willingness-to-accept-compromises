@@ -1,0 +1,119 @@
+---
+title: 'Prepare Data'
+author: 
+output: 
+  github_document:
+    toc: yes
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r "setup", include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
+                      fig.align = "center",
+                      fig.path=('../../report/figures/'))
+library(printr)
+options(digits = 2)
+library(rmarkdown)
+```
+
+# Scripts
+
+
+## Required Packages &amp; Reproducibility
+```{r "env", message=FALSE, warning=F, results='hide'}
+rm(list=ls())
+source(here::here("src/lib/functions.R"))
+```
+
+## Tidy Data
+This code chuck downloads the data from Qualtrics using the API and cleans the raw data.
+
+```{r "get data from Qualtrics", results="hide"}
+## Match data with RESPONDI quota questions
+d <- fetch_survey(surveyID = "SV_bIoc119D4OgUztA", 
+                    verbose = TRUE, force_request = T,
+                    label = FALSE, convert = FALSE)
+source(here("src/data-processing/clean_data.R"))
+```
+
+## Save Data for Analysis
+```{r "save data"}
+save(d, file = here("data/intermediate/cleaned_experiment.RData"))
+```
+
+## Visualization of Data
+
+### Dependent Variable
+```{r "Dependent Variable", echo=F, fig.width=10, fig.height=8}
+d %>%
+  select(MC, AC, time) %>%
+  pivot_longer(cols = MC:time,
+               names_to = "dvs") %>%
+  mutate(dvs = recode(dvs,
+                       MC = "Manipulation Checks ",
+                       AC = "Attention Check",
+                       time = "Time"),
+         value = as.numeric(value)) %>%
+  group_by(dvs) %>%
+  summarise(means = mean(value, na.rm=T),
+            stdev = sd(value, na.rm=T)) %>%
+  mutate(lower = means - (1.56 * stdev),
+         upper = means + (1.56 * stdev)) %>% 
+  ggplot(aes(x = dvs, y = means,
+             ymin = lower, ymax = upper)) +
+  geom_point(position = position_dodge(.5)) + 
+  geom_errorbar(position = position_dodge(.5), width = 0) +
+  labs(y = "", 
+       x = "") +
+  theme_minimal() +
+  scale_color_manual(values = fig_cols) +
+  coord_flip() +
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.position="none",
+        legend.title = element_blank()) 
+```
+
+### Treatment Conditions
+```{r "Independent Variables", echo=F, message=FALSE, warning=FALSE,fig.width=10, fig.height=10}
+d %>%
+  select(treatment) %>%
+  mutate(treatment = recode(treatment, 
+                           `insta` = "Instagram Treatment", 
+                           `text` = "Textual Treatment")) %>%
+  group_by(treatment) %>%
+  summarise(n = n()) %>%
+  mutate(perc = round(n/sum(n),2),
+         perc2 = paste0(perc*100, "%")) %>%
+  ggplot(aes(x = perc, y = treatment, label = perc2)) +
+  geom_col(width=0.75) + 
+  geom_text(position = position_fill(vjust=0.25), color = "white", fontface = "bold") +
+  labs(y = "", x = "", title = "Distribution of Treatments") +
+  scale_x_continuous(labels=scales::percent) +
+  theme_minimal() +
+  scale_fill_manual(values = fig_cols) +
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.position="bottom",
+        legend.title = element_blank()) +
+  guides(fill=guide_legend(ncol=4,byrow=TRUE))
+```
+
+
+### Correlations Matrix
+```{r "Correlations Matrix", echo=F, message=T, warning=T, fig.width=15, fig.height=15}
+d %>%
+  select(`Gender` = D1,
+         `Age` = D2,
+         `Education` = D3,
+         `Vote Recall`  = D4,
+         `Dgital Literacy`  = D5,
+         `Time`  = time,
+         `Manipulation Checks`  = MC,
+         `Attention Check`  = AC) %>%
+  ggcorrmat(
+  type = "robust", # correlation method
+  cor.vars = c(everything()), # a range of variables can be selected
+  colors = c(fig_cols[1], fig_cols[4], fig_cols[8]),
+  title = "Correlalogram for Variables under Study"
+)
+```

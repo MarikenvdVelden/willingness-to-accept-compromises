@@ -1,0 +1,50 @@
+descr <- d %>%
+  mutate(compromise = if_else(compromise == "yes", 1, 0),
+         negotiation = if_else(outcome == "negotiation", 1, 0)) %>%
+  select(D7:D8, PT1_1:PT8, S2, compromise,
+         negotiation, DV1: DV3, HT1:POST) %>%
+  pivot_longer(cols = D7:POST,
+               names_to = "Variables") %>%
+  group_by(Variables) %>%
+  summarise(`Mean Value` = mean(value, na.rm = T),
+            `St. Dev` = sd(value, na.rm = T),
+            `Min. Value` = min(value, na.rm = T),
+            `Max. Value` = max(value, na.rm = T)) %>%
+  ungroup() %>%
+  mutate(Variables = recode(Variables,
+                            `D7` = "Employment",
+                            `D8` = "Income",
+                            `pol_know`  = "Political Knowledge",
+                            `PT1_1` = "Position Speed Limit",
+                            `PT1_2` = "Position Top Tax",
+                            `PT1_3` = "Position Legalization Cannabis",
+                            `PT3_1` = "Salience Speed Limit",
+                            `PT3_2` = "Salience Top Tax",
+                            `PT3_3` = "Salience Legalization Cannabis",
+                            `PT7`  = "Political Interest",
+                            `PT8`  = "Ideology",
+                            `POST` = "Populist Attitudes",
+                            `S2` = "Partisan Strength",
+                            `MC` = "Manipulation Checks",
+                            `DV1`  = "DV: Trust",
+                            `DV2`  = "DV: Credibility",
+                            `DV3`  = "DV: Representation",
+                            `HT1` = "Principledness (1)",
+                            `HT2` = "Principledness (2)",
+                            `HT3` = "Mutual Trust",
+                            `negotiation` = "Treatment: Coalition Talks Continue",
+                            `compromise` = "Treatment: Party Compromised"),
+         Variables = factor(Variables,
+                            levels = c("DV: Trust","DV: Credibility", "DV: Representation",
+                                       "Treatment: Party Compromised",
+                                       "Treatment: Coalition Talks Continue",
+                                       "Principledness (1)", "Principledness (2)",
+                                       "Mutual Trust", "Manipulation Checks",
+                                       "Partisan Strength", "Populist Attitudes",
+                                       "Position Speed Limit", "Position Top Tax",
+                                       "Position Legalization Cannabis", "Salience Speed Limit",
+                                       "Salience Top Tax", "Salience Legalization Cannabis",
+                                       "Ideology", "Political Knowledge",
+                                       "Political Interest",
+                                       "Employment","Income")))
+

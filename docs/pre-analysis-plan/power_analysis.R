@@ -13,12 +13,12 @@ treatment_effect <- 0.1
 population <- declare_population(N = N, u = rnorm(N))
 potential_outcomes <- declare_potential_outcomes(Y_Z_0 = u, Y_Z_1 = Y_Z_0 + treatment_effect)
 estimand <- declare_estimand(ATE = mean(Y_Z_1 - Y_Z_0))
-assignment <- declare_assignment(prob = assignment_prob)
+assignment <- declare_assignment(Z = conduct_ra(N = N, prob = assignment_prob))
 reveal_Y <- declare_reveal()
 estimator <- declare_estimator(Y ~ Z, estimand = estimand, term="Z", model=lm)
 two_arm_design <- population + potential_outcomes + estimand + 
   assignment + reveal_Y + estimator
-designs <- redesign(design=two_arm_design, N=seq(2000,6000,1000), treatment_effect=seq(0.1,0.2,0.1))
+designs <- redesign(design=two_arm_design, N=seq(100,300,200), treatment_effect=seq(0.1,1,0.2))
 
 alpha <- .05
 my_diagnosands <- declare_diagnosands(power.onetailed=mean(p.value<alpha), keep_defaults=TRUE)

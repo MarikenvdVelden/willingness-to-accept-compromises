@@ -1,0 +1,112 @@
+---
+title: 'Analyses'
+author: 
+output: 
+  github_document:
+always_allow_html: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r "setup", include=FALSE}
+library(knitr)
+opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
+                      fig.align = "center",
+                      fig.path=('../../report/figures/'))
+options(scipen = 1, digits = 2)
+library(rmarkdown)
+```
+
+# Scripts
+
+
+# Required Packages &amp; Reproducibility
+```{r "env", message=FALSE, warning=F}
+rm(list=ls())
+source(here::here("src/lib/functions.R"))
+```
+
+# Pre-Registered Analyses
+
+```{r "data for analyses"}
+load(here("treatment-experiment/data/intermediate/cleaned_experiment.RData"))
+```
+
+Next, we automatically extract a `.md` file for the online appendix, as well as a  latex table for the manuscript. 
+We are using jinja2 template [src/analysis/table_descriptives.tex.j2](table.tex.j2) which is called with a json string containing the data.
+To replicate, make sure `env/bin/pip install -U j2cli` is installed via your command line.
+
+```{r "Table with Descriptives", eval=F}
+source(here("src/analysis/descriptive-information-overview.R"))
+table2 <- knitr::kable(descr, digits=2)
+fn <- here("report/figures/table_descriptives.tex")
+cat("# Table: Descriptive Information of Variables under Study \n\n", file=fn)
+cat(table2, file=fn, sep="\n", append=T)
+
+methodnames <- setNames(as.list(descr$Variables), descr$Variables)
+table <- purrr::map(descr, .f= ".") 
+#render_j2(here("src/analysis/table_descriptives.tex.j2"), here("report/figures/table_descriptives.tex"),
+#          data=list(data=table, methods=methodnames))
+rm(descr, methodnames, table, fn, table2)
+```
+
+## Descriptive Results
+```{r "descriptive-results", echo=FALSE, fig.height=15, fig.width=10}
+d %>%
+  select(MC, AC, time, treatment) %>%
+  pivot_longer(cols = MC:time,
+               names_to = "dvs") %>%
+  mutate(dvs = recode(dvs,
+                       MC = "Manipulation Checks ",
+                       AC = "Attention Check",
+                       time = "Time"),
+         value = as.numeric(value),
+         treatment = if_else(treatment=="insta", "Instagram Treatment", "Textual Treatment")) %>%
+  group_by(treatment, dvs) %>%
+  summarise(means = round(mean(value, na.rm=T),1),
+            stdev = sd(value, na.rm=T)) %>%
+  mutate(lower = means - (1.96 * stdev),
+         upper = means + (1.96 * stdev),
+         type = if_else(means <= 5, "below", "above")) %>%
+  ggplot(aes(x = treatment, 
+             y =means, label = means,
+             ymin = lower, ymax = upper)) +
+  geom_point(stat='identity', size=6)  +
+  scale_color_manual(values = c("above"=fig_cols[3],
+                                "below"=fig_cols[2])) +
+  geom_errorbar(width = 0) +
+  geom_text(color="white", size=2) +
+  facet_grid(dvs~.) +
+  labs(y = "", 
+       x = "", title = "Do Visual Experimental Treatments Improve Respondent's Engagement?") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5),
+        legend.position="none",
+        legend.title = element_blank(),
+        axis.text=element_text(size=8)) +
+  geom_hline(yintercept = 5, linetype = "dotted", color = "darkgrey") +
+  coord_flip() 
+```
+
+## Balance Checks
+
+The figure below shows that the data is unbalanced for the variables: `Education`,`Income`, `Employment`, `Urbaness`, `Living Place`, `Birth Place`, `Age`, `Political Knowledge`, `Political Interest`, and `Ideology`.
+As described in the Pre-Analysis Plan (p.10), I will add these covariates to the analyses as controls.
+
+```{r "balance-checks", fig.height=10, fig.width=10}
+source(here("treatment-experiment/src/analysis/balance-test.R"))
+df
+```
+
+##  Hypotheses 
+```{r "hs", fig.align="center", fig.height=10, fig.width=15}
+source(here("treatment-experiment/src/analysis/hs.R"))
+h
+```
+
+## Exploration: Interactions Age & Digital Literacy with Treatment
+```{r "exp", fig.align="center", fig.height=15, fig.width=10}
+source(here("treatment-experiment/src/analysis/exp.R"))
+he
+```

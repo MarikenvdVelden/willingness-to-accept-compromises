@@ -1,0 +1,198 @@
+---
+title: 'Analyses Experiment'
+author: 
+output: 
+  github_document:
+always_allow_html: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r "setup", include=FALSE}
+library(knitr)
+opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
+                      fig.align = "center", cache = FALSE,
+                      fig.path=('../../../report/figures/'))
+library(rmarkdown)
+```
+
+# Scripts
+
+
+# Required Packages &amp; Reproducibility
+```{r "env", message=FALSE, warning=F}
+rm(list=ls())
+source(here::here("src/lib/functions.R"))
+```
+
+# Pre-Registered Analyses
+
+```{r "data for analyses"}
+load(here("data/intermediate/cleaned_experiment.RData"))
+
+source(here("src/analysis/experiment/scaling.R"))
+kbl(scale, booktabs =T, caption = "\\label{tab:scale}Reliable Scales") %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center") %>%
+  column_spec(1, width = "5cm") %>%
+  column_spec(2, width = "4cm")
+rm(scale)
+
+source(here("src/analysis/experiment/data-for-analyses.R"))
+```
+
+## Descriptive Results
+```{r "descriptive-results", echo=FALSE, fig.height=15, fig.width=10}
+d %>%
+  select(DV1:DV3, compromise, outcome) %>%
+  pivot_longer(cols = DV1:DV3,
+               names_to = "dvs") %>%
+  mutate(dvs = recode(dvs,
+                      `DV1` = "DV: Trust",
+                      `DV2` = "DV: Credibility",
+                      `DV3` = "DV: Representation"),
+         outcome = recode(outcome, 
+                           `stalled` = "Coalition talks stalled", 
+                           `negotiation` = "Parties go to negotiation phase"),
+         compromise = recode(compromise,
+                             `yes` = "Party compromised",
+                             `no` = "Party remained steadfast")) %>%
+  unite(treat, compromise, outcome, sep = " - ") %>%
+  group_by(treat, dvs) %>%
+  summarise(means = round(mean(value, na.rm=T),1),
+            stdev = sd(value, na.rm=T)) %>%
+  mutate(lower = means - (1.56 * stdev),
+         upper = means + (1.56 * stdev),
+         type = if_else(means <= 5, "below", "above")) %>%
+  ggplot(aes(x = treat, 
+             y =means, label = means,
+             ymin = lower, ymax = upper)) +
+  geom_point(stat='identity', size=6)  +
+  scale_color_manual(values = c("above"=fig_cols[3],
+                                "below"=fig_cols[2])) +
+  geom_errorbar(width = 0) +
+  geom_text(color="white", size=2) +
+  facet_grid(dvs~.) +
+  labs(y = "0 (negative) - 10 (positive)", 
+       x = "", title = "Reputational Cost of Compromise") +
+  theme_ipsum() +
+  theme(plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5),
+        legend.position="none",
+        legend.title = element_blank(),
+        axis.text=element_text(size=8)) +
+  geom_hline(yintercept = 5, linetype = "dotted", color = "darkgrey") +
+  coord_flip() 
+```
+
+## Balance Checks
+
+The figure below shows that the data is unbalanced for the variables: `Education`,`Income`, `Employment`, `Urbaness`, `Living Place`, `Birth Place`, `Age`, `Political Knowledge`, `Political Interest`, and `Ideology`.
+As described in the Pre-Analysis Plan (p.10), I will add these covariates to the analyses as controls.
+
+```{r "balance-checks", fig.height=10, fig.width=10}
+source(here("src/analysis/experiment/balance-test.R"))
+df
+```
+
+## Manipulation Checks
+
+```{r "mc", fig.height=10, fig.width=10}
+source(here("src/analysis/experiment/MC.R"))
+p0
+
+pa
+pb
+pc_2b/ pc_2a + plot_layout(guides = 'collect')  & theme(legend.position = 'bottom')
+pd
+```
+
+## Steadfast Hypothesis & Outcome Hypothesis
+```{r "h1", fig.align="center", fig.height=5, fig.width=10}
+source(here("src/analysis/experiment/h1_exp.R"))
+p1
+```
+
+## Compromise Hypothesis
+```{r "h3", fig.align="center", fig.height=5, fig.width=10}
+source(here("src/analysis/experiment/h3_exp.R")) 
+p2
+
+source(here("src/analysis/experiment/h3_exp_int.R")) 
+p2_int
+```
+
+## Principled Hypothesis
+```{r "h4", fig.align="center", fig.height=8, fig.width=8}
+source(here("src/analysis/experiment/h4_exp.R")) #pooled?
+p3b / p3a + plot_layout(guides = 'collect')  & theme(legend.position = 'bottom')
+
+p3_2b/ p3_2a + plot_layout(guides = 'collect')  & theme(legend.position = 'none')
+```
+
+## Mutual Trust Hypothesis
+```{r "h5", fig.align="center", fig.height=7, fig.width=10}
+source(here("src/analysis/experiment/h5_exp.R")) #pooled?
+p4
+
+p4_2
+```
+
+# Robust  
+Results for those who know who is in the actual coalition negotiations
+
+```{r "robust", fig.align="center", fig.height=7, fig.width=10}
+source(here("src/analysis/experiment/robust.R")) #pooled?
+pa
+pb
+pc_2b/ pc_2a + plot_layout(guides = 'collect')  & theme(legend.position = 'bottom')
+pd
+```
+
+# Exploration
+
+```{r "h45-direct", fig.align="center", fig.height=8, fig.width=8}
+source(here("src/analysis/experiment/exploration_h45.R")) 
+p45d1 + p45d2 + p45d3 +
+  plot_layout(guides = 'collect')  & theme(legend.position = 'bottom')
+
+p34e
+```
+
+```{r "effect-on-compromise-attitude", fig.align="center", fig.height=8, fig.width=8}
+source(here("src/analysis/experiment/exploration_compromise_attitude.R")) 
+p_ca
+```
+
+
+```{r "effects-per-party", fig.align="center", fig.height=8, fig.width=18}
+source(here("src/analysis/experiment/exploration_h1_party.R")) 
+p1_e
+
+source(here("src/analysis/experiment/exploration_h3_party.R")) 
+p2_e
+
+source(here("src/analysis/experiment/exploration_h4_party.R"))
+p4a_e1 + p4a_e2 +
+  plot_annotation(title = 'Principledness (2)')
+
+p4b_e1 + p4b_e2 +
+  plot_annotation(title = 'Principledness (1)')
+
+source(here("src/analysis/experiment/exploration_h5_party.R"))
+p5_e1 + p5_e2 +
+  plot_annotation(title = 'Mutual Trust')
+```
+
+```{r "explor-pol-mod", fig.align="center", fig.height=8, fig.width=18}
+source(here("src/analysis/experiment/exploration_pol_mod.R"))
+mod_a
+mod_b
+mod1
+mod2
+mod3
+mod4
+mod5
+mod6
+mod7
+```
