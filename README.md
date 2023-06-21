@@ -3,7 +3,7 @@ Online research compendium of the paper entitled _Responsive or Responsible?  Th
 This repository combines the re-registration plans, data &amp; analysis compendium.
 
 ## Draft
-View the [draft of the paper here](report/draft.pdf).
+View the [draft of the paper](report/draft.pdf) and the [online appendix](report/OnlineAppendix.pdf) here.
 
 # Pre-Registration Plan
 * [Observational Study](https://osf.io/h29j3) Pre-registered hypothesis and analyses for testing the relationship between political trust and willingness to accept compromises in politics (_hypothesis 1_).
@@ -18,10 +18,10 @@ The following data files might be of interest:
 See the scripts in `src/data-processing` for details on how these files were constructed  for the [observational](src/data-processing/clean_data_obs.md) and the [experimental data](src/data-processing/clean_data_exp.md).
 
 # Results
-* [Observational Study](src/analysis/obervational_study.md) Demonstrates the analyses to test and visualise hypothesis 1. In addition, we report that the results are robust against specifications:
+* [Observational Study](src/analysis/observational/obervational_study.md) Demonstrates the analyses to test and visualise hypothesis 1. In addition, we report that the results are robust against specifications:
 	- Political Trust predicted by Willingness to Accept Compromise per country
 	- Effect of recoding missing values
-* [Experiment](src/analysis/experiment.md) Demonstrates the analyses to test and visualise hypothesis 1 -- 5. In addition, we report the exploratory results for:
+* [Experiment](src/analysis/experiment/experiment.md) Demonstrates the analyses to test and visualise hypothesis 1 -- 5. In addition, we report the exploratory results for various political moderators as well as various robustness checks.
 
 # Code of Conduct
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
