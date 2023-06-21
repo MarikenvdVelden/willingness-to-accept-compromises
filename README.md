@@ -6,7 +6,7 @@ This repository combines the re-registration plans, data &amp; analysis compendi
 View the [draft of the paper](report/draft.pdf) and the [online appendix](report/OnlineAppendix.pdf) here.
 
 # Pre-Registration Plan
-* [Observational Study](https://osf.io/h29j3) Pre-registered hypothesis and analyses for testing the relationship between political trust and willingness to accept compromises in politics (_hypothesis 1_).
+* [Observational Study](https://osf.io/h29j3/?view_only=56f627ee5bf441399a8a66df40394042) Pre-registered hypothesis and analyses for testing the relationship between political trust and willingness to accept compromises in politics (_hypothesis 1_).
 * [Experiment](docs/pre-analysis-plan/pap.pdf) Pre-registered hypotheses and  analyses for testing the effect of parties’ negotiation position from  success or failure in the negotiations (_hypotheses 1--3_).; and delve into the mechanisms that drive voters’ party trust after (not) accepting compromises (_hypotheses 4--5_)..
 
 # Data
