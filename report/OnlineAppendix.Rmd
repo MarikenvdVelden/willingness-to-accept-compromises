@@ -943,7 +943,7 @@ kbl(t5c, booktabs =T, caption = "\\label{tab:h5_3_oa}Heterogeneous Treatment Eff
 ```
 
 \newpage
-# Appendix I. Explorative Analysis: Heterogeneous treatments
+# Appendix I. Explorative Analysis: Heterogeneous treatments for H1
 
 ## HT: Issue congruence
 
@@ -994,9 +994,33 @@ knitr::include_graphics(here("report/figures/explor-pol-mod-7.png"))
 ```
 
 \newpage
-# Appendix J. Robustness Analyses Experimental Study -- Knowledge of Parties Negotiation
+# Appendix J. Explorative Analysis: Heterogeneous treatments for H2
 
-## Hypothesis 1 & 2
+## HT: Ideological Distance towards Coalition Partner 
+
+Figure \ref{fig:hr_id} demonstrates that the respondents who are further away from the coalition partner evaluate their party more negative when they continue the coalition talks than those respondents that are closer to the coalition partner. 
+
+```{r ht-id, fig.align = 'center', out.width = "100%", fig.cap = "\\label{fig:hr_id}Heterogenous Treatment Ideological Distance to Coalition Partner", fig.topcaption=TRUE, fig.pos="H"}
+knitr::include_graphics(here("report/figures/h2-robust-1.png"))
+```
+
+\newpage
+
+# Appendix K. Additional Robustness Analyses Experimental Study 
+
+## Comparing No Government & No Compromise to Government & Compromise
+
+Figure \ref{fig:comp_groups} demonstrates that both groups, either seeing no government and no compromise or govermnent and compromise, evaluate the party negatively. 
+Indicating that either an office-seeking strategy is never rewarded by voters, maybe because of their optimism bias. 
+
+```{r "comp-groups", fig.align = 'center', out.width = "100%", fig.cap = "\\label{fig:comp_groups}Heterogenous Treatment Ideological Distance to Coalition Partner", fig.topcaption=TRUE, fig.pos="H"}
+knitr::include_graphics(here("report/figures/h2-robust-2.png"))
+```
+
+
+## Knowledge of Parties Negotiation
+
+### Hypothesis 1 & 2
 
 Looking at those respondents who know which parties are negotating for the 2021 coalition, Figure \ref{fig:h1_party} shows that the main effects shown in the manuscript (Figure 2) do not change.
 
@@ -1004,7 +1028,7 @@ Looking at those respondents who know which parties are negotating for the 2021 
 knitr::include_graphics(here("report/figures/robust-1.png"))
 ```
 
-## Hypothesis 3
+### Hypothesis 3
 
 Looking at those respondents who know which parties are negotating for the 2021 coalition, Figure \ref{fig:h3_party} shows that the main effects shown in the manuscript (Figure 3) do not change.
 
@@ -1012,7 +1036,7 @@ Looking at those respondents who know which parties are negotating for the 2021 
 knitr::include_graphics(here("report/figures/robust-2.png"))
 ```
 
-## Hypothesis 4 & 5
+### Hypothesis 4 & 5
 
 Looking at those respondents who know which parties are negotating for the 2021 coalition, Figures \ref{fig:h4_party} and \ref{fig:h5_party} show that the main effects shown in the manuscript (Figure 4 and 5) do not change.
 
@@ -1023,9 +1047,10 @@ knitr::include_graphics(here("report/figures/robust-3.png"))
 ```{r "h5-know", fig.cap = "\\label{fig:h5_party}Heterogeneous Treatment Effect: Social Trust", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
 knitr::include_graphics(here("report/figures/robust-4.png"))
 ```
+
 \newpage
 
-# Appendix K. Robustness Analyses Experimental Study -- Analyses per Party
+# Appendix L. Robustness Analyses Experimental Study -- Analyses per Party
 \blandscape
 ## Hypothesis 1 & 2
 ```{r "h1-party", fig.cap = "\\label{fig:h1_party}Predicted Reputational Cost ", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
@@ -1052,7 +1077,7 @@ knitr::include_graphics(here("report/figures/h45-direct-2.png"))
 \elandscape
 
 \newpage
-# Appendix L. Operationalization Variables of Observational Data
+# Appendix M. Operationalization Variables of Observational Data
 To measure the effects on political trust, we study two dependent variables: `trust in politicians` and `satisfaction with democracy`.[^]:N.B. Only the `trust in politicians` was pre-registered as the dependent variable. 
 `Trust in politicians` is measured with responses to the statement: ''Most politicians are trustworthy'' with a 5-point Likert scale from 1 (_strongly disagree_) to 5 (_strongly disagree_).
 
@@ -1060,7 +1085,7 @@ To measure the effects on political trust, we study two dependent variables: `tr
 
 Our main independent variable, `willingness to accept compromise`, is measured with an item from @hibbing2002stealth's stealth democracy index: ''What people call compromise in politics is really just selling out on one's principles.'' This item is also measured with a 5-point Likert variable ranging from 1 (_strongly disagree_) to 5 (_strongly disagree_).
 
-# Appendix M. Regression Tables for Observational Data
+# Appendix N. Regression Tables for Observational Data
 
 ## Figure 6
 ```{r "obs", topcaption=TRUE}

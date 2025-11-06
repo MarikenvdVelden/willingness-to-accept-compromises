@@ -22,7 +22,7 @@ for(i in 1:length(issues)){
 }
 
 h3 <- h3 %>%
- filter(x %in% c("a", "b", "a:b"),
+ filter(x %in% c("(Intercept)","a", "b", "a:b"),
         y != "DV3") %>%
   mutate(y = recode(y,
                    `DV1` = "DV: Trust",
@@ -32,16 +32,17 @@ h3 <- h3 %>%
                     levels = c("DV: Trust", "DV: Credibility",
                                "DV: Representation")),
          x = recode(x,
+                    `(Intercept)` = "Intercept",
                     `a` = "Party Position: Compromise",
-                    `b` = "Outcome: Coalition Talks Continued",
-                    `a:b` = "Interaction: Party Position * Outcome"),
+                    `b` = "Success: Coalition Talks Continued",
+                    `a:b` = "Interaction: Party Position * Success"),
          x = factor(x,
-                    levels = c("Interaction: Party Position * Outcome",
-                               "Outcome: Coalition Talks Continued",
-                               "Party Position: Compromise")))
+                    levels = c("Interaction: Party Position * Success",
+                               "Success: Coalition Talks Continued",
+                               "Party Position: Compromise", "Intercept")))
 
 df <- d %>% 
-  mutate(a = if_else(compromise=="yes", 0, 1),
+  mutate(a = if_else(compromise=="yes", 1, 0),
          b = if_else(outcome == "negotiation", 1, 0),
          partner = recode(partner, 
                           "CDU" = 1,
@@ -50,7 +51,7 @@ df <- d %>%
                           "SPD" = 1))
 
 h3p <- pooled_regression(df, a, b, issue) %>%
-  filter(x %in% c("a", "b", "a:b"),
+  filter(x %in% c("(Intercept)","a", "b", "a:b"),
          y != "DV3") %>%
   mutate(issue = "Pooled Analysis",
          y = recode(y,
@@ -61,13 +62,14 @@ h3p <- pooled_regression(df, a, b, issue) %>%
                              levels = c("DV: Trust", "DV: Credibility",
                                         "DV: Representation")),
          x = recode(x,
+                    `(Intercept)` = "Intercept",
                     `a` = "Party Position: Compromise",
-                    `b` = "Outcome: Coalition Talks Continued",
-                    `a:b` = "Interaction: Party Position * Outcome"),
+                    `b` = "Success: Coalition Talks Continued",
+                    `a:b` = "Interaction: Party Position * Success"),
          x = factor(x,
-                    levels = c("Interaction: Party Position * Outcome",
-                               "Outcome: Coalition Talks Continued",
-                               "Party Position: Compromise")))
+                    levels = c("Interaction: Party Position * Success",
+                               "Success: Coalition Talks Continued",
+                               "Party Position: Compromise", "Intercept")))
 
 p2 <- h3 %>% 
   add_case(h3p) %>%
@@ -84,7 +86,10 @@ p2 <- h3 %>%
   geom_errorbar(position = position_dodge(.5), width = 0) +
   theme_ipsum() +
   facet_grid(hyp~y) +
-  labs(x = "", y = "Predicted Reputational Cost") +
+  labs(x = "", y = "Predicted Reputational Cost",
+       caption = "Visualized results are OLS regression coefficients of variables of interested controlled for the unbalanced co-variates: 
+       Degree of urbanization, employment, region of residence and birth, left-right position of the respondent, attitude towards the speed limit and top tax policies, and issue importance of top tax.
+       Pooled Analyses have additonally the issues as a covariate added.") +
   theme(plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5),
         legend.position="bottom",

@@ -87,7 +87,7 @@ pa <- h1 %>%
 issues <- unique(d$issue)
 for(i in 1:length(issues)){
   df <- d %>% 
-    mutate(a = if_else(compromise=="yes", 1, 0),
+    mutate(a = if_else(compromise=="yes", 0, 1),
            b = if_else(outcome == "negotiation", 1, 0),
            partner = recode(partner, 
                             "CDU" = 1,
@@ -196,7 +196,7 @@ pb <- h3 %>%
 #principledness 2
 df <- d %>% 
   mutate(compromise = if_else(compromise=="yes", 0, 1),
-         outcome = if_else(outcome == "negotiation", 0, 1),
+         outcome = if_else(outcome == "negotiation", 1, 0),
          b = HT1,
          partner = recode(partner, 
                           "CDU" = 1,
@@ -228,7 +228,7 @@ h4p <- pooled_regression_ht1(df, compromise, outcome, b, issue) %>%
 df <- d %>% 
   filter(MC3 == 1) %>% 
   mutate(compromise = if_else(compromise=="yes", 0, 1),
-         outcome = if_else(outcome == "negotiation", 0, 1),
+         outcome = if_else(outcome == "negotiation", 1, 0),
          b = HT2,
          partner = recode(partner, 
                           "CDU" = 1,

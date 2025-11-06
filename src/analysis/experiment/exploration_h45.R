@@ -14,7 +14,7 @@ p45d1 <- d %>%
   scale_fill_manual(values = fig_cols)
 
 p45d2 <- d %>% 
-  ggplot(aes(HT1, fill = issue)) +
+  ggplot(aes(HT1_rescale, fill = issue)) +
   geom_bar(aes(y = (..count..)/sum(..count..))) + 
   facet_grid(.~issue) +
   labs(x = "Princpledness (2)", y = "") +
@@ -100,7 +100,7 @@ for(i in 1:length(issues)){
   df <- d %>% 
     mutate(a = if_else(compromise=="yes", 0, 1),
            b = if_else(outcome == "negotiation", 1, 0),
-           c = HT1) %>%
+           c = HT1_rescale) %>%
     filter(issue == issues[i])
   if(i==1){
     h45eb <- regression_direct_explor(df, a, b) %>%

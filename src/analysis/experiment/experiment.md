@@ -159,7 +159,7 @@ p2_int
 ## Principled Hypothesis
 
 ``` r
-source(here("src/analysis/experiment/h4_exp.R")) #pooled?
+source(here("src/analysis/experiment/h4_exp.R")) 
 p3b / p3a + plot_layout(guides = 'collect')  & theme(legend.position = 'bottom')
 ```
 
@@ -174,7 +174,7 @@ p3_2b/ p3_2a + plot_layout(guides = 'collect')  & theme(legend.position = 'none'
 ## Mutual Trust Hypothesis
 
 ``` r
-source(here("src/analysis/experiment/h5_exp.R")) #pooled?
+source(here("src/analysis/experiment/h5_exp.R"))
 p4
 ```
 
@@ -191,7 +191,7 @@ p4_2
 Results for those who know who is in the actual coalition negotiations
 
 ``` r
-source(here("src/analysis/experiment/robust.R")) #pooled?
+source(here("src/analysis/experiment/robust.R")) 
 pa
 ```
 
@@ -221,22 +221,17 @@ pd
 source(here("src/analysis/experiment/exploration_h45.R")) 
 p45d1 + p45d2 + p45d3 +
   plot_layout(guides = 'collect')  & theme(legend.position = 'bottom')
-```
 
-<img src="../../../report/figures/h45-direct-1.png" style="display: block; margin: auto;" />
-
-``` r
 p34e
 ```
-
-<img src="../../../report/figures/h45-direct-2.png" style="display: block; margin: auto;" />
 
 ``` r
 source(here("src/analysis/experiment/exploration_compromise_attitude.R")) 
 p_ca
 ```
 
-<img src="../../../report/figures/effect-on-compromise-attitude-1.png" style="display: block; margin: auto;" />
+Do H1 and H2 hold for different heterogeneous treatments: party choice &
+political moderators
 
 ``` r
 source(here("src/analysis/experiment/exploration_h1_party.R")) 
@@ -329,3 +324,20 @@ mod7
 ```
 
 <img src="../../../report/figures/explor-pol-mod-9.png" style="display: block; margin: auto;" />
+
+Is negative finding of H3 only for those more cold towards partner? And
+is there a difference in reputation for those seeing no compromise & no
+government vs compromise and government?
+
+``` r
+source(here("src/analysis/experiment/explorationH2.R"))
+mod8
+```
+
+<img src="../../../report/figures/h2-robust-1.png" style="display: block; margin: auto;" />
+
+``` r
+mod9
+```
+
+<img src="../../../report/figures/h2-robust-2.png" style="display: block; margin: auto;" />

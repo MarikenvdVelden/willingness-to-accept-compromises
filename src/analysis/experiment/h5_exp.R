@@ -54,7 +54,8 @@ h5p <- pooled_regression_ht3(df, compromise, outcome, b, issue) %>%
 p4 <- h5 %>%
   add_case(h5p) %>% 
   mutate(issue = factor(issue,
-                        levels = c("SpeedLimit", "TopTax", "Pooled Analysis"))) %>% 
+                        levels = c("SpeedLimit", "TopTax", "Pooled Analysis")),
+         hyp = "Hypothesis 5") %>% 
   ggplot(aes(x = b, 
              y = AME,
              color = issue,
@@ -66,8 +67,11 @@ p4 <- h5 %>%
   geom_ribbon(alpha = .2) +
   theme_ipsum() +
   labs(x = "Levels of Mutual Trust \n (0 = Low, 10 = High)", 
-       y = "Average Marginal Effects of Being Steadfast") +
-  facet_grid(.~y) +
+       y = "Average Marginal Effects of Being Steadfast",
+       caption = "Visualized results are based upoon OLS regression of variables of interested controlled for the unbalanced co-variates: 
+       Degree of urbanization, employment, region of residence and birth, left-right position of the respondent, attitude towards the speed limit and top tax policies, and issue importance of top tax.
+       Pooled Analyses have additonally the issues as a covariate added.") +
+  facet_grid(hyp~y) +
   theme(plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5),
         legend.position="bottom",
@@ -78,7 +82,8 @@ p4 <- h5 %>%
 
 p4_2 <- h5p %>%
   mutate(issue = factor(issue,
-                        levels = c("SpeedLimit", "TopTax", "Pooled Analysis"))) %>% 
+                        levels = c("SpeedLimit", "TopTax", "Pooled Analysis")),
+         hyp = "Hypothesis 5") %>% 
   ggplot(aes(x = b, 
              y = AME,
              color = issue,
@@ -89,12 +94,15 @@ p4_2 <- h5p %>%
   geom_line() + 
   geom_ribbon(alpha = .2) +
   theme_ipsum() +
-  labs(x = "Levels of Mutual Trust \n (0 = Low, 10 = High)", y = "Average Marginal Effects of Being Steadfast") +
-  facet_grid(.~y) +
+  labs(x = "Levels of Mutual Trust \n (0 = Low, 10 = High)", y = "Average Marginal Effects of Being Steadfast",
+       caption = "Visualized results are based upoon OLS regression of variables of interested controlled for the unbalanced co-variates: 
+       Degree of urbanization, employment, region of residence and birth, left-right position of the respondent, attitude towards the speed limit and top tax policies, and issue importance of top tax.
+       Pooled Analyses have additonally the issues as a covariate added.") +
+  facet_grid(hyp~y) +
   theme(plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5),
         legend.position="none",
         legend.title = element_blank()) +
-  scale_color_manual(values = fig_cols) +
-  scale_fill_manual(values = fig_cols) +
+  scale_color_manual(values = fig_cols[3]) +
+  scale_fill_manual(values = fig_cols[3]) +
   geom_hline(yintercept = 0, linewidth = .2, linetype = "dashed")

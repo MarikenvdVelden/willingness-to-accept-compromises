@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.28)  30 JUL 2024 09:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.28)  30 JUL 2024 09:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**OnlineAppendix.tex
-(./OnlineAppendix.tex
+**Appendix.tex
+(./Appendix.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-02-24> (/usr/local/texlive/2022/texmf-dist/tex/latex
 /base/article.cls
@@ -640,144 +640,9 @@ Package translations Info: No language package found. I am going to use `englis
 h' as default language. on input line 190.
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
-(./OnlineAppendix.aux
-
-LaTeX Warning: Label `tab:dv' multiply defined.
-
-
-LaTeX Warning: Label `tab:demographics' multiply defined.
-
-
-LaTeX Warning: Label `fig:irt2' multiply defined.
-
+(./Appendix.aux
 
 LaTeX Warning: Label `fig:mc' multiply defined.
-
-
-LaTeX Warning: Label `tab:h1' multiply defined.
-
-
-LaTeX Warning: Label `tab:h1' multiply defined.
-
-
-LaTeX Warning: Label `tab:h1' multiply defined.
-
-
-LaTeX Warning: Label `tab:h3' multiply defined.
-
-
-LaTeX Warning: Label `tab:h3' multiply defined.
-
-
-LaTeX Warning: Label `tab:h3' multiply defined.
-
-
-LaTeX Warning: Label `tab:h3' multiply defined.
-
-
-LaTeX Warning: Label `tab:h3' multiply defined.
-
-
-LaTeX Warning: Label `tab:h4' multiply defined.
-
-
-LaTeX Warning: Label `tab:h4' multiply defined.
-
-
-LaTeX Warning: Label `tab:h4' multiply defined.
-
-
-LaTeX Warning: Label `tab:h4' multiply defined.
-
-
-LaTeX Warning: Label `tab:h4' multiply defined.
-
-
-LaTeX Warning: Label `tab:h4' multiply defined.
-
-
-LaTeX Warning: Label `tab:h4' multiply defined.
-
-
-LaTeX Warning: Label `tab:h4' multiply defined.
-
-
-LaTeX Warning: Label `tab:h4' multiply defined.
-
-
-LaTeX Warning: Label `tab:h4' multiply defined.
-
-
-LaTeX Warning: Label `tab:h4' multiply defined.
-
-
-LaTeX Warning: Label `tab:h5' multiply defined.
-
-
-LaTeX Warning: Label `tab:h5' multiply defined.
-
-
-LaTeX Warning: Label `tab:h5' multiply defined.
-
-
-LaTeX Warning: Label `tab:h5' multiply defined.
-
-
-LaTeX Warning: Label `tab:h5' multiply defined.
-
-
-LaTeX Warning: Label `tab:h1-rep' multiply defined.
-
-
-LaTeX Warning: Label `tab:h3-rep' multiply defined.
-
-
-LaTeX Warning: Label `tab:h3-rep' multiply defined.
-
-
-LaTeX Warning: Label `tab:h3_3_oa' multiply defined.
-
-
-LaTeX Warning: Label `tab:h4-rep' multiply defined.
-
-
-LaTeX Warning: Label `tab:h4-rep' multiply defined.
-
-
-LaTeX Warning: Label `tab:h4-rep' multiply defined.
-
-
-LaTeX Warning: Label `tab:h4-rep' multiply defined.
-
-
-LaTeX Warning: Label `tab:h4-rep' multiply defined.
-
-
-LaTeX Warning: Label `tab:h4-rep' multiply defined.
-
-
-LaTeX Warning: Label `tab:h4_10_oa' multiply defined.
-
-
-LaTeX Warning: Label `tab:h4-rep' multiply defined.
-
-
-LaTeX Warning: Label `tab:h4_11_oa' multiply defined.
-
-
-LaTeX Warning: Label `tab:h4-rep' multiply defined.
-
-
-LaTeX Warning: Label `tab:h4_12_oa' multiply defined.
-
-
-LaTeX Warning: Label `tab:h5-rep' multiply defined.
-
-
-LaTeX Warning: Label `tab:h5-rep' multiply defined.
-
-
-LaTeX Warning: Label `tab:h5_3_oa' multiply defined.
 
 
 LaTeX Warning: Label `fig:ht_pol_know' multiply defined.
@@ -797,11 +662,8 @@ LaTeX Warning: Label `fig:h5_party' multiply defined.
 
 LaTeX Warning: Label `fig:h5_party' multiply defined.
 
-
-LaTeX Warning: Label `tab:obs' multiply defined.
-
 )
-\openout1 = `OnlineAppendix.aux'.
+\openout1 = `Appendix.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 190.
 LaTeX Font Info:    ... okay on input line 190.
@@ -901,780 +763,368 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 190.
 LaTeX Info: Redefining \pageref on input line 190.
 LaTeX Info: Redefining \nameref on input line 190.
-(./OnlineAppendix.out) (./OnlineAppendix.out)
+(./Appendix.out) (./Appendix.out)
 \@outlinefile=\write3
-\openout3 = `OnlineAppendix.out'.
+\openout3 = `Appendix.out'.
 
-(./OnlineAppendix.toc
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 3
+(./Appendix.toc
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 4
 .
 (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 3
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 4
 .
 (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-3.
+4.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-3.
+4.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 3.
+(Font)              <10.95> on input line 4.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 3.
+(Font)              <8> on input line 4.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 3.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 3.
+(Font)              <6> on input line 4.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 4.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 4.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (8.57767pt too wide) detected at line 3
- []\T1/lmr/m/n/10.95 OA-3
- []
-
-
 Overfull \hbox (8.57767pt too wide) detected at line 4
  []\T1/lmr/m/n/10.95 OA-6
  []
 
 
-Overfull \hbox (14.05266pt too wide) detected at line 9
- []\T1/lmr/m/n/10.95 OA-17
+Overfull \hbox (8.57767pt too wide) detected at line 5
+ []\T1/lmr/m/n/10.95 OA-6
+ []
+
+
+Overfull \hbox (8.57767pt too wide) detected at line 6
+ []\T1/lmr/m/n/10.95 OA-6
+ []
+
+
+Overfull \hbox (8.57767pt too wide) detected at line 7
+ []\T1/lmr/m/n/10.95 OA-7
+ []
+
+
+Overfull \hbox (8.57767pt too wide) detected at line 8
+ []\T1/lmr/m/n/10.95 OA-7
  []
 
 
 Overfull \hbox (14.05266pt too wide) detected at line 10
- []\T1/lmr/m/n/10.95 OA-17
+ []\T1/lmr/m/n/10.95 OA-11
  []
 
 
 Overfull \hbox (14.05266pt too wide) detected at line 11
- []\T1/lmr/m/n/10.95 OA-17
+ []\T1/lmr/m/n/10.95 OA-11
  []
 
 
 Overfull \hbox (14.05266pt too wide) detected at line 12
- []\T1/lmr/m/n/10.95 OA-18
+ []\T1/lmr/m/n/10.95 OA-12
  []
 
 
 Overfull \hbox (14.05266pt too wide) detected at line 13
- []\T1/lmr/m/n/10.95 OA-18
+ []\T1/lmr/m/n/10.95 OA-12
  []
 
 
-Overfull \hbox (14.05266pt too wide) detected at line 15
- []\T1/lmr/m/n/10.95 OA-22
+Overfull \hbox (14.05266pt too wide) detected at line 14
+ []\T1/lmr/m/n/10.95 OA-13
  []
 
 
 Overfull \hbox (14.05266pt too wide) detected at line 16
- []\T1/lmr/m/n/10.95 OA-28
- []
-
-
-Overfull \hbox (14.05266pt too wide) detected at line 17
- []\T1/lmr/m/n/10.95 OA-39
+ []\T1/lmr/m/n/10.95 OA-14
  []
 
 
 Overfull \hbox (14.05266pt too wide) detected at line 18
- []\T1/lmr/m/n/10.95 OA-60
+ []\T1/lmr/m/n/10.95 OA-15
  []
 
 
-Overfull \hbox (14.05266pt too wide) detected at line 20
- []\T1/lmr/m/n/10.95 OA-71
+Overfull \hbox (14.05266pt too wide) detected at line 19
+ []\T1/lmr/m/n/10.95 OA-15
  []
 
 
-Overfull \hbox (14.05266pt too wide) detected at line 21
- []\T1/lmr/m/n/10.95 OA-74
+Overfull \hbox (14.05266pt too wide) detected at line 24
+ []\T1/lmr/m/n/10.95 OA-19
  []
 
 
-Overfull \hbox (14.05266pt too wide) detected at line 22
- []\T1/lmr/m/n/10.95 OA-81
+Overfull \hbox (14.05266pt too wide) detected at line 25
+ []\T1/lmr/m/n/10.95 OA-20
  []
 
 
-Overfull \hbox (14.05266pt too wide) detected at line 23
- []\T1/lmr/m/n/10.95 OA-96
- []
-
-
-Overfull \hbox (19.52765pt too wide) detected at line 25
- []\T1/lmr/m/n/10.95 OA-103
- []
-
-
-Overfull \hbox (19.52765pt too wide) detected at line 26
- []\T1/lmr/m/n/10.95 OA-103
- []
-
-
-Overfull \hbox (19.52765pt too wide) detected at line 27
- []\T1/lmr/m/n/10.95 OA-104
- []
-
-
-Overfull \hbox (19.52765pt too wide) detected at line 28
- []\T1/lmr/m/n/10.95 OA-104
- []
-
-
-Overfull \hbox (19.52765pt too wide) detected at line 29
- []\T1/lmr/m/n/10.95 OA-105
- []
-
-
-Overfull \hbox (19.52765pt too wide) detected at line 31
- []\T1/lmr/m/n/10.95 OA-106
- []
-
-[1
-
-{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (19.52765pt too wide) detected at line 33
- []\T1/lmr/m/n/10.95 OA-107
- []
-
-
-Overfull \hbox (19.52765pt too wide) detected at line 34
- []\T1/lmr/m/n/10.95 OA-107
- []
-
-
-Overfull \hbox (19.52765pt too wide) detected at line 39
- []\T1/lmr/m/n/10.95 OA-113
- []
-
-
-Overfull \hbox (19.52765pt too wide) detected at line 40
- []\T1/lmr/m/n/10.95 OA-114
- []
-
-
-Overfull \hbox (19.52765pt too wide) detected at line 41
- []\T1/lmr/m/n/10.95 OA-115
- []
-
-
-Overfull \hbox (19.52765pt too wide) detected at line 44
- []\T1/lmr/m/n/10.95 OA-118
+Overfull \hbox (14.05266pt too wide) detected at line 26
+ []\T1/lmr/m/n/10.95 OA-21
  []
 
 )
 \tf@toc=\write4
-\openout4 = `OnlineAppendix.toc'.
+\openout4 = `Appendix.toc'.
 
-[2]
+[1
+
+{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 2
-43.
+37.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-<../docs/pre-analysis-plan/power_analysis-pooled.png, id=228, 7227.0pt x 4516.8
-75pt>
-File: ../docs/pre-analysis-plan/power_analysis-pooled.png Graphic file (type pn
-g)
-<use ../docs/pre-analysis-plan/power_analysis-pooled.png>
-Package pdftex.def Info: ../docs/pre-analysis-plan/power_analysis-pooled.png  u
-sed on input line 268.
-(pdftex.def)             Requested size: 469.75502pt x 293.53825pt.
-[3 <../docs/pre-analysis-plan/power_analysis-pooled.png>]
-Overfull \hbox (49.9418pt too wide) in paragraph at lines 314--323
- [][] 
- []
 
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 3
-37.
-(/usr/local/texlive/2022/texmf-dist/tex/latex/lm/ts1lmr.fd
-File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [4]
-LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
-356.
-(/usr/local/texlive/2022/texmf-dist/tex/latex/lm/ts1lmtt.fd
-File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-Overfull \hbox (0.18124pt too wide) in paragraph at lines 352--358
-\T1/lmtt/m/n/10.95 of a large city\T1/lmr/m/n/10.95 , \T1/lmtt/m/n/10.95 middle
--szed or small city\T1/lmr/m/n/10.95 , \T1/lmtt/m/n/10.95 rural village\T1/lmr/
-m/n/10.95 , \T1/lmtt/m/n/10.95 detached house in the
- []
+pdfTeX warning: pdflatex (file ./Appendix_files/figure-latex/data-experiment-1.
+pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
 
+<Appendix_files/figure-latex/data-experiment-1.pdf, id=128, 338.26375pt x 492.8
+4125pt>
+File: Appendix_files/figure-latex/data-experiment-1.pdf Graphic file (type pdf)
 
-Overfull \hbox (17.18411pt too wide) in paragraph at lines 358--366
-\T1/lmtt/m/n/10.95 90/DIE GRÜNEN\T1/lmr/m/n/10.95 , \T1/lmtt/m/n/10.95 Other pa
-rty:\T1/lmr/m/n/10.95 , \T1/lmtt/m/n/10.95 I didn\TS1/lmtt/m/n/10.95 '\T1/lmtt/
-m/n/10.95 t vote/wasn\TS1/lmtt/m/n/10.95 '\T1/lmtt/m/n/10.95 t eligble to vote\
-T1/lmr/m/n/10.95 , \T1/lmtt/m/n/10.95 Don\TS1/lmtt/m/n/10.95 '\T1/lmtt/m/n/10.9
-5 t know/won\TS1/lmtt/m/n/10.95 '\T1/lmtt/m/n/10.95 t
- []
-
-
-Overfull \hbox (0.18124pt too wide) in paragraph at lines 366--374
-\T1/lmtt/m/n/10.95 Part-time employed\T1/lmr/m/n/10.95 , \T1/lmtt/m/n/10.95 Ent
-repreneur\T1/lmr/m/n/10.95 , \T1/lmtt/m/n/10.95 Unemployed and searching for a 
-job\T1/lmr/m/n/10.95 , \T1/lmtt/m/n/10.95 Unemployed
- []
-
-
-Overfull \hbox (37.74571pt too wide) in paragraph at lines 366--374
-\T1/lmtt/m/n/10.95 and not searching for a job or incapacitated\T1/lmr/m/n/10.9
-5 , \T1/lmtt/m/n/10.95 Housewife/Househusband or else\T1/lmr/m/n/10.95 , \T1/lm
-tt/m/n/10.95 Retired\T1/lmr/m/n/10.95 ,
- []
-
-
-Overfull \hbox (1.42886pt too wide) in paragraph at lines 382--391
-\T1/lmr/m/n/10.95 North Rhine- West-phalia, Rhineland-Palatinate, Saar-land, Sa
-x-ony, Saxony-Anholt, Schleswig-
- []
-
-
-Overfull \hbox (49.9418pt too wide) in paragraph at lines 397--413
- [][] 
- []
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-LaTeX Warning: Reference `tab:pret2' on page OA-5 undefined on input line 418.
-
-
-Overfull \hbox (1.39722pt too wide) in paragraph at lines 428--433
-\T1/lmr/m/n/10.95 ment should im-ple-ment a pol-icy: \T1/lmtt/m/n/10.95 impleme
-nt speed limit\T1/lmr/m/n/10.95 , \T1/lmtt/m/n/10.95 increase of top tax\T1/lmr
-/m/n/10.95 , \T1/lmtt/m/n/10.95 legalize
- []
-
-
-Overfull \hbox (49.9418pt too wide) in alignment at lines 438--461
- [] [] [] 
- []
-
-[5] [6] [7] [8] [9]
-
-pdfTeX warning: pdflatex (file ./OnlineAppendix_files/figure-latex/data-experim
-ent-1.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> a
-llowed
-<OnlineAppendix_files/figure-latex/data-experiment-1.pdf, id=286, 338.26375pt x
- 492.84125pt>
-File: OnlineAppendix_files/figure-latex/data-experiment-1.pdf Graphic file (typ
-e pdf)
-<use OnlineAppendix_files/figure-latex/data-experiment-1.pdf>
-Package pdftex.def Info: OnlineAppendix_files/figure-latex/data-experiment-1.pd
-f  used on input line 603.
+<use Appendix_files/figure-latex/data-experiment-1.pdf>
+Package pdftex.def Info: Appendix_files/figure-latex/data-experiment-1.pdf  use
+d on input line 242.
 (pdftex.def)             Requested size: 338.26291pt x 492.84003pt.
-[10] [11 <./OnlineAppendix_files/figure-latex/data-experiment-1.pdf>]
+[2 <./Appendix_files/figure-latex/data-experiment-1.pdf>]
 
-pdfTeX warning: pdflatex (file ./OnlineAppendix_files/figure-latex/treat-diff-1
-.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowe
-d
-<OnlineAppendix_files/figure-latex/treat-diff-1.pdf, id=308, 652.4375pt x 438.6
-3875pt>
-File: OnlineAppendix_files/figure-latex/treat-diff-1.pdf Graphic file (type pdf
-)
-<use OnlineAppendix_files/figure-latex/treat-diff-1.pdf>
-Package pdftex.def Info: OnlineAppendix_files/figure-latex/treat-diff-1.pdf  us
-ed on input line 608.
+pdfTeX warning: pdflatex (file ./Appendix_files/figure-latex/treat-diff-1.pdf):
+ PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<Appendix_files/figure-latex/treat-diff-1.pdf, id=147, 652.4375pt x 438.63875pt
+>
+File: Appendix_files/figure-latex/treat-diff-1.pdf Graphic file (type pdf)
+<use Appendix_files/figure-latex/treat-diff-1.pdf>
+Package pdftex.def Info: Appendix_files/figure-latex/treat-diff-1.pdf  used on 
+input line 247.
 (pdftex.def)             Requested size: 455.31934pt x 328.831pt.
-[12
+[3
 
- <./OnlineAppendix_files/figure-latex/treat-diff-1.pdf>]
+ <./Appendix_files/figure-latex/treat-diff-1.pdf>]
 
-pdfTeX warning: pdflatex (file ./OnlineAppendix_files/figure-latex/treat-diff-e
-xp-1.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> al
-lowed
-<OnlineAppendix_files/figure-latex/treat-diff-exp-1.pdf, id=326, 646.415pt x 64
-3.40375pt>
-File: OnlineAppendix_files/figure-latex/treat-diff-exp-1.pdf Graphic file (type
- pdf)
-<use OnlineAppendix_files/figure-latex/treat-diff-exp-1.pdf>
-Package pdftex.def Info: OnlineAppendix_files/figure-latex/treat-diff-exp-1.pdf
-  used on input line 614.
+pdfTeX warning: pdflatex (file ./Appendix_files/figure-latex/treat-diff-exp-1.p
+df): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<Appendix_files/figure-latex/treat-diff-exp-1.pdf, id=165, 646.415pt x 643.4037
+5pt>
+File: Appendix_files/figure-latex/treat-diff-exp-1.pdf Graphic file (type pdf)
+<use Appendix_files/figure-latex/treat-diff-exp-1.pdf>
+Package pdftex.def Info: Appendix_files/figure-latex/treat-diff-exp-1.pdf  used
+ on input line 253.
 (pdftex.def)             Requested size: 455.29851pt x 328.83842pt.
-[13
+[4
 
 
- <./OnlineAppendix_files/figure-latex/treat-diff-exp-1.pdf>]
+ <./Appendix_files/figure-latex/treat-diff-exp-1.pdf>]
 
-LaTeX Warning: Reference `fig:it1' on page OA-14 undefined on input line 628.
-
-<figures/idealism_relativism_iifs.png, id=344, 662.475pt x 441.65pt>
-File: figures/idealism_relativism_iifs.png Graphic file (type png)
-<use figures/idealism_relativism_iifs.png>
-Package pdftex.def Info: figures/idealism_relativism_iifs.png  used on input li
-ne 634.
-(pdftex.def)             Requested size: 469.75502pt x 313.16934pt.
-
-LaTeX Warning: Reference `fig:irt3' on page OA-14 undefined on input line 643.
-
-<figures/relativism_tif.png, id=346, 1327.96124pt x 885.3075pt>
-File: figures/relativism_tif.png Graphic file (type png)
-<use figures/relativism_tif.png>
-Package pdftex.def Info: figures/relativism_tif.png  used on input line 654.
-(pdftex.def)             Requested size: 469.75502pt x 313.17189pt.
-[14
-
- <./figures/idealism_relativism_iifs.png>]
-<figures/idealism_tifs.png, id=355, 1327.96124pt x 885.3075pt>
-File: figures/idealism_tifs.png Graphic file (type png)
-<use figures/idealism_tifs.png>
-Package pdftex.def Info: figures/idealism_tifs.png  used on input line 663.
-(pdftex.def)             Requested size: 469.75502pt x 313.17189pt.
-[15 <./figures/relativism_tif.png (PNG copy)>] [16 <./figures/idealism_tifs.png
- (PNG copy)>]
-
-pdfTeX warning: pdflatex (file ./OnlineAppendix_files/figure-latex/balance-chec
-ks-1.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> al
-lowed
-<OnlineAppendix_files/figure-latex/balance-checks-1.pdf, id=366, 651.43375pt x 
-661.47125pt>
-File: OnlineAppendix_files/figure-latex/balance-checks-1.pdf Graphic file (type
- pdf)
-<use OnlineAppendix_files/figure-latex/balance-checks-1.pdf>
-Package pdftex.def Info: OnlineAppendix_files/figure-latex/balance-checks-1.pdf
-  used on input line 690.
+pdfTeX warning: pdflatex (file ./Appendix_files/figure-latex/balance-checks-1.p
+df): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<Appendix_files/figure-latex/balance-checks-1.pdf, id=183, 651.43375pt x 661.47
+125pt>
+File: Appendix_files/figure-latex/balance-checks-1.pdf Graphic file (type pdf)
+<use Appendix_files/figure-latex/balance-checks-1.pdf>
+Package pdftex.def Info: Appendix_files/figure-latex/balance-checks-1.pdf  used
+ on input line 275.
 (pdftex.def)             Requested size: 328.83725pt x 455.2953pt.
-[17 <./OnlineAppendix_files/figure-latex/balance-checks-1.pdf>]
-<figures/mc-1.png, id=384, 963.6pt x 963.6pt>
+[5
+
+ <./Appendix_files/figure-latex/balance-checks-1.pdf>]
+<figures/mc-1.png, id=201, 963.6pt x 963.6pt>
 File: figures/mc-1.png Graphic file (type png)
 <use figures/mc-1.png>
-Package pdftex.def Info: figures/mc-1.png  used on input line 709.
+Package pdftex.def Info: figures/mc-1.png  used on input line 294.
 (pdftex.def)             Requested size: 375.80544pt x 375.80249pt.
-<figures/mc-2.png, id=386, 963.6pt x 963.6pt>
+<figures/mc-2.png, id=204, 963.6pt x 963.6pt>
 File: figures/mc-2.png Graphic file (type png)
 <use figures/mc-2.png>
-Package pdftex.def Info: figures/mc-2.png  used on input line 726.
+Package pdftex.def Info: figures/mc-2.png  used on input line 311.
 (pdftex.def)             Requested size: 375.80544pt x 375.80249pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-LaTeX Warning: Reference `fig:mh2' on page OA-18 undefined on input line 738.
+LaTeX Warning: Reference `fig:mh2' on page OA-6 undefined on input line 323.
 
-<figures/mc-3.png, id=387, 963.6pt x 963.6pt>
+<figures/mc-3.png, id=205, 963.6pt x 963.6pt>
 File: figures/mc-3.png Graphic file (type png)
 <use figures/mc-3.png>
-Package pdftex.def Info: figures/mc-3.png  used on input line 743.
+Package pdftex.def Info: figures/mc-3.png  used on input line 328.
 (pdftex.def)             Requested size: 375.80544pt x 375.80249pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/mc-4.png, id=389, 963.6pt x 963.6pt>
+<figures/mc-4.png, id=207, 963.6pt x 963.6pt>
 File: figures/mc-4.png Graphic file (type png)
 <use figures/mc-4.png>
-Package pdftex.def Info: figures/mc-4.png  used on input line 760.
+Package pdftex.def Info: figures/mc-4.png  used on input line 345.
 (pdftex.def)             Requested size: 375.80544pt x 375.80249pt.
-[18 <./figures/mc-1.png>]
+[6 <./figures/mc-1.png>]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/mc-5.png, id=403, 963.6pt x 963.6pt>
+<figures/mc-5.png, id=222, 963.6pt x 963.6pt>
 File: figures/mc-5.png Graphic file (type png)
 <use figures/mc-5.png>
-Package pdftex.def Info: figures/mc-5.png  used on input line 777.
+Package pdftex.def Info: figures/mc-5.png  used on input line 362.
 (pdftex.def)             Requested size: 375.80249pt x 325.20831pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[19 <./figures/mc-2.png>] [20 <./figures/mc-3.png>] [21 <./figures/mc-4.png>] [
-22 <./figures/mc-5.png>]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 793--873
- [] [] [] [] 
- []
-
-[23
-
-]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 875--954
- [] [] [] [] 
- []
-
-[24] [25]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 956--1036
- [] [] [] [] 
- []
-
-[26] [27]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 1038--1117
- [] [] [] [] 
- []
-
-[28]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 1122--1202
- [] [] [] [] 
- []
-
-[29] [30]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 1204--1283
- [] [] [] [] 
- []
-
-[31] [32]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 1285--1366
- [] [] [] [] 
- []
-
-[33] [34]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 1368--1448
- [] [] [] [] 
- []
-
-[35]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 1450--1529
- [] [] [] [] 
- []
-
-[36] [37]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 1531--1612
- [] [] [] [] 
- []
-
-[38] [39]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 1617--1698
- [] [] [] [] 
- []
-
-[40]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 1700--1780
- [] [] [] [] 
- []
-
-[41] [42]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 1782--1864
- [] [] [] [] 
- []
-
-[43] [44]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 1866--1947
- [] [] [] [] 
- []
-
-[45] [46]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 1949--2029
- [] [] [] [] 
- []
-
-[47]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 2031--2113
- [] [] [] [] 
- []
-
-[48] [49]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 2115--2196
- [] [] [] [] 
- []
-
-[50] [51]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 2198--2278
- [] [] [] [] 
- []
-
-[52] [53]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 2280--2362
- [] [] [] [] 
- []
-
-[54]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 2364--2445
- [] [] [] [] 
- []
-
-[55] [56]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 2447--2527
- [] [] [] [] 
- []
-
-[57] [58]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 2529--2611
- [] [] [] [] 
- []
-
-[59] [60]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 2616--2697
- [] [] [] [] 
- []
-
-[61]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 2699--2779
- [] [] [] [] 
- []
-
-[62] [63]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 2781--2863
- [] [] [] [] 
- []
-
-[64] [65]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 2865--2946
- [] [] [] [] 
- []
-
-[66] [67]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 2948--3028
- [] [] [] [] 
- []
-
-[68]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 3030--3112
- [] [] [] [] 
- []
-
-[69] [70] [71]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 3123--3203
- [] [] [] [] 
- []
-
-[72]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 3205--3284
- [] [] [] [] 
- []
-
-[73] [74]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 3289--3369
- [] [] [] [] 
- []
-
-[75] [76]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 3371--3450
- [] [] [] [] 
- []
-
-[77]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 3452--3609
- [] [] [] [] 
- []
-
-[78] [79] [80] [81]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 3614--3695
- [] [] [] [] 
- []
-
-[82]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 3697--3777
- [] [] [] [] 
- []
-
-[83] [84]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 3779--3861
- [] [] [] [] 
- []
-
-[85] [86]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 3863--3944
- [] [] [] [] 
- []
-
-[87] [88]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 3946--4026
- [] [] [] [] 
- []
-
-[89]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 4028--4110
- [] [] [] [] 
- []
-
-[90] [91]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 4112--4193
- [] [] [] [] 
- []
-
-[92] [93]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 4195--4275
- [] [] [] [] 
- []
-
-[94] [95]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 4277--4359
- [] [] [] [] 
- []
-
-[96]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 4364--4445
- [] [] [] [] 
- []
-
-[97] [98]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 4447--4527
- [] [] [] [] 
- []
-
-[99] [100]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 4529--4611
- [] [] [] [] 
- []
-
-[101] [102] [103]
-<figures/explor-pol-mod-5.png, id=826, 1734.48pt x 770.88pt>
+[7 <./figures/mc-2.png>] [8 <./figures/mc-3.png>] [9 <./figures/mc-4.png>] [10 
+<./figures/mc-5.png>]
+<figures/explor-pol-mod-5.png, id=249, 1734.48pt x 770.88pt>
 File: figures/explor-pol-mod-5.png Graphic file (type png)
 <use figures/explor-pol-mod-5.png>
-Package pdftex.def Info: figures/explor-pol-mod-5.png  used on input line 4633.
-
-(pdftex.def)             Requested size: 469.75502pt x 208.77556pt.
-<figures/explor-pol-mod-4.png, id=828, 1734.48pt x 770.88pt>
+Package pdftex.def Info: figures/explor-pol-mod-5.png  used on input line 388.
+(pdftex.def)             Requested size: 375.80544pt x 167.0181pt.
+<figures/explor-pol-mod-4.png, id=251, 1734.48pt x 770.88pt>
 File: figures/explor-pol-mod-4.png Graphic file (type png)
 <use figures/explor-pol-mod-4.png>
-Package pdftex.def Info: figures/explor-pol-mod-4.png  used on input line 4653.
-
+Package pdftex.def Info: figures/explor-pol-mod-4.png  used on input line 408.
 (pdftex.def)             Requested size: 469.75502pt x 208.77556pt.
-[104 <./figures/explor-pol-mod-5.png>]
+[11
 
-LaTeX Warning: Reference `ht_pol_int' on page OA-105 undefined on input line 46
-63.
+ <./figures/explor-pol-mod-5.png>]
 
-<figures/explor-pol-mod-8.png, id=840, 1734.48pt x 770.88pt>
+LaTeX Warning: Reference `ht_pol_int' on page OA-12 undefined on input line 418
+.
+
+<figures/explor-pol-mod-8.png, id=262, 1734.48pt x 770.88pt>
 File: figures/explor-pol-mod-8.png Graphic file (type png)
 <use figures/explor-pol-mod-8.png>
-Package pdftex.def Info: figures/explor-pol-mod-8.png  used on input line 4672.
-
+Package pdftex.def Info: figures/explor-pol-mod-8.png  used on input line 427.
 (pdftex.def)             Requested size: 469.75502pt x 208.77556pt.
 
-LaTeX Warning: Reference `ht_pol_know' on page OA-105 undefined on input line 4
-682.
+LaTeX Warning: Reference `ht_pol_know' on page OA-12 undefined on input line 43
+7.
 
-<figures/explor-pol-mod-9.png, id=841, 1734.48pt x 770.88pt>
+<figures/explor-pol-mod-9.png, id=263, 1734.48pt x 770.88pt>
 File: figures/explor-pol-mod-9.png Graphic file (type png)
 <use figures/explor-pol-mod-9.png>
-Package pdftex.def Info: figures/explor-pol-mod-9.png  used on input line 4690.
-
+Package pdftex.def Info: figures/explor-pol-mod-9.png  used on input line 445.
 (pdftex.def)             Requested size: 469.75502pt x 208.77556pt.
-[105 <./figures/explor-pol-mod-4.png> <./figures/explor-pol-mod-8.png>]
-<figures/explor-pol-mod-7.png, id=851, 1734.48pt x 770.88pt>
+[12 <./figures/explor-pol-mod-4.png> <./figures/explor-pol-mod-8.png>]
+<figures/explor-pol-mod-7.png, id=273, 1734.48pt x 770.88pt>
 File: figures/explor-pol-mod-7.png Graphic file (type png)
 <use figures/explor-pol-mod-7.png>
-Package pdftex.def Info: figures/explor-pol-mod-7.png  used on input line 4704.
-
+Package pdftex.def Info: figures/explor-pol-mod-7.png  used on input line 459.
 (pdftex.def)             Requested size: 469.75502pt x 208.77556pt.
-[106 <./figures/explor-pol-mod-9.png> <./figures/explor-pol-mod-7.png>]
-<figures/h2-robust-1.png, id=862, 963.6pt x 578.16pt>
+[13 <./figures/explor-pol-mod-9.png> <./figures/explor-pol-mod-7.png>]
+<figures/h2-robust-1.png, id=285, 963.6pt x 578.16pt>
 File: figures/h2-robust-1.png Graphic file (type png)
 <use figures/h2-robust-1.png>
-Package pdftex.def Info: figures/h2-robust-1.png  used on input line 4728.
+Package pdftex.def Info: figures/h2-robust-1.png  used on input line 483.
 (pdftex.def)             Requested size: 469.75502pt x 281.85406pt.
-[107 <./figures/h2-robust-1.png>]
-<figures/h2-robust-2.png, id=872, 963.6pt x 578.16pt>
+[14 <./figures/h2-robust-1.png>]
+<figures/h2-robust-2.png, id=296, 963.6pt x 578.16pt>
 File: figures/h2-robust-2.png Graphic file (type png)
 <use figures/h2-robust-2.png>
-Package pdftex.def Info: figures/h2-robust-2.png  used on input line 4753.
+Package pdftex.def Info: figures/h2-robust-2.png  used on input line 508.
 (pdftex.def)             Requested size: 469.75502pt x 281.85406pt.
-<figures/robust-1.png, id=874, 963.6pt x 674.52pt>
+<figures/robust-1.png, id=298, 963.6pt x 674.52pt>
 File: figures/robust-1.png Graphic file (type png)
 <use figures/robust-1.png>
-Package pdftex.def Info: figures/robust-1.png  used on input line 4772.
-(pdftex.def)             Requested size: 328.82533pt x 455.30194pt.
-[108 <./figures/h2-robust-2.png>]
-<figures/robust-2.png, id=888, 963.6pt x 674.52pt>
+Package pdftex.def Info: figures/robust-1.png  used on input line 527.
+(pdftex.def)             Requested size: 328.82707pt x 230.17773pt.
+[15 <./figures/h2-robust-2.png>]
+<figures/robust-2.png, id=312, 963.6pt x 674.52pt>
 File: figures/robust-2.png Graphic file (type png)
 <use figures/robust-2.png>
-Package pdftex.def Info: figures/robust-2.png  used on input line 4783.
-(pdftex.def)             Requested size: 328.82533pt x 455.30194pt.
-[109 <./figures/robust-1.png>]
-<figures/robust-3.png, id=901, 963.6pt x 674.52pt>
+Package pdftex.def Info: figures/robust-2.png  used on input line 538.
+(pdftex.def)             Requested size: 328.82707pt x 230.17773pt.
+<figures/robust-3.png, id=315, 963.6pt x 674.52pt>
 File: figures/robust-3.png Graphic file (type png)
 <use figures/robust-3.png>
-Package pdftex.def Info: figures/robust-3.png  used on input line 4795.
-(pdftex.def)             Requested size: 328.82533pt x 455.30194pt.
-[110 <./figures/robust-2.png>]
-<figures/robust-4.png, id=912, 963.6pt x 674.52pt>
+Package pdftex.def Info: figures/robust-3.png  used on input line 550.
+(pdftex.def)             Requested size: 328.82707pt x 230.17773pt.
+[16 <./figures/robust-1.png> <./figures/robust-2.png>]
+<figures/robust-4.png, id=331, 963.6pt x 674.52pt>
 File: figures/robust-4.png Graphic file (type png)
 <use figures/robust-4.png>
-Package pdftex.def Info: figures/robust-4.png  used on input line 4799.
-(pdftex.def)             Requested size: 328.82533pt x 455.30194pt.
-[111 <./figures/robust-3.png>] [112 <./figures/robust-4.png>] [113]
-<figures/effects-per-party-1.png, id=929, 1734.48pt x 770.88pt>
+Package pdftex.def Info: figures/robust-4.png  used on input line 554.
+(pdftex.def)             Requested size: 328.82707pt x 230.17773pt.
+[17 <./figures/robust-3.png> <./figures/robust-4.png>] [18]
+<figures/effects-per-party-1.png, id=344, 1734.48pt x 770.88pt>
 File: figures/effects-per-party-1.png Graphic file (type png)
 <use figures/effects-per-party-1.png>
-Package pdftex.def Info: figures/effects-per-party-1.png  used on input line 48
-15.
+Package pdftex.def Info: figures/effects-per-party-1.png  used on input line 57
+0.
 (pdftex.def)             Requested size: 455.29459pt x 328.82535pt.
-<figures/effects-per-party-2.png, id=930, 1734.48pt x 770.88pt>
+<figures/effects-per-party-2.png, id=345, 1734.48pt x 770.88pt>
 File: figures/effects-per-party-2.png Graphic file (type png)
 <use figures/effects-per-party-2.png>
-Package pdftex.def Info: figures/effects-per-party-2.png  used on input line 48
-22.
+Package pdftex.def Info: figures/effects-per-party-2.png  used on input line 57
+7.
 (pdftex.def)             Requested size: 455.29459pt x 328.82535pt.
-[114
+[19
 
  <./figures/effects-per-party-1.png>]
-<figures/effects-per-party-3.png, id=938, 1734.48pt x 770.88pt>
+<figures/effects-per-party-3.png, id=354, 1734.48pt x 770.88pt>
 File: figures/effects-per-party-3.png Graphic file (type png)
 <use figures/effects-per-party-3.png>
-Package pdftex.def Info: figures/effects-per-party-3.png  used on input line 48
-29.
+Package pdftex.def Info: figures/effects-per-party-3.png  used on input line 58
+4.
 (pdftex.def)             Requested size: 455.29459pt x 328.82535pt.
-[115 <./figures/effects-per-party-2.png>]
-<figures/effects-per-party-4.png, id=946, 1734.48pt x 770.88pt>
+[20 <./figures/effects-per-party-2.png>]
+<figures/effects-per-party-4.png, id=361, 1734.48pt x 770.88pt>
 File: figures/effects-per-party-4.png Graphic file (type png)
 <use figures/effects-per-party-4.png>
-Package pdftex.def Info: figures/effects-per-party-4.png  used on input line 48
-33.
+Package pdftex.def Info: figures/effects-per-party-4.png  used on input line 58
+8.
 (pdftex.def)             Requested size: 455.29459pt x 328.82535pt.
-[116 <./figures/effects-per-party-3.png>]
-<figures/h45-direct-2.png, id=953, 770.88pt x 770.88pt>
+[21 <./figures/effects-per-party-3.png>]
+<figures/h45-direct-2.png, id=368, 770.88pt x 770.88pt>
 File: figures/h45-direct-2.png Graphic file (type png)
 <use figures/h45-direct-2.png>
-Package pdftex.def Info: figures/h45-direct-2.png  used on input line 4837.
+Package pdftex.def Info: figures/h45-direct-2.png  used on input line 592.
 (pdftex.def)             Requested size: 455.29753pt x 328.82535pt.
-[117 <./figures/effects-per-party-4.png>] [118 <./figures/h45-direct-2.png>]
-Overfull \hbox (5.03629pt too wide) in alignment at lines 4877--4894
- [] [] [] [] 
- []
+[22 <./figures/effects-per-party-4.png>] [23 <./figures/h45-direct-2.png>] [24
 
-
-Overfull \hbox (5.03629pt too wide) in alignment at lines 4896--4913
- [] [] [] [] 
- []
-
-[119
-
-] [120] [121] (./OnlineAppendix.aux)
+] (./Appendix.aux)
 
 LaTeX Warning: There were undefined references.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package rerunfilecheck Info: File `OnlineAppendix.out' has not changed.
-(rerunfilecheck)             Checksum: F471D12053F8EC44F6E830278491D8FB;9880.
+Package rerunfilecheck Info: File `Appendix.out' has not changed.
+(rerunfilecheck)             Checksum: A3B82D0CE858C902F91950A1D4BA5C93;6019.
  ) 
 Here is how much of TeX's memory you used:
- 21732 strings out of 478268
- 399918 string characters out of 5846347
- 800803 words of memory out of 5000000
- 39293 multiletter control sequences out of 15000+600000
- 496173 words of font info for 53 fonts, out of 8000000 for 9000
+ 21213 strings out of 478268
+ 391315 string characters out of 5846347
+ 660707 words of memory out of 5000000
+ 38982 multiletter control sequences out of 15000+600000
+ 495503 words of font info for 51 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 70i,11n,79p,510b,970s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/local
-/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2022/
-texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2022/texmf-dist/fon
-ts/enc/dvips/lm/lm-mathit.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/p
-ublic/lm/lmbx10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/l
-mmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmr10.pfb><
-/usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/
-texlive/2022/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/20
-22/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on OnlineAppendix.pdf (121 pages, 3103539 bytes).
+ 70i,6n,79p,476b,885s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/local/
+texlive/2022/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/20
+22/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2022/texmf-di
+st/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2022/texmf-dist/fonts/ty
+pe1/public/lm/lmri10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public
+/lm/lmtt10.pfb>
+Output written on Appendix.pdf (24 pages, 1694715 bytes).
 PDF statistics:
- 1100 PDF objects out of 1200 (max. 8388607)
- 889 compressed objects within 9 object streams
- 298 named destinations out of 1000 (max. 500000)
- 474 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 436 PDF objects out of 1000 (max. 8388607)
+ 338 compressed objects within 4 object streams
+ 103 named destinations out of 1000 (max. 500000)
+ 310 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -59,8 +59,9 @@ m2 <- tidy(stats::lm(formula = swd ~ wtac + political_interest +
 
 rep <- m1 %>%
   add_case(m2) %>% 
-  filter(term != "(Intercept)") %>%
+  #filter(term != "(Intercept)") %>%
   mutate(term = recode(term,
+                       `(Intercept)` = "Intercept",
                        `wtac` = "Anti-Compromise Attitude",
                        `political_interest` = "Political Interest",
                        `rile_selfplacement` = "Left-Right Self-Placement",
@@ -76,7 +77,7 @@ rep <- m1 %>%
                                   "Evaluation of Government Performance",
                                   "Left-Right Self-Placement",
                                   "Political Interest",
-                                  "Anti-Compromise Attitude")),
+                                  "Anti-Compromise Attitude", "Intercept")),
          lower = estimate - (1.96 * std.error),
          upper = estimate + (1.96 * std.error)) %>%
   select(term, estimate, upper, lower, y) %>%
@@ -88,27 +89,29 @@ rep <- m1 %>%
   geom_point(position = position_dodge(.5)) + 
   geom_errorbar(position = position_dodge(.5), width = 0) +
   theme_ipsum() +
-  labs(x = "", y = "Predicted Dependent Variable") +
+  labs(x = "", y = "Predicted Effect of Dependent Variable for Anti-Compromise Attitude",
+       caption = "Visualized results are OLS regression coefficients of variables of interested controlled for the co-variates: 
+       Political interest,  left-right position of the respondent, satisfaction with the government's performance, party identity,
+       gender, age, level of eduction, income.
+       Pooled Analyses have additonally the separate countries as a covariate added.") +
   theme(plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5),
         legend.position="bottom",
         legend.title = element_blank()) +
-  scale_color_manual(values = fig_cols) +
+  scale_color_manual(values = c(fig_cols[4], fig_cols[5])) +
   geom_hline(yintercept = 0, size = .2, linetype = "dashed") +
   coord_flip()
-
 
 ##Per country
 pooled <- m1 %>% 
   add_case(m2) %>% 
   mutate(country = "Pooled Analysis") %>% 
-  filter(term == "wtac") %>% 
+  filter(term %in% c("wtac", "(Intercept)")) %>% 
   mutate(lower = estimate - (1.96 * std.error),
          upper = estimate + (1.96 * std.error)) %>%
   select(term, estimate, upper, lower, y, country)
 
 u_country <- unique(analysis$country)
-
 for(i in 2:length(u_country)){
   df <- analysis %>% 
     filter(country==u_country[i]) %>% 
@@ -163,14 +166,29 @@ rep2 <- m1 %>%
          upper = estimate + (1.96 * std.error)) %>%
   select(term, estimate, upper, lower, y, country) %>%
   add_case(pooled) %>% 
-  mutate(country = factor(country,
-                          levels = c("Switzerland","Portugal",
-                                     "Norway", "The Netherlands",
-                                     "Italy","Iceland",
-                                     "Great Britain", "Germany",
-                                     "France", "Finland",
-                                     "Denmark", "Belgium", 
-                                     "Austria", "Pooled Analysis"))) %>% 
+  mutate(country = recode(country,
+                          `Switzerland` = "CHE", 
+                          `Germany` = "DEU", 
+                          `Denmark` = "DNK", 
+                          `Finland` = "FIN",
+                          `France` = "FRA",
+                          `Great Britain` = "GBR", 
+                          `Iceland` = "ISL", 
+                          `Italy` = "ITA", 
+                          `The Netherlands` = "NLD", 
+                          `Norway` = "NOR", 
+                          `Portugal` = "PRT",
+                          `Belgium` = "BLG",
+                          `Austria` = "AUT",
+                          `Pooled Analysis` = "Pooled"),
+    country = factor(country,
+                          levels = c("CHE","PRT",
+                                     "NOR", "NLD",
+                                     "ITA","ISL",
+                                     "GBR", "DEU",
+                                     "FRA", "FIN",
+                                     "DNK", "BEL", 
+                                     "AUT", "Pooled"))) %>% 
   drop_na(country) %>% 
   ggplot(aes(x = country, 
              y = estimate,
@@ -179,16 +197,18 @@ rep2 <- m1 %>%
   geom_point(position = position_dodge(.5)) + 
   geom_errorbar(position = position_dodge(.5), width = 0) +
   theme_ipsum() +
-  labs(x = "", y = "Predicted Effect of Dependent Variable for Anti-Compromise Attitude") +
+  labs(x = "", y = "Predicted Effect of Dependent Variable for Anti-Compromise Attitude",
+       caption = "Visualized results are OLS regression coefficients of variables of interested controlled for the co-variates: 
+       Political interest,  left-right position of the respondent, satisfaction with the government's performance, party identity,
+       gender, age, level of eduction, income.
+       Pooled Analyses have additonally the separate countries as a covariate added.") +
   theme(plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5),
         legend.position="bottom",
         legend.title = element_blank()) +
   scale_color_manual(values = fig_cols) +
-  geom_hline(yintercept = 0, size = .2, linetype = "dashed") +
-  coord_flip()
+  geom_hline(yintercept = 0, size = .2, linetype = "dashed")
 
-  
 ## Full country set
 d <- d %>% 
   add_case(df) %>% 
@@ -308,36 +328,55 @@ for(i in 2:length(u_country)){
 
 rep <- m1 %>%
   add_case(m2) %>% 
-  filter(term == "wtac") %>%
+  filter(term  == "wtac") %>%
   mutate(lower = estimate - (1.96 * std.error),
          upper = estimate + (1.96 * std.error)) %>%
   select(term, estimate, upper, lower, y, country) %>%
   add_case(pooled) %>% 
-  mutate(country = factor(country,
-                          levels = c("Switzerland","Portugal",
-                                     "Norway", "The Netherlands",
-                                     "Italy","Iceland",
-                                     "Great Britain", "Germany",
-                                     "France", "Finland",
-                                     "Denmark", "Belgium", 
-                                     "Austria", "Pooled Analysis"))) %>% 
+  mutate(country = recode(country,
+                          `Switzerland` = "CHE", 
+                          `Germany` = "DEU", 
+                          `Denmark` = "DNK", 
+                          `Finland` = "FIN",
+                          `France` = "FRA",
+                          `Great Britain` = "GBR", 
+                          `Iceland` = "ISL", 
+                          `Italy` = "ITA", 
+                          `The Netherlands` = "NLD", 
+                          `Norway` = "NOR", 
+                          `Portugal` = "PRT",
+                          `Belgium` = "BLG",
+                          `Austria` = "AUT",
+                          `Pooled Analysis` = "Pooled"),
+         country = factor(country,
+                          levels = c("Pooled",
+                                     "AUT", "BEL",
+                                     "CHE", "DEU",
+                                     "DNK", "FIN",
+                                     "FRA", "GBR",
+                                     "ISL", "ITA", 
+                                     "NLD", "NOR",
+                                     "PRT"))) %>% 
   drop_na(country) %>% 
   ggplot(aes(x = country, 
              y = estimate,
              ymin = lower,
              ymax = upper, color = y)) +
-  geom_point(position = position_dodge(.5)) + 
+  geom_point(position = position_dodge(.5)) +
   geom_errorbar(position = position_dodge(.5), width = 0) +
   theme_ipsum() +
-  labs(x = "", y = "Predicted Effect of Dependent Variable for Anti-Compromise Attitude") +
+  #facet_grid(.~y) +
+  labs(x = "", y = "Predicted Effect of Dependent Variable for Anti-Compromise Attitude",
+       caption = "Visualized results are OLS regression coefficients of variables of interested controlled for the co-variates: 
+       Political interest,  left-right position of the respondent, satisfaction with the government's performance, party identity,
+       gender, age, level of eduction, income.
+       Pooled Analyses have additonally the separate countries as a covariate added.") +
   theme(plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5),
         legend.position="bottom",
         legend.title = element_blank()) +
-  scale_color_manual(values = fig_cols) +
-  geom_hline(yintercept = 0, size = .2, linetype = "dashed") +
-  coord_flip()
-
+  scale_color_manual(values = c(fig_cols[5], fig_cols[6])) +
+  geom_hline(yintercept = 0, size = .2, linetype = "dashed") 
 
 rep2_b <- m1 %>%
   add_case(m2) %>% 
@@ -519,7 +558,7 @@ rep2_e <- m1 %>%
         plot.subtitle = element_text(hjust = 0.5),
         legend.position="bottom",
         legend.title = element_blank()) +
-  scale_color_manual(values = fig_cols) +
+  scale_color_manual(values = c(fig_cols[4], fig_cols[5])) +
   geom_hline(yintercept = 0, size = .2, linetype = "dashed") +
   coord_flip() +
   facet_grid(.~country, scales = "free")

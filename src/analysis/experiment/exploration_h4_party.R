@@ -8,7 +8,7 @@ for(i in 1:length(issues)){
     df <- d %>% 
       mutate(compromise = if_else(compromise=="yes", 0, 1),
              outcome = if_else(outcome == "negotiation", 0, 1),
-             b = HT1,
+             b = HT1_rescale,
              partner = recode(partner, 
                               "CDU" = 1,
                               "die Grünen"= 0,
@@ -99,7 +99,7 @@ p4a_e1 <- h4_e %>%
   geom_line() + 
   geom_ribbon(alpha = .2) +
   theme_ipsum() +
-  labs(x = "Levels of Principledness \n (2 = Low, 14 = High)", 
+  labs(x = "Levels of Principledness \n (0 = Low, 4 = High)", 
        y = "Average Marginal Effects of Being Steadfast",
        subtitle = "DV: Trust") +
   facet_grid(issue~party) +
@@ -126,7 +126,7 @@ p4a_e2 <- h4_e %>%
   geom_line() + 
   geom_ribbon(alpha = .2) +
   theme_ipsum() +
-  labs(x = "Levels of Principledness \n (2 = Low, 14 = High)", 
+  labs(x = "Levels of Principledness \n (0 = Low, 4 = High)", 
        y = "Average Marginal Effects of Being Steadfast",
        subtitle = "DV: Credibility") +
   facet_grid(issue~party) +

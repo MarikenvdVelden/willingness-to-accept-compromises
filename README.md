@@ -1,6 +1,6 @@
 # Responsive or Responsible?  The Reputational Cost of Political Compromise
 Online research compendium of the paper entitled _Responsive or Responsible?  The Reputational Cost of Political Compromise_ . 
-This repository combines the re-registration plans, data &amp; analysis compendium.
+This repository combines the pre-registration plan, data &amp; analysis compendium.
 
 ## Draft
 View the [draft of the paper](report/draft.pdf) and the [online appendix](report/OnlineAppendix.pdf) here.

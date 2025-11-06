@@ -51,6 +51,10 @@ d %>%
                       `DV1` = "DV: Trust",
                       `DV2` = "DV: Credibility",
                       `DV3` = "DV: Representation"),
+         dvs = factor(dvs, 
+                      levels = c("DV: Trust",
+                                 "DV: Credibility",
+                                 "DV: Representation")),
          outcome = recode(outcome, 
                            `stalled` = "Coalition talks stalled", 
                            `negotiation` = "Parties go to negotiation phase"),
@@ -59,30 +63,18 @@ d %>%
                              `no` = "Party remained steadfast")) %>%
   unite(treat, compromise, outcome, sep = " - ") %>%
   group_by(treat, dvs) %>%
-  summarise(means = round(mean(value, na.rm=T),1),
-            stdev = sd(value, na.rm=T)) %>%
-  mutate(lower = means - (1.56 * stdev),
-         upper = means + (1.56 * stdev),
-         type = if_else(means <= 5, "below", "above")) %>%
   ggplot(aes(x = treat, 
-             y =means, label = means,
-             ymin = lower, ymax = upper)) +
-  geom_point(stat='identity', size=6)  +
-  scale_color_manual(values = c("above"=fig_cols[3],
-                                "below"=fig_cols[2])) +
-  geom_errorbar(width = 0) +
-  geom_text(color="white", size=2) +
+             y = value)) +
+  see::geom_violinhalf(fill = fig_cols[6], alpha = .4,
+                       color = "white") +
+  stat_summary(fun.data = "mean_cl_boot", geom = "pointrange",
+               colour = "gray55") +
+  labs(x = "", y = "0 (negative) - 10 (positive)") +
   facet_grid(dvs~.) +
-  labs(y = "0 (negative) - 10 (positive)", 
-       x = "", title = "Reputational Cost of Compromise") +
   theme_ipsum() +
-  theme(plot.title = element_text(hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5),
-        legend.position="none",
-        legend.title = element_blank(),
-        axis.text=element_text(size=8)) +
-  geom_hline(yintercept = 5, linetype = "dotted", color = "darkgrey") +
-  coord_flip() 
+  coord_flip() +
+  theme(legend.position = "bottom",
+        legend.title = element_blank())
 ```
 
 ## Balance Checks
@@ -123,8 +115,8 @@ p2_int
 ```
 
 ## Principled Hypothesis
-```{r "h4", fig.align="center", fig.height=8, fig.width=8}
-source(here("src/analysis/experiment/h4_exp.R")) #pooled?
+```{r "h4", fig.align="center", fig.height=10, fig.width=8}
+source(here("src/analysis/experiment/h4_exp.R")) 
 p3b / p3a + plot_layout(guides = 'collect')  & theme(legend.position = 'bottom')
 
 p3_2b/ p3_2a + plot_layout(guides = 'collect')  & theme(legend.position = 'none')
@@ -132,7 +124,7 @@ p3_2b/ p3_2a + plot_layout(guides = 'collect')  & theme(legend.position = 'none'
 
 ## Mutual Trust Hypothesis
 ```{r "h5", fig.align="center", fig.height=7, fig.width=10}
-source(here("src/analysis/experiment/h5_exp.R")) #pooled?
+source(here("src/analysis/experiment/h5_exp.R"))
 p4
 
 p4_2
@@ -142,16 +134,15 @@ p4_2
 Results for those who know who is in the actual coalition negotiations
 
 ```{r "robust", fig.align="center", fig.height=7, fig.width=10}
-source(here("src/analysis/experiment/robust.R")) #pooled?
+source(here("src/analysis/experiment/robust.R")) 
 pa
 pb
 pc_2b/ pc_2a + plot_layout(guides = 'collect')  & theme(legend.position = 'bottom')
 pd
 ```
 
-# Exploration
-
-```{r "h45-direct", fig.align="center", fig.height=8, fig.width=8}
+# Exploration 
+```{r "h45-direct", fig.align="center", fig.height=8, fig.width=8, eval = F}
 source(here("src/analysis/experiment/exploration_h45.R")) 
 p45d1 + p45d2 + p45d3 +
   plot_layout(guides = 'collect')  & theme(legend.position = 'bottom')
@@ -159,11 +150,13 @@ p45d1 + p45d2 + p45d3 +
 p34e
 ```
 
-```{r "effect-on-compromise-attitude", fig.align="center", fig.height=8, fig.width=8}
+```{r "effect-on-compromise-attitude", fig.align="center", fig.height=8, fig.width=8, eval = F}
 source(here("src/analysis/experiment/exploration_compromise_attitude.R")) 
 p_ca
 ```
 
+
+Do H1 and H2 hold for different heterogeneous treatments: party choice & political moderators
 
 ```{r "effects-per-party", fig.align="center", fig.height=8, fig.width=18}
 source(here("src/analysis/experiment/exploration_h1_party.R")) 
@@ -195,4 +188,12 @@ mod4
 mod5
 mod6
 mod7
+```
+
+Is negative finding of H3 only for those more cold towards partner? And is there a difference in reputation for those seeing no compromise & no government vs compromise and government?
+
+```{r "h2-robust", fig.align="center", fig.height=6, fig.width=10}
+source(here("src/analysis/experiment/explorationH2.R"))
+mod8
+mod9
 ```

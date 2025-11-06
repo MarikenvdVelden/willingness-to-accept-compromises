@@ -1,0 +1,300 @@
+---
+output: 
+  stevetemplates::article:
+    number_sections: TRUE
+    toc: yes
+    dev: cairo_pdf
+title: "APPENDIX: Don't Budge! The Reputational Cost of Political Compromises"
+bibliography: references.bib
+biblio-style: apsr
+geometry: margin=1in
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+fontsize: 11pt
+endnotes: FALSE
+mainfont: cochineal
+sansitup: FALSE
+params:
+  anonymous: ""
+  doublespacing: ""
+  removetitleabstract: ""
+appendix: TRUE
+appendixletter: "OA"
+pandocparas: FALSE
+anonymous: "`r params$anonymous`"
+doublespacing: "`r params$doublespacing`"
+removetitleabstract: "`r params$removetitleabstract`"
+linkcolor: black
+#nocite: |
+#  @cartersmith2020fml, @andersetal2020bbgb
+header-includes: 
+   - \usepackage{array}
+   - \usepackage{floatrow}
+   - \floatsetup[figure]{capposition=top}
+   - \floatsetup[table]{capposition=top}
+   - \usepackage{booktabs}
+   - \usepackage{longtable}
+   - \usepackage{array}
+   - \usepackage{multirow}
+   - \usepackage{wrapfig}
+   - \usepackage{float}
+   - \usepackage{colortbl}
+   - \usepackage{pdflscape}
+   - \newcommand{\blandscape}{\begin{landscape}}
+   - \newcommand{\elandscape}{\end{landscape}}
+   - \usepackage{tabu}
+   - \usepackage[para,online,flushleft]{threeparttable}
+   - \usepackage{threeparttablex}
+   - \usepackage[normalem]{ulem}
+   - \usepackage{makecell}
+   - \usepackage{xcolor}
+   - \usepackage{caption}
+   - \usepackage{graphicx}
+   - \usepackage{epstopdf}
+   - \usepackage{siunitx}
+   - \usepackage{multirow}
+   - \usepackage{hhline}
+   - \usepackage{calc}
+   - \usepackage{tabularx}
+   - \usepackage{fontawesome}
+   - \usepackage{amsthm}
+   - \usepackage{csquotes}
+   - \LTcapwidth=.95\textwidth
+   - \linespread{1.05}
+   - \usepackage{hyperref}
+   - \usepackage{setspace}
+   - \renewcommand{\thepage}{OA-\arabic{page}}
+---
+
+```{r setup, include=FALSE}
+## include this at top of your RMarkdown file for pretty output
+## make sure to have the printr package installed: install.packages('printr')
+library(knitr)
+opts_chunk$set(echo = FALSE,
+                      message=FALSE, warning=FALSE,
+               fig.pos = "H", out.extra = "")
+options(kableExtra.latex.load_packages = FALSE)
+```
+
+```{r "data"}
+here::i_am("report/OnlineAppendix.Rmd")
+source(here::here("src/lib/functions.R"))
+load(here("data/intermediate/cleaned_experiment.RData"))
+source(here("src/analysis/experiment/data-for-analyses.R"))
+ds <- d
+source(here("src/analysis/experiment/descriptive-information-overview.R"))
+```
+
+\newpage
+# Appendix C. Additional Experiment: Testing Stimulus Material
+
+Figure \ref{fig:balance-exp2} below shows that the data is unbalanced for the variable `Digital Literacy`.
+As described in the Pre-Analysis Plan (p.10), we will add this co-variates to the analyses as controls. 
+
+```{r "data-experiment",fig.height=7, fig.width=5,fig.cap = "\\label{fig:balance-exp2}Balance Test", fig.topcaption=TRUE}
+load(here("treatment-experiment/data/intermediate/cleaned_experiment.RData"))
+source(here("treatment-experiment/src/analysis/balance-test.R"))
+df
+```
+
+\blandscape
+```{r "treat-diff",fig.height=7, fig.width=10, fig.cap = "\\label{fig:exp_main}Predicting Treatment Differences", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+source(here("treatment-experiment/src/analysis/hs.R"))
+h
+```
+\elandscape
+
+\blandscape
+```{r "treat-diff-exp",fig.height=10, fig.width=10, fig.cap = "\\label{fig:ht_exp}Heterogeneoous Treatment Effects",fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+source(here("treatment-experiment/src/analysis/exp.R"))
+he
+```
+\elandscape
+
+# Appendix E. Balance Checks
+We have conducted a balance test based on demographics (age, gender, education, geographical region, level of urbanness,employment, and income), vote choice in the 2021 parliamentary elections, ideological self-placement, political knowledge, political interest, party identity strength, and positions on and salience of the three issues, using the `cobalt` R package [@greifer2021]. 
+The figure below shows that the data is unbalanced for the variables: `Education`,`Income`, `Employment`, `Urbaness`, `Living Place`, `Birth Place`, `Age`, `Political Knowledge`, `Political Interest`, and `Ideology`.
+As described in the [Pre-Analysis Plan (p.10)](https://github.com/MarikenvdVelden/willingness-to-accept-compromises/blob/main/docs/pre-analysis-plan/pap.pdf), we have added these co-variates to the analyses as controls.
+
+```{r "balance-checks", fig.height=10, fig.width=10,out.height="70%",out.width="70%"}
+d <- ds
+source(here("src/analysis/experiment/balance-test.R"))
+df
+```
+
+\newpage
+
+# Appendix F. Manipulation Checks
+
+## Effectiveness of Manipulation
+
+Figure \ref{fig:mc} shows that both manipulations in the experiment are successful: The significant effects of both manipulations indicate that those in the experimental group reported to have seen the manipulated conditions.
+
+```{r "mc", out.width="80%", fig.align = "center", fig.cap = "\\label{fig:mc}Effect of Treatment on Manipulations Checks", fig.topcaption=TRUE, fig.pos="h"}
+include_graphics(here("report/figures/mc-1.png"))
+```
+
+
+## H1 and H2 for those passing the Manipulation Checks
+Looking at those respondents who have correctly filled in the manipulation checks, Figure \ref{fig:mh1} shows that the main effects shown in the manuscript (Figure 2) do not change.
+
+```{r "mc-h1",out.width="80%",fig.align = "center", fig.cap = "\\label{fig:mh1}Predicted Reputational Cost", fig.topcaption=TRUE, fig.pos="h"}
+knitr::include_graphics(here("report/figures/mc-2.png"))
+```
+
+## H3 for those passing the Manipulation Checks
+Looking at those respondents who have correctly filled in the manipulation checks, Figure \ref{fig:mh2} shows that the main effects shown in the manuscript (Figure 3) do not change.
+
+```{r "mc-h3",out.width="80%", fig.align = "center", fig.cap = "\\label{fig:mh3}Predicted Reputational Cost", fig.topcaption=TRUE, fig.pos="h"}
+knitr::include_graphics(here("report/figures/mc-3.png"))
+```
+
+## H4 for those passing the Manipulation Checks
+Looking at those respondents who have correctly filled in the manipulation checks, Figure \ref{fig:mh4} shows that the main effects shown in the manuscript (Figure 4) do not change.
+
+```{r "mc-h4",out.width="80%", fig.align = "center", fig.cap = "\\label{fig:mh4}Heterogeneous Treatment Effect: Principledness", fig.topcaption=TRUE, fig.pos="h"}
+knitr::include_graphics(here("report/figures/mc-4.png"))
+```
+
+## H5 for those passing the Manipulation Checks
+
+Looking at those respondents who have correctly filled in the manipulation checks, Figure \ref{fig:mh5} shows that the main effects shown in the manuscript (Figure 5) do not change.
+
+```{r "mc-h5", out.height="50%", out.width="80%", fig.align = "center", fig.cap = "\\label{fig:mh5}Heterogeneous Treatment Effect: Social Trust", fig.topcaption=TRUE, fig.pos="h"}
+knitr::include_graphics(here("report/figures/mc-5.png"))
+```
+\newpage
+
+# Appendix I. Explorative Analysis: Heterogeneous treatments for H1
+
+## HT: Issue congruence
+
+Figure \ref{fig:ht_ic} visualizes the heteregeneous effect of issue congruence. 
+Looking at the issue of speed limits, we see that respondents who hold a congruent issue position with the party, they value staying steadfast less than those who hold an incongruent issue position.
+We however observe the complete opposite for the issue top tax, but the difference however is insignificant.
+This means that we cannot conclude a uniform moderating effect of issue congruence on the relationship between parties' reputation and striking a compromise.
+
+```{r ht-ic, fig.align = 'center', out.width = "80%", fig.cap = "\\label{fig:ht_ic}Heterogenous Treatment Issue Congruence", fig.topcaption=TRUE, fig.pos="H"}
+knitr::include_graphics(here("report/figures/explor-pol-mod-5.png"))
+```
+
+## HT: Ideological Position 
+
+Figure \ref{fig:hr_ip} demonstrates that the respondents with a left-leaning ideological orientation prefer parties to stay steadfast on the issue of top tax, while right-leaning voters prefer a political compromise.
+There is however no significant difference between the left and the right when it comes to the issue of speed limit.
+This indicates that for issues that align with the dimension, you like your party to stick to their ideological commitment.
+
+```{r ht-ip, fig.align = 'center', out.width = "100%", fig.cap = "\\label{fig:hr_ip}Heterogenous Treatment Ideological Position", fig.topcaption=TRUE, fig.pos="H"}
+knitr::include_graphics(here("report/figures/explor-pol-mod-4.png"))
+```
+
+## HT: Political Interest
+
+Figure \ref{ht_pol_int} demonstrates that the more political interest a respondent has, the less likely the respondent values the party stating steadfast. 
+This indicates that people with high levels of political interest, they prefer the party to seek a political compromise. 
+This could be an indication of understanding politics -- if a party gives in on something, it might be that they later get something in return.
+
+```{r ht-polint, fig.align = 'center', out.width = "100%", fig.cap = "\\label{fig:ht_pol_int}Heterogenous Treatment Political Interest", fig.topcaption=TRUE, fig.pos="H"}
+knitr::include_graphics(here("report/figures/explor-pol-mod-8.png"))
+```
+
+## HT: Political Knowledge
+
+Figure \ref{ht_pol_know} demonstrates, similar to Political Interest, that the more political knowledge a respondent has, the less likely the respondent values the party stating steadfast. 
+This indicates that people with high levels of political knowledge, they prefer the party to seek a political compromise. 
+
+```{r ht-polknow, fig.align = 'center', out.width = "100%", fig.cap = "\\label{fig:ht_pol_know}Heterogenous Treatment Political Knowledge", fig.topcaption=TRUE, fig.pos="H"}
+knitr::include_graphics(here("report/figures/explor-pol-mod-9.png"))
+```
+
+## HT:Party Choice
+
+The effect of this analysis is elaborated on in the main text.
+
+```{r ht-partychoice, fig.align = 'center', out.width = "100%", fig.cap = "\\label{fig:ht_pol_know}Heterogenous Treatment Party Choice", fig.topcaption=TRUE, fig.pos="H"}
+knitr::include_graphics(here("report/figures/explor-pol-mod-7.png"))
+```
+
+\newpage
+# Appendix J. Explorative Analysis: Heterogeneous treatments for H2
+
+## HT: Ideological Distance towards Coalition Partner 
+
+Figure \ref{fig:hr_id} demonstrates that the respondents who are further away from the coalition partner evaluate their party more negative when they continue the coalition talks than those respondents that are closer to the coalition partner. 
+
+```{r ht-id, fig.align = 'center', out.width = "100%", fig.cap = "\\label{fig:hr_id}Heterogenous Treatment Ideological Distance to Coalition Partner", fig.topcaption=TRUE, fig.pos="H"}
+knitr::include_graphics(here("report/figures/h2-robust-1.png"))
+```
+
+\newpage
+
+# Appendix K. Additional Robustness Analyses Experimental Study 
+
+## Comparing No Government & No Compromise to Government & Compromise
+
+Figure \ref{fig:comp_groups} demonstrates that both groups, either seeing no government and no compromise or govermnent and compromise, evaluate the party negatively. 
+Indicating that either an office-seeking strategy is never rewarded by voters, maybe because of their optimism bias. 
+
+```{r "comp-groups", fig.align = 'center', out.width = "100%", fig.cap = "\\label{fig:comp_groups}Heterogenous Treatment Ideological Distance to Coalition Partner", fig.topcaption=TRUE, fig.pos="H"}
+knitr::include_graphics(here("report/figures/h2-robust-2.png"))
+```
+
+
+## Knowledge of Parties Negotiation
+
+### Hypothesis 1 & 2
+
+Looking at those respondents who know which parties are negotating for the 2021 coalition, Figure \ref{fig:h1_party} shows that the main effects shown in the manuscript (Figure 2) do not change.
+
+```{r "h1-know", fig.cap = "\\label{fig:h1_party}Predicted Reputational Cost ", fig.topcaption=TRUE,out.width="70%"}
+knitr::include_graphics(here("report/figures/robust-1.png"))
+```
+
+### Hypothesis 3
+
+Looking at those respondents who know which parties are negotating for the 2021 coalition, Figure \ref{fig:h3_party} shows that the main effects shown in the manuscript (Figure 3) do not change.
+
+```{r "h3-know", fig.cap = "\\label{fig:h3_party}Predicted Reputational Cost ", fig.topcaption=TRUE, out.width="70%"}
+knitr::include_graphics(here("report/figures/robust-2.png"))
+```
+
+### Hypothesis 4 & 5
+
+Looking at those respondents who know which parties are negotating for the 2021 coalition, Figures \ref{fig:h4_party} and \ref{fig:h5_party} show that the main effects shown in the manuscript (Figure 4 and 5) do not change.
+
+```{r "h4-know", fig.cap = "\\label{fig:h4_party}Heterogeneous Treatment Effect: Principledness", fig.topcaption=TRUE, out.width="70%"}
+knitr::include_graphics(here("report/figures/robust-3.png"))
+```
+
+```{r "h5-know", fig.cap = "\\label{fig:h5_party}Heterogeneous Treatment Effect: Social Trust", fig.topcaption=TRUE, out.width="70%"}
+knitr::include_graphics(here("report/figures/robust-4.png"))
+```
+
+\newpage
+
+# Appendix L. Robustness Analyses Experimental Study -- Analyses per Party
+\blandscape
+## Hypothesis 1 & 2
+```{r "h1-party", fig.cap = "\\label{fig:h1_party}Predicted Reputational Cost ", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+knitr::include_graphics(here("report/figures/effects-per-party-1.png"))
+```
+
+## Hypothesis 3
+```{r "h3-party", fig.cap = "\\label{fig:h3_party}Predicted Reputational Cost ", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+knitr::include_graphics(here("report/figures/effects-per-party-2.png"))
+```
+
+## Hypothesis 4 & 5
+```{r "h4-party", fig.cap = "\\label{fig:h1_party}Heterogeneous Treatment Effect: Principledness", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+knitr::include_graphics(here("report/figures/effects-per-party-3.png"))
+```
+
+```{r "h5-party", fig.cap = "\\label{fig:h5_party}Heterogeneous Treatment Effect: Social Trust", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+knitr::include_graphics(here("report/figures/effects-per-party-4.png"))
+```
+
+```{r "h45-direct", fig.cap = "\\label{fig:h5_party}Direct Effects of Principledness and Social Trust", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+knitr::include_graphics(here("report/figures/h45-direct-2.png"))
+```
+\elandscape
+
+\newpage

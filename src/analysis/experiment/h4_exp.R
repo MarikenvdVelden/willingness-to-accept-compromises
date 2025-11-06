@@ -5,7 +5,7 @@ for(i in 1:length(issues)){
   df <- d %>% 
     mutate(compromise = if_else(compromise=="yes", 0, 1),
            outcome = if_else(outcome == "negotiation", 0, 1),
-           b = HT1,
+           b = HT1_rescale,
            partner = recode(partner, 
                             "CDU" = 1,
                             "die Grünen"= 0,
@@ -37,7 +37,7 @@ h4 <- h4 %>%
 df <- d %>% 
   mutate(compromise = if_else(compromise=="yes", 0, 1),
          outcome = if_else(outcome == "negotiation", 0, 1),
-         b = HT1,
+         b = HT1_rescale,
          partner = recode(partner, 
                           "CDU" = 1,
                           "die Grünen"= 0,
@@ -58,7 +58,8 @@ h4p <- pooled_regression_ht1(df, compromise, outcome, b, issue) %>%
 p3a <- h4 %>% 
   add_case(h4p) %>% 
   mutate(issue = factor(issue,
-                        levels = c("SpeedLimit", "TopTax", "Pooled Analysis"))) %>% 
+                        levels = c("SpeedLimit", "TopTax", "Pooled Analysis")),
+         hyp = "Hypothesis 4 - Principledness (2)") %>% 
   ggplot(aes(x = b, 
              y = AME,
              color = issue,
@@ -69,8 +70,11 @@ p3a <- h4 %>%
   geom_line() + 
   geom_ribbon(alpha = .2) +
   theme_ipsum() +
-  labs(x = "Levels of Principledness \n (2 = Low, 14 = High)", y = "Average Marginal Effects of Being Steadfast") +
-  facet_grid(type~y) +
+  labs(x = "Levels of Principledness \n (0 = Low, 4 = High)", y = "Average Marginal Effects of Being Steadfast",
+  caption = "Visualized results are based upon OLS regression of variables of interested controlled for the unbalanced co-variates: 
+       Degree of urbanization, employment, region of residence and birth, \n left-right position of the respondent, attitude towards the speed limit and top tax policies, \n and issue importance of top tax.
+       Pooled Analyses have additonally the issues as a covariate added.") +
+  facet_grid(hyp~y) +
   theme(plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5),
         legend.position="bottom",
@@ -139,7 +143,8 @@ h4bp <- pooled_regression_ht2(df, compromise, outcome, b, issue) %>%
 p3b <- h4b %>%
   add_case(h4bp) %>% 
   mutate(issue = factor(issue,
-                        levels = c("SpeedLimit", "TopTax", "Pooled Analysis"))) %>% 
+                        levels = c("SpeedLimit", "TopTax", "Pooled Analysis")),
+         hyp = "Hypothesis 4 - Principledness (1)") %>% 
   ggplot(aes(x = b, 
              y = AME,
              color = issue,
@@ -150,8 +155,11 @@ p3b <- h4b %>%
   geom_line() + 
   geom_ribbon(alpha = .2) +
   theme_ipsum() +
-  labs(x = "Levels of Principledness \n (0 = Low, 4 = High)", y = "Average Marginal Effects of Being Steadfast") +
-  facet_grid(type~y) +
+  labs(x = "Levels of Principledness \n (0 = Low, 4 = High)", y = "Average Marginal Effects of Being Steadfast",
+       caption = "Visualized results are based upoon OLS regression of variables of interested controlled for the unbalanced co-variates: 
+       Degree of urbanization, employment, region of residence and birth, \n left-right position of the respondent, attitude towards the speed limit and top tax policies, \n and issue importance of top tax.
+       Pooled Analyses have additonally the issues as a covariate added.") +
+  facet_grid(hyp~y) +
   theme(plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5),
         legend.position="bottom",
@@ -162,7 +170,8 @@ p3b <- h4b %>%
 
 p3_2a <- h4p %>%
   mutate(issue = factor(issue,
-                        levels = c("SpeedLimit", "TopTax", "Pooled Analysis"))) %>% 
+                        levels = c("SpeedLimit", "TopTax", "Pooled Analysis")),
+         hyp = "Hypothesis 4 - Principledness (2)") %>% 
   ggplot(aes(x = b, 
              y = AME,
              color = issue,
@@ -173,20 +182,24 @@ p3_2a <- h4p %>%
   geom_line() + 
   geom_ribbon(alpha = .2) +
   theme_ipsum() +
-  labs(x = "Levels of Principledness \n (2 = Low, 14 = High)", 
-       y = "Average Marginal Effects of Being Steadfast") +
-  facet_grid(type~y) +
+  labs(x = "Levels of Principledness \n (0 = Low, 4 = High)", 
+       y = "Average Marginal Effects of Being Steadfast",
+       caption = "Visualized results are based upoon OLS regression of variables of interested controlled for the unbalanced co-variates: 
+       Degree of urbanization, employment, region of residence and birth, \n left-right position of the respondent, attitude towards the speed limit and top tax policies, \n and issue importance of top tax.
+       Pooled Analyses have additonally the issues as a covariate added.") +
+  facet_grid(hyp~y) +
   theme(plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5),
         legend.position="none",
         legend.title = element_blank()) +
-  scale_color_manual(values = fig_cols) +
-  scale_fill_manual(values = fig_cols) +
+  scale_color_manual(values = fig_cols[3]) +
+  scale_fill_manual(values = fig_cols[3]) +
   geom_hline(yintercept = 0, linewidth = .2, linetype = "dashed")
 
 p3_2b <- h4bp %>%
   mutate(issue = factor(issue,
-                        levels = c("SpeedLimit", "TopTax", "Pooled Analysis"))) %>% 
+                        levels = c("SpeedLimit", "TopTax", "Pooled Analysis")),
+         hyp = "Hypothesis 4 - Principledness (1)") %>% 
   ggplot(aes(x = b, 
              y = AME,
              color = issue,
@@ -199,11 +212,11 @@ p3_2b <- h4bp %>%
   theme_ipsum() +
   labs(x = "Levels of Principledness \n (0 = Low, 4 = High)", 
        y = "Average Marginal Effects of Being Steadfast") +
-  facet_grid(type~y) +
+  facet_grid(hyp~y) +
   theme(plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5),
         legend.position="none",
         legend.title = element_blank()) +
-  scale_color_manual(values = fig_cols) +
-  scale_fill_manual(values = fig_cols) +
+  scale_color_manual(values = fig_cols[3]) +
+  scale_fill_manual(values = fig_cols[3]) +
   geom_hline(yintercept = 0, linewidth = .2, linetype = "dashed")

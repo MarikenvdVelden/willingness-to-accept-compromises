@@ -1,5 +1,4 @@
 # H1 & H2
-
 issues <- unique(d$issue)
 for(i in 1:length(issues)){
   df <- d %>% 
@@ -19,20 +18,21 @@ for(i in 1:length(issues)){
 rm (tmp)
 
 p1 <- h1 %>%
-  filter(x %in% c("a", "b"),
+  filter(x %in% c("(Intercept)","a", "b"),
          y != "DV3") %>%
   mutate(x = recode(x,
+                    `(Intercept)` = "Intercept",
                     `a` = "Party Position: Steadfast",
-                    `b` = "Outcome: Coalition Talks Continued"),
+                    `b` = "Success: Coalition Talks Continued"),
          x = factor(x,
-                    levels = c("Outcome: Coalition Talks Continued",
-                               "Party Position: Steadfast")),
+                    levels = c("Success: Coalition Talks Continued",
+                               "Party Position: Steadfast", "Intercept")),
          y = recode(y,
                     `DV1` = "DV: Trust",
                     `DV2` = "DV: Credibility"),
          y = factor(y,
                     levels = c("DV: Trust","DV: Credibility")),
-         hyp = ifelse(x == "Party Position: Steadfast", "Hypothesis 1", "Hypothesis 2")) %>%
+         hyp = "Hypotheses 1 & 2") %>%
   filter(estimate != is.na(estimate), x != is.na(x)) %>%
   ggplot(aes(x = x, 
              y = estimate,
@@ -43,7 +43,8 @@ p1 <- h1 %>%
   geom_point(position = position_dodge(.5)) + 
   geom_errorbar(position = position_dodge(.5), width = 0) +
   theme_ipsum() +
-  labs(x = "", y = "Predicted Reputational Cost") +
+  labs(x = "", y = "Predicted Reputational Cost",
+       caption = "Visualized results are OLS regression coefficients of variables of interested controlled for the unbalanced co-variates: \n Degree of urbanization, employment, region of residence and birth, left-right position of the respondent, attitude towards the speed limit and top tax policies, and issue importance of top tax .") +
   facet_grid(hyp~y, scales = "free") +
   theme(plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5),

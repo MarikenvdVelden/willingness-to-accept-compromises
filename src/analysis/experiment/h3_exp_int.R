@@ -386,6 +386,7 @@ tmp <- tmp %>%
    
 
 p2_int <- tmp %>% 
+  filter(issue == "Pooled Analysis") %>% 
   ggplot(aes(x = term, y = value$estimate, 
              color = term2,
              group = term2)) +

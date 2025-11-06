@@ -81,7 +81,7 @@ d <- d %>%
          PT5 = if_else(PT5 == 5, 1, 0),
          PT6 = if_else(PT6==1, 1, 0),
          PT7 =  na_if(PT7, 6), #48 participants
-         PT7 = 8-PT7,
+         PT7 = 6 - PT7,
          S1 = recode(S1, 
                      `1` = "CDU",
                      `2` = "Greens",
@@ -109,9 +109,10 @@ d <- d %>%
          HT1b_6 = 8 - HT1b_6,
          HT1b = round((HT1b_1 + HT1b_2 + HT1b_3 + HT1b_4 + HT1b_5 + HT1b_6)/6,0),
          HT1 = HT1a + HT1b,
+         HT1_rescale = (HT1 - 2)/3,
          HT2 = 5 - HT2,
          HT3 = round((HT3a + HT3b + HT3c)/3,0),
          POST = round((POST_1 + POST_2 + POST_3 + POST_4 + POST_5 + POST_6)/6),0) %>%
   select(id, D1:D10, PT1_1: PT3_3, pol_know, PT7:PT8, S1:S2, compromise, outcome,
-         partner, issue, DV1:DV3, MC1:MC3, HT1, HT2, HT3, POST, POST_1) %>%
+         partner, issue, DV1:DV3, MC1:MC3, HT1, HT1_rescale, HT2, HT3, POST, POST_1) %>%
   drop_na()
