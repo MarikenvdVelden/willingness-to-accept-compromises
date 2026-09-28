@@ -1,0 +1,12 @@
+% Make the stevetemplates reference list work with pandoc >= 3.1.8
+\providecommand{\citeproctext}{}
+\makeatletter
+\newenvironment{CSLReferencesFix}[2]{\begin{list}{}{%
+  \setlength{\leftmargin}{1.5em}\setlength{\itemindent}{-1.5em}%
+  \setlength{\labelwidth}{0pt}\setlength{\labelsep}{0pt}%
+  \setlength{\itemsep}{0pt}\setlength{\parsep}{0pt}}}{\end{list}}
+\AtBeginDocument{%
+  \let\CSLReferences\CSLReferencesFix
+  \let\endCSLReferences\endCSLReferencesFix
+  \let\@biblabel\@gobble}
+\makeatother

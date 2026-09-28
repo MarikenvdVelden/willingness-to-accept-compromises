@@ -4,6 +4,8 @@ output:
     number_sections: TRUE
     toc: yes
     dev: cairo_pdf
+    includes:
+      in_header: csl-fix.tex
 title: "ONLINE APPENDIX: Don't Budge! The Reputational Cost of Political Compromises"
 bibliography: references.bib
 biblio-style: apsr
@@ -350,14 +352,14 @@ df
 ```
 
 \blandscape
-```{r "treat-diff",fig.height=7, fig.width=10, fig.cap = "\\label{fig:exp_main}Predicting Treatment Differences", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+```{r "treat-diff",fig.height=7, fig.width=10, fig.cap = "\\label{fig:exp_main}Predicting Treatment Differences", fig.topcaption=TRUE,out.width="100%"}
 source(here("treatment-experiment/src/analysis/hs.R"))
 h
 ```
 \elandscape
 
 \blandscape
-```{r "treat-diff-exp",fig.height=10, fig.width=10, fig.cap = "\\label{fig:ht_exp}Heterogeneoous Treatment Effects",fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+```{r "treat-diff-exp",fig.height=10, fig.width=10, fig.cap = "\\label{fig:ht_exp}Heterogeneoous Treatment Effects",fig.topcaption=TRUE,out.width="100%"}
 source(here("treatment-experiment/src/analysis/exp.R"))
 he
 ```
@@ -395,7 +397,7 @@ We have conducted a balance test based on demographics (age, gender, education, 
 The figure below shows that the data is unbalanced for the variables: `Education`,`Income`, `Employment`, `Urbaness`, `Living Place`, `Birth Place`, `Age`, `Political Knowledge`, `Political Interest`, and `Ideology`.
 As described in the [Pre-Analysis Plan (p.10)](https://github.com/MarikenvdVelden/willingness-to-accept-compromises/blob/main/docs/pre-analysis-plan/pap.pdf), we have added these co-variates to the analyses as controls.
 
-```{r "balance-checks", fig.height=10, fig.width=10,out.height="70%",out.width="70%"}
+```{r "balance-checks", fig.height=10, fig.width=10,out.width="100%"}
 d <- ds
 source(here("src/analysis/experiment/balance-test.R"))
 df
@@ -1024,7 +1026,7 @@ knitr::include_graphics(here("report/figures/h2-robust-2.png"))
 
 Looking at those respondents who know which parties are negotating for the 2021 coalition, Figure \ref{fig:h1_party} shows that the main effects shown in the manuscript (Figure 2) do not change.
 
-```{r "h1-know", fig.cap = "\\label{fig:h1_party}Predicted Reputational Cost ", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+```{r "h1-know", fig.cap = "\\label{fig:h1_party}Predicted Reputational Cost ", fig.topcaption=TRUE,out.width="100%"}
 knitr::include_graphics(here("report/figures/robust-1.png"))
 ```
 
@@ -1032,7 +1034,7 @@ knitr::include_graphics(here("report/figures/robust-1.png"))
 
 Looking at those respondents who know which parties are negotating for the 2021 coalition, Figure \ref{fig:h3_party} shows that the main effects shown in the manuscript (Figure 3) do not change.
 
-```{r "h3-know", fig.cap = "\\label{fig:h3_party}Predicted Reputational Cost ", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+```{r "h3-know", fig.cap = "\\label{fig:h3_party}Predicted Reputational Cost ", fig.topcaption=TRUE,out.width="100%"}
 knitr::include_graphics(here("report/figures/robust-2.png"))
 ```
 
@@ -1040,12 +1042,24 @@ knitr::include_graphics(here("report/figures/robust-2.png"))
 
 Looking at those respondents who know which parties are negotating for the 2021 coalition, Figures \ref{fig:h4_party} and \ref{fig:h5_party} show that the main effects shown in the manuscript (Figure 4 and 5) do not change.
 
-```{r "h4-know", fig.cap = "\\label{fig:h4_party}Heterogeneous Treatment Effect: Principledness", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+```{r "h4-know", fig.cap = "\\label{fig:h4_party}Heterogeneous Treatment Effect: Principledness", fig.topcaption=TRUE,out.width="100%"}
 knitr::include_graphics(here("report/figures/robust-3.png"))
 ```
 
-```{r "h5-know", fig.cap = "\\label{fig:h5_party}Heterogeneous Treatment Effect: Social Trust", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+```{r "h5-know", fig.cap = "\\label{fig:h5_party}Heterogeneous Treatment Effect: Social Trust", fig.topcaption=TRUE,out.width="100%"}
 knitr::include_graphics(here("report/figures/robust-4.png"))
+```
+
+## Excluding AfD and Die Linke Voters
+
+Respondents had to select their in-party from the SPD, CDU, Greens and FDP. To check that our results are not driven by respondents who voted for AfD or Die Linke in the 2021  Bundestag election, we re-estimate the models of Figures 2 and 3 in the main text excluding these respondents (n = 1186 excluded; N = 6376). Figures \ref{fig:h1_noafdleft} and \ref{fig:h3_noafdleft} show that the results are substantively the same as those reported in Figures 2 and 3 of the main text. 
+
+```{r "h1-noafdleft", fig.cap = "\\label{fig:h1_noafdleft}Predicted Reputational Cost, Excluding AfD and Die Linke Voters (cf. Figure 2)", fig.topcaption=TRUE, out.width="100%"}
+knitr::include_graphics(here("report/figures/robust-no-afd-left-1.png"))
+```
+
+```{r "h3-noafdleft", fig.cap = "\\label{fig:h3_noafdleft}Predicted Reputational Cost, Excluding AfD and Die Linke Voters (cf. Figure 3)", fig.topcaption=TRUE, out.width="100%"}
+knitr::include_graphics(here("report/figures/robust-no-afd-left-2.png"))
 ```
 
 \newpage
@@ -1053,25 +1067,25 @@ knitr::include_graphics(here("report/figures/robust-4.png"))
 # Appendix L. Robustness Analyses Experimental Study -- Analyses per Party
 \blandscape
 ## Hypothesis 1 & 2
-```{r "h1-party", fig.cap = "\\label{fig:h1_party}Predicted Reputational Cost ", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+```{r "h1-party", fig.cap = "\\label{fig:h1_party}Predicted Reputational Cost ", fig.topcaption=TRUE,out.width="100%"}
 knitr::include_graphics(here("report/figures/effects-per-party-1.png"))
 ```
 
 ## Hypothesis 3
-```{r "h3-party", fig.cap = "\\label{fig:h3_party}Predicted Reputational Cost ", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+```{r "h3-party", fig.cap = "\\label{fig:h3_party}Predicted Reputational Cost ", fig.topcaption=TRUE,out.width="100%"}
 knitr::include_graphics(here("report/figures/effects-per-party-2.png"))
 ```
 
 ## Hypothesis 4 & 5
-```{r "h4-party", fig.cap = "\\label{fig:h1_party}Heterogeneous Treatment Effect: Principledness", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+```{r "h4-party", fig.cap = "\\label{fig:h1_party}Heterogeneous Treatment Effect: Principledness", fig.topcaption=TRUE,out.width="100%"}
 knitr::include_graphics(here("report/figures/effects-per-party-3.png"))
 ```
 
-```{r "h5-party", fig.cap = "\\label{fig:h5_party}Heterogeneous Treatment Effect: Social Trust", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+```{r "h5-party", fig.cap = "\\label{fig:h5_party}Heterogeneous Treatment Effect: Social Trust", fig.topcaption=TRUE,out.width="100%"}
 knitr::include_graphics(here("report/figures/effects-per-party-4.png"))
 ```
 
-```{r "h45-direct", fig.cap = "\\label{fig:h5_party}Direct Effects of Principledness and Social Trust", fig.topcaption=TRUE,out.height="70%",out.width="70%"}
+```{r "h45-direct", fig.cap = "\\label{fig:h5_party}Direct Effects of Principledness and Social Trust", fig.topcaption=TRUE,out.width="100%"}
 knitr::include_graphics(here("report/figures/h45-direct-2.png"))
 ```
 \elandscape
