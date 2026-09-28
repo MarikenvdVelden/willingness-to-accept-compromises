@@ -1,9 +1,9 @@
-# Responsive or Responsible?  The Reputational Cost of Political Compromise
-Online research compendium of the paper entitled _Responsive or Responsible?  The Reputational Cost of Political Compromise_ . 
+# Selling Out? How Voters Perceive Political Compromise
+Online research compendium of the paper entitled _Selling Out? How Voters Perceive Political Compromise_ . 
 This repository combines the pre-registration plan, data &amp; analysis compendium.
 
-## Draft
-View the [draft of the paper](report/draft.pdf) and the [online appendix](report/OnlineAppendix.pdf) here.
+## Online appendix 
+View the [online appendix](report/OnlineAppendix.pdf) here.
 
 # Pre-Registration Plan
 * [Observational Study](https://osf.io/h29j3/?view_only=56f627ee5bf441399a8a66df40394042) Pre-registered hypothesis and analyses for testing the relationship between political trust and willingness to accept compromises in politics (_hypothesis 1_).

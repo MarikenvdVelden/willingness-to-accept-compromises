@@ -6,7 +6,7 @@ output:
     dev: cairo_pdf
     includes:
       in_header: csl-fix.tex
-title: "ONLINE APPENDIX: Don't Budge! The Reputational Cost of Political Compromises"
+title: "ONLINE APPENDIX: Selling Out? How Voters Perceive Political Compromise"
 bibliography: references.bib
 biblio-style: apsr
 geometry: margin=1in
