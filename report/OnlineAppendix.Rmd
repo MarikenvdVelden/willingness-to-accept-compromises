@@ -1085,30 +1085,53 @@ knitr::include_graphics(here("report/figures/effects-per-party-3.png"))
 knitr::include_graphics(here("report/figures/effects-per-party-4.png"))
 ```
 
-```{r "h45-direct", fig.cap = "\\label{fig:h5_party}Direct Effects of Principledness and Social Trust", fig.topcaption=TRUE,out.width="100%"}
+```{r "h45-direct", fig.cap = "\\label{fig:h5_party}Direct Effects of Principledness and Social Trust", fig.topcaption=TRUE,out.width="70%"}
 knitr::include_graphics(here("report/figures/h45-direct-2.png"))
 ```
 \elandscape
 
 \newpage
-# Appendix M. Operationalization Variables of Observational Data
-To measure the effects on political trust, we study two dependent variables: `trust in politicians` and `satisfaction with democracy`.[^]:N.B. Only the `trust in politicians` was pre-registered as the dependent variable. 
-`Trust in politicians` is measured with responses to the statement: ''Most politicians are trustworthy'' with a 5-point Likert scale from 1 (_strongly disagree_) to 5 (_strongly disagree_).
 
-`Satisfaction in democracy` is measured with the question: ''On the whole are you very satisfied, rather satisfied, not very satisfied or not at all satisfied with the way democracy is developing in [COUNTRY]?'', with 5-point Likert scale from 1 (_not at all satisfied_) to 5 (_very satisfied_) as answer categories.   
+# Appendix M. Compromise Attitudes and Trust across Western Europe
 
-Our main independent variable, `willingness to accept compromise`, is measured with an item from @hibbing2002stealth's stealth democracy index: ''What people call compromise in politics is really just selling out on one's principles.'' This item is also measured with a 5-point Likert variable ranging from 1 (_strongly disagree_) to 5 (_strongly disagree_).
+In addition to the survey experiment, we preregistered a separate observational analysis of the relationship between anti-compromise attitudes and political trust.\footnote{The preregistration was registered for 6 countries only (Austria, Germany, France, Italy, Netherlands, UK) given data availability at the time.
+We have complemented these six countries with more countries from CSES Module 5 upon their release. The preregistration can be found \href{https://anonymous.4open.science/r/willingness-to-accept-compromises-9EC5/README.md}{here}.}
+This analysis addresses a different question than the experiment. It relates individuals' general attitudes towards compromise to their trust in politicians, whereas the experiment measures how in-partisans evaluate their own party when it compromises. We therefore report it here for completeness.
 
-# Appendix N. Regression Tables for Observational Data
+We conducted a preregistered pooled cross-sectional analysis of election study data from the Comparative Study of Electoral Systems (CSES) [@lenzner2016comparative] in 9 West-European countries using OLS regression analysis. Specifically, we examine the effect of holding anti-compromise attitudes on trust in politicians and satisfaction with democracy.\footnote{In keeping with the political trust literature, we control for respondents' age, gender, educational attainment, and household income. In addition, we control for relevant political attitude confounding variables known to influence political trust, including partisanship, political interest, and left-right placement. Lastly, to ascertain that we do not capture governmental performance, we control for evaluations of governmental performance. Since our interest lies in individual-level effects, we control for all country-level variation by including country fixed effects. We also estimate country-specific models.}
 
-## Figure 6
+To measure political trust, we study two dependent variables: \textit{trust in politicians} and \textit{satisfaction with democracy}.\footnote{Only \textit{trust in politicians} was preregistered as the dependent variable. We treat \textit{satisfaction with democracy} as exploratory.}
+\textit{Trust in politicians} is measured with responses to the statement: ''Most politicians are trustworthy'' with a 5-point Likert scale from 1 (_strongly disagree_) to 5 (_strongly agree_).
+
+\textit{Satisfaction with democracy} is measured with the question: ''On the whole are you very satisfied, rather satisfied, not very satisfied or not at all satisfied with the way democracy is developing in [COUNTRY]?'', with 5-point Likert scale from 1 (_not at all satisfied_) to 5 (_very satisfied_) as answer categories.
+
+Our main independent variable, \textit{anti-compromise attitude}, is measured with an item from @hibbing2002stealth's stealth democracy index: ''What people call compromise in politics is really just selling out on one's principles.'' This item is also measured with a 5-point Likert variable ranging from 1 (_strongly disagree_) to 5 (_strongly agree_).
+
+Figure \ref{fig:h1-obs2} presents the results of the pooled cross-sectional analysis of election study data in the nine Western European countries (top row), as well as the effects per country in alphabetical order.
+The coefficient of \textit{anti-compromise attitude} of -0.16 for the dependent variable \textit{trust in politicians} in the pooled sample points to a negative and statistically significant effect, albeit rather small.
+As we hypothesized in our pre-analysis plan, the stronger one’s anti-compromise beliefs, the lower one’s trust in politicians. The negative effect on satisfaction with democracy is similar, yet smaller.
+Figure \ref{fig:h1-obs2} shows that this effect holds for seven of the nine countries in our sample when it comes to \textit{trust in politicians}, and in six out of nine when it comes to \textit{satisfaction with democracy}.
+The relationship between an anti-compromise attitude and political trust does not hold in Italy and Portugal.
+Moreover, in Denmark, we find a significant negative effect on trust in politicians, but not on satisfaction with democracy.
+All in all, these findings suggest that anti-compromise attitudes and political trust correlate across most Western European national contexts.
+
+\begin{figure}[h!]
+\centering
+\caption{Results Pooled Cross-Sectional \& Country Specific Analysis}
+\includegraphics[scale=.6]{figures/cses5-1.png}
+\label{fig:h1-obs2}
+\end{figure}
+
+
+## Regression Tables for Observational Data
+
 ```{r "obs", topcaption=TRUE}
 source(here("src/analysis/oa/obs_oa.R"))
 
-dv1 <- rep2 %>% 
-  filter(y == "Trust in Politicians") %>% 
+dv1 <- rep2 %>%
+  filter(y == "Trust in Politicians") %>%
   select(Country = country, estimate, std.error, statistic)
-kbl(dv1, booktabs =T, caption = "\\label{tab:obs1_oa}Predicted Anti-Compromise Attitude, DV = Trust in Politicians -- Table Supporting Figure 6 in the Main Manuscript", position = "h",
+kbl(dv1, booktabs =T, caption = "\\label{tab:obs1_oa}Predicted Anti-Compromise Attitude, DV = Trust in Politicians -- Table Supporting Figure \\ref{fig:h1-obs2}", position = "h",
     align = c("l", "c", "c", "c"), longtable = T) %>%
   kable_styling(latex_options = c("striped", "hold_position"),
                 full_width = F, fixed_thead = T, position = "center",
@@ -1118,10 +1141,10 @@ kbl(dv1, booktabs =T, caption = "\\label{tab:obs1_oa}Predicted Anti-Compromise A
  column_spec(3, width = "2.5cm") %>%
  column_spec(4, width = "2.5cm")
 
-dv2 <- rep2 %>% 
-  filter(y == "Satisfaction with Democracy") %>% 
+dv2 <- rep2 %>%
+  filter(y == "Satisfaction with Democracy") %>%
   select(Country = country, estimate, std.error, statistic)
-kbl(dv2, booktabs =T, caption = "\\label{tab:obs2_oa}Predicted Anti-Compromise Attitude, DV = Satisfaction with Democracy -- Table Supporting Figure 6 in the Main Manuscript", position = "h",
+kbl(dv2, booktabs =T, caption = "\\label{tab:obs2_oa}Predicted Anti-Compromise Attitude, DV = Satisfaction with Democracy -- Table Supporting Figure \\ref{fig:h1-obs2}", position = "h",
     align = c("l", "c", "c", "c"), longtable = T) %>%
   kable_styling(latex_options = c("striped", "hold_position"),
                 full_width = F, fixed_thead = T, position = "center",
@@ -1133,3 +1156,4 @@ kbl(dv2, booktabs =T, caption = "\\label{tab:obs2_oa}Predicted Anti-Compromise A
 ```
 
 \newpage
+
