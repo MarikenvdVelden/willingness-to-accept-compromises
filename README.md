@@ -2,6 +2,9 @@
 Online research compendium of the paper entitled _Selling Out? How Voters Perceive Political Compromise_ . 
 This repository combines the pre-registration plan, data &amp; analysis compendium.
 
+The paper reports a pre-registered survey experiment fielded in Germany. We additionally pre-registered a separate observational study of the relationship between attitudes towards compromise and political trust. Because it addresses a different question than the experiment, it is not part of the paper and is reported for completeness in Section M of the online appendix.
+
+
 ## Online appendix 
 View the [online appendix](report/OnlineAppendix.pdf) here.
 
