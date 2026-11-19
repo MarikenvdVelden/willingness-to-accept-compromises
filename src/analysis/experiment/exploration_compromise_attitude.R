@@ -43,8 +43,8 @@ p_ca <- me_ca %>%
                                "Partner: FDP","Partner: SPD",
                                "Outcome: Coalition Talks Continued",
                                "Party Position: Steadfast")),
-         lower = estimate - (1.56 * std.error),
-         upper = estimate + (1.56 * std.error)) %>%
+         lower = estimate - (1.96 * std.error),
+         upper = estimate + (1.96 * std.error)) %>%
   filter(estimate != is.na(estimate), term != is.na(term)) %>%
   ggplot(aes(x = term, 
              y = estimate,

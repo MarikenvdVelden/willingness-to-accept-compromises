@@ -187,8 +187,8 @@ h5ae <- lm(DV3 ~  outcome + compromise * b +
             factor(D9) + factor(D10),
           data= df)
 #ma <- summary(margins(h5ae, variables = "compromise", at = list(b = 0:10))) %>%
-#  mutate(lower = AME - (1.56 * SE),
-#         upper = AME + (1.56 * SE)) %>%
+#  mutate(lower = AME - (1.96 * SE),
+#         upper = AME + (1.96 * SE)) %>%
 #  select(AME, upper, lower, b) %>%
 #  mutate(position = "In favor of TopTax Increase")
 
@@ -209,7 +209,7 @@ h5be <- lm(DV3 ~  outcome + compromise * b +
             factor(D9) + factor(D10),
           data= df)
 #mb <- summary(margins(h5be, variables = "compromise", at = list(b = 0:10))) %>%
-#  mutate(lower = AME - (1.56 * SE),
-#         upper = AME + (1.56 * SE)) %>%
+#  mutate(lower = AME - (1.96 * SE),
+#         upper = AME + (1.96 * SE)) %>%
 #  select(AME, upper, lower, b) %>%
 #  mutate(position = "Against TopTax Increase")

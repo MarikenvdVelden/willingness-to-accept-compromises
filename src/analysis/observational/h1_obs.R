@@ -35,8 +35,8 @@ h1 <- m %>%
                                "Left-Right Self-Placement",
                                "Not Politically Interested",
                                "Anti-Compromise Attitude")),
-         lower = estimate - (1.56 * std.error),
-         upper = estimate + (1.56 * std.error)) %>%
+         lower = estimate - (1.96 * std.error),
+         upper = estimate + (1.96 * std.error)) %>%
   select(term, estimate, upper, lower) %>%
   filter(term != is.na(term)) %>% 
   ggplot(aes(x = term, 
@@ -65,8 +65,8 @@ r1 <- m[11:15,] %>%
                        `factor(country)Germany` = "Germany",
                        `factor(country)Great Britain` = "Great Britain",
                        `factor(country)Italy` = "Italy"),
-         lower = estimate - (1.56 * std.error),
-         upper = estimate + (1.56 * std.error)) %>%
+         lower = estimate - (1.96 * std.error),
+         upper = estimate + (1.96 * std.error)) %>%
   select(term, estimate, upper, lower) %>%
   ggplot(aes(x = term, 
              y = estimate,
@@ -101,8 +101,8 @@ r2 <- m[16:23,] %>%
                        levels = c("Income", "Education", "Age", "Gender",
                                   "Partisan ID", "Left-Right Self-Placement",
                                   "Anti-Compromise Attitude", "Trust")),
-         lower = estimate - (1.56 * std.error),
-         upper = estimate + (1.56 * std.error)) %>%
+         lower = estimate - (1.96 * std.error),
+         upper = estimate + (1.96 * std.error)) %>%
   select(term, estimate, upper, lower) %>%
   ggplot(aes(x = term, 
              y = estimate,
@@ -160,8 +160,8 @@ r3 <- m %>%
                                   "Left-Right Self-Placement",
                                   "Not Politically Interested",
                                   "Anti-Compromise Attitude")),
-         lower = estimate - (1.56 * std.error),
-         upper = estimate + (1.56 * std.error)) %>%
+         lower = estimate - (1.96 * std.error),
+         upper = estimate + (1.96 * std.error)) %>%
   select(term, estimate, upper, lower) %>%
   filter(term != is.na(term)) %>% 
   ggplot(aes(x = term, 

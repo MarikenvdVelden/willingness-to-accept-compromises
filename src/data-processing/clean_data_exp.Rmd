@@ -64,8 +64,8 @@ d %>%
   group_by(dvs, issue) %>%
   summarise(means = mean(value, na.rm=T),
             stdev = sd(value, na.rm=T)) %>%
-  mutate(lower = means - (1.56 * stdev),
-         upper = means + (1.56 * stdev)) %>%
+  mutate(lower = means - (1.96 * stdev),
+         upper = means + (1.96 * stdev)) %>%
   ggplot(aes(x = dvs, y = means, color = issue,
              label = issue,
              ymin = lower, ymax = upper)) +

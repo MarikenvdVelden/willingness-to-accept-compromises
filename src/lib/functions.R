@@ -38,16 +38,16 @@ regression_direct <- function(df, a, b){
       m <- tidy(allModels[[i]]) %>%
         mutate(x = term,
                y = depVarList[i],
-               lower = estimate - (1.56 * std.error),
-               upper = estimate + (1.56 * std.error)) %>%
+               lower = estimate - (1.96 * std.error),
+               upper = estimate + (1.96 * std.error)) %>%
         select(estimate, upper, lower, y, x, std.error, p.value)
     }
     else{
       tmp <- tidy(allModels[[i]]) %>%
         mutate(x = term,
                y = depVarList[i],
-               lower = estimate - (1.56 * std.error),
-               upper = estimate + (1.56 * std.error)) %>%
+               lower = estimate - (1.96 * std.error),
+               upper = estimate + (1.96 * std.error)) %>%
         select(estimate, upper, lower, y, x, std.error, p.value)
       m <- m %>%
         add_case(tmp)
@@ -75,16 +75,16 @@ regression_direct_party <- function(df, a, b){
       m <- tidy(allModels[[i]]) %>%
         mutate(x = term,
                y = depVarList[i],
-               lower = estimate - (1.56 * std.error),
-               upper = estimate + (1.56 * std.error)) %>%
+               lower = estimate - (1.96 * std.error),
+               upper = estimate + (1.96 * std.error)) %>%
         select(estimate, upper, lower, y, x)
     }
     else{
       tmp <- tidy(allModels[[i]]) %>%
         mutate(x = term,
                y = depVarList[i],
-               lower = estimate - (1.56 * std.error),
-               upper = estimate + (1.56 * std.error)) %>%
+               lower = estimate - (1.96 * std.error),
+               upper = estimate + (1.96 * std.error)) %>%
         select(estimate, upper, lower, y, x)
       m <- m %>%
         add_case(tmp)
@@ -114,16 +114,16 @@ regression_direct_explor <- function(df, a, b){
       m <- tidy(allModels[[i]]) %>%
         mutate(x = term,
                y = depVarList[i],
-               lower = estimate - (1.56 * std.error),
-               upper = estimate + (1.56 * std.error)) %>%
+               lower = estimate - (1.96 * std.error),
+               upper = estimate + (1.96 * std.error)) %>%
         select(estimate, upper, lower, y, x)
     }
     else{
       tmp <- tidy(allModels[[i]]) %>%
         mutate(x = term,
                y = depVarList[i],
-               lower = estimate - (1.56 * std.error),
-               upper = estimate + (1.56 * std.error)) %>%
+               lower = estimate - (1.96 * std.error),
+               upper = estimate + (1.96 * std.error)) %>%
         select(estimate, upper, lower, y, x)
       m <- m %>%
         add_case(tmp)
@@ -151,16 +151,16 @@ regression <- function(df, a, b){
       m <- tidy(allModels[[i]]) %>%
         mutate(x = term,
                y = depVarList[i],
-               lower = estimate - (1.56 * std.error),
-               upper = estimate + (1.56 * std.error)) %>%
+               lower = estimate - (1.96 * std.error),
+               upper = estimate + (1.96 * std.error)) %>%
         select(estimate, upper, lower, y, x, std.error, p.value)
     }
     else{
       tmp <- tidy(allModels[[i]]) %>%
         mutate(x = term,
                y = depVarList[i],
-               lower = estimate - (1.56 * std.error),
-               upper = estimate + (1.56 * std.error)) %>%
+               lower = estimate - (1.96 * std.error),
+               upper = estimate + (1.96 * std.error)) %>%
         select(estimate, upper, lower, y, x, std.error, p.value)
       m <- m %>%
         add_case(tmp)
@@ -188,16 +188,16 @@ regression_party <- function(df, a, b){
       m <- tidy(allModels[[i]]) %>%
         mutate(x = term,
                y = depVarList[i],
-               lower = estimate - (1.56 * std.error),
-               upper = estimate + (1.56 * std.error)) %>%
+               lower = estimate - (1.96 * std.error),
+               upper = estimate + (1.96 * std.error)) %>%
         select(estimate, upper, lower, y, x)
     }
     else{
       tmp <- tidy(allModels[[i]]) %>%
         mutate(x = term,
                y = depVarList[i],
-               lower = estimate - (1.56 * std.error),
-               upper = estimate + (1.56 * std.error)) %>%
+               lower = estimate - (1.96 * std.error),
+               upper = estimate + (1.96 * std.error)) %>%
         select(estimate, upper, lower, y, x)
       m <- m %>%
         add_case(tmp)
@@ -224,15 +224,15 @@ regression_explor <- function(df, a, b){
     if(i==1){
       m <- summary(margins(allModels[[i]], variables = "b", at = list(a = 0:1))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, a)
     }
     else{
       tmp <- summary(margins(allModels[[i]], variables = "b", at = list(a = 0:1))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, a)
       m <- m %>%
         add_case(tmp)
@@ -260,15 +260,15 @@ regression_ht1 <- function(df, compromise, outcome, b){
     if(i==1){
       m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:4))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
     }
     else{
       tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:4))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
       m <- m %>%
         add_case(tmp)
@@ -329,15 +329,15 @@ regression_ht2 <- function(df, compromise, outcome, b){
     if(i==1){
       m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:4))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
     }
     else{
       tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:4))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
       m <- m %>%
         add_case(tmp)
@@ -365,15 +365,15 @@ regression_ht3 <- function(df, compromise, outcome, b){
     if(i==1){
       m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:10))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
     }
     else{
       tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:10))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
       m <- m %>%
         add_case(tmp)
@@ -401,15 +401,15 @@ regression_ht4 <- function(df, compromise, outcome, b){
     if(i==1){
       m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:1))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
     }
     else{
       tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:1))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
       m <- m %>%
         add_case(tmp)
@@ -437,15 +437,15 @@ regression_ht5 <- function(df, compromise, outcome, b){
     if(i==1){
       m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:11))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
     }
     else{
       tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:11))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
       m <- m %>%
         add_case(tmp)
@@ -473,15 +473,15 @@ regression_ht6 <- function(df, compromise, outcome, b){
     if(i==1){
       m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 1:5))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
     }
     else{
       tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 1:5))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
       m <- m %>%
         add_case(tmp)
@@ -509,15 +509,15 @@ regression_ht7 <- function(df, compromise, outcome, b){
     if(i==1){
       m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:10))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
     }
     else{
       tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:10))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
       m <- m %>%
         add_case(tmp)
@@ -547,8 +547,8 @@ regression_ht8 <- function(df, compromise, outcome, b){
                            at = list(b = c("AfD", "CDU/CSU", "FDP", "Greens",
                                            "Left", "SPD", "Other party")))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
     }
     else{
@@ -556,8 +556,8 @@ regression_ht8 <- function(df, compromise, outcome, b){
                              at = list(b = c("AfD", "CDU/CSU", "FDP", "Greens",
                                              "Left", "SPD", "Other party")))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
       m <- m %>%
         add_case(tmp)
@@ -585,15 +585,15 @@ regression_ht1_party <- function(df, compromise, outcome, b){
     if(i==1){
       m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:4))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
     }
     else{
       tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:4))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
       m <- m %>%
         add_case(tmp)
@@ -621,15 +621,15 @@ regression_ht2_party <- function(df, compromise, outcome, b){
     if(i==1){
       m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:4))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
     }
     else{
       tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:4))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
       m <- m %>%
         add_case(tmp)
@@ -657,15 +657,15 @@ regression_ht3_party <- function(df, compromise, outcome, b){
     if(i==1){
       m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:10))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
     }
     else{
       tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:10))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
       m <- m %>%
         add_case(tmp)
@@ -695,16 +695,16 @@ pooled_regression <- function(df, a, b, issue){
       m <- tidy(allModels[[i]]) %>%
         mutate(x = term,
                y = depVarList[i],
-               lower = estimate - (1.56 * std.error),
-               upper = estimate + (1.56 * std.error)) %>%
+               lower = estimate - (1.96 * std.error),
+               upper = estimate + (1.96 * std.error)) %>%
         select(estimate, upper, lower, y, x, std.error, p.value)
     }
     else{
       tmp <- tidy(allModels[[i]]) %>%
         mutate(x = term,
                y = depVarList[i],
-               lower = estimate - (1.56 * std.error),
-               upper = estimate + (1.56 * std.error)) %>%
+               lower = estimate - (1.96 * std.error),
+               upper = estimate + (1.96 * std.error)) %>%
         select(estimate, upper, lower, y, x, std.error, p.value)
       m <- m %>%
         add_case(tmp)
@@ -733,16 +733,16 @@ pooled_regression_party <- function(df, a, b, issue){
       m <- tidy(allModels[[i]]) %>%
         mutate(x = term,
                y = depVarList[i],
-               lower = estimate - (1.56 * std.error),
-               upper = estimate + (1.56 * std.error)) %>%
+               lower = estimate - (1.96 * std.error),
+               upper = estimate + (1.96 * std.error)) %>%
         select(estimate, upper, lower, y, x)
     }
     else{
       tmp <- tidy(allModels[[i]]) %>%
         mutate(x = term,
                y = depVarList[i],
-               lower = estimate - (1.56 * std.error),
-               upper = estimate + (1.56 * std.error)) %>%
+               lower = estimate - (1.96 * std.error),
+               upper = estimate + (1.96 * std.error)) %>%
         select(estimate, upper, lower, y, x)
       m <- m %>%
         add_case(tmp)
@@ -770,15 +770,15 @@ pooled_regression_explor <- function(df, a, b, issue){
     if(i==1){
       m <- summary(margins(allModels[[i]], variables = "b", at = list(a = 0:1))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, a)
     }
     else{
       tmp <- summary(margins(allModels[[i]], variables = "b", at = list(a = 0:1))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, a)
       m <- m %>%
         add_case(tmp)
@@ -841,15 +841,15 @@ pooled_regression_ht1 <- function(df, compromise, outcome, b, issue){
     if(i==1){
       m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:4))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
     }
     else{
       tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:4))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
       m <- m %>%
         add_case(tmp)
@@ -878,15 +878,15 @@ pooled_regression_ht2 <- function(df, compromise, outcome, b, issue){
     if(i==1){
       m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:4))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
     }
     else{
       tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:4))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
       m <- m %>%
         add_case(tmp)
@@ -915,15 +915,15 @@ pooled_regression_ht3 <- function(df, compromise, outcome, b, issue){
     if(i==1){
       m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:10))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
     }
     else{
       tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:10))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
       m <- m %>%
         add_case(tmp)
@@ -952,15 +952,15 @@ pooled_regression_ht4 <- function(df, compromise, outcome, b, issue){
     if(i==1){
       m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:1))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
     }
     else{
       tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:1))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
       m <- m %>%
         add_case(tmp)
@@ -989,15 +989,15 @@ pooled_regression_ht5 <- function(df, compromise, outcome, b, issue){
     if(i==1){
       m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:11))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
     }
     else{
       tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:11))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
       m <- m %>%
         add_case(tmp)
@@ -1026,15 +1026,15 @@ pooled_regression_ht6 <- function(df, compromise, outcome, b, issue){
     if(i==1){
       m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 1:5))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
     }
     else{
       tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 1:5))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
       m <- m %>%
         add_case(tmp)
@@ -1063,15 +1063,15 @@ pooled_regression_ht7 <- function(df, compromise, outcome, b, issue){
     if(i==1){
       m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:10))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
     }
     else{
       tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:10))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
       m <- m %>%
         add_case(tmp)
@@ -1102,8 +1102,8 @@ pooled_regression_ht8 <- function(df, compromise, outcome, b, issue){
                            at = list(b = c("AfD", "CDU/CSU", "FDP", "Greens",
                                            "Left", "SPD", "Other party")))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
     }
     else{
@@ -1111,8 +1111,8 @@ pooled_regression_ht8 <- function(df, compromise, outcome, b, issue){
                              at = list(b = c("AfD", "CDU/CSU", "FDP", "Greens",
                                              "Left", "SPD", "Other party")))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
       m <- m %>%
         add_case(tmp)
@@ -1141,15 +1141,15 @@ pooled_regression_ht9 <- function(df, compromise, outcome, b, issue){
     if(i==1){
       m <- summary(margins(allModels[[i]], variables = "outcome", at = list(b = 0:4))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
     }
     else{
       tmp <- summary(margins(allModels[[i]], variables = "outcome", at = list(b = 0:4))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
       m <- m %>%
         add_case(tmp)
@@ -1178,15 +1178,15 @@ pooled_regression_ht10 <- function(df, compromise, outcome, b, issue){
     if(i==1){
       m <- summary(margins(allModels[[i]], variables = "outcome", at = list(b = 1:5))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
     }
     else{
       tmp <- summary(margins(allModels[[i]], variables = "outcome", at = list(b = 1:5))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
       m <- m %>%
         add_case(tmp)
@@ -1215,15 +1215,15 @@ pooled_regression_ht11 <- function(df, compromise, outcome, b, issue){
     if(i==1){
       m <- summary(margins(allModels[[i]], variables = "outcome", at = list(b = 0:8))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
     }
     else{
       tmp <- summary(margins(allModels[[i]], variables = "outcome", at = list(b = 0:8))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
       m <- m %>%
         add_case(tmp)
@@ -1252,15 +1252,15 @@ pooled_regression_ht1_party <- function(df, compromise, outcome, b, issue){
     if(i==1){
       m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:4))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
     }
     else{
       tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:4))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
       m <- m %>%
         add_case(tmp)
@@ -1289,15 +1289,15 @@ pooled_regression_ht2_party <- function(df, compromise, outcome, b, issue){
     if(i==1){
       m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:4))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
     }
     else{
       tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:4))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
       m <- m %>%
         add_case(tmp)
@@ -1326,15 +1326,15 @@ pooled_regression_ht3_party <- function(df, compromise, outcome, b, issue){
     if(i==1){
       m <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:10))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
     }
     else{
       tmp <- summary(margins(allModels[[i]], variables = "compromise", at = list(b = 0:10))) %>%
         mutate(y = depVarList[i],
-               lower = AME - (1.56 * SE),
-               upper = AME + (1.56 * SE)) %>%
+               lower = AME - (1.96 * SE),
+               upper = AME + (1.96 * SE)) %>%
         select(AME, upper, lower, y, b)
       m <- m %>%
         add_case(tmp)

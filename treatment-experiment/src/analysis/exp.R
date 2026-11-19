@@ -13,8 +13,8 @@ h1a <-  summary(margins(h1a, variables = "insta", at = list(D2 = 0:5))) %>%
   mutate(b = D2,
          dv = "DV1: Manipulation Checks",
          #h = ifelse(term == "factor(treatment)insta", "Hypothesis", "Controls"),
-         lower = AME - (1.56 * SE),
-         upper = AME + (1.56 * SE),
+         lower = AME - (1.96 * SE),
+         upper = AME + (1.96 * SE),
          type = "Marginal Effects of Age Groups") %>%
   select(AME, upper, lower, dv, b, type)
 
@@ -22,8 +22,8 @@ h2a <- lm(time ~ factor(insta) * D2 + D5, d)
 h2a <-  summary(margins(h2a, variables = "insta", at = list(D2 = 0:5))) %>%
   mutate(b = D2,
          dv = "DV2: Time",
-         lower = AME - (1.56 * SE),
-         upper = AME + (1.56 * SE),
+         lower = AME - (1.96 * SE),
+         upper = AME + (1.96 * SE),
          type = "Marginal Effects of Age Groups") %>%
   select(AME, upper, lower, dv, b, type)
 
@@ -31,8 +31,8 @@ h3a <- lm(AC ~ factor(insta)* D2 + D5, d)
 h3a <- summary(margins(h3a, variables = "insta", at = list(D2 = 0:5))) %>%
   mutate(b = D2,
          dv = "DV3: Attention Check",
-         lower = AME - (1.56 * SE),
-         upper = AME + (1.56 * SE),
+         lower = AME - (1.96 * SE),
+         upper = AME + (1.96 * SE),
          type = "Marginal Effects of Age Groups") %>%
   select(AME, upper, lower, dv, b, type)
 
@@ -46,8 +46,8 @@ h1b <-  summary(margins(h1b, variables = "insta", at = list(D5 = 0:18))) %>%
   mutate(b = D5,
          dv = "DV1: Manipulation Checks",
          #h = ifelse(term == "factor(treatment)insta", "Hypothesis", "Controls"),
-         lower = AME - (1.56 * SE),
-         upper = AME + (1.56 * SE),
+         lower = AME - (1.96 * SE),
+         upper = AME + (1.96 * SE),
          type = "Marginal Effects of Digital Literacy") %>%
   select(AME, upper, lower, dv, b, type)
 
@@ -55,8 +55,8 @@ h2b <- lm(time ~ factor(insta) * D5 + D2, d)
 h2b <-  summary(margins(h2b, variables = "insta", at = list(D5 = 0:18))) %>%
   mutate(b = D5, 
          dv = "DV2: Time",
-         lower = AME - (1.56 * SE),
-         upper = AME + (1.56 * SE),
+         lower = AME - (1.96 * SE),
+         upper = AME + (1.96 * SE),
          type = "Marginal Effects of Digital Literacy") %>%
   select(AME, upper, lower, dv, b, type)
 
@@ -64,8 +64,8 @@ h3b <- lm(AC ~ factor(insta)* D5 + D2, d)
 h3b <-  summary(margins(h3b, variables = "insta", at = list(D5 = 0:18))) %>%
   mutate(b = D5, 
          dv = "DV3: Attention Check",
-         lower = AME - (1.56 * SE),
-         upper = AME + (1.56 * SE),
+         lower = AME - (1.96 * SE),
+         upper = AME + (1.96 * SE),
          type = "Marginal Effects of Digital Literacy") %>%
   select(AME, upper, lower, dv, b, type)
 

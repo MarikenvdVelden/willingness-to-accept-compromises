@@ -30,8 +30,8 @@ p1 <- aut %>%
                                   "Left-Right Self-Placement",
                                   "Not Politically Interested",
                                   "Willingness to Accept Compromise")),
-         lower = estimate - (1.56 * std.error),
-         upper = estimate + (1.56 * std.error)) %>%
+         lower = estimate - (1.96 * std.error),
+         upper = estimate + (1.96 * std.error)) %>%
   select(term, estimate, upper, lower, type) %>%
   filter(term != is.na(term)) %>% 
   ggplot(aes(x = term, 
@@ -85,8 +85,8 @@ p2 <- fr %>%
                                   "Left-Right Self-Placement",
                                   "Not Politically Interested",
                                   "Willingness to Accept Compromise")),
-         lower = estimate - (1.56 * std.error),
-         upper = estimate + (1.56 * std.error)) %>%
+         lower = estimate - (1.96 * std.error),
+         upper = estimate + (1.96 * std.error)) %>%
   select(term, estimate, upper, lower, type) %>%
   filter(term != is.na(term)) %>% 
   ggplot(aes(x = term, 
@@ -142,8 +142,8 @@ p3 <- de %>%
                                   "Left-Right Self-Placement",
                                   "Not Politically Interested",
                                   "Willingness to Accept Compromise")),
-         lower = estimate - (1.56 * std.error),
-         upper = estimate + (1.56 * std.error)) %>%
+         lower = estimate - (1.96 * std.error),
+         upper = estimate + (1.96 * std.error)) %>%
   select(term, estimate, upper, lower, type) %>%
   filter(term != is.na(term)) %>% 
   ggplot(aes(x = term, 
@@ -197,8 +197,8 @@ p4 <- it %>%
                                   "Left-Right Self-Placement",
                                   "Not Politically Interested",
                                   "Willingness to Accept Compromise")),
-         lower = estimate - (1.56 * std.error),
-         upper = estimate + (1.56 * std.error)) %>%
+         lower = estimate - (1.96 * std.error),
+         upper = estimate + (1.96 * std.error)) %>%
   select(term, estimate, upper, lower, type) %>%
   filter(term != is.na(term)) %>% 
   ggplot(aes(x = term, 
@@ -256,8 +256,8 @@ p5 <- nl %>%
                                   "Left-Right Self-Placement",
                                   "Not Politically Interested",
                                   "Willingness to Accept Compromise")),
-         lower = estimate - (1.56 * std.error),
-         upper = estimate + (1.56 * std.error)) %>%
+         lower = estimate - (1.96 * std.error),
+         upper = estimate + (1.96 * std.error)) %>%
   select(term, estimate, upper, lower, type) %>%
   filter(term != is.na(term)) %>% 
   ggplot(aes(x = term, 
@@ -315,8 +315,8 @@ p6 <- gb %>%
                                   "Left-Right Self-Placement",
                                   "Not Politically Interested",
                                   "Willingness to Accept Compromise")),
-         lower = estimate - (1.56 * std.error),
-         upper = estimate + (1.56 * std.error)) %>%
+         lower = estimate - (1.96 * std.error),
+         upper = estimate + (1.96 * std.error)) %>%
   select(term, estimate, upper, lower, type) %>%
   filter(term != is.na(term)) %>% 
   ggplot(aes(x = term, 
